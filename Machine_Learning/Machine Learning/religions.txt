@@ -1,0 +1,146 @@
+Afghanistan	97%	3%
+Albania	32.5%	62%
+Algeria	93%	6.5%
+Angola	88%	10.5%
+Argentina	66%	33%
+Armenia	72.5%	25%
+Australia	32%	67.5%
+Austria	55%	43%
+Azerbaijan	49.5%	48.5%
+Bahrain	95.5%	3.5%
+Bangladesh	100%	0%
+Belarus	33%	57.5%
+Belgium	33%	57.5%
+Belize	61.5%	33%
+Benin	92.5%	6.5%
+Bolivia	88.5%	10.5%
+Bosnia and Herzegovina	66%	29.5%
+Botswana	77%	23%
+Brazil	86.5%	13%
+Bulgaria	33.5%	62%
+Burkina Faso	87.5%	12%
+Burundi	97.5%	2.5%
+Cambodia	96%	3.5%
+Cameroon	95.5%	4.5%
+Canada	42%	57%
+Central African Republic	94%	6%
+Chad	94%	6%
+Chile	69.5%	29.5%
+Colombia	82.5%	16%
+Comoros	96%	2.5%
+Costa Rica	79%	19.5%
+Croatia	66.5%	30.5%
+Cuba	33.5%	64%
+Cyprus	75%	24.5%
+Czech Republic	20.5%	74.5%
+Côte d'Ivoire	88%	12%
+Democratic Republic of the Congo	98.5%	1.5%
+Denmark	18%	80.5%
+Djibouti	98%	1.5%
+Dominican Rebpublic	86%	13.5%
+Ecuador	82%	17.5%
+Egypt	98%	2%
+El Salvador	83%	15.5%
+Estonia	16%	78%
+Ethiopia	91%	9%
+Finland	28%	70%
+France	29.5%	69.5%
+Georgia	80%	16%
+Germany	40.5%	59%
+Ghana	94.5%	5%
+Greece	71.5%	29.5%
+Guatemala	88%	9%
+Guinea	97%	3%
+Haiti	75%	22.5%
+Honduras	84%	15.5%
+Hong Kong	23%	75.5%
+Hungary	39%	58.5%
+India	79%	17%
+Indonesia	99%	0%
+Iran	82.5%	15.5%
+Iraq	86%	10.5%
+Ireland	53.5%	46.5%
+Israel	49.5%	49.5%
+Italy	71.5%	26%
+Jamaica	70%	29.5%
+Japan	23.5%	75%
+Jordan	96.5%	3.5%
+Kazakhstan	43%	48.5%
+Kenya	94%	6%
+Kosovo	63.5%	31.5%
+Kuwait	92.5%	5.5%
+Kygyzstan	72.5%	25%
+Laos	96.5%	2.5%
+Latvia	39%	58.5%
+Lebanon	89.5%	10%
+Liberia	94%	6%
+Lithuania	41.5%	49.5%
+Macedonia	78.5%	20.5%
+Madagascar	93%	7%
+Malawi	98.5%	1.5%
+Malaysia	95.5%	3.5%
+Mali	94.5%	5.5%
+Mauritania	98%	1.5%
+Mexico	72%	25.5%
+Moldova	71.5%	19%
+Montenegro	45.5%	48%
+Morocco	98.5%	1%
+Mozambique	86%	14%
+Myanmar	96.5%	3%
+Namibia	91.5%	8.5%
+Nepal	93%	6%
+New Zealand	33%	66%
+Nicaragua	84%	15%
+Niger	100%	0%
+Nigeria	95.5%	2.5%
+Norway	20.5%	78%
+Pakistan	96.5%	2.5%
+Palestinian Territories	93%	6%
+Panama	88%	10.5%
+Paraguay	91.5%	7.5%
+Peru	83.5%	14.5%
+Philippines	95.5%	4%
+Poland	74.5%	19.5%
+Portugal	71.5%	26%
+Puerto Rico	84.5%	13.5%
+Qatar	94.5%	4.5%
+Republic of the Congo	94.5%	5.5%
+Romania	84%	12.5%
+Russia	33%	60.5%
+Rwanda	95%	4.5%
+Saudi Arabia	94.5%	3.5%
+Senegal	96.5%	3.5%
+Serbia	50.5%	46.5%
+Sierra Leone	98%	1.5%
+Singapore	70%	29%
+Slovakia	46.5%	51.5%
+Slovenia	47%	52.5%
+Somalia	98.5%	1.5%
+South Africa	84.5%	15.5%
+South Korea	32.5%	65.5%
+Spain	49.5%	50%
+Sri Lanka	98.5%	1%
+Sudan	94%	6%
+Sweden	16.5%	83%
+Switzerland	41.5%	56%
+Taiwan	45%	54%
+Tajikistan	84.5%	12.5%
+Tanzania	96.5%	3.5
+Thailand	94%	5.5%
+The Netherlands	33%	66.5%
+Togo	80%	13%
+Trinidad and Tobago	92%	8%
+Tunisia	93%	5%
+Turkey	89.5%	9.5%
+Uganda	93%	7%
+Ukraine	45.5%	48.5%
+United Arab Emirates	91%	8.5%
+United Kingdom	26.5%	73%
+United States of America	65%	34.5%
+Uruguay	40.5%	59%
+Uzbekistan	51%	45.5%
+Venezuela	79%	20.5%
+Vietnam	29.5%	69.5%
+Yemen	96%	3.5%
+Zambia	97%	3%
+Zimbabwe	87.5%	12.5%
