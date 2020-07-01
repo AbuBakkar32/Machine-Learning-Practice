@@ -33,11 +33,11 @@ home_price = home_price.item()
 
 print('Prediction Home Price: ', home_price)
 
-# plt.scatter(df['area'], df['price'], marker=r'$\clubsuit$', edgecolors='black', linewidths=5, label='Data Area')
-# plt.plot(df.area, reg.predict(df[['area']]))
-#
-# plt.legend()
+plt.scatter(df['area'], df['price'], marker=r'$\clubsuit$', edgecolors='black', linewidths=5, label='Data Area')
+plt.plot(df.area, reg.predict(df[['area']]), color='red')
+
+plt.legend()
 # plt.xlabel('Area measure')
 # plt.ylabel('Price of Area')
 # plt.title('Home Price and Area')
-# plt.show()
+plt.show()

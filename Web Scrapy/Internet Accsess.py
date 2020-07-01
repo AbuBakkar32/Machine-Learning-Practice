@@ -3,15 +3,8 @@ from bs4 import BeautifulSoup
 
 r = requests.get('https://www.cia.gov/library/publications/the-world-factbook/fields/204.html#AF')
 c = r.content
-soup = BeautifulSoup(c)
-
+soup = BeautifulSoup(c, parser='html_parser')
 data = soup.findAll('tr')[1:]
-
-a = soup.findAll('tr')[1].findAll('td', {'class': 'country'})[0].text
-
-b = a.replace('\n', '')
-
-soup.findAll('tr')[1].findAll('span', {'class': 'subfield-number'})[1].text
 
 data_dictionary = []
 for country in data:
@@ -20,24 +13,7 @@ for country in data:
         country_name_formatted = country_name.replace('\n', "")
         internet_percentage = country.findAll('span', {'class': 'subfield-number'})[1].text
         internet_percentage_formatted = float(internet_percentage.replace("%", ""))
-        data_dictionary.append({'country': country_name_formatted,
-                                "percentage of population with internet access": internet_percentage_formatted})
+        data_dictionary.append({'country': country_name_formatted, "percentage of population with internet access": internet_percentage_formatted})
     except:
         pass
-
-# In[113]:
-
-
-import pandas as pd
-
-# In[114]:
-
-
-internet_stats_df = pd.DataFrame.from_dict(data_dictionary)
-
-# In[115]:
-
-
-internet_stats_df
-
-# In[ ]:
+print(data_dictionary)

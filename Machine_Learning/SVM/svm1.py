@@ -26,15 +26,7 @@ train_y = train_data['Survived']
 test_x = test_data.drop(columns=['Survived'], axis=1)
 test_y = test_data['Survived']
 
-'''
-Create the object of the Support Vector Classifier model
-You can also add other parameters and test your code here
-Some parameters are : kernal and degree
-Documentation of sklearn Support Vector Classifier: 
 
-https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
-
- '''
 model = SVC()
 
 # fit the model with the training data
