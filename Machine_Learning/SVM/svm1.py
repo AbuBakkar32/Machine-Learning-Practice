@@ -1,7 +1,3 @@
-'''
-The following code is for Support Vector Machines
-Created by - ANALYTICS VIDHYA
-'''
 # importing required libraries
 import pandas as pd
 from sklearn.svm import SVC
