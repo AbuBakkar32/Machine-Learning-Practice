@@ -1,4 +1,5 @@
 sum = 0
+
 for i in range(6):
     if i > 0:
         print('(', end='')
@@ -6,10 +7,11 @@ for i in range(6):
         print('{}'.format(j + 1), end='')
         if (j + 1) < i:
             print('+', end='')
-        if (j+1) == i:
+        if (j + 1) == i:
             print(')+', end='')
 
     sum += i
+
 if i == 5:
     print(".....+(", end='')
     for k in range(5):

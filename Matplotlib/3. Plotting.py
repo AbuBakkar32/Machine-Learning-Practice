@@ -142,7 +142,7 @@ income_data.columns = ['age','workclass','fnlwgt','education','education-num','m
 # In[61]:
 
 
-plt.scatter(income_data['education-num'],income_data['hours-per-week'], s=1,alpha=.1)
+plt.scatter(income_data['education-num'],income_data['hours-per-week'], s=1, alpha=.1)
 
 
 # In[66]:
