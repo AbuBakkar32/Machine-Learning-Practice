@@ -32,8 +32,7 @@ for data in list_of_data:
     for country in data_dictionary:
         if data['Country Code'] == country['Country Code']:
             if data['Sex'] == 'MLE':
-                country['Male Suicide Rate'] = d
-                ata['Suicide Rate']
+                country['Male Suicide Rate'] = data['Suicide Rate']
             elif data['Sex'] == "FMLE":
                 country['Female Suicide Rate'] = data['Suicide Rate']
             elif data['Sex'] == 'BTSX':
