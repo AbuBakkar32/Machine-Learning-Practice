@@ -16,16 +16,21 @@ for fact in data['fact']:
     suicide_rate = fact['value']['numeric']
     list_of_data.append({'Country Code': country_code, 'Sex': sex, "Suicide Rate": suicide_rate})
 
+print(list_of_data)
+
+
 country_codes = []
 for country in list_of_data:
     country_codes.append(country['Country Code'])
 
 country_codes = set(country_codes)
 
+
+# Store all data like this format in data_dictionary
 data_dictionary = []
 for country in country_codes:
-    data_dictionary.append(
-        {'Country Code': country, 'Male Suicide Rate': '', 'Female Suicide Rate': '', 'Combined Suicide Rate': ''})
+    data_dictionary.append({'Country Code': country, 'Male Suicide Rate':'', 'Female Suicide Rate':'', 'Combined Suicide Rate':''})
+
 
 # creating Python list with dictionary for each country
 for data in list_of_data:
@@ -37,3 +42,26 @@ for data in list_of_data:
                 country['Female Suicide Rate'] = data['Suicide Rate']
             elif data['Sex'] == 'BTSX':
                 country['Combined Suicide Rate'] = data['Suicide Rate']
+
+
+# Create pandas dataFrame to import data as a table
+suicide_rates = pd.DataFrame(data_dictionary, columns=['Country Code', 'Male Suicide Rate', 'Female Suicide Rate', 'Combined Suicide Rate'])
+suicide_rates.set_index(['Country Code'], inplace=True)
+suicide_rates.sort_index(inplace=True)
+
+
+# country_names = []
+# for country in data['dimension']:
+#     country_names.append({'Country Code': country['label'], 'Country Name': country['display']})
+#
+# country_names_df = pd.DataFrame(country_names)
+# country_names_df.set_index(['Country Code'], inplace=True)
+# suicide_rates = suicide_rates.join(country_names_df, on=['Country Code'], how='inner')
+# suicide_rates = suicide_rates[['Country Name', 'Combined Suicide Rate', 'Male Suicide Rate', 'Female Suicide Rate']]
+#
+
+
+
+
+
+
