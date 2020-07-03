@@ -1,0 +1,497 @@
+
+
+
+
+###################################################### Loading and viewing your data ###########################################
+# In this chapter, you're going to look at a subset of the Department of Buildings Job Application Filings dataset from the NYC Open 
+# Data portal. (https://opendata.cityofnewyork.us/) This dataset consists of job applications filed on January 22, 2017.
+
+# Your first task is to load this dataset into a DataFrame and then inspect it using the .head() and .tail() methods. However, you'll 
+# find out very quickly that the printed results don't allow you to see everything you need, since there are too many columns.
+# Therefore, you need to look at the data in another way.
+
+# The .shape and .columns attributes let you see the shape of the DataFrame and obtain a list of its columns. From here, you can see 
+# which columns are relevant to the questions you'd like to ask of the data. To this end, a new DataFrame, df_subset, consisting only of # these relevant columns, has been pre-loaded. This is the DataFrame you'll work with in the rest of the chapter.
+
+# Get acquainted with the dataset now by exploring it with pandas! This initial exploratory analysis is a crucial first step of data 
+# cleaning.
+
+
+# Import pandas
+import pandas as pd
+
+# Read the file into a DataFrame: df
+df = pd.read_csv('dob_job_application_filings_subset.csv')
+
+# Print the head of df
+print(df.head())
+
+# Print the tail of df
+print(df.tail())
+
+# Print the shape of df
+print(df.shape)
+
+# Print the columns of df
+print(df.columns)
+
+# Print the head and tail of df_subset
+print(df_subset.head())
+print(df_subset.tail())
+
+
+
+
+######################################## Frequency counts for categorical data ######################################
+# As you've seen, .describe() can only be used on numeric columns. So how can you diagnose data issues when you have categorical data? 
+# One way is by using the .value_counts() method, which returns the frequency counts for each unique value in a column!
+
+# This method also has an optional parameter called dropna which is True by default. What this means is if you have missing data in a 
+# column, it will not give a frequency count of them. You want to set the dropna column to False so if there are missing values in a 
+# column, it will give you the frequency counts.
+
+# In this exercise, you're going to look at the 'Borough', 'State', and 'Site Fill' columns to make sure all the values in there are 
+# valid. When looking at the output, do a sanity check: Are all values in the 'State' column from NY, for example? Since the dataset 
+# consists of applications filed in NY, you would expect this to be the case.
+
+
+
+# Print the value counts for 'Borough'
+print(df['Borough'].value_counts(dropna=False))
+
+# Print the value_counts for 'State'
+print(df['State'].value_counts(dropna=False))
+
+# Print the value counts for 'Site Fill'
+print(df['Site Fill'].value_counts(dropna=False))
+
+
+
+
+######################################## Visualizing single variables with histograms ######################################
+Up until now, you've been looking at descriptive statistics of your data. One of the best ways to confirm what the numbers are telling you is to plot and visualize the data.
+
+You'll start by visualizing single variables using a histogram for numeric values. The column you will work on in this exercise is 'Existing Zoning Sqft'.
+
+The .plot() method allows you to create a plot of each column of a DataFrame. The kind parameter allows you to specify the type of plot to use - kind='hist', for example, plots a histogram.
+
+In the IPython Shell, begin by computing summary statistics for the 'Existing Zoning Sqft' column using the .describe() method. You'll notice that there are extremely large differences between the min and max values, and the plot will need to be adjusted accordingly. In such cases, it's good to look at the plot on a log scale. The keyword arguments logx=True or logy=True can be passed in to .plot() depending on which axis you want to rescale.
+
+Finally, note that Python will render a plot such that the axis will hold all the information. That is, if you end up with large amounts of whitespace in your plot, it indicates counts or values too small to render.
+
+
+
+# Import matplotlib.pyplot
+import matplotlib.pyplot as plt
+
+# Plot the histogram
+df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
+
+# Display the histogram
+plt.show()
+
+
+
+
+
+
+
+###################################### Visualizing multiple variables with boxplots ####################################
+Histograms are great ways of visualizing single variables. To visualize multiple variables, boxplots are useful, especially when one of the variables is categorical.
+
+In this exercise, your job is to use a boxplot to compare the 'initial_cost' across the different values of the 'Borough' column. The pandas .boxplot() method is a quick way to do this, in which you have to specify the column and by parameters. Here, you want to visualize how 'initial_cost' varies by 'Borough'.
+
+pandas and matplotlib.pyplot have been imported for you as pd and plt, respectively, and the DataFrame has been pre-loaded as df.
+
+
+# Import necessary modules
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Create the boxplot
+df.boxplot(column='initial_cost', by='Borough', rot=90)
+
+# Display the plot
+plt.show()
+
+
+
+
+
+
+
+###################################### Visualizing multiple variables with scatter plots #######################################
+Boxplots are great when you have a numeric column that you want to compare across different categories. When you want to visualize two numeric columns, scatter plots are ideal.
+
+In this exercise, your job is to make a scatter plot with 'initial_cost' on the x-axis and the 'total_est_fee' on the y-axis. You can do this by using the DataFrame .plot() method with kind='scatter'. You'll notice right away that there are 2 major outliers shown in the plots.
+
+Since these outliers dominate the plot, an additional DataFrame, df_subset, has been provided, in which some of the extreme values have been removed. After making a scatter plot using this, you'll find some interesting patterns here that would not have been seen by looking at summary statistics or 1 variable plots.
+
+
+
+
+
+# Import necessary modules
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Create and display the first scatter plot
+df.plot(kind='scatter', x='initial_cost', y='total_est_fee', rot=70)
+plt.show()
+
+# Create and display the second scatter plot
+df_subset.plot(kind='scatter', x ='initial_cost', y='total_est_fee', rot =70)
+plt.show()
+
+
+
+
+
+################################################# Tidying data for analysis ##############################################
+
+Reshaping your data using melt
+Melting data is the process of turning columns of your data into rows of data. Consider the DataFrames from the previous exercise. In the tidy DataFrame, the variables Ozone, Solar.R, Wind, and Temp each had their own column. If, however, you wanted these variables to be in rows instead, you could melt the DataFrame. In doing so, however, you would make the data untidy! This is important to keep in mind: Depending on how your data is represented, you will have to reshape it differently.
+
+In this exercise, you will practice melting a DataFrame using pd.melt(). There are two parameters you should be aware of: id_vars and value_vars. The id_vars represent the columns of the data you do not want to melt (i.e., keep it in its current shape), while the value_vars represent the columns you do wish to melt into rows. By default, if no value_vars are provided, all columns not set in the id_vars will be melted. This could save a bit of typing, depending on the number of columns that need to be melted.
+
+The (tidy) DataFrame airquality has been pre-loaded. Your job is to melt its Ozone, Solar.R, Wind, and Temp columns into rows. Later in this chapter, you'll learn how to bring this melted DataFrame back into a tidy form.
+
+
+# Print the head of airquality
+print(airquality.head())
+
+# Melt airquality: airquality_melt
+airquality_melt = pd.melt(airquality, id_vars=['Month', 'Day'])
+
+# Print the head of airquality_melt
+print(airquality_melt.head())
+
+
+
+###################################### Customizing melted data ######################################
+When melting DataFrames, it would be better to have column names more meaningful than variable and value.
+
+The default names may work in certain situations, but it's best to always have data that is self explanatory.
+
+You can rename the variable column by specifying an argument to the var_name parameter, and the value column by specifying an argument to the value_name parameter. You will now practice doing exactly this. The DataFrame airquality has been pre-loaded for you.
+
+
+
+
+# Print the head of airquality
+print(airquality.head())
+
+# Melt airquality: airquality_melt
+airquality_melt = pd.melt(airquality, id_vars=['Month', 'Day'], var_name='measurement', value_name='reading')
+
+# Print the head of airquality_melt
+print(airquality_melt.head())
+
+
+
+
+
+############################################# Pivot data ###########################################
+Pivoting data is the opposite of melting it. Remember the tidy form that the airquality DataFrame was in before you melted it? You'll now begin pivoting it back into that form using the .pivot_table() method!
+
+While melting takes a set of columns and turns it into a single column, pivoting will create a new column for each unique value in a specified column.
+
+.pivot_table() has an index parameter which you can use to specify the columns that you don't want pivoted: It is similar to the id_vars parameter of pd.melt(). Two other parameters that you have to specify are columns (the name of the column you want to pivot), and values (the values to be used when the column is pivoted). The melted DataFrame airquality_melt has been pre-loaded for you.
+
+
+
+# Print the head of airquality_melt
+print(airquality_melt.head())
+
+# Pivot airquality_melt: airquality_pivot
+airquality_pivot = airquality_melt.pivot_table(index=['Month', 'Day'], columns='measurement', values='reading')
+
+# Print the head of airquality_pivot
+print(airquality_pivot.head())
+
+
+
+###################################### Resetting the index of a DataFrame #########################################
+After pivoting airquality_melt in the previous exercise, you didn't quite get back the original DataFrame.
+
+What you got back instead was a pandas DataFrame with a hierarchical index (also known as a MultiIndex).
+
+Hierarchical indexes are covered in depth in Manipulating DataFrames with pandas. In essence, they allow you to group columns or rows by another variable - in this case, by 'Month' as well as 'Day'.
+
+There's a very simple method you can use to get back the original DataFrame from the pivoted DataFrame: .reset_index(). Dan didn't show you how to use this method in the video, but you're now going to practice using it in this exercise to get back the original DataFrame from airquality_pivot, which has been pre-loaded.
+
+
+
+# Print the index of airquality_pivot
+print(airquality_pivot.index)
+
+# Reset the index of airquality_pivot: airquality_pivot
+airquality_pivot = airquality_pivot.reset_index()
+
+# Print the new index of airquality_pivot
+print(airquality_pivot.index)
+
+# Print the head of airquality_pivot
+print(airquality_pivot.head())
+
+
+
+
+
+
+######################################### Pivoting duplicate values ###########################################
+So far, you've used the .pivot_table() method when there are multiple index values you want to hold constant during a pivot. In the video, Dan showed you how you can also use pivot tables to deal with duplicate values by providing an aggregation function through the aggfunc parameter. Here, you're going to combine both these uses of pivot tables.
+
+Let's say your data collection method accidentally duplicated your dataset. Such a dataset, in which each row is duplicated, has been pre-loaded as airquality_dup. In addition, the airquality_melt DataFrame from the previous exercise has been pre-loaded. Explore their shapes in the IPython Shell by accessing their .shape attributes to confirm the duplicate rows present in airquality_dup.
+
+You'll see that by using .pivot_table() and the aggfunc parameter, you can not only reshape your data, but also remove duplicates. Finally, you can then flatten the columns of the pivoted DataFrame using .reset_index().
+
+NumPy and pandas have been imported as np and pd respectively.
+
+
+# Pivot airquality_dup: airquality_pivot
+airquality_pivot = airquality_dup.pivot_table(index=['Month', 'Day'], columns='measurement', values='reading', aggfunc=np.mean)
+
+# Reset the index of airquality_pivot
+airquality_pivot = airquality_pivot.reset_index()
+
+# Print the head of airquality_pivot
+print(airquality_pivot.head())
+
+# Print the head of airquality
+print(airquality.head())
+
+
+
+
+
+
+
+################################## Splitting a column with .str ########################################
+The dataset you saw in the video, consisting of case counts of tuberculosis by country, year, gender, and age group, has been pre-loaded into a DataFrame as tb.
+
+In this exercise, you're going to tidy the 'm014' column, which represents males aged 0-14 years of age. In order to parse this value, you need to extract the first letter into a new column for gender, and the rest into a column for age_group. Here, since you can parse values by position, you can take advantage of pandas' vectorized string slicing by using the str attribute of columns of type object.
+
+Begin by printing the columns of tb in the IPython Shell using its .columns attribute, and take note of the problematic column.
+
+
+# Melt tb: tb_melt
+tb_melt = pd.melt(tb, id_vars=['country', 'year'])
+
+# Create the 'gender' column
+tb_melt['gender'] = tb_melt.variable.str[0]
+
+# Create the 'age_group' column
+tb_melt['age_group'] = tb_melt.variable.str[1:]
+
+# Print the head of tb_melt
+print(tb_melt.head())
+
+
+
+
+
+
+
+##################################### Splitting a column with .split() and .get() #############################################
+Another common way multiple variables are stored in columns is with a delimiter. You'll learn how to deal with such cases in this exercise, using a dataset consisting of Ebola cases and death counts by state and country. It has been pre-loaded into a DataFrame as ebola.
+
+Print the columns of ebola in the IPython Shell using ebola.columns. Notice that the data has column names such as Cases_Guinea and Deaths_Guinea. Here, the underscore _ serves as a delimiter between the first part (cases or deaths), and the second part (country).
+
+This time, you cannot directly slice the variable by position as in the previous exercise. You now need to use Python's built-in string method called .split(). By default, this method will split a string into parts separated by a space. However, in this case you want it to split by an underscore. You can do this on Cases_Guinea, for example, using Cases_Guinea.split('_'), which returns the list ['Cases', 'Guinea'].
+
+The next challenge is to extract the first element of this list and assign it to a type variable, and the second element of the list to a country variable. You can accomplish this by accessing the str attribute of the column and using the .get() method to retrieve the 0 or 1 index, depending on the part you want.
+
+
+
+# Melt ebola: ebola_melt
+ebola_melt = pd.melt(ebola, id_vars=[____, ____], var_name=____, value_name=____)
+
+# Create the 'str_split' column
+ebola_melt['str_split'] = ____
+
+# Create the 'type' column
+ebola_melt['type'] = ____
+
+# Create the 'country' column
+ebola_melt['country'] = ____
+
+# Print the head of ebola_melt
+print(ebola_melt.head())
+
+
+
+
+
+########################################## Combining rows of data #########################################
+The dataset you'll be working with here relates to NYC Uber data. The original dataset has all the originating Uber pickup locations by time and latitude and longitude. For didactic purposes, you'll be working with a very small portion of the actual data.
+
+Three DataFrames have been pre-loaded: uber1, which contains data for April 2014, uber2, which contains data for May 2014, and uber3, which contains data for June 2014. Your job in this exercise is to concatenate these DataFrames together such that the resulting DataFrame has the data for all three months.
+
+Begin by exploring the structure of these three DataFrames in the IPython Shell using methods such as .head().
+
+
+# Concatenate uber1, uber2, and uber3: row_concat
+row_concat = pd.concat([uber1, uber2, uber3])
+
+# Print the shape of row_concat
+print(row_concat.shape)
+
+# Print the head of row_concat
+print(row_concat.head())
+
+
+
+
+
+####################################### Combining columns of data ############################################
+Think of column-wise concatenation of data as stitching data together from the sides instead of the top and bottom. To perform this action, you use the same pd.concat() function, but this time with the keyword argument axis=1. The default, axis=0, is for a row-wise concatenation.
+
+You'll return to the Ebola dataset you worked with briefly in the last chapter. It has been pre-loaded into a DataFrame called ebola_melt. In this DataFrame, the status and country of a patient is contained in a single column. This column has been parsed into a new DataFrame, status_country, where there are separate columns for status and country.
+
+Explore the ebola_melt and status_country DataFrames in the IPython Shell. Your job is to concatenate them column-wise in order to obtain a final, clean DataFrame.
+
+
+
+# Concatenate ebola_melt and status_country column-wise: ebola_tidy
+ebola_tidy = pd.concat([ebola_melt, status_country], axis = 1)
+
+# Print the shape of ebola_tidy
+print(ebola_tidy.shape)
+
+# Print the head of ebola_tidy
+print(ebola_tidy.head())
+
+
+
+
+
+
+############################################ Finding files that match a pattern #################################################
+You're now going to practice using the glob module to find all csv files in the workspace. In the next exercise, you'll programmatically load them into DataFrames.
+
+As Dan showed you in the video, the glob module has a function called glob that takes a pattern and returns a list of the files in the working directory that match that pattern.
+
+For example, if you know the pattern is part_ single digit number .csv, you can write the pattern as 'part_?.csv' (which would match part_1.csv, part_2.csv, part_3.csv, etc.)
+
+Similarly, you can find all .csv files with '*.csv', or all parts with 'part_*'. The ? wildcard represents any 1 character, and the * wildcard represents any number of characters.
+
+
+
+# Import necessary modules
+import glob
+import pandas as pd
+
+# Write the pattern: pattern
+pattern = '*.csv'
+
+# Save all file matches: csv_files
+csv_files = glob.glob(pattern)
+
+# Print the file names
+print(csv_files)
+
+# Load the second file into a DataFrame: csv2
+csv2 = pd.read_csv(csv_files[1])
+
+# Print the head of csv2
+print(csv2.head())
+
+
+
+
+################################### Iterating and concatenating all matches #######################################
+Now that you have a list of filenames to load, you can load all the files into a list of DataFrames that can then be concatenated.
+
+You'll start with an empty list called frames. Your job is to use a for loop to iterate through each of the filenames, read each filename into a DataFrame, and then append it to the frames list.
+
+You can then concatenate this list of DataFrames using pd.concat(). Go for it!
+
+
+# Create an empty list: frames
+frames = []
+
+#  Iterate over csv_files
+for csv in csv_files:
+
+    #  Read csv into a DataFrame: df
+    df = pd.read_csv(csv)
+    
+    # Append df to frames
+    frames.append(df)
+
+# Concatenate frames into a single DataFrame: uber
+uber = pd.concat(frames)
+
+# Print the shape of uber
+print(uber.shape)
+
+# Print the head of uber
+print(uber.head())
+
+
+
+
+
+####################################################### 1-to-1 data merge #######################################################
+Merging data allows you to combine disparate datasets into a single dataset to do more complex analysis.
+
+Here, you'll be using survey data that contains readings that William Dyer, Frank Pabodie, and Valentina Roerich took in the late 1920 and 1930 while they were on an expedition towards Antarctica. The dataset was taken from a sqlite database from the Software Carpentry SQL lesson.
+
+Two DataFrames have been pre-loaded: site and visited. Explore them in the IPython Shell and take note of their structure and column names. Your task is to perform a 1-to-1 merge of these two DataFrames using the 'name' column of site and the 'site' column of visited.
+
+
+# Merge the DataFrames: o2o
+o2o = pd.merge(left=site, right=visited, left_on=site.name, right_on=visited.site)
+
+# Print o2o
+print(o2o)
+
+
+
+################################################ Many-to-1 data merge ################################################
+In a many-to-one (or one-to-many) merge, one of the values will be duplicated and recycled in the output. That is, one of the keys in the merge is not unique.
+
+Here, the two DataFrames site and visited have been pre-loaded once again. Note that this time, visited has multiple entries for the site column. Confirm this by exploring it in the IPython Shell.
+
+The .merge() method call is the same as the 1-to-1 merge from the previous exercise, but the data and output will be different.
+
+
+
+# Merge the DataFrames: m2o
+m2o = pd.merge(left = site, right = visited, left_on = site.name, right_on = visited.site)
+
+# Print m2o
+print(m2o)
+
+
+
+
+
+
+############################################# Many-to-many data merge ##############################################
+The final merging scenario occurs when both DataFrames do not have unique keys for a merge. What happens here is that for each duplicated key, every pairwise combination will be created.
+
+Two example DataFrames that share common key values have been pre-loaded: df1 and df2. Another DataFrame df3, which is the result of df1 merged with df2, has been pre-loaded. All three DataFrames have been printed - look at the output and notice how pairwise combinations have been created. This example is to help you develop your intuition for many-to-many merges.
+
+Here, you'll work with the site and visited DataFrames from before, and a new survey DataFrame. Your task is to merge site and visited as you did in the earlier exercises. You will then merge this merged DataFrame with survey.
+
+Begin by exploring the site, visited, and survey DataFrames in the IPython Shell.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
