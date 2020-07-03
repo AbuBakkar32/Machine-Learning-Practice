@@ -60,7 +60,6 @@ print(format_name("", ""))
 """
 
 
-
 '''def fractional_part(numerator, denominator):
     if denominator == 0:
         return 0

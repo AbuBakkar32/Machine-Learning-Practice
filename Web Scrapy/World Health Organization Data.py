@@ -1,6 +1,6 @@
 import requests
-import json
 import pandas as pd
+import json
 
 r = requests.get('http://apps.who.int/gho/athena/api/GHO/MH_12/.json?filter=Year:2016')
 data = r.json()

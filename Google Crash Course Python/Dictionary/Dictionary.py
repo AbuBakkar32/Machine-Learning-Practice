@@ -1,11 +1,11 @@
 # The email_list function receives a dictionary, which contains domain names as keys, and a list of users as values.
 # Fill in the blanks to generate a list that contains complete email addresses (e.g. diana.prince@gmail.com).
 
-''''def email_list(domains):
+'''def email_list(domains):
 	emails = []
 	for keys, users in domains.items():
-	  for user in users:
-	    emails.append(user+'@'+keys)
+	    for user in users:
+	        emails.append(user+'@'+keys)
 	return(emails)
 
 print(email_list({"gmail.com": ["clark.kent", "diana.prince", "peter.parker"], "yahoo.com": ["barbara.gordon", "jean.grey"], "hotmail.com": ["bruce.wayne"]}))
@@ -55,8 +55,7 @@ print(add_prices(groceries)) # Should print 28.44
 # The format of the input string is: numeric house number, followed by the street name which may contain numbers, but never by themselves, and could be several words long.
 # For example, "123 Main Street", "1001 1st Ave", or "55 North Center Drive". Fill in the gaps to complete this function.
 
-"""
-def format_address(address_string):
+'''def format_address(address_string):
     house_number = ''
     street_name = ''
     parts = address_string.split()
@@ -70,8 +69,8 @@ def format_address(address_string):
 
 print(format_address("123 Main Street"))
 print(format_address("1001 1st Ave"))
-print(format_address("55 North Center Drive"))
-"""
+print(format_address("55 North Center Drive"))'''
+
 
 # The highlight_word function changes the given word in a sentence to its upper-case version.
 # For example, highlight_word("Have a nice day", "nice") returns "Have a NICE day". Can you write this function in just one line?
@@ -173,7 +172,7 @@ print(squares(0, 10))  # Should be [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 # After the class, they each entered their lists into the computer and emailed them to the professor, who needs to combine them into one, in the order of each student's arrival.
 # Jamie emailed a follow-up, saying that her list is in reverse order. Complete the steps to combine them into one list as follows: the contents of Drew's list, followed by Jamie's list in reverse order, to get an accurate list of the students as they arrived.
 
-def combine_lists(list1, list2):
+'''def combine_lists(list1, list2):
     new_list = list2
     for i in reversed(range(len(list1))):
         new_list.append(list1[i])
@@ -182,4 +181,4 @@ def combine_lists(list1, list2):
 
 Jamies_list = ["Alice", "Cindy", "Bobby", "Jan", "Peter"]
 Drews_list = ["Mike", "Carol", "Greg", "Marcia"]
-print(combine_lists(Jamies_list, Drews_list))
+print(combine_lists(Jamies_list, Drews_list))'''
