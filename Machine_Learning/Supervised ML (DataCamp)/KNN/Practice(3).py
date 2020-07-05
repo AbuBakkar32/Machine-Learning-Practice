@@ -26,8 +26,8 @@ for i, k in enumerate(neighbors):
     test_accuracy[i] = knn.score(X_test, Y_test)
 
 # Generate plot
-plt.plot(neighbors, test_accuracy, label='Testing Accuracy')
-plt.plot(neighbors, train_accuracy, label='Training Accuracy')
+plt.plot(neighbors, test_accuracy, label='Testing Accuracy', marker='D')
+plt.plot(neighbors, train_accuracy, label='Training Accuracy', marker='D')
 plt.legend()
 plt.title('k-NN: Varying Number of Neighbors')
 plt.xlabel('Number of Neighbors')
