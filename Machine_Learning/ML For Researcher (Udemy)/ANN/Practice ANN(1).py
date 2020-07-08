@@ -16,4 +16,5 @@ model.add(Dense(8, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-model.evaluate(X, y)
+_, Accuracy = model.evaluate(X,y)
+print(Accuracy)
