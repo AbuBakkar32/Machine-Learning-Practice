@@ -110,7 +110,7 @@ pd.read_json('https://raw.githubusercontent.com/zekelabs/data-science-complete-t
 # In[32]:
 
 
-get_ipython().system('pip install pysqlite3')
+# get_ipython().system('pip install pysqlite3')
 
 
 # In[33]:
@@ -128,7 +128,7 @@ con = sqlite3.connect('Data/database.sqlite')
 # In[39]:
 
 
-pd.read_sql_query("SELECT * FROM Reviews LIMIT 5",con)
+pd.read_sql_query("SELECT * FROM Reviews LIMIT 5", con)
 
 
 # * import MySQLdb
