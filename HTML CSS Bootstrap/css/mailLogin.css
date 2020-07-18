@@ -1,0 +1,88 @@
+﻿body {
+    width: 100%;
+    height: 100%;
+
+    background-repeat: no-repeat;
+}
+
+.row {
+    margin-top: 200px;
+}
+
+.firstpic {
+    float: right;
+    display: inline-block;
+    padding: 10px;
+
+}
+
+.firstpic h2 {
+    margin-left: 0px;
+    text-align: center;
+    padding: 5px;
+}
+
+.secondpic h2 {
+    text-align: center;
+}
+
+.firstpic a:hover {
+    color: red;
+    display: inline-block;
+    font-size: 25px;
+    transition: all 0.9s;
+    text-decoration: none;
+    letter-spacing: 0px;
+}
+
+.secondpic a:hover {
+    color: red;
+    display: inline-block;
+    font-size: 25px;
+    transition: all 0.9s;
+    text-decoration: none;
+    letter-spacing: 0px;
+}
+
+.secondpic {
+    float: left;
+    display: inline-block;
+    padding: 10px;
+}
+
+.firstpic img {
+    width: 260px;
+    height: 255px;
+    border-radius: 150px;
+}
+
+.secondpic img {
+    width: 260px;
+    height: 255px;
+    border-radius: 150px;
+}
+
+a {
+    text-decoration: none;
+    color: blueviolet;
+    font-weight: 700;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 1px 2px 10px;
+    font-size: 29px;
+    font-style: italic;
+    letter-spacing: 3.5px;
+
+}
+
+.title {
+    margin-left: 430px;
+    display: block;
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+h1 {
+    margin-top: 50px;
+    text-shadow: 7px 5px 8px;
+    color: crimson;
+}
