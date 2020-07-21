@@ -44,7 +44,7 @@ data_dict = {
 }
 
 df = pd.DataFrame(data=data_dict, index=pd.date_range('2020-01-01', periods=1000))
-print(df)
+# print(df)
 
 #################################################### 00007 ###############################################
 
@@ -56,9 +56,9 @@ data_dict = {
 }
 
 df = pd.DataFrame(data=data_dict, index=pd.date_range('2020-01-01', periods=1000))
-print(df.head(10))
-print()
-print(df.tail())
+# print(df.head(10))
+# print()
+# print(df.tail())
 
 #################################################### 00008 ###############################################
 
@@ -70,9 +70,9 @@ data_dict = {
 }
 
 df = pd.DataFrame(data=data_dict, index=pd.date_range('2020-01-01', periods=1000))
-print(df.info())
-print()
-print(df.describe())
+# print(df.info())
+# print()
+# print(df.describe())
 
 #################################################### 00009 ###############################################
 
@@ -84,7 +84,7 @@ data_dict = {
 }
 
 df = pd.DataFrame(data=data_dict, index=pd.date_range('2020-01-01', periods=1000))
-print(df['binomial'].value_counts())
+# print(df['binomial'].value_counts())
 
 #################################################### 00010 ###############################################
 
@@ -100,71 +100,71 @@ df[:50].to_csv('dataframe50.csv', sep=',')
 
 #################################################### 00012 ###############################################
 
-google = pd.read_csv('google.csv', index_col=0)
-google = google.reset_index()
-print(google)
+# google = pd.read_csv('google.csv', index_col=0)
+# google = google.reset_index()
+# print(google)
 
 #################################################### 00013 ###############################################
-google = pd.read_csv('google.csv', index_col=0)
-google = google.reset_index()
-google['Date'] = pd.to_datetime(google['Date'])
-google['Year'] = google['Date'].dt.year
-google['Month'] = google['Date'].dt.month
-print(google)
+# google = pd.read_csv('google.csv', index_col=0)
+# google = google.reset_index()
+# google['Date'] = pd.to_datetime(google['Date'])
+# google['Year'] = google['Date'].dt.year
+# google['Month'] = google['Date'].dt.month
+# print(google)
 #################################################### 00014 ###############################################
 
-google = pd.read_csv('google.csv', index_col=0)
-google = google.reset_index()
-google['Date'] = pd.to_datetime(google['Date'])
-google['Year'] = google['Date'].dt.year
-google['Month'] = google['Date'].dt.month
-print(google.groupby('Month')['Close'].mean())
+# google = pd.read_csv('google.csv', index_col=0)
+# google = google.reset_index()
+# google['Date'] = pd.to_datetime(google['Date'])
+# google['Year'] = google['Date'].dt.year
+# google['Month'] = google['Date'].dt.month
+# print(google.groupby('Month')['Close'].mean())
 
 #################################################### 00015 ###############################################
 
-google = pd.read_csv('google.csv', index_col=0)
-google = google.reset_index()
-idx_min = google['Close'].argmin()
-print(google.iloc[[idx_min]])
+# google = pd.read_csv('google.csv', index_col=0)
+# google = google.reset_index()
+# idx_min = google['Close'].argmin()
+# print(google.iloc[[idx_min]])
 
 #################################################### 00016 ###############################################
 
-google = pd.read_csv('google.csv', index_col=0)
-google = google.reset_index()
-print(google[['Date', 'Open', 'Close', 'Volume']])
+# google = pd.read_csv('google.csv', index_col=0)
+# google = google.reset_index()
+# print(google[['Date', 'Open', 'Close', 'Volume']])
 
 #################################################### 00017 ###############################################
 
-google = pd.read_csv('google.csv')
-google = google.set_index('Date')
-print(google)
+# google = pd.read_csv('google.csv')
+# google = google.set_index('Date')
+# print(google)
 
 #################################################### 00018 ###############################################
 
-google = pd.read_csv('google.csv')
-google['Date'] = pd.to_datetime(google['Date'])
-google['Year'] = google['Date'].dt.year
-google['Month'] = google['Date'].dt.month
-google = google.drop(columns=['Year', 'Month'])
-print(google)
+# google = pd.read_csv('google.csv')
+# google['Date'] = pd.to_datetime(google['Date'])
+# google['Year'] = google['Date'].dt.year
+# google['Month'] = google['Date'].dt.month
+# google = google.drop(columns=['Year', 'Month'])
+# print(google)
 
 #################################################### 00019 ###############################################
 
-google = pd.read_csv('google.csv', index_col=0)
-google.columns = ['O', 'H', 'L', 'C', 'V']
-print(google)
+# google = pd.read_csv('google.csv', index_col=0)
+# google.columns = ['O', 'H', 'L', 'C', 'V']
+# print(google)
 
 #################################################### 00020 ###############################################
 
 url = 'https://ml-repository-krakers.s3-eu-west-1.amazonaws.com/kaggle+/churn_modelling/Telco-Customer-Churn.csv'
 df = pd.read_csv(url)
-print(df.head())
+# print(df.head())
 
 #################################################### 00021 ###############################################
 
 url = 'https://ml-repository-krakers.s3-eu-west-1.amazonaws.com/kaggle+/churn_modelling/Telco-Customer-Churn.csv'
 df = pd.read_csv(url)
-print(df.isnull().sum())
+# print(df.isnull().sum())
 
 #################################################### 00022 ###############################################
 
@@ -180,7 +180,7 @@ df.loc[df['TotalCharges'] == ' ', 'TotalCharges'] = TotalChargesMedian
 # Convert TotalCharges column to float type
 df['TotalCharges'] = df['TotalCharges'].astype('float')
 
-print(df['TotalCharges'].value_counts())
+# print(df['TotalCharges'].value_counts())
 
 #################################################### 00023 ###############################################
 
@@ -216,19 +216,19 @@ for col in categorical:
 for col in numerical:
     df[col] = df[col].astype(float)
 
-print(df.describe(include=['category']))
+# print(df.describe(include=['category']))
 
 #################################################### 00025 ###############################################
 
 url = 'https://ml-repository-krakers.s3-eu-west-1.amazonaws.com/kaggle+/churn_modelling/Telco-Customer-Churn.csv'
 df = pd.read_csv(url, index_col=0)
-print(df['Churn'].value_counts())
+# print(df['Churn'].value_counts())
 
 #################################################### 00026 ###############################################
 
 url = 'https://ml-repository-krakers.s3-eu-west-1.amazonaws.com/kaggle+/churn_modelling/Telco-Customer-Churn.csv'
 df = pd.read_csv(url, index_col=0)
-print(df.groupby(['Churn', 'PaymentMethod'])['MonthlyCharges'].mean())
+# print(df.groupby(['Churn', 'PaymentMethod'])['MonthlyCharges'].mean())
 
 #################################################### 00027 ###############################################
 
@@ -240,7 +240,7 @@ df['Churn'] = df['Churn'].map({'Yes': 1, 'No': 0})
 
 url = 'https://ml-repository-krakers.s3-eu-west-1.amazonaws.com/kaggle+/churn_modelling/Telco-Customer-Churn.csv'
 df = pd.read_csv(url, index_col=0)
-print(df.corr())
+# print(df.corr())
 
 #################################################### 00029 ###############################################
 
@@ -258,7 +258,7 @@ s2 = pd.Series(np.random.randn(20))
 
 df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
-print(df)
+# print(df)
 
 #################################################### 00031 ###############################################
 
@@ -275,7 +275,7 @@ s2 = pd.Series(np.random.randn(20))
 df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
 df['col3'] = df['col2'].map(lambda x: 1 if x >= 0 else -1)
-print(df)
+# print(df)
 
 #################################################### 00033 ###############################################
 
@@ -287,7 +287,7 @@ df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
 df['col3'] = df['col2'].map(lambda x: 1 if x >= 0 else -1)
 df['col4'] = df['col2'].clip(-1.0, 1.0)
-print(df)
+# print(df)
 
 #################################################### 00034 ###############################################
 
@@ -297,9 +297,9 @@ s2 = pd.Series(np.random.randn(20))
 
 df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
-print(df['col2'].nlargest(5))
-print()
-print(df['col2'].nsmallest(5))
+# print(df['col2'].nlargest(5))
+# print()
+# print(df['col2'].nsmallest(5))
 
 #################################################### 00035 ###############################################
 
@@ -309,7 +309,7 @@ s2 = pd.Series(np.random.randn(20))
 
 df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
-print(df.cumsum())
+# print(df.cumsum())
 
 #################################################### 00036 ###############################################
 
@@ -319,9 +319,9 @@ s2 = pd.Series(np.random.randn(20))
 
 df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
-print(df['col2'].median())
+# print(df['col2'].median())
 # or
-print(df['col2'].quantile())
+# print(df['col2'].quantile())
 
 #################################################### 00037 ###############################################
 
@@ -331,9 +331,9 @@ s2 = pd.Series(np.random.randn(20))
 
 df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
-print(df.query("col2 > 0"))
+# print(df.query("col2 > 0"))
 # or
-print(df[df['col2'] > 0])
+# print(df[df['col2'] > 0])
 
 #################################################### 00038 ###############################################
 
@@ -343,9 +343,9 @@ s2 = pd.Series(np.random.randn(20))
 
 df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
-print(df.head().to_dict())
+# print(df.head().to_dict())
 # or
-print(df[:5].to_dict())
+# print(df[:5].to_dict())
 
 #################################################### 00039 ###############################################
 
@@ -355,28 +355,28 @@ s2 = pd.Series(np.random.randn(20))
 
 df = pd.concat([s1, s2], axis=1)
 df.columns = ['col1', 'col2']
-print(df.head().to_html())
+# print(df.head().to_html())
 # or
-print(df[:5].to_html())
+# print(df[:5].to_html())
 
 #################################################### 00040 ###############################################
 
 np.random.seed(42)
 df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
-print(df.loc[df['C'] > 0.8])
+# print(df.loc[df['C'] > 0.8])
 
 #################################################### 00041 ###############################################
 
 np.random.seed(42)
 df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
-print(df.loc[(df['C'] > 0.3) & (df['D'] < 0.7)])
+# print(df.loc[(df['C'] > 0.3) & (df['D'] < 0.7)])
 
 #################################################### 00042 ###############################################
 
 np.random.seed(42)
 df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
-for index, row in df.head().iterrows():
-    print(row)
+# for index, row in df.head().iterrows():
+#     print(row)
 
 #################################################### 00043 ###############################################
 
@@ -384,7 +384,7 @@ np.random.seed(42)
 df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
 df.iloc[3, 1] = np.nan
 df.loc[8, 'D'] = np.nan
-print(df)
+# print(df)
 
 #################################################### 00044 ###############################################
 
@@ -393,7 +393,7 @@ df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
 df.iloc[3, 1] = np.nan
 df.loc[8, 'D'] = np.nan
 df1 = df.dropna()
-print(df1)
+# print(df1)
 #################################################### 00045 ###############################################
 
 np.random.seed(42)
@@ -402,7 +402,7 @@ df.iloc[3, 1] = np.nan
 df.loc[8, 'D'] = np.nan
 df1 = df.dropna()
 df1 = df1.reset_index(drop=True)
-print(df1)
+# print(df1)
 
 #################################################### 00046 ###############################################
 
@@ -410,7 +410,7 @@ np.random.seed(42)
 df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
 df.iloc[3, 1] = np.nan
 df.loc[8, 'D'] = np.nan
-print(df.isnull().sum())
+# print(df.isnull().sum())
 
 #################################################### 00047 ###############################################
 
@@ -419,46 +419,46 @@ df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
 df.iloc[3, 1] = np.nan
 df.loc[8, 'D'] = np.nan
 df = df.fillna(0)
-print(df)
+# print(df)
 
 #################################################### 00048 ###############################################
 
 df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
 df = df[['D', 'A', 'B', 'C']]
-print(df)
+# print(df)
 
 #################################################### 00017 ###############################################
 
 np.random.seed(42)
 df = pd.DataFrame(np.random.rand(10, 4), columns=list('ABCD'))
 df = df.drop('D', axis=1)
-print(df)
+# print(df)
 
 #################################################### 00049 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
-print(df)
+# print(df)
 
 #################################################### 00050 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
-print(list(df.columns))
+# print(list(df.columns))
 
 #################################################### 00051 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
 df.drop('New_Price', axis=1, inplace=True)
-print(df.head())
+# print(df.head())
 
 #################################################### 00052 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
 df.drop('New_Price', axis=1, inplace=True)
-print(df.isnull().sum())
+# print(df.isnull().sum())
 
 #################################################### 00053 ###############################################
 
@@ -472,14 +472,14 @@ df.info()
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
 df.columns = [col.lower() for col in df.columns]
-print(df.head())
+# print(df.head())
 
 #################################################### 00055 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
 df.columns = [col.lower() for col in df.columns]
-print(df['owner_type'].value_counts())
+# print(df['owner_type'].value_counts())
 
 #################################################### 00017 ###############################################
 
@@ -488,28 +488,29 @@ df = pd.read_csv(url, index_col=0)
 df.columns = [col.lower() for col in df.columns]
 df.dropna(inplace=True)
 df['engine'] = df['engine'].map(lambda x: int(x[:-3]))
-print(df[['name', 'engine']].head())
+# print(df[['name', 'engine']].head())
+
 #################################################### 00056 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
 df.columns = [col.lower() for col in df.columns]
 df['power'] = np.where(df['power'] == 'null bhp', np.nan, df['power'])
-print(df['power'].value_counts()[:5])
+# print(df['power'].value_counts()[:5])
 
 #################################################### 00057 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
 df.columns = [col.lower() for col in df.columns]
-print(df.groupby('year').size())
+# print(df.groupby('year').size())
 
 #################################################### 00058 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.csv'
 df = pd.read_csv(url, index_col=0)
 df.columns = [col.lower() for col in df.columns]
-print(df.groupby('year').size())
+# print(df.groupby('year').size())
 
 #################################################### 00059 ###############################################
 
@@ -517,7 +518,7 @@ url = 'https://storage.googleapis.com/esmartdata-courses-files/dash-course/data.
 df = pd.read_csv(url, index_col=0)
 df.columns = [col.lower() for col in df.columns]
 df['transmission'] = df['transmission'].map({'Manual': 0, 'Automatic': 1})
-print(df['transmission'].head())
+# print(df['transmission'].head())
 
 #################################################### 00060 ###############################################
 
@@ -538,8 +539,8 @@ pd.set_option('max_columns', 9)
 pd.set_option('display.width', 150)
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ds-bootcamp/london_bike.csv'
 df = pd.read_csv(url, index_col=0)
-print(df.head())
-print(df.tail())
+# print(df.head())
+# print(df.tail())
 
 #################################################### 00063 ###############################################
 
@@ -558,7 +559,7 @@ url = 'https://storage.googleapis.com/esmartdata-courses-files/ds-bootcamp/londo
 df = pd.read_csv(url)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['hour'] = df['timestamp'].dt.hour
-print(df.head())
+# print(df.head())
 
 #################################################### 00065 ###############################################
 
@@ -569,7 +570,7 @@ df = pd.read_csv(url)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['hour'] = df['timestamp'].dt.hour
 df['month'] = df['timestamp'].dt.month
-print(df.head())
+# print(df.head())
 
 #################################################### 00066 ###############################################
 
@@ -580,7 +581,7 @@ df = pd.read_csv(url)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['month'] = df['timestamp'].dt.month
 humidity_by_month = df.groupby('month')['hum'].mean().reset_index()
-print(humidity_by_month)
+# print(humidity_by_month)
 
 #################################################### 00067 ###############################################
 
@@ -591,7 +592,7 @@ df = pd.read_csv(url)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['hour'] = df['timestamp'].dt.hour
 cnt_by_hour = df.groupby('hour')['cnt'].mean().reset_index()
-print(cnt_by_hour)
+# print(cnt_by_hour)
 
 #################################################### 00068 ###############################################
 
@@ -602,7 +603,7 @@ df = pd.read_csv(url)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['hour'] = df['timestamp'].dt.hour
 cnt_by_weekend_hour = df.groupby(['is_weekend', 'hour'])['cnt'].mean().reset_index()
-print(cnt_by_weekend_hour)
+# print(cnt_by_weekend_hour)
 
 #################################################### 00069 ###############################################
 
@@ -612,7 +613,7 @@ url = 'https://storage.googleapis.com/esmartdata-courses-files/ds-bootcamp/londo
 df = pd.read_csv(url)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['hour'] = df['timestamp'].dt.hour
-print(df.query("wind_speed < 10.0 and hum > 90.0"))
+# print(df.query("wind_speed < 10.0 and hum > 90.0"))
 
 #################################################### 00070 ###############################################
 
@@ -623,7 +624,7 @@ df = pd.read_csv(url)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['hour'] = df['timestamp'].dt.hour
 df_weekend = df.query("is_weekend == 1.0").copy()
-print(df_weekend)
+# print(df_weekend)
 
 #################################################### 00071 ###############################################
 
@@ -640,13 +641,13 @@ df_weekend.to_csv('weekend.txt', index=False)
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ml-course/insurance.csv'
 df = pd.read_csv(url)
-print(df.head())
+# print(df.head())
 
 #################################################### 00073 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ml-course/insurance.csv'
 df = pd.read_csv(url)
-print(df[df.duplicated()])
+# print(df[df.duplicated()])
 
 #################################################### 00074 ###############################################
 
@@ -659,7 +660,7 @@ df.info()
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ml-course/insurance.csv'
 df = pd.read_csv(url)
-print(df.select_dtypes(include=['object']))
+# print(df.select_dtypes(include=['object']))
 
 #################################################### 00076 ###############################################
 
@@ -677,7 +678,7 @@ df.info()
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ml-course/insurance.csv'
 df = pd.read_csv(url)
 num_vars = list(df.select_dtypes(include=['float', 'int']).columns)
-print(num_vars)
+# print(num_vars)
 
 #################################################### 00078 ###############################################
 
@@ -687,8 +688,8 @@ for col in list(df.select_dtypes(include=['object']).columns):
     df[col] = df[col].astype('category')
 df_cat = df.select_dtypes(include=['category']).copy()
 df_num = df.select_dtypes(include=['float', 'int']).copy()
-print(df_cat.head())
-print(df_num.head())
+# print(df_cat.head())
+# print(df_num.head())
 
 #################################################### 00079 ###############################################
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ml-course/insurance.csv'
@@ -696,7 +697,7 @@ df = pd.read_csv(url)
 for col in list(df.select_dtypes(include=['object']).columns):
     df[col] = df[col].astype('category')
 df_cat = df.select_dtypes(include=['category']).copy()
-print(df_cat.describe())
+# print(df_cat.describe())
 #################################################### 00080 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ml-course/insurance.csv'
@@ -704,19 +705,19 @@ df = pd.read_csv(url)
 for col in list(df.select_dtypes(include=['object']).columns):
     df[col] = df[col].astype('category')
 df_num = df.select_dtypes(include=['float', 'int']).copy()
-print(df_num.describe())
+# print(df_num.describe())
 
 #################################################### 00081 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ml-course/insurance.csv'
 df = pd.read_csv(url)
-print(df.describe().T[['mean', 'std']])
+# print(df.describe().T[['mean', 'std']])
 
 #################################################### 00082 ###############################################
 
 url = 'https://storage.googleapis.com/esmartdata-courses-files/ml-course/insurance.csv'
 df = pd.read_csv(url)
-print(df.isnull().sum())
+# print(df.isnull().sum())
 
 #################################################### 00083 ###############################################
 
@@ -727,7 +728,7 @@ df = pd.read_csv(url)
 for col in list(df.select_dtypes(include=['object']).columns):
     df[col] = df[col].astype('category')
 df_dummies = pd.get_dummies(df, drop_first=True)
-print(df_dummies.head())
+# print(df_dummies.head())
 
 #################################################### 00084 ###############################################
 
@@ -750,7 +751,7 @@ for col in list(df.select_dtypes(include=['object']).columns):
     df[col] = df[col].astype('category')
 df_dummies = pd.get_dummies(df, drop_first=True)
 corr = df_dummies.corr()
-print(corr[['charges']].sort_values(by='charges', ascending=False))
+# print(corr[['charges']].sort_values(by='charges', ascending=False))
 
 #################################################### 00086 ###############################################
 
@@ -763,9 +764,9 @@ for col in list(df.select_dtypes(include=['object']).columns):
 df_dummies = pd.get_dummies(df, drop_first=True)
 data = df_dummies.copy()
 target = data.pop('charges')
-print(data.head())
-print()
-print(target.head())
+# print(data.head())
+# print()
+# print(target.head())
 
 #################################################### 00087 ###############################################
 
@@ -779,7 +780,7 @@ data = {
 }
 
 df = pd.DataFrame(data)
-print(df)
+# print(df)
 
 #################################################### 00088 ###############################################
 
@@ -798,7 +799,7 @@ for col in ['size', 'color', 'gender', 'bought']:
     df[col] = df[col].astype('category')
 
 df['weight'] = df['weight'].astype('float')
-print()
+# print()
 df.info()
 
 #################################################### 00089 ###############################################
@@ -819,7 +820,7 @@ for col in ['size', 'color', 'gender', 'bought']:
     df[col] = df[col].astype('category')
 
 df['weight'] = df['weight'].astype('float')
-print(pd.get_dummies(df))
+# print(pd.get_dummies(df))
 
 #################################################### 00090 ###############################################
 
@@ -835,12 +836,9 @@ data = {
 }
 
 df = pd.DataFrame(data)
+print(df.head())
 for col in ['size', 'color', 'gender', 'bought']:
     df[col] = df[col].astype('category')
 
 df['weight'] = df['weight'].astype('float')
 print(pd.get_dummies(df, drop_first=True))
-
-
-
-
