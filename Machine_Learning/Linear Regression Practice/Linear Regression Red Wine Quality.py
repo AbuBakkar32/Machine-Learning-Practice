@@ -35,6 +35,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 reg = LinearRegression()
 reg.fit(X_train, y_train)
 
+
+# corr = df.corr()
+# plt.subplots(figsize=(8, 5))
+# sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns, annot=True, cmap=sns.diverging_palette(220, 20, as_cmap=True))
+# plt.show()
+
+
 # Find the Coefficient of regression model
 coef_df = pd.DataFrame(reg.coef_, df.columns[:-1], columns=['Coefficient'])
 # print(coef_df)
