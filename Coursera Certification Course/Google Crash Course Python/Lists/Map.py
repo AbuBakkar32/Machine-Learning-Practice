@@ -2,10 +2,9 @@
 spells = ["protego", "accio", "expecto patronum", "legilimens"]
 
 # Use map() to apply a lambda function over spells: shout_spells
-shout_spells = map(lambda item: item + '!!!', spells)
-
-# Convert shout_spells to a list: shout_spells_list
-shout_spells_list = list(shout_spells)
+shout_spells =list(map(lambda item: item +'!!!', spells))
+shout = list(map(lambda x: {spells.index(x) : x }, spells))
 
 # Print the result
-print(shout_spells_list)
+print(shout_spells)
+print(shout)

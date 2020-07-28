@@ -4,3 +4,4 @@ import datetime
 
 data = pd.read_csv('Country suicide rate.csv')
 print(data.head())
+print(d)
