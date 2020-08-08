@@ -43,8 +43,7 @@ training_set['Title'] = training_set.Name.str.extract('([A-Za-z]+)\.', expand=Fa
 # print(training_set['Title'])
 
 # Changing to common category
-training_set['Title'] = training_set['Title'].replace(
-    ['Dr', 'Rev', 'Col', 'Major', 'Countess', 'Sir', 'Jonkheer', 'Lady', 'Capt', 'Don'], 'Others')
+training_set['Title'] = training_set['Title'].replace(['Dr', 'Rev', 'Col', 'Major', 'Countess', 'Sir', 'Jonkheer', 'Lady', 'Capt', 'Don'], 'Others')
 training_set['Title'] = training_set['Title'].replace('Ms', 'Miss')
 training_set['Title'] = training_set['Title'].replace('Mme', 'Mrs')
 training_set['Title'] = training_set['Title'].replace('Mlle', 'Miss')
@@ -94,6 +93,6 @@ training_set['Deck'] = le.fit_transform(training_set['Deck'])
 
 #################################################################################
 
-print(training_set)
+#print(training_set)
 
 #################################################################################
