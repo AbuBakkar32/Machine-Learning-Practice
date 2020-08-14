@@ -65,7 +65,7 @@ training_set['Embarked'] = training_set['Embarked'].fillna('S')
 # Checking the no of null values now
 training_set['Embarked'].isnull().sum()
 
-#################################################################################
+###############################000000000000000000000000000000000000000000000000000000000000000000000000000000000##################################################
 
 means = training_set.groupby('Title')['Age'].mean()
 title_list = ['Master', 'Miss', 'Mr', 'Mrs', 'Others']

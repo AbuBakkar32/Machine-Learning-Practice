@@ -1,4 +1,4 @@
-import requests
+
 import json
 
 with open('test.json', 'r') as f:
