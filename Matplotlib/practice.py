@@ -3,14 +3,14 @@ import matplotlib.pyplot as plt
 import sklearn.model_selection
 
 df = pd.read_csv('mental_disorder_substance_use.csv')
-# dataa = df.iloc[:, 4:6]
-# print(df.iloc[:50,:])
-# dataa.plot(subplots=True)
-# dataa.plot(kind='hist')
+dataa = df.iloc[:, 4:6]
+print(df.iloc[:50,:])
+dataa.plot(subplots=True)
+dataa.plot(kind='hist')
 
-# plt.title('Group Off Albania Disorder (%)')
-# plt.grid()
-# plt.show()
+plt.title('Group Off Albania Disorder (%)')
+plt.grid()
+plt.show()
 
 # -------------------------------------------------------------------------------
 

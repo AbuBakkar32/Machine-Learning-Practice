@@ -5,13 +5,10 @@ def main():
     infile = open('reads.txt', 'rb')
     CopyFile = open('reads-copy.txt', 'wb')
 
-    while True:
-        buffer = infile.read(10240)
-        if buffer:
-            CopyFile.write(buffer)
-            print('.', end='', flush=True)
-        else:
-            break
+    for line in infile:
+        print(line.strip(), file=CopyFile)
+        print('.', end='', flush=True)
+
     CopyFile.close()
     print('\nDone........')
 
