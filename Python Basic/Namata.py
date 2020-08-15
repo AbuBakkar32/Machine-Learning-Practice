@@ -1,3 +1,5 @@
+import time
+
 num = input("How many Namata you want?\n")
 num = (int(num) + 1)
 for i in range(int(num)):
@@ -8,14 +10,15 @@ for i in range(int(num)):
         if j == 0:
             continue
         result = i * j
+        time.sleep(1.0)
         print(f"{i}x{j}={result}")
     print('*************************')
 
-name = 'HELLO'
-names = 'RAKIB'
-print(*name, sep='\t')
-print(*names, sep='\t')
-print('*************************')
+# name = 'HELLO'
+# names = 'RAKIB'
+# print(*name, sep='\t')
+# print(*names, sep='\t')
+# print('*************************')
 
 
 

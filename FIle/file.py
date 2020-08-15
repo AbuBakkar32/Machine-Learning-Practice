@@ -1,5 +1,8 @@
-f = open('reads.txt', 'r')
+def main():
+    f = open('reads.txt', 'r')
+    for line in f:
+        print(line.strip())
 
-print(f.read())
 
-
+if __name__ == '__main__':
+    main()
