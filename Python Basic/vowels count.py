@@ -15,12 +15,13 @@ for char in text:
         cons[char] = cons.get(char, 0)+1
 print(count)
 print(cons)
+
 # simple code for remove punctuation character
 data = {}
 for i, j in cons.items():
     if i in punctuation:
         continue
-    if i==' ':
+    if i == ' ':
         continue
     else:
         data[i] = j

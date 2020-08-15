@@ -37,7 +37,7 @@ df['male_bytes'] = df.apply(male_bytes, axis=1)
 
 # Group By URL and sum male_bytes and Female_bytes
 df3 = df.groupby('url')['male_bytes', 'female_bytes'].sum()
-print(df3)
+#print(df3)
 
 # sum bytes by male/female and group by URL and Country
 df4 = df.groupby(['url', 'country'])['male_bytes', 'female_bytes'].sum()
