@@ -13,6 +13,7 @@ ops = {
     "/": operator.truediv,
     "*": operator.mul,
     "**": pow
+
 }
 
 print(ops['-'](50, 25))

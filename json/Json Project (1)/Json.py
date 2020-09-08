@@ -6,7 +6,7 @@ import json
 r = requests.get('https://formulae.brew.sh/api/formula.json')
 packages_json = r.json()
 results = []
-print(json.dumps(packages_json, indent=4))
+# print(json.dumps(packages_json, indent=4))
 for package in packages_json[0:]:
     try:
         package_name = package['name']

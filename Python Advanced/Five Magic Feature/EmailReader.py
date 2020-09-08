@@ -10,7 +10,7 @@ mail.select('inbox')
 print(messages)
 if retcode == 'OK':
     id_list = messages[0].split()
-    latest_emails = id_list[-10:]
+    latest_emails = id_list[:10]
     for num in latest_emails:
         typ, data = mail.fetch(num, '(RFC822)')
         for response_part in data:
