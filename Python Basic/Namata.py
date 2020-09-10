@@ -10,6 +10,7 @@ for i in range(int(num)):
         if j == 0:
             continue
         result = i * j
+        time.sleep(1)
         print(f"{i}x{j}={result}")
     print('*************************')
 

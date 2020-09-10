@@ -6,13 +6,14 @@ from selenium.webdriver.common.by import By
 
 browser = webdriver.Chrome('G:/Machine Learning Practice/Automation/driver/chromedriver.exe')
 browser.maximize_window()
+browser.implicitly_wait(3)
 
 browser.get("https://opensource-demo.orangehrmlive.com/")
 browser.find_element_by_id('txtUsername').send_keys('Admin')
 browser.find_element_by_id('txtPassword').send_keys('admin123')
 browser.find_element_by_id('btnLogin').click()
 browser.find_element_by_id('welcome').click()
-ml = browser.find_element_by_class_name('quickLinkText')
+
 
 # browser.find_element_by_xpath("//td[text()='Logout']").click()
 # try:
@@ -20,8 +21,8 @@ ml = browser.find_element_by_class_name('quickLinkText')
 # except :
 #     print("something went wrong")
 
-time.sleep(2)
-# browser.close()
-# browser.quit()
+time.sleep(5)
+browser.close()
+browser.quit()
 print('Thank for logged-in our website')
 
