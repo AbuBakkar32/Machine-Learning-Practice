@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 driver = webdriver.Chrome('G:/Machine Learning Practice/Automation/driver/chromedriver.exe')
 driver.maximize_window()
@@ -32,7 +33,7 @@ driver.find_elements_by_tag_name('option')[33].click()
 time.sleep(1)
 driver.find_elements_by_tag_name('option')[68].click()
 time.sleep(1)
-driver.find_element_by_xpath('//*[@id="u_1_3"]').click()
+driver.find_element_by_xpath('//*[@id="u_1_5"]').click()
 
 time.sleep(1)
 driver.find_element_by_name('websubmit').click()
