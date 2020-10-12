@@ -60,7 +60,7 @@ df1 = df.head(25)
 # Now let's plot the comparison of Actual and Predicted values
 df1.plot(kind='bar', figsize=(10, 8))
 plt.grid(which='major', linestyle='--', linewidth='0.5', color='green')
-# plt.show()
+plt.show()
 
 
 # The final step is to evaluate the performance of the algorithm. We’ll do this by finding the values for MAE, MSE, and RMSE

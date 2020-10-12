@@ -3,6 +3,7 @@
 # Importing the libraries
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Importing the dataset
 dataset = pd.read_csv('Social_Network_Ads.csv')
@@ -31,6 +32,24 @@ classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_test)
 
 # Making the Confusion Matrix
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, accuracy_score, f1_score
+
+cs = accuracy_score(y_test, y_pred)
+print(cs)
 
 cm = confusion_matrix(y_test, y_pred)
+print(cm)
+
+
+# decision Tree12 Classification
+
+# from sklearn.tree import DecisionTreeClassifier
+#
+# dt = DecisionTreeClassifier()
+# dt.fit(X_train, y_train)
+#
+# dt_predit = dt.predict(X_test)
+# print("This is for the Decision Tree classification")
+# print(dt_predit)
+# print(confusion_matrix(y_test, y_pred))
+# print(dt.score(X_test, y_test))

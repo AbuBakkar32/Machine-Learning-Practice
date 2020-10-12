@@ -50,9 +50,8 @@ def readData(file, sheetName, rowno, columnno):
 def writeData(file, sheetName, rowno, columnno, data):
     data = openpyxl.load_workbook(file)
     sheet = data.get_sheet_by_name(sheetName)
-    sheet.cell(row=rowno, column=columnno).value=data
+    sheet.cell(row=rowno, column=columnno).value = data
     data.save(file)
-
 
 # row = getRowCount('data-1.xlsx', 'Sheet1')
 # col = getColumnCount('data-1.xlsx', 'Sheet1')

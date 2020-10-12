@@ -27,7 +27,7 @@ corr = df.corr()
 plt.subplots(figsize=(15, 10))
 sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns, annot=True,
             cmap=sns.diverging_palette(220, 20, as_cmap=True))
-
+plt.show()
 # Create Classification version of target variable
 df['goodquality'] = [1 if x >= 7 else 0 for x in df['quality']]
 
@@ -99,6 +99,7 @@ print('XGBoost Accuracy Score: ', accuracy_score(y_test, y_pred1))
 
 feat_importances = pd.Series(model5.feature_importances_, index=X_features.columns)
 feat_importances.nlargest(25).plot(kind='barh', figsize=(10, 10))
+plt.show()
 
 # Filtering df for only good quality
 good = df[df['goodquality'] == 1]

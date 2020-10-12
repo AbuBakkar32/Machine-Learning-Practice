@@ -12,12 +12,12 @@ driver.maximize_window()
 path = 'data.xlsx'
 row = XLUtils.getRowCount(path, 'empsheet')
 col = XLUtils.getColumnCount(path, 'empsheet')
-print(row,col)
+print(row, col)
 
-for r in range(2, row+1):
+for r in range(1, row+1):
     for c in range(1, col+1):
         data = XLUtils.readData(path, 'empsheet', r, c)
-        print(data, end='      ')
+        print(data, end='                              ')
     print('')
 
 
