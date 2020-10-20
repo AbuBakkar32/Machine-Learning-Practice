@@ -6,6 +6,7 @@ vowels = 'aeiou'
 text = 'Hello every one my name is abu bakkar siddik. i am from bangladesh. i am studing as a software engineer under daffodil international university. my dreame so long and may Allah full fill my dreams'
 text = text.casefold()
 count = {}.fromkeys(vowels, 0)
+
 cons = {}
 
 for char in text:

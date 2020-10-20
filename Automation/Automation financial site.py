@@ -12,33 +12,35 @@ soup = BeautifulSoup(page.text, 'lxml')
 table = soup.find('div', {'id': 'ctl00_cph1_divSymbols'})
 
 elements = []
+x = 0
 for tr in table.find_all('tr'):
     for td in tr.find_all('td'):
         element = td.text
         elements.append(element)
+    x +=1
 print(elements)
 
 
-# symbols = []
-# for y in range(0, x, 10):
-#     symbols.append(elements[y])
-#
-# names = []
-# for y in range(1, x, 10):
-#     names.append(elements[y])
-#
-# # Pandas Dataframes
-# df = pd.DataFrame(index=None)
-# df['stock_symbol'] = symbols
-# df['stock_name'] = names
-# df.set_index('stock_symbol', inplace=True)
-# # df.to_json('stock.json')
-#
-# with open('stock.json', 'r') as f:
-#     data = json.load(f)
-#
-# data_str = json.dumps(data, indent=4)
-# print(data_str)
+symbols = []
+for y in range(0, x, 10):
+    symbols.append(elements[y])
+
+names = []
+for y in range(1, x, 10):
+    names.append(elements[y])
+
+# Pandas Dataframes
+df = pd.DataFrame(index=None)
+df['stock_symbol'] = symbols
+df['stock_name'] = names
+df.set_index('stock_symbol', inplace=True)
+# df.to_json('stock.json')
+
+with open('stock.json', 'r') as f:
+    data = json.load(f)
+
+data_str = json.dumps(data, indent=4)
+print(data_str)
 
 
 
