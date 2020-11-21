@@ -27,4 +27,6 @@ def arg_printer(a, b, *args, option=True, **kwargs):
     print(kwargs)
 
 
+lst = [1, 4, 5]
+arg_printer(lst)
 # print(arg_printer(1, 4, 6, 5, param1=5, param2=6))
