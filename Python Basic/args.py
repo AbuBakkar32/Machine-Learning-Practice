@@ -18,5 +18,13 @@ def arg_printer(a, b, option=True, **kwargs):
     print(kwargs)
 
 
-print(arg_printer(3, 4, param1=5, param2=6))
+# print(arg_printer(3, 4, param1=5, param2=6))
 
+def arg_printer(a, b, *args, option=True, **kwargs):
+    print(a, b)
+    print(args)
+    print(option)
+    print(kwargs)
+
+
+# print(arg_printer(1, 4, 6, 5, param1=5, param2=6))
