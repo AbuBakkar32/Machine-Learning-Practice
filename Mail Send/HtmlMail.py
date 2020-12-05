@@ -2,9 +2,10 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-email = 'myaddress@gmail.com'
-password = 'password'
-send_to_email = 'sentoaddreess@gmail.com'
+email = 'abubakkar.swe@gmail.com'
+password = ''
+send_to_email = 'Rakibsarkar26@gmail.com'
+
 subject = 'This is the subject'
 messageHTML = '<p>Visit <a href="https://nitratine.net/">nitratine.net<a> for some great <span style="color: #496dd0">tutorials and projects!</span><p>'
 messagePlain = 'Visit nitratine.net for some great tutorials and projects!'
