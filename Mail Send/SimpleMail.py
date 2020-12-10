@@ -15,7 +15,7 @@ def randPass():
 
 try:
     email = 'abubakkar.swe@gmail.com'
-    password = ''
+    password = 'Abubakkar32'
     send_to_email = 'Rakibsarkar26@gmail.com'
 
     msg = EmailMessage()
