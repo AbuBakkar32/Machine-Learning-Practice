@@ -2,35 +2,740 @@ import smtplib
 import string
 import random
 from email.message import EmailMessage
+from termcolor import colored
 
+# def randPass():
+#     chars = string.ascii_uppercase + string.digits + string.ascii_lowercase
+#     size = 5
+#     return ''.join(random.choice(chars) for _ in range(size, 12))
 
-def randPass():
-    chars = string.ascii_uppercase + string.digits + string.ascii_lowercase
-    size = 5
-    return ''.join(random.choice(chars) for _ in range(size, 12))
+# customer = """
+# glenn.e.quarantillo@gmail.com
+# glennbrennan55@gmail.com
+# glennr11677@gmail.com
+# glennsmga@gmail.com
+# glenthornton1956@gmail.com
+# glinclark2@gmail.com
+# glkglk337@gmail.com
+# glocke95@gmail.com
+# gloryx7415@gmail.com
+# glosseme3@gmail.com
+# glrca8@gmail.com
+# glrobinson1959@gmail.com
+# glum96744808@gmail.com
+# glworthey3@gmail.com
+# gmcbryan79@gmail.com
+# gmguinn6352@gmail.com
+#
+# gmmsm1@gmail.com
+# goal38a@gmail.com
+# godfck01@gmail.com
+# gododgers232@gmail.com
+# godspeed.ig@gmail.com
+# gogetter9393@gmail.com
+# goharry69@gmail.com
+# gohike1981@gmail.com
+# goin4it70@gmail.com
+# goingforward666@gmail.com
+# goldnhotrods@gmail.com
+# gomesottoniel@gmail.com
+# gomezjovani3@gmail.com
+# gonyea6969@gmail.com
+# gonzalesray115@gmail.com
+# good2do63@gmail.com
+# goodp2585@gmail.com
+# goodspeed.gregg@gmail.com
+# goodtimeintheville8@gmail.com
+# gordonrhodes854@gmail.com
+# gorospesandro@gmail.com
+# gotafeelit@gmail.com
+# gotitbig23@gmail.com
+# gourmetcat1994@gmail.com
+# gparadise79@gmail.com
+#
+# gpichler51@gmail.com
+# gpitser1945@gmail.com
+# gplrfv509984@gmail.com
+# gpmcintyre7241@gmail.com
+# gprhavingfun@gmail.com
+# gpsvt3630@gmail.com
+# graceellison393@gmail.com
+# graemes691965@gmail.com
+# grahammike691030@gmail.com
+# grandville33@gmail.com
+# grant7george@gmail.com
+# grantmyers0907@gmail.com
+# gravessonny93@gmail.com
+# gray3975@gmail.com
+# graygenesis44@gmail.com
+# grcambell809@gmail.com
+# greekfromathens@gmail.com
+# green7169.jg@gmail.com
+# greencrow420@gmail.com
+# greenhorent1234@gmail.com
+# greentruck39@gmail.com
+# greg.akins317@gmail.com
+# greg219olson@gmail.com
+# gregauterson@gmail.com
+# gregdconrey67@gmail.com
+#
+# gregf3344@gmail.com
+# greggaab30@gmail.com
+# greghowell28@gmail.com
+# greglang53@gmail.com
+# gregory.shover3@gmail.com
+# gregorymercer17.gm@gmail.com
+# gregss102@gmail.com
+# gregty7777@gmail.com
+# gregutter59@gmail.com
+# greymonkey1954@gmail.com
+# greyrider2013@gmail.com
+# griffithr987@gmail.com
+# grijalvajason28@gmail.com
+# grimward247@gmail.com
+# griosx14@gmail.com
+# groberts003@gmail.com
+# grouchy958yo@gmail.com
+# grover7769@gmail.com
+# grslicer778@gmail.com
+# grwoodley@gmail.com
+# gstanke123@gmail.com
+# gtheman6248@gmail.com
+# gtlight6732@gmail.com
+# gtoone5555@gmail.com
+# gtravis606@gmail.com
+#
+# gtullom1@gmail.com
+# guiness707@gmail.com
+# gulpair50@gmail.com
+# gunnyray556@gmail.com
+# gurden53@gmail.com
+# guswhat123grw@gmail.com
+# gutnemben@gmail.com
+# guyaneseking12@gmail.com
+# guyhere28334@gmail.com
+# guyprichard29@gmail.com
+# guyshanley29@gmail.com
+# guzmanbo187@gmail.com
+# guzmanrhebony91@gmail.com
+# gwj571960@gmail.com
+# gzrmohammed@gmail.com
+# h0wlatthem00n71@gmail.com
+# haannamya11@gmail.com
+# hagelron82@gmail.com
+# hagergreg53@gmail.com
+# haigkocek69@gmail.com
+# hailestock60@gmail.com
+# hain194@gmail.com
+# haircutter13@gmail.com
+# half665oot@gmail.com
+# halljared214@gmail.com
+#
+# halloranjohn5@gmail.com
+# hamalscatering@gmail.com
+# hamiltonsingleman@gmail.com
+# hammer69201@gmail.com
+# hammondj519@gmail.com
+# handfulofcock@gmail.com
+# handymanpsl63@gmail.com
+# hanedjim66@gmail.com
+# haneyjimmy3@gmail.com
+# hank2621@gmail.com
+# hankpile@gmail.com
+# hankrapersr67@gmail.com
+# hanrahan63te@gmail.com
+# hansuumgent@gmail.com
+# happyslappy61@gmail.com
+# harderfaster27@gmail.com
+# hardlil6incher@gmail.com
+# hardnready3@gmail.com
+# hardware1431@gmail.com
+# harleycall12@gmail.com
+# harleyrob206@gmail.com
+# harmsjake5@gmail.com
+# harnessracing04@gmail.com
+# harold9000@gmail.com
+# haroldmcguire556@gmail.com
+#
+# haroldspohn@gmail.com
+# harperbrian1984@gmail.com
+# harringmiland@gmail.com
+# harrisongbraider24@gmail.com
+# harryguy707@gmail.com
+# harryisbad1@gmail.com
+# harrym.millerhm@gmail.com
+# harrysacs2@gmail.com
+# harshman1060@gmail.com
+# harthulen@gmail.com
+# hartj8615@gmail.com
+# hartsfieldjulie86@gmail.com
+# harvey.jg85@gmail.com
+# harveyjohnson63@gmail.com
+# hawkswin69@gmail.com
+# hawrylukrichard4@gmail.com
+# hayslipben@gmail.com
+# haywardmccrea79@gmail.com
+# hazmat11709@gmail.com
+# hbrogdon16@gmail.com
+# hcamilo1269@gmail.com
+# hddude63@gmail.com
+# hdholbrook@gmail.com
+# heathersman610@gmail.com
+# hebenstriet17@gmail.com
+#
+# hebs98zj@gmail.com
+# hebwms989848@gmail.com
+# heckyea92@gmail.com
+# hectorhector84@gmail.com
+# hectorlunnon619@gmail.com
+# hedgerd.usmc@gmail.com
+# heehaw32.hb@gmail.com
+# heistbrett@gmail.com
+# hell.no.mustang007@gmail.com
+# helpjw31@gmail.com
+# helpmenow740@gmail.com
+# henrixushi@gmail.com
+# henry.lens01@gmail.com
+# henry81948@gmail.com
+# henrycallaway01@gmail.com
+# henryhiter4@gmail.com
+# henrylong8236@gmail.com
+# henrymerill@gmail.com
+# henryrod0330@gmail.com
+# henrytanah45@gmail.com
+# henrythefirst0@gmail.com
+# hensonty60@gmail.com
+# herbster1.ht@gmail.com
+# hergil123456@gmail.com
+# hermansmunoz@gmail.com
+#
+# hermsengreenbay@gmail.com
+# heroclickerforlife@gmail.com
+# hershellwilliams21@gmail.com
+# hessaaron69@gmail.com
+# hesselrick@gmail.com
+# hewdiditkw4165@gmail.com
+# hey32803@gmail.com
+# heyenrich@gmail.com
+# hfmc6789@gmail.com
+# hhmoore1946@gmail.com
+# hicks3899@gmail.com
+# hicksboy80@gmail.com
+# hicksmichael402@gmail.com
+# highlander1s1950@gmail.com
+# hillbillywilly2013@gmail.com
+# hillerik21@gmail.com
+# hirthj4200@gmail.com
+# hitsonbill85@gmail.com
+# hiway.outlaw.59@gmail.com
+# hj4608831@gmail.com
+# hjkjljkl21555@gmail.com
+# hjromo27@gmail.com
+# hl3248006@gmail.com
+# hlmn171@gmail.com
+# hlopez1958@gmail.com
+#
+# hm75277@gmail.com
+# hoepfnercraig@gmail.com
+# hollandnc1169@gmail.com
+# holliewood669@gmail.com
+# hollowelldavieon@gmail.com
+# holmeshjohn691@gmail.com
+# homealone69woman5@gmail.com
+# homerthehammer3131@gmail.com
+# hoppn62@gmail.com
+# hor.ney.xx69@gmail.com
+# hornydave43@gmail.com
+# hornyyrhotkiss@gmail.com
+# hoskinsondonnie1@gmail.com
+# hoss8085@gmail.com
+# hotchevlle71@gmail.com
+# hotdog1956@gmail.com
+# hotf10039@gmail.com
+# hotgirl2584789@gmail.com
+# hotlogger693@gmail.com
+# hotone48@gmail.com
+# hotone69er@gmail.com
+# hotrod50050@gmail.com
+# hotweld20yahoo@gmail.com
+# houndog502@gmail.com
+# howej82901@gmail.com
+#
+# howelljimmy8832@gmail.com
+# hoyryan7726@gmail.com
+# hoytshooter882@gmail.com
+# hrddriv1298@gmail.com
+# htgill32@gmail.com
+# htourehamid@gmail.com
+# htrejo326@gmail.com
+# huerta6807@gmail.com
+# hughespaul1066@gmail.com
+# hugovaladez09@gmail.com
+# humancanopener58@gmail.com
+# hunlockj@gmail.com
+# hunnicutteddie534@gmail.com
+# huntercorbitt7333@gmail.com
+# hunterkevinstyles@gmail.com
+# huntermicheal50@gmail.com
+# hurricanehunter007@gmail.com
+# huxtable007@gmail.com
+# hvmendoza99@gmail.com
+# hwrd.kennedy@gmail.com
+# hyderc77@gmail.com
+# hyjames420@gmail.com
+# i7wannabeguy@gmail.com
+# iagucp953840@gmail.com
+# iamlazy987@gmail.com
+#
+# iampapibear@gmail.com
+# ianandrews45@gmail.com
+# iannone2777@gmail.com
+# ianpontyboy@gmail.com
+# iantrestrail1@gmail.com
+# ianvandy1972@gmail.com
+# ibeatyourbabymama@gmail.com
+# ibevjzw10541@gmail.com
+# icanburfantac69@gmail.com
+# icemanrd9559@gmail.com
+# icemonkey.t@gmail.com
+# idou69.ks@gmail.com
+# ifhrju224585@gmail.com
+# ihildawn1941@gmail.com
+# ijwac69@gmail.com
+# ikekay@gmail.com
+# ilbj6969@gmail.com
+# ilep69@gmail.com
+# illbud2460@gmail.com
+# iloveamericaforever1@gmail.com
+# iluvlickinu@gmail.com
+# imagepaint62@gmail.com
+# imaperfect10eating@gmail.com
+# imgone70k@gmail.com
+# imodie2u2@gmail.com
+#
+# imoreno084@gmail.com
+# imsapin@gmail.com
+# imtheman1393@gmail.com
+# imwmdm647557@gmail.com
+# inabled4u@gmail.com
+# inalidad72710@gmail.com
+# indigomusab31@gmail.com
+# indigored1952@gmail.com
+# indio5544jy@gmail.com
+# insidewarmth12@gmail.com
+# intrepid24151@gmail.com
+# inurcooter@gmail.com
+# iowahotrodman@gmail.com
+# ipleezupleezme@gmail.com
+# iriscapeles56@gmail.com
+# irishking1027@gmail.com
+# is4rael8@gmail.com
+# isa490543@gmail.com
+# isaacv636@gmail.com
+# isaimtz67@gmail.com
+# isanybodyrealhere@gmail.com
+# islandtime960@gmail.com
+# ismaelaugusto2014@gmail.com
+# ispratt27@gmail.com
+# israelacosta24@gmail.com
+#
+# israelrodriguez.ir43@gmail.com
+# issacguevara32@gmail.com
+# itsgustthat6969@gmail.com
+# itsme0978111@gmail.com
+# itsmoeman3@gmail.com
+# itwonthurtmuchatall@gmail.com
+# iugi7445@gmail.com
+# ivantwogreat@gmail.com
+# iwantit412302976@gmail.com
+# iwserwin@gmail.com
+# izbcwc747997@gmail.com
+# izzaanderson08@gmail.com
+# izzyroth66@gmail.com
+# j.duenes5250@gmail.com
+# j.merryfield00@gmail.com
+# j.r.mcquiston8812@gmail.com
+# j.roudebush0522@gmail.com
+# j.wilsonomg4u@gmail.com
+# j.wolf6538@gmail.com
+# j0hnb201172@gmail.com
+# j205b05ro49@gmail.com
+# j6970p@gmail.com
+# ja1972kall@gmail.com
+# jabjr4363@gmail.com
+# jabosutton18@gmail.com
+#
+# jachura0911@gmail.com
+# jack.gawith@gmail.com
+# jackhello532@gmail.com
+# jackiermoser08@gmail.com
+# jackj6360@gmail.com
+# jackjeremy57@gmail.com
+# jackjohnmiller@gmail.com
+# jackmeoff2263@gmail.com
+# jackrutherford19@gmail.com
+# jacksonhenry1960@gmail.com
+# jacob.e.mascaro@gmail.com
+# jacob21fernando@gmail.com
+# jacobdyck1234@gmail.com
+# jaesonross80@gmail.com
+# jagriff1962@gmail.com
+# jahjahjam3@gmail.com
+# jaid8175@gmail.com
+# jaimegraciano27@gmail.com
+# jaimejones1961@gmail.com
+# jajsnmjcjajs@gmail.com
+# jakeandliz16@gmail.com
+# jakecaruso2490@gmail.com
+# jakedanos@gmail.com
+# jakedubbs56.jd@gmail.com
+# jakemyers230@gmail.com
+#
+# jakeriggs94@gmail.com
+# jakesteward1958@gmail.com
+# jakreds2158@gmail.com
+# jaley1001@gmail.com
+# jallen7542@gmail.com
+# jamall.ousley@gmail.com
+# jamaya387@gmail.com
+# james.daugherty3@gmail.com
+# james.diorio30@gmail.com
+# james.o.braun@gmail.com
+# james12345roche@gmail.com
+# james125866@gmail.com
+# james76turner@gmail.com
+# james89690@gmail.com
+# james899h8h@gmail.com
+# jamesbeyerjr@gmail.com
+# jamesblazin3207@gmail.com
+# jamesbuckykemp@gmail.com
+# jamescarrion1953@gmail.com
+# jamescomstock64@gmail.com
+# jamescparrish@gmail.com
+# jamescrabb101251@gmail.com
+# jamesculwell6@gmail.com
+# jamesdaley75@gmail.com
+# jamesdicumoseeng@gmail.com
+#
+# jamesefferson55@gmail.com
+# jamesforrest707@gmail.com
+# jameshealy0720@gmail.com
+# jamesjosephthiel@gmail.com
+# jameskahn76@gmail.com
+# jamesklopp34@gmail.com
+# jameslcroslin@gmail.com
+# jamesloane4@gmail.com
+# jameslummus59@gmail.com
+# jameslyford01@gmail.com
+# jamesmartinw4200000@gmail.com
+# jamesmhayes1974@gmail.com
+# jamesnjessnjace2012@gmail.com
+# jameson.mike9@gmail.com
+# jamespulliamsr83@gmail.com
+# jamesray7689@gmail.com
+# jamesrichardson2377@gmail.com
+# jamesshumate57@gmail.com
+# jamessmith2885@gmail.com
+# jamesstorm1967@gmail.com
+# jamest8360@gmail.com
+# jamestommy2010@gmail.com
+# jamestrammell6969@gmail.com
+# jamesw.russell0619@gmail.com
+# jameswatkinson2014@gmail.com
+#
+# jameswcornelius62@gmail.com
+# jameswhitt36@gmail.com
+# jamie.mohler1980@gmail.com
+# jamiefling2@gmail.com
+# jamiehawkins911@gmail.com
+# jamiehawks1972@gmail.com
+# jamiehowell08@gmail.com
+# jamiejoja@gmail.com
+# jamieleague17@gmail.com
+# jamieleeadams1978@gmail.com
+# jamiepete72@gmail.com
+# jamieray541@gmail.com
+# jamiesinger225@gmail.com
+# jamietelferplumber85@gmail.com
+# jamievossekuil@gmail.com
+# jammerfijian@gmail.com
+# jamusjohnson46@gmail.com
+# janelindsey832@gmail.com
+# janeoliver005@gmail.com
+# jaredarcher19877@gmail.com
+# jarwis2467@gmail.com
+# jaschkerichard@gmail.com
+# jasmcneal124@gmail.com
+# jasminebrock562@gmail.com
+# jason666420medlock@gmail.com
+#
+# jasonbariola2626@gmail.com
+# jasondicks50@gmail.com
+# jasonheck1963@gmail.com
+# jasonmcspadden40@gmail.com
+# jasonmims73@gmail.com
+# jasonrlanders798@gmail.com
+# jasonsherrill01@gmail.com
+# jasontargetdoorsupply@gmail.com
+# jasonvalimar481@gmail.com
+# jasonwebster727@gmail.com
+# jasonweidenaar82@gmail.com
+# jasonzschomler@gmail.com
+# jasper27681@gmail.com
+# jassaghotra786786@gmail.com
+# jastone1970@gmail.com
+# jatplatinumpest@gmail.com
+# javierlugo3663@gmail.com
+# javiernunez.mn@gmail.com
+# javierurey923@gmail.com
+# jawbreaker1959@gmail.com
+# jay11oil69@gmail.com
+# jay2778275@gmail.com
+# jay32r@gmail.com
+# jayblax1975@gmail.com
+# jaybone85.jh.jh@gmail.com
+#
+# jaybuckds1@gmail.com
+# jayg5512@gmail.com
+# jaygarrick66@gmail.com
+# jayheard24@gmail.com
+# jayman12.jr77@gmail.com
+# jayrrr1220@gmail.com
+# jayruns79@gmail.com
+# jazzigrampa@gmail.com
+# jbalderas163@gmail.com
+# jballi447@gmail.com
+# jbarger9503@gmail.com
+# jbarnerfamily1993@gmail.com
+# jbash3355@gmail.com
+# jbbmw1953@gmail.com
+# jbee92001@gmail.com
+# jbignuf4u@gmail.com
+# jbjames1970@gmail.com
+# jblauser86@gmail.com
+# jbochicchio001@gmail.com
+# jboothboothj@gmail.com
+# jbret22tbdn@gmail.com
+# jbridjmohanjr2900@gmail.com
+# jbrzonkala1984@gmail.com
+# jbspep3@gmail.com
+# jburgess204@gmail.com
+#
+# jbutaran15@gmail.com
+# jc1033031@gmail.com
+# jc12md80@gmail.com
+# jc351099@gmail.com
+# jc899012@gmail.com
+# jcb73052@gmail.com
+# jcfisher1202@gmail.com
+# jcg71429@gmail.com
+# jcinnamon50@gmail.com
+# jckcchiefs@gmail.com
+# jcludlum6@gmail.com
+# jcorbett490@gmail.com
+# jd25469@gmail.com
+# jdavid24.ja@gmail.com
+# jdavidyoung01@gmail.com
+# jdb19921996@gmail.com
+# jdbelew5@gmail.com
+# jdbyrnesxi@gmail.com
+# jdc611970@gmail.com
+# jdcdavid27@gmail.com
+# jdelatorre881@gmail.com
+# jdj08zo6@gmail.com
+# jdm828.jm.jm.jm@gmail.com
+# jdmyers020@gmail.com
+# jdockum44@gmail.com
+#
+# jdoty03@gmail.com
+# jdschlabach@gmail.com
+# jeana9362@gmail.com
+# jeaniejfgh32@gmail.com
+# jeannecarlson832@gmail.com
+# jeanniehubbard468@gmail.com
+# jeanroach81@gmail.com
+# jedifalcon56@gmail.com
+# jedkeantattoos@gmail.com
+# jeep201639@gmail.com
+# jeep2gibbs@gmail.com
+# jeeper92fl@gmail.com
+# jeepguy501@gmail.com
+# jeepmccoy@gmail.com
+# jeff.bp.oil@gmail.com
+# jeff22515@gmail.com
+# jeff332t@gmail.com
+# jeffbelardes@gmail.com
+# jeffbidwell42@gmail.com
+# jeffbuck61@gmail.com
+# jeffd5708@gmail.com
+# jefferygeewiz@gmail.com
+# jeffingrum85@gmail.com
+# jeffjdm5@gmail.com
+# jeffjohnson1702@gmail.com
+#
+# jeffjordan223@gmail.com
+# jefflfinstad@gmail.com
+# jeffmountcastle@gmail.com
+# jeffnesem962@gmail.com
+# jeffparm29@gmail.com
+# jeffpiper81@gmail.com
+# jeffreybeatty5446@gmail.com
+# jeffreyhazel59@gmail.com
+# jeffreyjones1892@gmail.com
+# jeffreyspratt1967@gmail.com
+# jeffreyv27@gmail.com
+# jeffreywalker8509@gmail.com
+# jeffreywilliams858@gmail.com
+# jeffro.jf@gmail.com
+# jeffsoup55@gmail.com
+# jeffswoodworks15@gmail.com
+# jefft7069@gmail.com
+# jefftaxara@gmail.com
+# jefftrucks0919@gmail.com
+# jehumphries2009@gmail.com
+# jenisa354@gmail.com
+# jennagerych01@gmail.com
+# jenniferlisa999@gmail.com
+# jennijoly1025@gmail.com
+# jennykimberly807@gmail.com
+#
+# jenpaschal5@gmail.com
+# jensencamaron@gmail.com
+# jeramey245@gmail.com
+# jerbo156@gmail.com
+# jerejjong08@gmail.com
+# jeremiahlovesheather@gmail.com
+# jeremy.p.braun@gmail.com
+# jeremyc318@gmail.com
+# jeremycreller@gmail.com
+# jeremykennethshorter@gmail.com
+# jeremyoncale873@gmail.com
+# jeremysplaya@gmail.com
+# jeremystevens872016@gmail.com
+# jeroldchanner17@gmail.com
+# jeromeokeefe69@gmail.com
+# jerrica22ingles@gmail.com
+# jerry.goins17@gmail.com
+# jerry361025a@gmail.com
+# jerrybrnhrt93@gmail.com
+# jerrydoe99@gmail.com
+# jerryhoffman2901@gmail.com
+# jerryj379@gmail.com
+# jerryj6868@gmail.com
+# jerrylangkop26@gmail.com
+# jerryloredo74@gmail.com
+#
+# jerrylulie@gmail.com
+# jerrymathis9@gmail.com
+# jerrymc399@gmail.com
+# jerrynetlease@gmail.com
+# jerrype@gmail.com
+# jerryromans49@gmail.com
+# jerrywelch53@gmail.com
+# jerrywitter82@gmail.com
+# jes370@gmail.com
+# jeselink.jacob@gmail.com
+# jeshaka23@gmail.com
+# jesseadkins323@gmail.com
+# jessealex079@gmail.com
+# jesseapr18@gmail.com
+# jesseg4910@gmail.com
+# jessegautreaux1995@gmail.com
+# jesseknielsen@gmail.com
+# jessenavarro500@gmail.com
+# jesseromano232@gmail.com
+# jessewhite553@gmail.com
+# jessezamie57135@gmail.com
+# jessicajacitrter52454@gmail.com
+# jessiejoseph526@gmail.com
+# jessiesaldana05@gmail.com
+# jesslove507@gmail.com
+#
+# jesusrock91@gmail.com
+# jetbreeze427@gmail.com
+# jettero79@gmail.com
+# jettkiller6969@gmail.com
+# jevongaiter221@gmail.com
+# jf.pede28@gmail.com
+# jf50979@gmail.com
+# jfrechette47@gmail.com
+# jfred7972@gmail.com
+# jftsmith3@gmail.com
+# jfvillegas81@gmail.com
+# jg497837@gmail.com
+# jg9328072@gmail.com
+# jg94530@gmail.com
+# jgalindo1118@gmail.com
+# jgassick@gmail.com
+# jgh6744@gmail.com
+# jgoodney@gmail.com
+# jharnew86@gmail.com
+# jhayes8490@gmail.com
+# jhbailey5175@gmail.com
+# jhlpflhnds@gmail.com
+# jhonboon495@gmail.com
+# jhrd1234@gmail.com
+# jibt1976@gmail.com
+#
+# jim.dupery@gmail.com
+# jim.flynn27@gmail.com
+# jim77196@gmail.com
+# jimbibbs67@gmail.com
+# jimbo19562000@gmail.com
+# jimbobh1971@gmail.com
+# jimcannon62@gmail.com
+# jimdurkin8@gmail.com
+# jimevans184@gmail.com
+# jimhassler11@gmail.com
+# jimhyjurick@gmail.com
+# jimjarman1968@gmail.com
+# jimkp4377@gmail.com
+# jimmez.jo@gmail.com
+# jimmhf@gmail.com
+# jimmycabe0@gmail.com
+# jimmydjsr@gmail.com
+# jimmyjukeboxb94@gmail.com
+# jimmynr0@gmail.com
+# jimmyortutay@gmail.com
+# jimmyplakidas@gmail.com
+# jimongo112769@gmail.com
+# jimorum6@gmail.com
+# jimp30620@gmail.com
+# jimquarles60@gmail.com
+# """.split('\n')
 
+# customer_list = []
+#
+# for m in customer:
+#     if m == '':
+#         continue
+#     else:
+#         customer_list.append(m)
+#
+# count = 0
 
-# customer = ['sowrov35-1946@diu.edu.bd', 'sabbir35-2007@diu.edu.bd', 'sowrov35-1946@diu.edu.bd',
-#             'tuhin35-1947@diu.edu.bd', 'afrail35-2016@diu.edu.bd', 'najmul35-1775@diu.edu.bd', 'sabbir35-1979@diu.edu.bd']
-
+# for mail in customer_list:
 try:
     email = 'abubakkar.swe@gmail.com'
     password = 'Abubakkar32'
-    send_to_email = 'Rakibsarkar26@gmail.com'
+    send_to_email = "rakibsarkar26@gmail.com"
 
     msg = EmailMessage()
-    msg['Subject'] = 'Facebook'
+    msg['Subject'] = 'Amazon Offer'
     msg['From'] = email
     msg['To'] = send_to_email
 
-    TEXT = f'Hello,\nYour Email Verification Code Is :{randPass()}'
+    TEXT = f'amazon offer 500$ gift card collect your offer fast \n https://bit.ly/3haBhWW'
     msg.set_content(TEXT)
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login(email, password)
     server.send_message(msg)
-    print('Successfully Mail has been Send!!!!')
+    print(colored(f'Successfully Mail Send to:- {send_to_email}', 'red'))
     server.quit()
+    # count += 1
 except:
     print("Opps!! Try Again Please")
+
+

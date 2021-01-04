@@ -4,6 +4,7 @@ n = len(List)
 
 for i in range(n):
     for j in range(0, n - i - 1):
+        print(j)
         if List[j] > List[j + 1]:
             List[j], List[j + 1] = List[j + 1], List[j]
 print(f"The Sorted list is {List}")

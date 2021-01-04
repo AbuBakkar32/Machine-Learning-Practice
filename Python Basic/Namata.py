@@ -14,11 +14,5 @@ for i in range(int(num)):
         print(f"{i}x{j}={result}")
     print('*************************')
 
-# name = 'HELLO'
-# names = 'RAKIB'
-# print(*name, sep='\t')
-# print(*names, sep='\t')
-# print('*************************')
-
 
 

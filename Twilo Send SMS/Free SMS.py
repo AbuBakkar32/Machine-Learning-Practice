@@ -7,7 +7,5 @@ client = Client(acount_sid, token_auth)
 Message = input("Write Your Text Here: ")
 Sms_sent_to = input("SMS Send To: ")
 
-client.messages.create(from_="+17195694678",
-                       body=Message,
-                       to=Sms_sent_to,)
+client.messages.create(from_="+17195694678", body=Message, to=Sms_sent_to,)
 print("Thank you Abu Bakkar Siddik for sending a Message")
