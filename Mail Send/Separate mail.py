@@ -16,3 +16,4 @@ gmail_user.append('')
 for i in gmail_user, hotmail_user:
     for j in i:
         print(j)
+
