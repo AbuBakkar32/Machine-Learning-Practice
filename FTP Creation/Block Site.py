@@ -6,7 +6,6 @@ end_time = datetime(2021, 1, 4, 20)  # y, m, d, h, min
 sites_to_block = ['www.facebook.com', 'facebook.com']
 
 hosts_path = r"C:\Windows\System32\drivers\etc\hosts"
-# r"C:\Windows\System32\drivers\etc\hosts"
 
 redirect = "127.0.0.1"
 
