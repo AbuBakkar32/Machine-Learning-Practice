@@ -1,7 +1,9 @@
 import youtube_dl
 
-# link = input("Paste your copy youtube downloadable link \n")
+links = []
 link = input("Paste your copy youtube downloadable link \n")
+links.append(link)
 
 ydl = youtube_dl.YoutubeDL()
-ydl.download([link])
+ydl.download(links)
+print("♦♦♦Thank for using this apps♦♦♦")
