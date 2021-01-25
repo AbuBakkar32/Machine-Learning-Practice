@@ -12,5 +12,6 @@ def minIndex(lst):
 def maxIndex(lst):
     return max(range(len(lst)), key=lst.__getitem__)  # use xrange if < 2.7
 
+
 print(minIndex(lst))
 print(maxIndex(lst))
