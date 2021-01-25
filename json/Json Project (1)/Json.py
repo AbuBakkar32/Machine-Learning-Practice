@@ -5,6 +5,7 @@ import json
 
 r = requests.get('https://formulae.brew.sh/api/formula.json')
 packages_json = r.json()
+
 results = []
 # print(json.dumps(packages_json, indent=4))
 for package in packages_json[0:]:
@@ -34,5 +35,5 @@ for package in packages_json[0:]:
         print(f'Got {package_name} in {r.elapsed.total_seconds()} seconds')
     except:
         pass
-with open('test.json', 'a') as f:
-    json.dump(results, f, indent=2)
+# with open('test.json', 'a') as f:
+#     json.dump(results, f, indent=2)
