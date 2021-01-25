@@ -715,27 +715,25 @@ from termcolor import colored
 # count = 0
 
 # for mail in customer_list:
-try:
-    email = 'abubakkar.swe@gmail.com'
-    password = 'Abubakkar32'
-    send_to_email = "rakibsarkar26@gmail.com"
 
-    msg = EmailMessage()
-    msg['Subject'] = 'Amazon Offer'
-    msg['From'] = email
-    msg['To'] = send_to_email
+email = 'abubakkar.swe@gmail.com'
+password = 'Abubakkar32'
+send_to_email = "rakibsarkar26@gmail.com"
 
-    TEXT = f'amazon offer 500$ gift card collect your offer fast \n https://bit.ly/3haBhWW'
-    msg.set_content(TEXT)
+msg = EmailMessage()
+msg['Subject'] = 'Amazon Offer'
+msg['From'] = email
+msg['To'] = send_to_email
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(email, password)
-    server.send_message(msg)
-    print(colored(f'Successfully Mail Send to:- {send_to_email}', 'red'))
-    server.quit()
-    # count += 1
-except:
-    print("Opps!! Try Again Please")
+TEXT = f'amazon offer 500$ gift card collect your offer fast \n https://bit.ly/3haBhWW'
+msg.set_content(TEXT)
+
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
+server.login(email, password)
+server.send_message(msg)
+print(colored(f'Successfully Mail Send to:- {send_to_email}', 'red'))
+server.quit()
+
 
 
