@@ -14,7 +14,8 @@ class keydefaultdict(defaultdict):
 
 
 def pow2(n):
-    return 1 << n 
+    return 1 << n
+
 
 d = keydefaultdict(pow2)
 print(d[1])
