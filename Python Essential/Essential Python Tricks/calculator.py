@@ -7,6 +7,7 @@ Created with help of an answer on stackoverflow. Don't have the exact link.
 """
 
 import operator
+
 ops = {
     "+": operator.add,
     "-": operator.sub,
@@ -16,4 +17,4 @@ ops = {
 
 }
 
-print(ops['-'](50, 25))
+print(ops['*'](10, 5))
