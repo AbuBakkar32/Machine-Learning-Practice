@@ -15,7 +15,10 @@ class WorkingStudent(Student):  # WorkingStudent() is a child of Student()
 
 
 sarah = WorkingStudent('Sarah', 'Oxford', 10)
-print(sarah.salary)
+
 sarah.marks.append(30)
 sarah.marks.append(28)
-print(sarah.average())
+sarah.marks.append(28)
+
+print(f"{sarah.name} get {sarah.salary} mark and his average value is {round(sarah.average(), 2)}")
+
