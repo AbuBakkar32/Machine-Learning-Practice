@@ -16,16 +16,14 @@ class Book:
         print(f'Number of copies : {self.copies}')
         print('.' * 50)
 
-        def in_stock(self):
-            return True if self.copies > 0 else False
+    def in_stock(self):
+        return True if self.copies > 0 else False
 
     def sell(self):
         if self.in_stock():
             self.copies -= 1
         else:
             print('The book is out of stock')
-
-    
 
 
 book1 = Book('957-4-36-547417-1', 'Learn Physics', 'Stephen', 'CBC', 350, 200, 10)
