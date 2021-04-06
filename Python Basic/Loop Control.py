@@ -3,7 +3,7 @@ password = 'abu'
 pw = ''
 auth = False
 count = 0
-max_attempt = 5
+max_attempt = 3
 start = time.time()
 
 while pw != password:

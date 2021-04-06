@@ -32,10 +32,12 @@ car = Car()
 clock = Clock()
 person = Person()
 
+
 # polymorphism apply
 def do_something(x):
     x.move()
     x.stop()
+
 
 do_something(car)
 do_something(clock)

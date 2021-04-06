@@ -6,8 +6,7 @@ from string import punctuation
 
 text = "I believe this would help the reader understand how tokenization \
         works. as well as realize its importance (text) ."
-        
-print(punctuation)
+
 
 custom_list = set(stopwords.words('english')+list(punctuation))
 
