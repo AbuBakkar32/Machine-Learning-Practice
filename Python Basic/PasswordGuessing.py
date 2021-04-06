@@ -1,6 +1,7 @@
 import random
 from termcolor import colored
 
+
 def guess(x):
     randmon_number = random.randint(1, x)
     guess = 0
