@@ -18,7 +18,7 @@ FAILURE = 'incorrect value'
 class CalculatorTest(unittest.TestCase):
     def setUp(self) -> None:
         print('tearDown\n')
-        self.calc = Calculator();
+        self.calc = Calculator()
 
     def test_last_answer_init(self):
         value = self.calc.last_answer

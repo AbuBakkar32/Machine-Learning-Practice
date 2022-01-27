@@ -1,7 +1,4 @@
 from math import pi
-import xml.etree.cElementTree as ET
-import pandas
-from inspect import getmembers, isclass, isfunction, ismethod
 
 
 # for(name, _) in getmembers(pandas, isfunction):
