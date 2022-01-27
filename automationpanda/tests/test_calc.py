@@ -1,7 +1,5 @@
 import sys
 
-from automationpanda.example.calc import Calculator
-
 try:
     if sys.version_info < (2, 7):
         import unittest2
@@ -16,10 +14,6 @@ FAILURE = 'incorrect value'
 
 
 class CalculatorTest(unittest.TestCase):
-    def setUp(self) -> None:
-        print('tearDown\n')
-        self.calc = Calculator()
-
     def test_last_answer_init(self):
         value = self.calc.last_answer
         self.assertEqual(value, 0.0, FAILURE)
@@ -81,10 +75,6 @@ class CalculatorTest(unittest.TestCase):
         value = self.calc.minimum(NUMBER_2, NUMBER_2)
         self.assertEqual(value, NUMBER_2, FAILURE)
         self.assertEqual(value, self.calc.last_answer, FAILURE)
-
-    def tearDown(self) -> None:
-        pass
-
 
 if __name__ == '__main__':
     import xmlrunner
