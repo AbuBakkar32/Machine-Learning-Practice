@@ -1,4 +1,5 @@
 import sys
+from unittest import mock
 
 from automationpanda.example.calc import Calculator
 
@@ -14,11 +15,21 @@ NUMBER_1 = 3.0
 NUMBER_2 = 2.0
 FAILURE = 'incorrect value'
 
-
 class CalculatorTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.calc = Calculator();
+        self.calc = Calculator()
         return self.calc
+
+        """
+             Hello Python Enthusiasts!
+             What is the difference between a unit test and a functional test?
+             lets see how we can test our calculator class
+             Here the Example is a Calculator class and the test is a test_calc.py file
+        """
+
+    @mock.patch('automationpanda.example.calc.Calculator.add', side_effect=Exception('Boom!!'))  # patching add() method
+    def test_add_negative(self, negitive):
+        self.assertRaises(Exception, negitive)
 
     def test_last_answer_init(self):
         value = self.calc.last_answer
@@ -88,6 +99,6 @@ if __name__ == '__main__':
 
     unittest.main(
         testRunner=xmlrunner.XMLTestRunner(output='test-report'),
-        failfast=False,
-        buffer=False,
+        failfast=True,
+        buffer=True,
         catchbreak=False)

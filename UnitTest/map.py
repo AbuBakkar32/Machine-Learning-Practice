@@ -5,7 +5,7 @@ temps = [("berlin", 35), ("germany", 50), ("england", 41), ("Dhaka", 26), ("Fran
 c_to_f = lambda data: (data[0], round((9 / 5) * data[1] + 32, 2));
 result = map(c_to_f, temps)
 a = dict(result)
-print(json.dumps(a, indent=6))
+print(json.dumps(a, indent=4))
 
 # List Comprehension is a concise way to create a list.
 # It consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses.
@@ -29,4 +29,4 @@ def count_item(number):
 
 
 data = count_item([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-print(data)  # Counting 1 2 3 4 5 6..........
+print(b'data')  # Counting 1 2 3 4 5 6..........
