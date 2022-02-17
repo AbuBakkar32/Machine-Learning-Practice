@@ -14,8 +14,10 @@ for char in text:
         count[char] += 1
     else:
         cons[char] = cons.get(char, 0)+1
-print(count)
-print(cons)
+
+print(f'The Vowels is : {count}', end=" ")
+print("")
+print(f'The cosonents is : {cons}', end=" ")
 
 # simple code for remove punctuation character
 data = {}

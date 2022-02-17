@@ -186,3 +186,131 @@ test_List = [10, 11, 12]
 test(*test_Dic)
 test(**test_Dic)
 test(*test_List)
+
+## ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** *
+
+a, b, c = 4, 5.5, 'Hello'
+
+# Extract value
+a, b, *c = [1, 2, 3, 4, 5]
+print(a, b, c)
+
+# Do Sum from a list
+a = [1, 2, 3, 4, 5, 6]
+s = sum([num for num in a if num % 2 == 0])
+print(s)
+
+#### Deleting all even
+a = [1, 2, 3, 4, 5]
+del a[1::2]
+print(a)
+
+# Reading Files
+lst = [line.strip() for line in open('data.txt')]
+print(lst)
+
+##Using with will also close the file after use
+list(open('data.txt'))
+with open("data.txt") as f:
+    lst = [line.strip() for line in f]
+print(lst)
+
+# Writing data to file
+with open("data.txt", 'a', newline='\n') as f:
+    f.write("Python is awsome")
+
+# Creating Lists
+lst = [i for i in range(0, 10)]
+print(lst)
+# or
+lst = list(range(0, 10))
+print(lst)
+
+# We can also create a list of strings using the same method.
+lst = [("Hello " + i) for i in ['Karl', 'Abhay', 'Zen']]
+print(lst)
+
+# Mapping Lists or TypeCasting Whole List
+list(map(int, ['1', '2', '3']))
+list(map(float, [1, 2, 3]))
+[float(i) for i in [1, 2, 3]]
+
+#### Square of all even numbers in an range
+x = {x ** 2 for x in range(10) if x % 2 == 0}
+
+# Fizz Buzz
+x = ['FizzBuzz' if i % 3 == 0 and i % 5 == 0 else 'Fizz' if i % 3 == 0 else 'Buzz' if i % 5 == 0 else i for i in
+     range(1, 20)]
+
+# Palindrome
+text = 'level'
+ispalindrome = text == text[::-1]
+print(ispalindrome)
+
+# Space Separated integers to a List
+lis = list(map(int, input().split()))
+print(lis)
+
+# Lambda Function
+sqr = lambda x: x * x  ##Function that returns square of any number
+print(sqr(10))
+
+# To Check The Existence of a number in a list
+num = 5
+if num in [1, 2, 3, 4, 5]:
+    print('present')
+
+# Printing Patterns
+n = 5
+print('\n'.join('😀' * i for i in range(1, n + 1)))
+
+# Finding Factorial
+import math
+
+n = 6
+math.factorial(n)
+
+# Fibonacci Series
+fibo = [0, 1]
+[fibo.append(fibo[-2] + fibo[-1]) for i in range(5)]
+print(fibo)
+
+# Prime Number
+x = list(filter(lambda x: all(x % y != 0 for y in range(2, x)), range(2, 13)))
+
+# Finding Max Number
+findmax = lambda x, y: x if x > y else y
+findmax(5, 14)
+
+
+# Linear Algebra
+def scale(lst, x): return [i * x for i in lst]
+
+
+scale([2, 3, 4], 2)
+
+# Transpose of a matrix
+a = [[1, 2, 3],
+     [4, 5, 6],
+     [7, 8, 9]]
+transpose = [list(i) for i in zip(*a)]
+print(transpose)
+
+# Counting occurrence of a pattern
+import re
+
+len(re.findall('python', 'python is a programming language. python is python.'))
+
+# Replacing a text with some other text
+x = "python is a programming language.python is python".replace("python", 'Java')
+
+# Simulating Toss of a coin
+import random
+
+random.choice(['Head', "Tail"])
+
+# Generating Groups
+groups = [(a, b) for a in ['a', 'b'] for b in [1, 2, 3]]
+print(groups)
+
+#
