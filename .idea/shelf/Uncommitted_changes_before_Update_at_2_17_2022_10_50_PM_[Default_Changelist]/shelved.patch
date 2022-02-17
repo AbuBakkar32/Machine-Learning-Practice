@@ -1,0 +1,312 @@
+Index: Python Essential/20 Essential Python code.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Swaping values\r\na, b = 5, 10\r\nprint(a, b)\r\na, b = b, a\r\nprint(a, b)\r\n\r\n# One string of all items within a list\r\np = [\"Python\", \"is\", \"a\", \"popular\", \"language\"]\r\nprint(\" \".join(p))\r\n\r\n# Most common element in the list\r\nlist1 = [0, 1, 2, 3, 3, 2, 3, 1, 4, 5, 4]\r\nprint(max(set(list1), key=list1.count))\r\n\r\n# Test if two strings are anagrams\r\nfrom collections import Counter\r\n\r\n\r\ndef anagram(string_1, string_2):\r\n    return Counter(string_1) == Counter(string_2)\r\n\r\n\r\nanagram('pqrs', 'rqsp')\r\nanagram('pqrs', 'rqqs')\r\n\r\n# Reverse a string with slicing\r\nstr = \"PQRST\"\r\nreverse_str = str[::-1]\r\nprint(reverse_str)\r\n\r\n\r\n# Reverse a list using slicing approach\r\ndef Reverse(lst):\r\n    lst1 = lst[::-1]\r\n    return lst1\r\n\r\n\r\nlst = [5, 6, 7, 8, 9, 10]\r\nprint(Reverse(lst))\r\n\r\n# Transpose a matrix\r\nmat = [(5, 6, 7), (8, 9, 10), (11, 12, 13), (14, 15, 16)]\r\nfor row in mat:\r\n    print(row)\r\nprint(\"\\n\")\r\nt_mat = zip(*mat)\r\nfor row in t_mat:\r\n    print(row)\r\n\r\n# Chained comparison\r\na = 3\r\nprint(1 < a < 10)\r\nprint(5 < a < 15)\r\nprint(a < 7 < a * 7 < 49)\r\nprint(8 > a <= 6)\r\nprint(3 == a > 2)\r\n\r\n# Dictionary ‘get’\r\ndict = {\"P\": 1, \"Q\": 2}\r\nprint(dict[\"P\"])\r\nprint(dict[\"R\"])\r\n\r\ndict = {\"P\": 1, \"Q\": 2}\r\nprint(dict.get(\"P\"))\r\nprint(dict.get(\"R\"))\r\nprint(dict.get(\"R\", \"Unavailable! \"))\r\n\r\n\r\n# Sort dictionary by value\r\ndef dict():\r\n    keyval = {}\r\n\r\n    # Initializing the value\r\n    keyval[3] = 48\r\n    keyval[2] = 6\r\n    keyval[5] = 10\r\n    keyval[1] = 22\r\n    keyval[6] = 15\r\n    keyval[4] = 245\r\n    print(\"Task 3:-\\nKeys and Values sorted\",\r\n          \"in alphabetical order by the value\")\r\n    # Remember this would arrange in aphabetical sequence\r\n    # Convert it to float to mathematical purposes\r\n    print(sorted(keyval.elements(), key=\r\n    lambda k_val: (k_val[1], k_val[0])))\r\n\r\n\r\ndef main():\r\n    dict()\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    main()\r\n\r\n# List comprehension\r\nlist1 = [2, 4, 6, 8]\r\nlist2 = [3 * p for p in list1]\r\nprint(list2)\r\n\r\n# Time consumed to implement a part of the program\r\nimport time\r\n\r\ninitial_Time = time.time()\r\n# Program to test follows\r\nx, y = 5, 6\r\nz = x + y\r\n# Program to test ending\r\nending_Time = time.time()\r\nTime_lapsed_in_Micro_sec = (ending_Time - initial_Time) * (10 ** 6)\r\nprint(\" Time lapsed in micro_seconds: {0} ms\").format(Time_lapsed_in_Micro_sec)\r\n\r\n# Merge dictionaries\r\ndic1 = {'men': 6, 'boy': 5}\r\ndic2 = {'boy': 3, 'girl': 5}\r\nmerged_dic = {**dic1, **dic2}\r\nprint(merged_dic)\r\n\r\n# Digitize\r\nnumber = 2468\r\n# with map\r\ndigit_list = list(map(int, str(number)))\r\nprint(digit_list)\r\n[2, 4, 6, 8]\r\n# with list comprehension\r\ndigit_list = [int(a) for a in str(number)]\r\nprint(digit_list)\r\n[2, 4, 6, 8]\r\n# Even simpler approach\r\ndigit_list = list(str(number))\r\nprint(digit_list)\r\n\r\n\r\n# Test for uniqueness\r\n\r\ndef uniq(list):\r\n    if len(list) == len(set(list)):\r\n        print(\"total items are unique\")\r\n    else:\r\n        print(\"List includes duplicate item\")\r\n\r\n\r\nuniq([0, 2, 4, 6])\r\n# total items are unique\r\nuniq([1, 3, 3, 5])\r\n# List includes duplicate item\r\n\r\n# Using enumeration\r\nsample_list = [4, 5, 6]\r\nfor j, item in enumerate(sample_list):\r\n    print(j, ': ', item)\r\n\r\n# Evaluate the factorial of any number in a single line\r\nimport functools\r\n\r\nfact = (lambda i: functools.reduce(int.__mul__, range(1, i + 1), 1)(4))\r\nprint(fact)\r\n\r\n\r\n# Return several functions’ elements\r\ndef a():\r\n    return 5, 6, 7, 8\r\n\r\n\r\n# Calling the above function.\r\nw, x, y, z = a()\r\nprint(w, x, y, z)\r\n\r\n\r\n# Incorporate a true Python switch-case statement\r\ndef aswitch(a):\r\n    return aswitch._system_dic.get(a, None)\r\n\r\n\r\naswitch._system_dic = {'mangoes': 4, 'apples': 6, 'oranges': 8}\r\nprint(aswitch('default'))\r\nprint(aswitch('oranges'))\r\n\r\n\r\n# With splat operator unpacking function arguments\r\ndef test(a, b, c):\r\n    print(p, q, r)\r\n\r\n\r\ntest_Dic = {'a': 4, 'b': 5, 'c': 6}\r\ntest_List = [10, 11, 12]\r\ntest(*test_Dic)\r\ntest(**test_Dic)\r\ntest(*test_List)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Python Essential/20 Essential Python code.py b/Python Essential/20 Essential Python code.py
+--- a/Python Essential/20 Essential Python code.py	(revision 78caef508ee6b11b9d96b11934304396a82c0028)
++++ b/Python Essential/20 Essential Python code.py	(date 1618734384976)
+@@ -186,3 +186,131 @@
+ test(*test_Dic)
+ test(**test_Dic)
+ test(*test_List)
++
++## ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** *
++
++a, b, c = 4, 5.5, 'Hello'
++
++# Extract value
++a, b, *c = [1, 2, 3, 4, 5]
++print(a, b, c)
++
++# Do Sum from a list
++a = [1, 2, 3, 4, 5, 6]
++s = sum([num for num in a if num % 2 == 0])
++print(s)
++
++#### Deleting all even
++a = [1, 2, 3, 4, 5]
++del a[1::2]
++print(a)
++
++# Reading Files
++lst = [line.strip() for line in open('data.txt')]
++print(lst)
++
++##Using with will also close the file after use
++list(open('data.txt'))
++with open("data.txt") as f:
++    lst = [line.strip() for line in f]
++print(lst)
++
++# Writing data to file
++with open("data.txt", 'a', newline='\n') as f:
++    f.write("Python is awsome")
++
++# Creating Lists
++lst = [i for i in range(0, 10)]
++print(lst)
++# or
++lst = list(range(0, 10))
++print(lst)
++
++# We can also create a list of strings using the same method.
++lst = [("Hello " + i) for i in ['Karl', 'Abhay', 'Zen']]
++print(lst)
++
++# Mapping Lists or TypeCasting Whole List
++list(map(int, ['1', '2', '3']))
++list(map(float, [1, 2, 3]))
++[float(i) for i in [1, 2, 3]]
++
++#### Square of all even numbers in an range
++x = {x ** 2 for x in range(10) if x % 2 == 0}
++
++# Fizz Buzz
++x = ['FizzBuzz' if i % 3 == 0 and i % 5 == 0 else 'Fizz' if i % 3 == 0 else 'Buzz' if i % 5 == 0 else i for i in
++     range(1, 20)]
++
++# Palindrome
++text = 'level'
++ispalindrome = text == text[::-1]
++print(ispalindrome)
++
++# Space Separated integers to a List
++lis = list(map(int, input().split()))
++print(lis)
++
++# Lambda Function
++sqr = lambda x: x * x  ##Function that returns square of any number
++print(sqr(10))
++
++# To Check The Existence of a number in a list
++num = 5
++if num in [1, 2, 3, 4, 5]:
++    print('present')
++
++# Printing Patterns
++n = 5
++print('\n'.join('😀' * i for i in range(1, n + 1)))
++
++# Finding Factorial
++import math
++
++n = 6
++math.factorial(n)
++
++# Fibonacci Series
++fibo = [0, 1]
++[fibo.append(fibo[-2] + fibo[-1]) for i in range(5)]
++print(fibo)
++
++# Prime Number
++x = list(filter(lambda x: all(x % y != 0 for y in range(2, x)), range(2, 13)))
++
++# Finding Max Number
++findmax = lambda x, y: x if x > y else y
++findmax(5, 14)
++
++
++# Linear Algebra
++def scale(lst, x): return [i * x for i in lst]
++
++
++scale([2, 3, 4], 2)
++
++# Transpose of a matrix
++a = [[1, 2, 3],
++     [4, 5, 6],
++     [7, 8, 9]]
++transpose = [list(i) for i in zip(*a)]
++print(transpose)
++
++# Counting occurrence of a pattern
++import re
++
++len(re.findall('python', 'python is a programming language. python is python.'))
++
++# Replacing a text with some other text
++x = "python is a programming language.python is python".replace("python", 'Java')
++
++# Simulating Toss of a coin
++import random
++
++random.choice(['Head', "Tail"])
++
++# Generating Groups
++groups = [(a, b) for a in ['a', 'b'] for b in [1, 2, 3]]
++print(groups)
++
++#
+Index: Algorithm/swap.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>def swapPossition(list, pos1, pos2):\r\n    list[pos1], list[pos2] = list[pos2], list[pos1]\r\n    return list\r\n\r\n\r\nlist = [20, 43, 24, 56, 76, 42]\r\npos1, pos2 = 1, 4\r\n\r\nresult = swapPossition(list, pos1 - 1, pos2 - 1)\r\nprint(result)\r\n\r\n\r\n######################################################################\r\n\r\ndef swapPositions(list, pos1, pos2):\r\n    first_ele = list.pop(pos1)\r\n    second_ele = list.pop(pos2 - 1)\r\n\r\n    list.insert(pos1, second_ele)\r\n    list.insert(pos2, first_ele)\r\n\r\n    return list\r\n\r\n\r\nList = [23, 65, 19, 90]\r\npos1, pos2 = 1, 3\r\n\r\nprint(swapPositions(List, pos1 - 1, pos2 - 1))\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Algorithm/swap.py b/Algorithm/swap.py
+--- a/Algorithm/swap.py	(revision 78caef508ee6b11b9d96b11934304396a82c0028)
++++ b/Algorithm/swap.py	(date 1624731514644)
+@@ -16,6 +16,7 @@
+     first_ele = list.pop(pos1)
+     second_ele = list.pop(pos2 - 1)
+ 
++
+     list.insert(pos1, second_ele)
+     list.insert(pos2, first_ele)
+ 
+Index: Python Basic/vowels count.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from string import punctuation\r\nimport time\r\nfrom datetime import datetime\r\n\r\nvowels = 'aeiou' # This is Vowels character\r\ntext = 'Hello every one my name is abu bakkar siddik. i am from bangladesh. i am studing as a software engineer under daffodil international university. my dreame so long and may Allah full fill my dreams'\r\ntext = text.casefold()\r\ncount = {}.fromkeys(vowels, 0)\r\n\r\ncons = {}\r\n\r\nfor char in text:\r\n    if char in count:\r\n        count[char] += 1\r\n    else:\r\n        cons[char] = cons.get(char, 0)+1\r\nprint(count)\r\nprint(cons)\r\n\r\n# simple code for remove punctuation character\r\ndata = {}\r\nfor i, j in cons.items():\r\n    if i in punctuation:\r\n        continue\r\n    if i == ' ':\r\n        continue\r\n    else:\r\n        data[i] = j\r\n\r\nprint('\\n<<<<<<<<<<This the clear item count after processing data>>>>>>>>>>')\r\nprint(data)\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Python Basic/vowels count.py b/Python Basic/vowels count.py
+--- a/Python Basic/vowels count.py	(revision 78caef508ee6b11b9d96b11934304396a82c0028)
++++ b/Python Basic/vowels count.py	(date 1626073025778)
+@@ -14,8 +14,10 @@
+         count[char] += 1
+     else:
+         cons[char] = cons.get(char, 0)+1
+-print(count)
+-print(cons)
++
++print(f'The Vowels is : {count}', end=" ")
++print("")
++print(f'The cosonents is : {cons}', end=" ")
+ 
+ # simple code for remove punctuation character
+ data = {}
+Index: .idea/csv-plugin.xml
+===================================================================
+diff --git a/.idea/csv-plugin.xml b/.idea/csv-plugin.xml
+deleted file mode 100644
+--- a/.idea/csv-plugin.xml	(revision 78caef508ee6b11b9d96b11934304396a82c0028)
++++ /dev/null	(revision 78caef508ee6b11b9d96b11934304396a82c0028)
+@@ -1,58 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CsvFileAttributes">
+-    <option name="attributeMap">
+-      <map>
+-        <entry key="\API\Spech_to_Shutdown.py">
+-          <value>
+-            <Attribute>
+-              <option name="separator" value=":" />
+-            </Attribute>
+-          </value>
+-        </entry>
+-        <entry key="\Algorithm\merge_sort.py">
+-          <value>
+-            <Attribute>
+-              <option name="separator" value=":" />
+-            </Attribute>
+-          </value>
+-        </entry>
+-        <entry key="\Algorithm\swap.py">
+-          <value>
+-            <Attribute>
+-              <option name="separator" value="," />
+-            </Attribute>
+-          </value>
+-        </entry>
+-        <entry key="\GeoPy\GeoCoder.py">
+-          <value>
+-            <Attribute>
+-              <option name="separator" value="," />
+-            </Attribute>
+-          </value>
+-        </entry>
+-        <entry key="\OOP\Function Trick\Trick.py">
+-          <value>
+-            <Attribute>
+-              <option name="separator" value="," />
+-            </Attribute>
+-          </value>
+-        </entry>
+-        <entry key="\Python Basic\PasswordGuessing.py">
+-          <value>
+-            <Attribute>
+-              <option name="separator" value=":" />
+-            </Attribute>
+-          </value>
+-        </entry>
+-        <entry key="\Python Essential\20 Essential Python code.py">
+-          <value>
+-            <Attribute>
+-              <option name="separator" value="," />
+-            </Attribute>
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/markdown-navigator.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"MarkdownProjectSettings\">\r\n    <PreviewSettings splitEditorLayout=\"SPLIT\" splitEditorPreview=\"PREVIEW\" useGrayscaleRendering=\"false\" zoomFactor=\"1.0\" maxImageWidth=\"0\" synchronizePreviewPosition=\"true\" highlightPreviewType=\"LINE\" highlightFadeOut=\"5\" highlightOnTyping=\"true\" synchronizeSourcePosition=\"true\" verticallyAlignSourceAndPreviewSyncPosition=\"true\" showSearchHighlightsInPreview=\"true\" showSelectionInPreview=\"true\" lastLayoutSetsDefault=\"false\">\r\n      <PanelProvider>\r\n        <provider providerId=\"com.vladsch.md.nav.editor.swing.html.panel\" providerName=\"Default - Swing\" />\r\n      </PanelProvider>\r\n    </PreviewSettings>\r\n    <ParserSettings gitHubSyntaxChange=\"false\" correctedInvalidSettings=\"false\" emojiShortcuts=\"1\" emojiImages=\"0\">\r\n      <PegdownExtensions>\r\n        <option name=\"ATXHEADERSPACE\" value=\"true\" />\r\n        <option name=\"FENCED_CODE_BLOCKS\" value=\"true\" />\r\n        <option name=\"INTELLIJ_DUMMY_IDENTIFIER\" value=\"true\" />\r\n        <option name=\"RELAXEDHRULES\" value=\"true\" />\r\n        <option name=\"STRIKETHROUGH\" value=\"true\" />\r\n        <option name=\"TABLES\" value=\"true\" />\r\n        <option name=\"TASKLISTITEMS\" value=\"true\" />\r\n      </PegdownExtensions>\r\n      <ParserOptions>\r\n        <option name=\"COMMONMARK_LISTS\" value=\"true\" />\r\n        <option name=\"EMOJI_SHORTCUTS\" value=\"true\" />\r\n        <option name=\"GFM_TABLE_RENDERING\" value=\"true\" />\r\n        <option name=\"PRODUCTION_SPEC_PARSER\" value=\"true\" />\r\n        <option name=\"SIM_TOC_BLANK_LINE_SPACER\" value=\"true\" />\r\n      </ParserOptions>\r\n    </ParserSettings>\r\n    <HtmlSettings headerTopEnabled=\"false\" headerBottomEnabled=\"false\" bodyTopEnabled=\"false\" bodyBottomEnabled=\"false\" addPageHeader=\"false\" addAnchorLinks=\"true\" anchorLinksWrapText=\"false\" imageUriSerials=\"false\" addDocTypeHtml=\"true\" noParaTags=\"false\" defaultUrlTitle=\"false\" migratedPlantUml=\"false\" migratedAnchorLinks=\"false\" plantUmlConversion=\"0\">\r\n      <GeneratorProvider>\r\n        <provider providerId=\"com.vladsch.md.nav.editor.text.html.generator\" providerName=\"Unmodified HTML Generator\" />\r\n      </GeneratorProvider>\r\n      <headerTop />\r\n      <headerBottom />\r\n      <bodyTop />\r\n      <bodyBottom />\r\n      <fencedCodeConversions />\r\n    </HtmlSettings>\r\n    <CssSettings previewScheme=\"UI_SCHEME\" cssUri=\"\" isCssUriEnabled=\"false\" isCssUriSerial=\"true\" isCssTextEnabled=\"false\" isDynamicPageWidth=\"true\">\r\n      <StylesheetProvider>\r\n        <provider providerId=\"com.vladsch.md.nav.editor.text.html.css\" providerName=\"No Stylesheet\" />\r\n      </StylesheetProvider>\r\n      <ScriptProviders />\r\n      <cssText />\r\n      <cssUriHistory />\r\n    </CssSettings>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/markdown-navigator.xml b/.idea/markdown-navigator.xml
+--- a/.idea/markdown-navigator.xml	(revision 78caef508ee6b11b9d96b11934304396a82c0028)
++++ b/.idea/markdown-navigator.xml	(date 1619588583447)
+@@ -24,7 +24,7 @@
+         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
+       </ParserOptions>
+     </ParserSettings>
+-    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="false" addAnchorLinks="true" anchorLinksWrapText="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" defaultUrlTitle="false" migratedPlantUml="false" migratedAnchorLinks="false" plantUmlConversion="0">
++    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="false" addAnchorLinks="false" anchorLinksWrapText="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" defaultUrlTitle="false" migratedPlantUml="true" migratedAnchorLinks="true" plantUmlConversion="0">
+       <GeneratorProvider>
+         <provider providerId="com.vladsch.md.nav.editor.text.html.generator" providerName="Unmodified HTML Generator" />
+       </GeneratorProvider>
+@@ -32,7 +32,23 @@
+       <headerBottom />
+       <bodyTop />
+       <bodyBottom />
+-      <fencedCodeConversions />
++      <fencedCodeConversions>
++        <option name="c4plantuml" value="NONE" />
++        <option name="ditaa" value="NONE" />
++        <option name="erd" value="NONE" />
++        <option name="graphviz" value="NONE" />
++        <option name="latex" value="KATEX" />
++        <option name="math" value="KATEX" />
++        <option name="mermaid" value="NONE" />
++        <option name="nomnoml" value="NONE" />
++        <option name="plantuml" value="NONE" />
++        <option name="puml" value="NONE" />
++        <option name="svgbob" value="NONE" />
++        <option name="umlet" value="NONE" />
++        <option name="vega" value="NONE" />
++        <option name="vegalite" value="NONE" />
++        <option name="wavedrom" value="NONE" />
++      </fencedCodeConversions>
+     </HtmlSettings>
+     <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="false" isDynamicPageWidth="true">
+       <StylesheetProvider>
+Index: Python Basic/dictionary.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>def main():\r\n    game = {'rock': 'pock', 'papper': 'speark', 'popular': 'Python'}\r\n    # for k in game.keys():\r\n    #     print(k)\r\n\r\n    # for k in game.values():\r\n    #     print(k)\r\n\r\n    game['yang'] = 'Olee'\r\n    print_list(game)\r\n\r\n\r\ndef print_list(list):\r\n    for i in list:\r\n        print(f'{i}: {list[i]}')\r\n    print()\r\n\r\n\r\nif __name__ ==\"__main__\":\r\n    main()
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Python Basic/dictionary.py b/Python Basic/dictionary.py
+--- a/Python Basic/dictionary.py	(revision 78caef508ee6b11b9d96b11934304396a82c0028)
++++ b/Python Basic/dictionary.py	(date 1619866098038)
+@@ -16,5 +16,5 @@
+     print()
+ 
+ 
+-if __name__ =="__main__":
+-    main()
+\ No newline at end of file
++if __name__ == "__main__":
++    main()
