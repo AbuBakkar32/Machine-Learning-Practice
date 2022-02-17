@@ -1,5 +1,5 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 from termcolor import colored
 
 
@@ -10,10 +10,7 @@ def get_crypto_coin(coin):
     result = soup.find(class_="BNeawe iBp4i AP7Wnd").find(class_="BNeawe iBp4i AP7Wnd")
     results = f"1 {coin} = {result.text}"
     print(colored(results, 'red'))
-    # print(soup.prettify())
 
-
-# get_crypto_coin('bitcoin')
 
 while True:
     try:

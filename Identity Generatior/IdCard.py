@@ -1,7 +1,6 @@
-import random
-import os
 import datetime
-from qrcode import make
+import random
+from code import make
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -11,7 +10,8 @@ font = ImageFont.truetype('arial.ttf', size=45)
 
 d_date = datetime.datetime.now()
 reg_format_date = d_date.strftime("  %d-%m-%Y\t\t\t\t\t ID CARD Generator\t\t\t\t\t  %I:%M:%S %p  ")
-print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+print(
+    '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
 print(reg_format_date)
 print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
 

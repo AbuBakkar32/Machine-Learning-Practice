@@ -1,8 +1,6 @@
 from unittest import TestCase
 
-import samples1
 from mock import patch, Mock, MagicMock, call, sentinel
-from samples1 import Customer
 
 
 class MyTestCase(TestCase):
