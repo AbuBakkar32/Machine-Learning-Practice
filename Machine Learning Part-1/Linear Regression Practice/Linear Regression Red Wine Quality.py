@@ -1,13 +1,13 @@
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
 from sklearn import metrics
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
 # to see all column Data
 pd.set_option('display.max_columns', None)
-
 
 df = pd.read_csv('winequality-red.csv', header=0)
 # print(df.head())
@@ -46,7 +46,7 @@ reg.fit(X_train, y_train)
 coef_df = pd.DataFrame(reg.coef_, df.columns[:-1], columns=['Coefficient'])
 # print(coef_df)
 
-# find score Using Test Dataset
+# find score Using test Dataset
 score = reg.score(X_test, y_test)
 # print(score)
 

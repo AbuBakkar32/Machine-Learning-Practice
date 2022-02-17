@@ -1,6 +1,5 @@
 # Importing the libraries
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset
@@ -26,7 +25,7 @@ a=a[:,1:]
 X = X[:,:3]
 X=np.concatenate((X, a),axis=1)
 
-# Splitting the dataset into the Training set and Test set
+# Splitting the dataset into the Training set and test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
@@ -46,7 +45,6 @@ regressor.fit(X_train,y_train)
 y_pred=regressor.predict(X_test)
 
 #adding column of 1's in X
-import statsmodels.formula.api as sm
 X=np.append(arr=np.ones((50,1)).astype(int),values=X,axis=1)
 
 import statsmodels.api as sm1

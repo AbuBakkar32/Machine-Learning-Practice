@@ -12,7 +12,7 @@ print(" ".join(p))
 list1 = [0, 1, 2, 3, 3, 2, 3, 1, 4, 5, 4]
 print(max(set(list1), key=list1.count))
 
-# Test if two strings are anagrams
+# test if two strings are anagrams
 from collections import Counter
 
 
@@ -130,7 +130,7 @@ digit_list = list(str(number))
 print(digit_list)
 
 
-# Test for uniqueness
+# test for uniqueness
 
 def uniq(list):
     if len(list) == len(set(list)):

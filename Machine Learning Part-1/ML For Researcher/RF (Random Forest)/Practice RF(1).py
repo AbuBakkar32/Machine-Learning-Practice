@@ -1,10 +1,10 @@
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sn
 from sklearn.datasets import load_digits
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
 
 # Load Datasets from Sklearn Dataset
 digits = load_digits()
@@ -24,7 +24,7 @@ df['target'] = digits.target
 X = df.drop('target', axis=1)
 y = df.target
 
-# Make Datasets into Train And Test separantly
+# Make Datasets into Train And test separantly
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Create object of RF for Default prediction

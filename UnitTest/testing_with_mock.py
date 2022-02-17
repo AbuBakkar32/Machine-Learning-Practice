@@ -10,7 +10,7 @@ class MyTestCase(TestCase):
 
     def test_passing_mock_object(self):
         """
-        Test if method was called on mock object which was passed as argument
+        test if method was called on mock object which was passed as argument
         to some method. Pass an object into a method (or some part of the system under test)
         and then check that it is used in the correct way.
 

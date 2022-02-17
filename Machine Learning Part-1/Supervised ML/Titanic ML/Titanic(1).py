@@ -1,7 +1,7 @@
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
+
 sns.set()
 
 # Fill all NaN value into Train Dataset
@@ -9,7 +9,7 @@ train = pd.read_csv('train.csv')
 train = train.fillna(train.median().iloc[0])
 # print(train.isna().sum())
 
-# Fill all NaN value into Test Dataset
+# Fill all NaN value into test Dataset
 test = pd.read_csv('test.csv')
 test = test.fillna(test.median().iloc[0])
 # print(test.isna().sum())
