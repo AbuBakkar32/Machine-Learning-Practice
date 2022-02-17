@@ -6,7 +6,7 @@ import xmlrunner
 
 
 class TestBlog(TestCase):
-    @patch('UnitTest.file.main.Blog')
+    @patch('utestfile.file.main.Blog')
     def test_blog_posts(self, MockBlog):
         blog = MockBlog()
 
@@ -32,7 +32,8 @@ class TestBlog(TestCase):
 
 if __name__ == '__main__':
     unittest.main(
-        testRunner=xmlrunner.XMLTestRunner(output='test-reports'))
+        testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
+        failfast=False, buffer=False, catchbreak=False)
 
 # def mock_sum(a, b):
 #     # mock sum function without the long running time.sleep
