@@ -1,8 +1,7 @@
-import unittest
 from unittest import TestCase
 from unittest.mock import patch
 
-import xmlrunner
+import HTMLTestRunner
 
 
 class TestBlog(TestCase):
@@ -23,20 +22,21 @@ class TestBlog(TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response[0], dict)
         assert MockBlog.called  # The mock wasP called
-        blog.posts.assert_called_with()  # We called the posts method with no arguments
+        blog.posts.assert_called_with()  # We called the posts' method with no arguments
         blog.posts.assert_called_once_with()  # We called the posts method once with no arguments
-        # blog.posts.assert_called_with(1, 2, 3) - This assertion is False and will fail since we called blog.posts with no arguments
+        # blog.posts.assert_called_with(1, 2, 3) - This assertion is False and will fail since we called blog.posts
+        # with no arguments
         blog.reset_mock()  # Reset the mock object
         blog.posts.assert_not_called()  # After resetting, posts has not been called.
 
 
 if __name__ == '__main__':
-    unittest.main(
-        testRunner=xmlrunner.XMLTestRunner(output='test-reports'),
-        failfast=False, buffer=False, catchbreak=False)
+    HTMLTestRunner.main()
+    # unittest.main(
+    #     testRunner=xmlrunner.XMLTestRunner(output='test-reports'), failfast=False, buffer=True, catchbreak=False)
 
 # def mock_sum(a, b):
-#     # mock sum function without the long running time.sleep
+#     # mock sum function without the long-running time.sleep
 #     return a + b
 #
 #
