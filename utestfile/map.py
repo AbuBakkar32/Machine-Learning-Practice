@@ -1,5 +1,4 @@
 # Map Function working with calculate the Celcius to Fahrenheit
-import json
 
 # temps = [("berlin", 35), ("germany", 50), ("england", 41), ("Dhaka", 26), ("France", 10)]
 # c_to_f = lambda data: (data[0], round((9 / 5) * data[1] + 32, 2));
@@ -45,7 +44,9 @@ import json
 #
 # print("\n\n", family["member1"]["Occupation"]["score"][2])  # Accessing child dictionary key
 
-from enum import IntEnum, unique, auto, Enum
+from enum import IntEnum, unique, Enum
+
+
 class Country(IntEnum):
     Afghanistan = 93
     Albania = 355
@@ -53,8 +54,11 @@ class Country(IntEnum):
     Andorra = 376
     Angola = 244
     Antarctica = 672
+
+
 country_code_list = list(map(int, Country))
 print(country_code_list)
+
 
 @unique
 class Color(Enum):
@@ -65,8 +69,7 @@ class Color(Enum):
 
 e_valu_list = [myenum.value for myenum in Color]
 print('enum values:', e_valu_list)
-print ("The enum member as a string is :\n ",end="")
-print (Color.GREEN.value)
-print (Color.RED.name)
+print("The enum member as a string is :\n ", end="")
+print(Color.GREEN.value)
+print(Color.RED.name)
 print(isinstance(Color.GREEN, Color))
-

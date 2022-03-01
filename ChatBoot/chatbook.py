@@ -30,5 +30,4 @@ list_trainer = ListTrainer(my_bot)
 for item in (small_talk, math_talk_1, math_talk_2):
     list_trainer.train(item)
 
-
 print(my_bot.get_response("hi"))
