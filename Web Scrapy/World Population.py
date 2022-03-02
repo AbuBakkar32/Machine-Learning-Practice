@@ -16,6 +16,7 @@ for i in table.find_all('th'):
 
 # Create DataFrame using Column name
 df = pd.DataFrame(columns=header)
+print(df)
 
 # Insert All table row data in a row one by one
 for j in table.find_all('tr')[1:]:
