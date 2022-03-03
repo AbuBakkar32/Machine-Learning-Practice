@@ -90,6 +90,7 @@ def get_data(base_url):
 
 if __name__ == '__main__':
     try:
-        get_data(base_url)
+        while True:
+            get_data(base_url)
     except Exception as e:
         e.args
