@@ -33,8 +33,8 @@ def crawl(category):
     print(product_data)
     try:
         product_data
-    except:
-        print('Data Not Found')
+    except Exception as e:
+        e.args
     return product_data
     # product_data.to_csv('product_data.csv', index=False)
 
@@ -45,7 +45,7 @@ def check_response(response):
         content = soup.find('div', class_='categorySection miscCategorySection onlyMiscCategorySection')
         category = content.find_all('div', class_='product')
     else:
-        print('Page Not Found')
+        print('d')
     return category
 
 
@@ -54,8 +54,8 @@ def find_all_product(url, item='popular'):
     category = check_response(response)
     try:
         product_info = crawl(category)
-    except:
-        print('Data Not Found')
+    except Exception as e:
+        e.args
     return product_info
 
 
@@ -83,9 +83,13 @@ def get_data(base_url):
     print(f'You Have Selected {colored(select_item, "green")} Item \n')
     try:
         get_data = find_all_product(base_url, select_item)
-    except:
-        print('Data Not Found')
+    except Exception as e:
+        e.args
     return get_data
 
 
-get_data(base_url)
+if __name__ == '__main__':
+    try:
+        get_data(base_url)
+    except Exception as e:
+        e.args
