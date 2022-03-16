@@ -1,8 +1,10 @@
-from unittest import TestCase
+import re
+from unittest import TestCase, mock
 
 from mock import patch, Mock, MagicMock, call, sentinel
 
 
+@mock.patch(re.search, return_value=sentinel.search_result)
 class MyTestCase(TestCase):
 
     def setUp(self):

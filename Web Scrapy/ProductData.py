@@ -30,13 +30,13 @@ def crawl(category):
     unit = pd.Series(unit)
 
     product_data = pd.DataFrame({'Product Name': product_name, 'unit': unit, 'Product Price': product_price})
+    product_data.to_csv('product_data.csv', index=False)
     print(product_data)
     try:
         product_data
     except Exception as e:
         e.args
     return product_data
-    # product_data.to_csv('product_data.csv', index=False)
 
 
 def check_response(response):
