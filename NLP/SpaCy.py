@@ -24,12 +24,26 @@ print("Conjunctions:", [token.lemma_ for token in doc if token.pos_ == "CCONJ"])
 print("Pronouns:", [token.lemma_ for token in doc if token.pos_ == "PRON"])
 print("Punctuations:", [token.lemma_ for token in doc if token.pos_ == "PUNCT"])
 
-# Find named entities, phrases and concepts
-for entity in doc.ents:
-    print(entity.text, entity.label_)
 print("*" * 100)
-for token in doc:
-    print(token.pos_ + " = " + token.lemma_)
+
+pre = [token.lemma_ for token in doc if token.pos_ == "ADP"]
+count_pre = {}
+for i in pre:
+    if i in count_pre:
+        count_pre[i] += 1
+    else:
+        count_pre[i] = 1
+print(count_pre)
+
+# Find named entities, phrases and concepts
+# for entity in doc.ents:
+#     print(entity.text, entity.label_)
+#
+# print("*" * 100)
+#
+# for token in doc:
+#     print(token.pos_ + " = " + token.lemma_)
+
 # for token in doc:
 #     print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
 #           token.shape_, token.is_alpha, token.is_stop)

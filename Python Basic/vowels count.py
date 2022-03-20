@@ -1,6 +1,6 @@
-from string import punctuation
 import time
 from datetime import datetime
+from string import punctuation
 
 vowels = 'aeiou' # This is Vowels character
 text = 'Hello every one my name is abu bakkar siddik. i am from bangladesh. i am studing as a software engineer under daffodil international university. my dreame so long and may Allah full fill my dreams'
@@ -17,7 +17,7 @@ for char in text:
 
 print(f'The Vowels is : {count}', end=" ")
 print("")
-print(f'The cosonents is : {cons}', end=" ")
+print(f'The consonants is : {cons}', end=" ")
 
 # simple code for remove punctuation character
 data = {}
