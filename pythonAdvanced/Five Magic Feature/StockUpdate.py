@@ -1,3 +1,4 @@
+import pandas as pd
 import yfinance as yf
 
 # q = yf.Ticker("AAPL")
@@ -12,8 +13,6 @@ import yfinance as yf
 # data_frame = q.history("1d")
 # price = data_frame["Close"].values[0]
 # print(f'Apple current stock price: {price} USD')
-
-import pandas as pd
 
 tickers_list = ["aapl", "goog", "amzn", "BAC", "BA"]  # example list
 tickers_data = {}  # empty dictionary

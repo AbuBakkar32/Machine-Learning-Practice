@@ -1,5 +1,5 @@
-from pydub import AudioSegment
 import speech_recognition as sr
+from pydub import AudioSegment
 
 AudioSegment.from_file("/path_to_video").export("~/output.mp3", format="mp3")
 sound = AudioSegment.from_mp3('output.mp3')

@@ -1,5 +1,5 @@
-import speech_recognition as sr
 import moviepy.editor as mp
+import speech_recognition as sr
 
 clip = mp.VideoFileClip(r"video_recording.mov")
 clip.audio.write_audiofile(r"converted.wav")

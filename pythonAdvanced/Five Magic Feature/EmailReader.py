@@ -1,5 +1,5 @@
-import imaplib
 import email
+import imaplib
 
 mail = imaplib.IMAP4_SSL('imap.gmail.com')
 mail.login('rakibsarkar26@gmail.com', 'gjutblvmtfnlydsk')

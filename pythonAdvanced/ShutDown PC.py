@@ -1,7 +1,7 @@
+import os
+
 import pyttsx3
 import speech_recognition as sr
-import pyaudio
-import os
 
 
 # creating take_commands() function which

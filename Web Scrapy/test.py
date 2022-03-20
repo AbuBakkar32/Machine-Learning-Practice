@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from pythonAdvanced import Time
+
 # base_url = 'https://chaldal.com/popular'
 # response = requests.get(base_url)
 # soup = BeautifulSoup(response.content, "lxml")
@@ -13,9 +15,11 @@ import pandas as pd
 #     li = ul.find_all('li')
 #     print(li[2])
 
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_rows', None)
-a = pd.DataFrame(np.random.random_sample(2000).reshape(100, 20))
-# print(np.random.choice(2, 100, replace={1: True, 0: False}))
-print(np.random.random_sample(2000).reshape(100, 20))
+with Time as t:
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_rows', None)
+    a = pd.DataFrame(np.random.random_sample(2000).reshape(100, 20))
+    # print(np.random.choice(2, 100, replace={1: True, 0: False}))
+    print(np.random.random_sample(2000).reshape(100, 20))
 # a.to_csv('test.csv')
+# print()
