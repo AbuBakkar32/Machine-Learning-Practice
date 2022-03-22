@@ -51,6 +51,7 @@ class XmlToJson:
 
 
 if __name__ == '__main__':
-    xmlFileLocation = str(input("Enter the path of xml file: "))
-    jsonFileLocation = str(input("Enter the path where you want to keep json file: "))
-    XmlToJson(xmlFileLocation, jsonFileLocation)  # XmlToJson("D:/xmlfile", "D:/jsonfile")
+    # xmlFileLocation = str(input("Enter the path of xml file: "))
+    # jsonFileLocation = str(input("Enter the path where you want to keep json file: "))
+    # XmlToJson(xmlFileLocation, jsonFileLocation)  # XmlToJson("D:/xmlfile", "D:/jsonfile")
+    XmlToJson()  # XmlToJson("D:/xmlfile", "D:/jsonfile")
