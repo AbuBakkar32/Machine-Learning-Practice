@@ -26,18 +26,17 @@ for root, dirs, files in os.walk(jsonFilePath):
             sections = []
 
             for i in range(len(data['us-patent-application']['claims']['claim'])):
-                if data['us-patent-application']['claims']['claim'][i]['id'].split("-")[0] == 'CLM':
-                    try:
-                        text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text'].strip()
-                        text = " ".join(text.split())
-                    except TypeError:
-                        text = data['us-patent-application']['claims']['claim'][i]['claim-text'][1]['text'].strip()
-                        text = " ".join(text.split())
-                    section = {
-                        "text": text,
-                        "id": data['us-patent-application']['claims']['claim'][i]['id']
-                    }
-                    sections.append(section)
+                try:
+                    text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text'].strip()
+                    text = " ".join(text.split())
+                except TypeError:
+                    text = data['us-patent-application']['claims']['claim'][i]['claim-text'][1]['text'].strip()
+                    text = " ".join(text.split())
+                section = {
+                    "text": text,
+                    "id": data['us-patent-application']['claims']['claim'][i]['id']
+                }
+                sections.append(section)
             getjson = {
                 'applicationNumber': applicationNumber,
                 'date': date,

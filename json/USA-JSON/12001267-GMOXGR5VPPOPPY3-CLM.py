@@ -24,25 +24,34 @@ for root, dirs, files in os.walk(jsonFilePath):
                     'date']
             documentType = id.split("-")[0]
             sections = []
-
+            # print(data['us-patent-application']['claims']['claim'][0]['claim-text']['text'])
+            # print(data['us-patent-application']['claims']['claim'][3]['claim-text'])
+            # print(data['us-patent-application']['claims']['claim'][6]['claim-text'][0])
+            # print(data['us-patent-application']['claims']['claim'][7]['claim-text'][0]['text'])
             for i in range(len(data['us-patent-application']['claims']['claim'])):
-                if data['us-patent-application']['claims']['claim'][i]['id'].split("-")[0] == 'CLM':
+                try:
+                    text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text']
+                except TypeError:
                     try:
-                        text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text'].strip()
-                        text = " ".join(text.split())
+                        text = data['us-patent-application']['claims']['claim'][i]['claim-text']
                     except TypeError:
-                        text = data['us-patent-application']['claims']['claim'][i]['claim-text'][1]['text'].strip()
-                        text = " ".join(text.split())
-                    section = {
-                        "text": text,
-                        "id": data['us-patent-application']['claims']['claim'][i]['id']
-                    }
-                    sections.append(section)
+                        try:
+                            text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text']
+                        except TypeError:
+                            text = data['us-patent-application']['claims']['claim'][i]['claim-text']['boundary-data'][
+                                'text']
+                section = {
+                    "text": text,
+                    "id": data['us-patent-application']['claims']['claim'][i]['id']
+                }
+                sections.append(section)
+
             getjson = {
                 'applicationNumber': applicationNumber,
                 'date': date,
                 'documentType': documentType,
                 'sections': sections
             }
+
             with open(jsonFilePath + "/" + file, 'w') as f:
                 json.dump(getjson, f, indent=4)

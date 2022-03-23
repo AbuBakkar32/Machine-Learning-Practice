@@ -12,16 +12,15 @@ for root, dirs, files in os.walk(jsonFilePath):
             data = data.replace("\\n", "")
             data = data.replace("#", "")
             data = json.loads(data)
-            id = data['us-patent-application']['description']['id']
             applicationNumber = \
-                data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
-                    'document-id'][
-                    'doc-number']
+                int(data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
+                        'document-id'][
+                        'doc-number'])
             date = \
                 data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
                     'document-id'][
                     'date']
-            documentType = id.split("-")[0]
+            documentType = 'SPEC'
             sections = []
             # print(len(data['us-patent-application']['description']['p']))
             for i in range(len(data['us-patent-application']['description']['p'])):
@@ -41,5 +40,5 @@ for root, dirs, files in os.walk(jsonFilePath):
                 'documentType': documentType,
                 'sections': sections
             }
-            with open(jsonFilePath + "/" + file, 'w') as f:
-                json.dump(getjson, f, indent=4)
+            # with open(jsonFilePath + "/" + file, 'w') as f:
+            #     json.dump(getjson, f, indent=4)

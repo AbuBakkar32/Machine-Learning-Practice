@@ -26,30 +26,27 @@ for root, dirs, files in os.walk(jsonFilePath):
             sections = []
 
             for i in range(len(data['us-patent-application']['claims']['claim'])):
-                if data['us-patent-application']['claims']['claim'][i]['id'].split("-")[0] == 'CLM':
+                try:
+                    text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text'].strip()
+                    text = " ".join(text.split())
+                except TypeError:
                     try:
-                        text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text'].strip()
+                        text = data['us-patent-application']['claims']['claim'][i]['claim-text'][1]['text'].strip()
                         text = " ".join(text.split())
                     except TypeError:
-                        try:
-                            text = data['us-patent-application']['claims']['claim'][i]['claim-text'][1]['text'].strip()
-                            text = " ".join(text.split())
-                        except TypeError:
-                            text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text'].strip()
-                            text = " ".join(text.split())
+                        text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text'].strip()
+                        text = " ".join(text.split())
 
-                    section = {
-                        "text": text,
-                        "id": data['us-patent-application']['claims']['claim'][i]['id']
-                    }
-                    sections.append(section)
+                section = {
+                    "text": text,
+                    "id": data['us-patent-application']['claims']['claim'][i]['id']
+                }
+                sections.append(section)
             getjson = {
                 'applicationNumber': applicationNumber,
                 'date': date,
                 'documentType': documentType,
                 'sections': sections
             }
-
-            print(getjson)
             with open(jsonFilePath + "/" + file, 'w') as f:
                 json.dump(getjson, f, indent=4)
