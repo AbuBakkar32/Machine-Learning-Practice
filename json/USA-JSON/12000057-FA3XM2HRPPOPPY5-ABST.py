@@ -1,38 +1,47 @@
 import json
 import os
 
+from termcolor import colored
+
 jsonFilePath = "D:/jsonfile"
 jsonfile = []
 for root, dirs, files in os.walk(jsonFilePath):
     for file in files:
         if file.endswith('.json'):
-            with open(jsonFilePath + "/" + file, 'r') as f:
-                data = json.load(f)
-            data = json.dumps(data, indent=4)
-            data = data.replace("\\t", "")
-            data = data.replace("\\n", "")
-            data = data.replace("#", "")
-            data = json.loads(data)
-            applicationNumber = \
-                data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
-                    'document-id'][
-                    'doc-number']
-            date = \
-                data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
-                    'document-id'][
-                    'date']
-            documentType = "ABST"
-            sections = []
-            section = {
-                "text": data['us-patent-application']['abstract']['p']['text'],
-                "id": data['us-patent-application']['abstract']['id']
-            }
-            sections.append(section)
-            getjson = {
-                'applicationNumber': applicationNumber,
-                'date': date,
-                'documentType': documentType,
-                'sections': section
-            }
-            with open(jsonFilePath + "/" + file, 'w') as f:
-                json.dump(getjson, f, indent=4)
+            sfile = file.split('-')[-1]
+            sfile = sfile.split('.')[0]
+            if sfile == 'ABST':
+                with open(jsonFilePath + "/" + file, 'r') as f:
+                    data = json.load(f)
+                data = json.dumps(data, indent=4)
+                data = data.replace("\\t", "")
+                data = data.replace("\\n", "")
+                data = data.replace("#", "")
+                data = json.loads(data)
+                applicationNumber = \
+                    int(data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
+                            'document-id'][
+                            'doc-number'])
+                date = \
+                    data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
+                        'document-id'][
+                        'date']
+                documentType = 'ABST'
+                sections = []
+                if type(data['us-patent-application']['abstract']['p']) == list:
+                    for i in range(len(data['us-patent-application']['abstract']['p'])):
+                        if 'boundary-data' in data['us-patent-application']['abstract']['p'][i]:
+                            sections.append(data['us-patent-application']['abstract']['p'][i]['text'])
+                        else:
+                            sections.append(data['us-patent-application']['abstract']['p'][i]['confidence']['text'])
+                else:
+                    sections.append(data['us-patent-application']['abstract']['p']['text'])
+                getjson = {
+                    'applicationNumber': applicationNumber,
+                    'date': date,
+                    'documentType': documentType,
+                    'sections': sections
+                }
+                with open("D:/cleanjson" + "/" + file, 'w') as f:
+                    json.dump(getjson, f, indent=4)
+                print(colored(f"{file} Successfully cleaned", 'green'))
