@@ -108,8 +108,8 @@ class XmlToJson:
                             'documentType': documentType,
                             'sections': sections
                         }
-                        for i in tqdm(range(100)):
-                            time.sleep(0.000001)
+                        for i in tqdm(range(100), desc="Loading", unit="sec"):
+                            time.sleep(0.001)
                         with open("D:/cleanjson" + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
                         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -150,8 +150,8 @@ class XmlToJson:
                             'sections': sections
                         }
 
-                        for i in tqdm(range(100)):
-                            time.sleep(0.000001)
+                        for i in tqdm(range(100), desc="Loading", unit="sec"):
+                            time.sleep(0.001)
                         with open("D:/cleanjson" + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
                         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -207,8 +207,8 @@ class XmlToJson:
                                 'sections': sections
                             }
 
-                        for i in tqdm(range(100)):
-                            time.sleep(0.000001)
+                        for i in tqdm(range(100), desc="Loading", unit="sec"):
+                            time.sleep(0.001)
                         with open("D:/cleanjson" + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
                         print(colored(f"\n{file} Successfully cleaned", 'green'))
