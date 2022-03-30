@@ -6,6 +6,7 @@ from xml.parsers import expat
 
 import xmltodict
 from termcolor import colored
+from tqdm import tqdm
 
 
 class XmlToJson:
@@ -43,7 +44,7 @@ class XmlToJson:
                     with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
                         json.dump(xml, f, indent=4)
                 print(colored(f"{filename} files Successfully converted XML to JSON", 'green'))
-                time.sleep(1)
+                time.sleep(0.1)
         except FileNotFoundError:  # This is skipped if file exists
             print("FileNotFoundError")
         except Exception as e:  # This is processed instead
@@ -107,10 +108,11 @@ class XmlToJson:
                             'documentType': documentType,
                             'sections': sections
                         }
+                        for i in tqdm(range(100)):
+                            time.sleep(0.000001)
                         with open("D:/cleanjson" + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
-                        print(colored(f"{file} Successfully cleaned", 'green'))
-                        time.sleep(1)
+                        print(colored(f"\n{file} Successfully cleaned", 'green'))
 
                     elif sfile == 'ABST':  # if file name is ABST.json then we are converting it to ABST.json
                         with open(self.jsonFilePath + "/" + file, 'r') as f:
@@ -147,10 +149,13 @@ class XmlToJson:
                             'documentType': documentType,
                             'sections': sections
                         }
+
+                        for i in tqdm(range(100)):
+                            time.sleep(0.000001)
                         with open("D:/cleanjson" + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
-                        print(colored(f"{file} Successfully cleaned", 'green'))
-                        time.sleep(1)
+                        print(colored(f"\n{file} Successfully cleaned", 'green'))
+
                     elif sfile == 'CLM':
                         with open(self.jsonFilePath + "/" + file, 'r') as f:
                             data = json.load(f)
@@ -201,10 +206,12 @@ class XmlToJson:
                                 'documentType': documentType,
                                 'sections': sections
                             }
+
+                        for i in tqdm(range(100)):
+                            time.sleep(0.000001)
                         with open("D:/cleanjson" + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
-                        print(colored(f"{file} Successfully cleaned", 'green'))
-                        time.sleep(1)
+                        print(colored(f"\n{file} Successfully cleaned", 'green'))
                     else:
                         print("Someting Went Wrong")
 
