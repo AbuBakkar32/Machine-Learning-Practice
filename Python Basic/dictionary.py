@@ -18,3 +18,9 @@ def print_list(list):
 
 if __name__ == "__main__":
     main()
+
+k = "One Two Three".split()
+v = "1 2 3".split()
+d = dict(zip(k, v))
+k, v = zip(*d.items())
+print(d)

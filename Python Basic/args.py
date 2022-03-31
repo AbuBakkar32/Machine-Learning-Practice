@@ -31,15 +31,13 @@ def arg_printer(a, b, *args, option=True, **kwargs):
 # print(arg_printer(lst))
 # print(arg_printer(*lst))
 
-# lst = [1, 4, 5]
-# tpl = ('a', 'b', 4)
-# arg_printer(*lst, *tpl, 5, 6)
+lst = [1, 4, 5]
+tpl = ('a', 'b', 4)
+arg_printer(*lst, *tpl, 5, 6)
 
 # dct = {'param1':5, 'param2':8}
 # arg_printer(5, 6, **dct)
 
 dct = {'param1': 5, 'param2': 8}
-arg_printer(5, 5, param3=9, **dct)
+# print(arg_printer(5, 5, param3=9, **dct))
 # print(arg_printer(1, 4, 6, 5, param1=5, param2=6))
-
-

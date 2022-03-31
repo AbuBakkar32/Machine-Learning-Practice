@@ -10,10 +10,11 @@ from tqdm import tqdm
 
 
 class XmlToJson:
-    def __init__(self, xmlFilePath: any = None, jsonFilePath: any = None):
+    def __init__(self, xmlFilePath: any = None, jsonFilePath: any = None, cleanJsonPath: any = None):
         self.xmlFile = []
         self.xmlFilePath = xmlFilePath  # path of xml file
         self.jsonFilePath = jsonFilePath  # path of json file where json file will be created
+        self.cleanJsonPath = cleanJsonPath  # path of json file where clean json file will be created
         self.getjson()  # call getjson function
 
     def convertXMLFileToList(self):
@@ -44,16 +45,18 @@ class XmlToJson:
                     with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
                         json.dump(xml, f, indent=4)
                 print(colored(f"{filename} files Successfully converted XML to JSON", 'green'))
-                time.sleep(0.1)
+                time.sleep(0.6)
         except FileNotFoundError:  # This is skipped if file exists
             print("FileNotFoundError")
         except Exception as e:  # This is processed instead
             print("An exception occurred: ", e)
         finally:  # This is always processed no matter what
             pass
+        self.cleanjson()  # call cleanjson function
 
     # this is the end of class where we are calling the function to convert josn to clean json formet
     def cleanjson(self):
+        global getjson
         print("\nPlease wait while cleaning json file started\n")
         time.sleep(3)
         for root, dirs, files in os.walk(self.jsonFilePath):
@@ -108,9 +111,14 @@ class XmlToJson:
                             'documentType': documentType,
                             'sections': sections
                         }
-                        for i in tqdm(range(100), desc="Loading", unit="sec"):
-                            time.sleep(0.001)
-                        with open("D:/cleanjson" + "/" + file, 'w') as f:
+
+                        try:
+                            for i in tqdm(range(100), desc="Loading", unit="sec"):
+                                time.sleep(0.001)
+                        except Exception as e:
+                            pass
+
+                        with open(self.cleanJsonPath + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
                         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
@@ -150,9 +158,13 @@ class XmlToJson:
                             'sections': sections
                         }
 
-                        for i in tqdm(range(100), desc="Loading", unit="sec"):
-                            time.sleep(0.001)
-                        with open("D:/cleanjson" + "/" + file, 'w') as f:
+                        try:
+                            for i in tqdm(range(100), desc="Loading", unit="sec"):
+                                time.sleep(0.001)
+                        except Exception as e:
+                            pass
+
+                        with open(self.cleanJsonPath + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
                         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
@@ -199,6 +211,7 @@ class XmlToJson:
                                         "text": '',
                                         "id": data['us-patent-application']['claims']['claim'][i]['id']
                                     }
+                                    sections.append(section)
 
                             getjson = {
                                 'applicationNumber': applicationNumber,
@@ -207,9 +220,13 @@ class XmlToJson:
                                 'sections': sections
                             }
 
-                        for i in tqdm(range(100), desc="Loading", unit="sec"):
-                            time.sleep(0.001)
-                        with open("D:/cleanjson" + "/" + file, 'w') as f:
+                        try:
+                            for i in tqdm(range(100), desc="Loading", unit="sec"):
+                                time.sleep(0.001)
+                        except Exception as e:
+                            pass
+
+                        with open(self.cleanJsonPath + "/" + file, 'w') as f:
                             json.dump(getjson, f, indent=4)
                         print(colored(f"\n{file} Successfully cleaned", 'green'))
                     else:
@@ -217,5 +234,7 @@ class XmlToJson:
 
 
 if __name__ == '__main__':
-    cnvjson = XmlToJson("D:/xmlfile", "D:/jsonfile")
-    cnvjson.cleanjson()
+    xmlfile = "D:/xmlfile"
+    jsonfile = "D:/jsonfile"
+    cleanjson = "D:/cleanjson"
+    XmlToJson(xmlfile, jsonfile, cleanjson)
