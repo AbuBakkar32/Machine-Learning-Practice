@@ -54,7 +54,7 @@ class XmlToJson:
             pass
         self.cleanjson()  # call cleanjson function
 
-    # this is the end of class where we are calling the function to convert josn to clean json formet
+    # this is the end of class where we are calling the function to convert json to clean json format
     def cleanjson(self):
         global getjson
         print("\nPlease wait while cleaning json file started\n")
@@ -112,6 +112,7 @@ class XmlToJson:
                             'sections': sections
                         }
 
+                        # noinspection TryExceptPass
                         try:
                             for i in tqdm(range(100), desc="Loading", unit="sec"):
                                 time.sleep(0.001)
@@ -158,6 +159,7 @@ class XmlToJson:
                             'sections': sections
                         }
 
+                        # noinspection TryExceptPass
                         try:
                             for i in tqdm(range(100), desc="Loading", unit="sec"):
                                 time.sleep(0.001)
@@ -220,6 +222,7 @@ class XmlToJson:
                                 'sections': sections
                             }
 
+                        # noinspection TryExceptPass
                         try:
                             for i in tqdm(range(100), desc="Loading", unit="sec"):
                                 time.sleep(0.001)
@@ -230,7 +233,7 @@ class XmlToJson:
                             json.dump(getjson, f, indent=4)
                         print(colored(f"\n{file} Successfully cleaned", 'green'))
                     else:
-                        print("Someting Went Wrong")
+                        print("Something Went Wrong")
 
 
 if __name__ == '__main__':
