@@ -1,219 +1,230 @@
 import json
 import os
-import time
+import shutil
 from xml.dom import minidom
 from xml.parsers import expat
 
 import xmltodict
 from termcolor import colored
-from tqdm import tqdm
 
 
 class XmlToJson:
-    def __init__(self, xmlFilePath: any = None, jsonFilePath: any = None, cleanJsonPath: any = None):
+    def __init__(self, xmlFilePath: any = None):
         self.xmlFile = []
         self.xmlFilePath = xmlFilePath  # path of xml file
-        self.jsonFilePath = jsonFilePath  # path of json file where json file will be created
-        self.cleanJsonPath = cleanJsonPath  # path of json file where clean json file will be created
+
+        self.jsonFilePath = 'c:/jsonfile'  # path of json file where json file will be created
+        self.cleanJsonPath = 'c:/cleanjson'  # path of json file where clean json file will be created
+        self.CopyXmlPath = 'c:/copyxml'  # path of xml file where xml file will be stored after cleaning
+
+        path = ['c:/jsonfile', 'c:/cleanjson', 'c:/copyxml']
+        for p in path:
+            if not os.path.exists(p):
+                os.mkdir(p)
+                print(colored("Directory " + p + " Created", 'green'))
+            else:
+                print(f"{p} folder already exists")
         self.getjson()  # call getjson function
 
     def convertXMLFileToList(self):
         # for handle the exception using try and case
-        try:
-            for root, dirs, files in os.walk(self.xmlFilePath):
+        for root, dirs, files in os.walk(self.xmlFilePath):
+            if len(files) > 0:
                 for file in files:
                     if file.endswith('.xml'):
-                        self.xmlFile.append(file)
-            return self.xmlFile
-        except FileNotFoundError:  # This is skipped if file exists
-            print("FileNotFoundError")
-        except Exception as e:  # This is processed instead
-            print("An exception occurred: ", e)
-        finally:  # This is always processed no matter what
-            pass
+                        if not os.path.exists(self.CopyXmlPath + '/' + file):
+                            self.xmlFile.append(file)
+                        else:
+                            print(f"{file} File already exists")
+                            os.remove(self.xmlFilePath + '/' + file)
+                return self.xmlFile
+            else:
+                print("No XML file found")
+                break
 
     def getjson(self):
         # this function is to convert xml file to json file
         try:
             for filename in self.convertXMLFileToList():  # call function to read xml file
-                with open(self.xmlFilePath + '/' + filename, 'r') as f:  # read XML file one by one
-                    xml = f.read()
-                    xml = minidom.parseString(xml)
-                    xml = xml.toprettyxml()
-                    xml = xmltodict.parse(xml, attr_prefix='', encoding='utf-8', expat=expat)
-                    baseFileName = filename.split('.xml')[0]
-                    with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
-                        json.dump(xml, f, indent=4)
-                print(colored(f"{filename} files Successfully converted XML to JSON", 'green'))
-                time.sleep(0.6)
-        except FileNotFoundError:  # This is skipped if file exists
-            print("FileNotFoundError")
-        except Exception as e:  # This is processed instead
-            print("An exception occurred: ", e)
-        finally:  # This is always processed no matter what
-            pass
-        self.cleanjson()  # call cleanjson function
+                try:
+                    with open(self.xmlFilePath + '/' + filename, 'r') as f:  # read XML file one by one
+                        xml = f.read()
+                        xml = minidom.parseString(xml)
+                        xml = xml.toprettyxml()
+                        xml = xmltodict.parse(xml, attr_prefix='', encoding='utf-8', expat=expat)
+                        baseFileName = filename.split('.xml')[0]
+                        with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
+                            json.dump(xml, f, indent=4)
+                except:  # This is skipped if file exists
+                    print("FileNotFoundError")
+                    break
+            self.cleanjson()
+        except:
+            pass  # call cleanjson function
 
     # this is the end of class where we are calling the function to convert json to clean json format
     def cleanjson(self):
         global getjson
-        print("\nPlease wait while cleaning json file started\n")
-        time.sleep(3)
-        for root, dirs, files in os.walk(self.jsonFilePath):
-            for file in files:
-                if file.endswith('.json'):
-                    sfile = file.split('-')[-1]
-                    sfile = sfile.split('.')[0]
-                    if sfile == 'SPEC':  # if file name is SPEC.json then we are converting it to SPEC.json
-                        with open(self.jsonFilePath + "/" + file, 'r') as f:
-                            data = json.load(f)
-                        data = json.dumps(data, indent=4)
-                        data = data.replace("\\t", "")
-                        data = data.replace("\\n", "")
-                        data = data.replace("#", "")
-                        data = json.loads(data)
-                        applicationNumber = \
-                            int(data['us-patent-application']['us-bibliographic-data-application'][
+        if len(self.xmlFile) > 0:
+            for root, dirs, files in os.walk(self.jsonFilePath):
+                for file in files:
+                    if file.endswith('.json'):
+                        sfile = file.split('-')[-1]
+                        sfile = sfile.split('.')[0]
+                        fileName = file.split('.json')[0]
+                        if sfile == 'SPEC':  # if file name is SPEC.json then we are converting it to SPEC.json
+                            with open(self.jsonFilePath + "/" + file, 'r') as f:
+                                data = json.load(f)
+                            data = json.dumps(data, indent=4)
+                            data = data.replace("\\t", "")
+                            data = data.replace("\\n", "")
+                            data = data.replace("#", "")
+                            data = json.loads(data)
+                            applicationNumber = \
+                                int(data['us-patent-application']['us-bibliographic-data-application'][
+                                        'application-reference'][
+                                        'document-id'][
+                                        'doc-number'])
+                            date = \
+                                data['us-patent-application']['us-bibliographic-data-application'][
                                     'application-reference'][
                                     'document-id'][
-                                    'doc-number'])
-                        date = \
-                            data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
-                                'document-id'][
-                                'date']
-                        documentType = 'SPEC'
-                        sections = []
-                        for i in range(len(data['us-patent-application']['description']['p'])):
-                            if 'boundary-data' in data['us-patent-application']['description']['p'][i]:
-                                if type(data['us-patent-application']['description']['p'][i]['boundary-data']) == dict:
-                                    text = data['us-patent-application']['description']['p'][i]['text'].strip()
-                                    text = " ".join(text.split())
-                                    section = {
-                                        "text": text,
-                                        "type": data['us-patent-application']['description']['p'][i]['boundary-data'][
-                                            'type']
-                                    }
-                                    sections.append(section)
-                                elif type(
-                                        data['us-patent-application']['description']['p'][i]['boundary-data']) == list:
-                                    text = data['us-patent-application']['description']['p'][i]['text'].strip()
-                                    text = " ".join(text.split())
-                                    section = {
-                                        "text": text,
-                                        "type":
-                                            data['us-patent-application']['description']['p'][i]['boundary-data'][0][
-                                                'type']
-                                    }
-                                    sections.append(section)
-                        getjson = {
-                            'applicationNumber': applicationNumber,
-                            'date': date,
-                            'documentType': documentType,
-                            'sections': sections
-                        }
+                                    'date']
+                            documentType = 'SPEC'
+                            sections = []
+                            for i in range(len(data['us-patent-application']['description']['p'])):
+                                if 'boundary-data' in data['us-patent-application']['description']['p'][i]:
+                                    try:
+                                        if type(data['us-patent-application']['description']['p'][i][
+                                                    'boundary-data']) == dict:
+                                            text = data['us-patent-application']['description']['p'][i]['text'].strip()
+                                            text = " ".join(text.split())
+                                            section = {
+                                                "text": text,
+                                                "type": data['us-patent-application']['description']['p'][i][
+                                                    'boundary-data'][
+                                                    'type']
+                                            }
+                                            sections.append(section)
+                                        elif type(
+                                                data['us-patent-application']['description']['p'][i][
+                                                    'boundary-data']) == list:
+                                            text = data['us-patent-application']['description']['p'][i]['text'].strip()
+                                            text = " ".join(text.split())
+                                            section = {
+                                                "text": text,
+                                                "type":
+                                                    data['us-patent-application']['description']['p'][i][
+                                                        'boundary-data'][0][
+                                                        'type']
+                                            }
+                                            sections.append(section)
+                                    except Exception as e:
+                                        print(e)
+                            getjson = {
+                                'applicationNumber': applicationNumber,
+                                'date': date,
+                                'documentType': documentType,
+                                'sections': sections
+                            }
 
-                        # noinspection TryExceptPass
-                        try:
-                            for i in tqdm(range(100), desc="Loading", unit="sec"):
-                                time.sleep(0.001)
-                        except Exception as e:
-                            pass
+                            with open(self.cleanJsonPath + "/" + file, 'w') as f:
+                                json.dump(getjson, f, indent=4)
+                            shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+                                        self.CopyXmlPath + "/" + fileName + ".xml")
+                            os.remove(self.jsonFilePath + "/" + file)
+                            print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-                        with open(self.cleanJsonPath + "/" + file, 'w') as f:
-                            json.dump(getjson, f, indent=4)
-                        print(colored(f"\n{file} Successfully cleaned", 'green'))
-
-                    elif sfile == 'ABST':  # if file name is ABST.json then we are converting it to ABST.json
-                        with open(self.jsonFilePath + "/" + file, 'r') as f:
-                            data = json.load(f)
-                        data = json.dumps(data, indent=4)
-                        data = data.replace("\\t", "")
-                        data = data.replace("\\n", "")
-                        data = data.replace("#", "")
-                        data = json.loads(data)
-                        applicationNumber = \
-                            int(data['us-patent-application']['us-bibliographic-data-application'][
+                        elif sfile == 'ABST':  # if file name is ABST.json then we are converting it to ABST.json
+                            with open(self.jsonFilePath + "/" + file, 'r') as f:
+                                data = json.load(f)
+                            data = json.dumps(data, indent=4)
+                            data = data.replace("\\t", "")
+                            data = data.replace("\\n", "")
+                            data = data.replace("#", "")
+                            data = json.loads(data)
+                            applicationNumber = \
+                                int(data['us-patent-application']['us-bibliographic-data-application'][
+                                        'application-reference'][
+                                        'document-id'][
+                                        'doc-number'])
+                            date = \
+                                data['us-patent-application']['us-bibliographic-data-application'][
                                     'application-reference'][
                                     'document-id'][
-                                    'doc-number'])
-                        date = \
-                            data['us-patent-application']['us-bibliographic-data-application'][
-                                'application-reference'][
-                                'document-id'][
-                                'date']
-                        documentType = 'ABST'
-                        sections = []
-                        if type(data['us-patent-application']['abstract']['p']) == list:
-                            for i in range(len(data['us-patent-application']['abstract']['p'])):
-                                if 'boundary-data' in data['us-patent-application']['abstract']['p'][i]:
-                                    sections.append(data['us-patent-application']['abstract']['p'][i]['text'])
-                                else:
-                                    sections.append(
-                                        data['us-patent-application']['abstract']['p'][i]['confidence']['text'])
-                        else:
-                            sections.append(data['us-patent-application']['abstract']['p']['text'])
-                        getjson = {
-                            'applicationNumber': applicationNumber,
-                            'date': date,
-                            'documentType': documentType,
-                            'sections': sections
-                        }
+                                    'date']
+                            documentType = 'ABST'
+                            sections = []
+                            if type(data['us-patent-application']['abstract']['p']) == list:
+                                for i in range(len(data['us-patent-application']['abstract']['p'])):
+                                    if 'boundary-data' in data['us-patent-application']['abstract']['p'][i]:
+                                        sections.append(data['us-patent-application']['abstract']['p'][i]['text'])
+                                    else:
+                                        sections.append(
+                                            data['us-patent-application']['abstract']['p'][i]['confidence']['text'])
+                            else:
+                                sections.append(data['us-patent-application']['abstract']['p']['text'])
+                            getjson = {
+                                'applicationNumber': applicationNumber,
+                                'date': date,
+                                'documentType': documentType,
+                                'sections': sections
+                            }
 
-                        # noinspection TryExceptPass
-                        try:
-                            for i in tqdm(range(100), desc="Loading", unit="sec"):
-                                time.sleep(0.001)
-                        except Exception as e:
-                            pass
+                            with open(self.cleanJsonPath + "/" + file, 'w') as f:
+                                json.dump(getjson, f, indent=4)
+                            shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+                                        self.CopyXmlPath + "/" + fileName + ".xml")
+                            os.remove(self.jsonFilePath + "/" + file)
+                            print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-                        with open(self.cleanJsonPath + "/" + file, 'w') as f:
-                            json.dump(getjson, f, indent=4)
-                        print(colored(f"\n{file} Successfully cleaned", 'green'))
-
-                    elif sfile == 'CLM':
-                        with open(self.jsonFilePath + "/" + file, 'r') as f:
-                            data = json.load(f)
-                        data = json.dumps(data, indent=4)
-                        data = data.replace("\\t", "")
-                        data = data.replace("\\n", "")
-                        data = data.replace("#", "")
-                        data = json.loads(data)
-                        applicationNumber = \
-                            int(data['us-patent-application']['us-bibliographic-data-application'][
+                        elif sfile == 'CLM':
+                            with open(self.jsonFilePath + "/" + file, 'r') as f:
+                                data = json.load(f)
+                            data = json.dumps(data, indent=4)
+                            data = data.replace("\\t", "")
+                            data = data.replace("\\n", "")
+                            data = data.replace("#", "")
+                            data = json.loads(data)
+                            applicationNumber = \
+                                int(data['us-patent-application']['us-bibliographic-data-application'][
+                                        'application-reference'][
+                                        'document-id'][
+                                        'doc-number'])
+                            date = \
+                                data['us-patent-application']['us-bibliographic-data-application'][
                                     'application-reference'][
                                     'document-id'][
-                                    'doc-number'])
-                        date = \
-                            data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
-                                'document-id'][
-                                'date']
-                        documentType = 'CLM'
-                        sections = []
-                        for i in range(len(data['us-patent-application']['claims']['claim'])):
-                            if data['us-patent-application']['claims']['claim'][i]['id'].split('-')[0] != 'UNKNOWN':
-                                if type(data['us-patent-application']['claims']['claim'][i]['claim-text']) != list:
-                                    text = data['us-patent-application']['claims']['claim'][i]['claim-text'][
-                                        'text'].strip()
-                                    text = " ".join(text.split())
-                                    section = {
-                                        "text": text,
-                                        "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                    }
-                                    sections.append(section)
-                                elif type(data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
-                                    text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text']
-                                    text = " ".join(text.split())
-                                    section = {
-                                        "text": text,
-                                        "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                    }
-                                    sections.append(section)
-                                else:
-                                    section = {
-                                        "text": '',
-                                        "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                    }
-                                    sections.append(section)
+                                    'date']
+                            documentType = 'CLM'
+                            sections = []
+                            for i in range(len(data['us-patent-application']['claims']['claim'])):
+                                if data['us-patent-application']['claims']['claim'][i]['id'].split('-')[0] != 'UNKNOWN':
+                                    if type(data['us-patent-application']['claims']['claim'][i]['claim-text']) != list:
+                                        text = data['us-patent-application']['claims']['claim'][i]['claim-text'][
+                                            'text'].strip()
+                                        text = " ".join(text.split())
+                                        section = {
+                                            "text": text,
+                                            "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                        }
+                                        sections.append(section)
+                                    elif type(
+                                            data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
+                                        text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0][
+                                            'text']
+                                        text = " ".join(text.split())
+                                        section = {
+                                            "text": text,
+                                            "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                        }
+                                        sections.append(section)
+                                    else:
+                                        section = {
+                                            "text": '',
+                                            "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                        }
+                                        sections.append(section)
 
                             getjson = {
                                 'applicationNumber': applicationNumber,
@@ -222,22 +233,18 @@ class XmlToJson:
                                 'sections': sections
                             }
 
-                        # noinspection TryExceptPass
-                        try:
-                            for i in tqdm(range(100), desc="Loading", unit="sec"):
-                                time.sleep(0.001)
-                        except Exception as e:
-                            pass
-
-                        with open(self.cleanJsonPath + "/" + file, 'w') as f:
-                            json.dump(getjson, f, indent=4)
-                        print(colored(f"\n{file} Successfully cleaned", 'green'))
-                    else:
-                        print("Something Went Wrong")
+                            with open(self.cleanJsonPath + "/" + file, 'w') as f:
+                                json.dump(getjson, f, indent=4)
+                            shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+                                        self.CopyXmlPath + "/" + fileName + ".xml")
+                            os.remove(self.jsonFilePath + "/" + file)
+                            print(colored(f"\n{file} Successfully cleaned", 'green'))
+                        else:
+                            print("File type should be CLM, ABST and SPEC")
+        else:
+            pass
 
 
 if __name__ == '__main__':
-    xmlfile = "D:/xmlfile"
-    jsonfile = "D:/jsonfile"
-    cleanjson = "D:/cleanjson"
-    XmlToJson(xmlfile, jsonfile, cleanjson)
+    xmlfile = "c:/xmlfile"
+    XmlToJson(xmlfile)
