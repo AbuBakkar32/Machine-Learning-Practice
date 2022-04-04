@@ -14,7 +14,6 @@ while True:
     current_minute = now.strftime("%M")
     current_seconds = now.strftime("%S")
     current_period = now.strftime("%p")
-    print("Current time:", current_hour, current_minute, current_seconds, current_period)
     if (alarm_period == current_period):
         if (alarm_hour == current_hour):
             if (alarm_minute == current_minute):
