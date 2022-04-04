@@ -29,6 +29,7 @@ class XmlToJsonConverter:
                 print(f"{p} folder already exists")
         self.getjson()  # call getjson function
 
+    # for Established to connect to database
     def db_con(self):
         try:
             connection = psycopg2.connect(user="postgres", password="asl123", host="localhost", port="5433",
@@ -150,7 +151,7 @@ class XmlToJsonConverter:
                                 fetch_student = """
                                                 insert into success (file_name, time_stamp, status) values (%s, %s, %s)
                                             """
-                                # Print PostgreSQL version
+                                # Print PostgresSQL version
                                 cursor.execute(fetch_student, (file, datetime.now().date(), 'success'))
                                 connection.commit()
                                 print("Record inserted successfully into the student table")
