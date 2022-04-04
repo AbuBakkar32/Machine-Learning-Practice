@@ -1,14 +1,16 @@
 import json
 import os
 import shutil
+from datetime import datetime
 from xml.dom import minidom
 from xml.parsers import expat
 
+import psycopg2
 import xmltodict
 from termcolor import colored
 
 
-class XmlToJson:
+class XmlToJsonConverter:
     def __init__(self, xmlFilePath: any = None):
         self.xmlFile = []
         self.xmlFilePath = xmlFilePath  # path of xml file
@@ -16,6 +18,7 @@ class XmlToJson:
         self.jsonFilePath = 'c:/jsonfile'  # path of json file where json file will be created
         self.cleanJsonPath = 'c:/cleanjson'  # path of json file where clean json file will be created
         self.CopyXmlPath = 'c:/copyxml'  # path of xml file where xml file will be stored after cleaning
+        self.con = None
 
         path = ['c:/jsonfile', 'c:/cleanjson', 'c:/copyxml']
         for p in path:
@@ -25,6 +28,16 @@ class XmlToJson:
             else:
                 print(f"{p} folder already exists")
         self.getjson()  # call getjson function
+
+    def db_con(self):
+        try:
+            connection = psycopg2.connect(user="postgres", password="asl123", host="localhost", port="5433",
+                                          database="automation")
+            self.con = connection
+            return self.con
+
+        except (Exception, psycopg2.Error) as error:
+            print("Database Can't Connected Successfully", error)
 
     def convertXMLFileToList(self):
         # for handle the exception using try and case
@@ -58,9 +71,9 @@ class XmlToJson:
                 except:  # This is skipped if file exists
                     print("FileNotFoundError")
                     break
-            self.cleanjson()
+            self.cleanjson()  # call cleanjson function
         except:
-            pass  # call cleanjson function
+            pass
 
     # this is the end of class where we are calling the function to convert json to clean json format
     def cleanjson(self):
@@ -130,9 +143,24 @@ class XmlToJson:
 
                             with open(self.cleanJsonPath + "/" + file, 'w') as f:
                                 json.dump(getjson, f, indent=4)
+                            try:
+                                self.db_con()
+                                connection = self.con
+                                cursor = connection.cursor()
+                                fetch_student = """
+                                                insert into success (file_name, time_stamp, status) values (%s, %s, %s)
+                                            """
+                                # Print PostgreSQL version
+                                cursor.execute(fetch_student, (file, datetime.now().date(), 'success'))
+                                connection.commit()
+                                print("Record inserted successfully into the student table")
+                                cursor.close()
+                            except:
+                                print("Data Can not insert")
                             shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
                                         self.CopyXmlPath + "/" + fileName + ".xml")
                             os.remove(self.jsonFilePath + "/" + file)
+
                             print(colored(f"\n{file} Successfully cleaned", 'green'))
 
                         elif sfile == 'ABST':  # if file name is ABST.json then we are converting it to ABST.json
@@ -173,6 +201,20 @@ class XmlToJson:
 
                             with open(self.cleanJsonPath + "/" + file, 'w') as f:
                                 json.dump(getjson, f, indent=4)
+                            try:
+                                self.db_con()
+                                connection = self.con
+                                cursor = connection.cursor()
+                                fetch_student = """
+                                                insert into success (file_name, time_stamp, status) values (%s, %s, %s)
+                                            """
+                                # Print PostgreSQL version
+                                cursor.execute(fetch_student, (file, datetime.now().date(), 'success'))
+                                connection.commit()
+                                print("Record inserted successfully into the student table")
+                                cursor.close()
+                            except:
+                                print("Data Can not insert")
                             shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
                                         self.CopyXmlPath + "/" + fileName + ".xml")
                             os.remove(self.jsonFilePath + "/" + file)
@@ -235,6 +277,20 @@ class XmlToJson:
 
                             with open(self.cleanJsonPath + "/" + file, 'w') as f:
                                 json.dump(getjson, f, indent=4)
+                            try:
+                                self.db_con()
+                                connection = self.con
+                                cursor = connection.cursor()
+                                fetch_student = """
+                                                insert into success (file_name, time_stamp, status) values (%s, %s, %s)
+                                            """
+                                # Print PostgreSQL version
+                                cursor.execute(fetch_student, (file, datetime.now().date(), 'success'))
+                                connection.commit()
+                                print("Record inserted successfully into the student table")
+                                cursor.close()
+                            except:
+                                print("Data Can not insert")
                             shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
                                         self.CopyXmlPath + "/" + fileName + ".xml")
                             os.remove(self.jsonFilePath + "/" + file)
@@ -247,4 +303,4 @@ class XmlToJson:
 
 if __name__ == '__main__':
     xmlfile = "c:/xmlfile"
-    XmlToJson(xmlfile)
+    XmlToJsonConverter(xmlfile)
