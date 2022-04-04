@@ -1,14 +1,19 @@
 import os
+import time
 
 filename: any = None
-readFile = None
+readFile: any = None
 for root, dirs, files in os.walk("C:/xmlfile"):
     for file in files:
         filename = file
 
 with open("C:/xmlfile/" + filename, 'r') as f:
     readFile = f.read()
-filename = '1' + filename
 
-with open("C:/xmlfile/" + filename, 'w') as f:
-    f.write(readFile)
+t1 = time.time()
+for i in range(1, 100000):
+    filename1 = str(i) + filename
+    with open("C:/xmlfile/" + filename1, 'w') as f:
+        f.write(readFile)
+t2 = time.time()
+print("Time taken to write 20000 files: ", t2 - t1)
