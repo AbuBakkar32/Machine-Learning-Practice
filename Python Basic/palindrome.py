@@ -10,4 +10,5 @@ def palindrome(sentence):
     return palindrome
 
 
-palindrome("baba tumi kemon acho?")
+output = palindrome("mim tumi kemon acho?")
+print(output)

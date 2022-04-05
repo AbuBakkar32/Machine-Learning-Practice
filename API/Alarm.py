@@ -14,10 +14,12 @@ while True:
     current_minute = now.strftime("%M")
     current_seconds = now.strftime("%S")
     current_period = now.strftime("%p")
-    if (alarm_period == current_period):
-        if (alarm_hour == current_hour):
-            if (alarm_minute == current_minute):
-                if (alarm_seconds == current_seconds):
-                    print("Wake Up!")
-                    playsound('audio.mp3')
-                    break
+    if (
+            alarm_period == current_period and alarm_hour == current_hour and alarm_minute == current_minute and alarm_seconds == current_seconds):
+        try:
+            while True:
+                print(f"Wake Up! Its {alarm_time.upper()}")
+                playsound('audio.mp3')
+        except:
+            print("Error in playing audio")
+            break
