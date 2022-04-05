@@ -11,9 +11,9 @@ with open("C:/xmlfile/" + filename, 'r') as f:
     readFile = f.read()
 
 t1 = time.time()
-for i in range(1, 10000):
+for i in range(1, 100):
     filename1 = str(i) + filename
     with open("C:/xmlfile/" + filename1, 'w') as f:
         f.write(readFile)
 t2 = time.time()
-print("Time taken to write 10000 files: ", t2 - t1)
+print("Time taken to write files: ", t2 - t1)
