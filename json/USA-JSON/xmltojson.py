@@ -59,6 +59,8 @@ class XmlToJsonConverter:
                                     baseFileName = file.split('.xml')[0]
                                     with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
                                         json.dump(xml, f, indent=4)
+                                json_file = baseFileName + '.json'
+                                self.cleanjson(json_file)
                             except:  # This is skipped if file exists
                                 # this block belongs to insert fail data in database
                                 try:
@@ -79,7 +81,6 @@ class XmlToJsonConverter:
                         else:
                             print(f"{file} File already exists")
                             os.remove(self.xmlFilePath + '/' + file)
-                    self.cleanjson()  # call cleanjson function
             else:
                 print("No XML file found")
                 break
@@ -144,7 +145,7 @@ class XmlToJsonConverter:
                         conn = """
                                         insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
                                     """
-                        cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'failed'))
+                        cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
                         connection.commit()
                         print("Record inserted successfully into the fail table")
                         cursor.close()
@@ -222,7 +223,7 @@ class XmlToJsonConverter:
                 conn = """
                                 insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
                             """
-                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'failed'))
+                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
                 connection.commit()
                 print("Record inserted successfully into the fail table")
                 cursor.close()
@@ -317,7 +318,7 @@ class XmlToJsonConverter:
                 conn = """
                                 insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
                             """
-                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'failed'))
+                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
                 connection.commit()
                 print("Record inserted successfully into the fail table")
                 cursor.close()
@@ -354,38 +355,38 @@ class XmlToJsonConverter:
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     # this is the end of class where we are calling the function to convert json to clean json format
-    def cleanjson(self):
-        for root, dirs, files in os.walk(self.jsonFilePath):
-            for file in files:
-                fileName = file.split('.json')[0]
-                if file.endswith('.json'):
-                    sfile = file.split('-')[-1]
-                    sfile = sfile.split('.')[0]
+    def cleanjson(self, file):
+        # for root, dirs, files in os.walk(self.jsonFilePath):
+        #     for file in files:
+        fileName = file.split('.json')[0]
+        if file.endswith('.json'):
+            sfile = file.split('-')[-1]
+            sfile = sfile.split('.')[0]
 
-                    # if file type is SPEC then it will be converting it to SPEC.json
-                    if sfile == 'SPEC':
-                        self.clean_spec_file(file)
-                    # if file type is ABST then it will be converting it to ABST.json
-                    elif sfile == 'ABST':
-                        self.clean_abst_file(file)
-                    # if file type is CLM then it will be converting it to CLM.json
-                    elif sfile == 'CLM':
-                        self.clean_clm_file(file)
-                    else:
-                        # this block belongs to insert fail data in database
-                        try:
-                            connection = self.con
-                            cursor = connection.cursor()
-                            conn = """
-                                                        insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-                                                    """
-                            cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'failed'))
-                            connection.commit()
-                            print("Record inserted successfully into the fail table")
-                            cursor.close()
-                        except:
-                            print("Data Can not insert")
-                        print("File type should be CLM, ABST and SPEC")
+            # if file type is SPEC then it will be converting it to SPEC.json
+            if sfile == 'SPEC':
+                self.clean_spec_file(file)
+            # if file type is ABST then it will be converting it to ABST.json
+            elif sfile == 'ABST':
+                self.clean_abst_file(file)
+            # if file type is CLM then it will be converting it to CLM.json
+            elif sfile == 'CLM':
+                self.clean_clm_file(file)
+            else:
+                # this block belongs to insert fail data in database
+                try:
+                    connection = self.con
+                    cursor = connection.cursor()
+                    conn = """
+                                                insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
+                                            """
+                    cursor.execute(conn,
+                                   (fileName + ".xml", datetime.now().date(), 'File type should be SPEC, ABST or CLM'))
+                    connection.commit()
+                    print("Record inserted successfully into the fail table")
+                    cursor.close()
+                except:
+                    print("Data Can not insert")
 
 
 def main():
