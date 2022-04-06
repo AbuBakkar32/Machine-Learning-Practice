@@ -380,30 +380,59 @@ class XmlToJsonConverter:
                 for i in range(len(data['us-patent-application']['claims']['claim'])):
                     if data['us-patent-application']['claims']['claim'][i]['id'].split('-')[0] != 'UNKNOWN':
                         if type(data['us-patent-application']['claims']['claim'][i]['claim-text']) != list:
-                            text = data['us-patent-application']['claims']['claim'][i]['claim-text'][
-                                'text'].strip()
-                            text = " ".join(text.split())
-                            section = {
-                                "text": text,
-                                "id": data['us-patent-application']['claims']['claim'][i]['id']
-                            }
-                            sections.append(section)
-                        elif type(
-                                data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
-                            text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0][
-                                'text']
-                            text = " ".join(text.split())
-                            section = {
-                                "text": text,
-                                "id": data['us-patent-application']['claims']['claim'][i]['id']
-                            }
-                            sections.append(section)
-                        else:
-                            section = {
-                                "text": '',
-                                "id": data['us-patent-application']['claims']['claim'][i]['id']
-                            }
-                            sections.append(section)
+                            try:
+                                text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text']
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": text,
+                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                }
+                                sections.append(section)
+                            except TypeError:
+                                text = data['us-patent-application']['claims']['claim'][i]['claim-text']
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": text,
+                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                }
+                                sections.append(section)
+                            except:
+                                section = {
+                                    "text": ' ',
+                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                }
+                                sections.append(section)
+                        elif type(data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
+                            try:
+                                text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text']
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": text,
+                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                }
+                                sections.append(section)
+                            except TypeError:
+                                try:
+                                    text = data['us-patent-application']['claims']['claim'][i]['claim-text'][-1]['text']
+                                    text = " ".join(text.split())
+                                    section = {
+                                        "text": text,
+                                        "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                    }
+                                    sections.append(section)
+                                except TypeError:
+                                    text = data['us-patent-application']['claims']['claim'][i]['claim-text']
+                                    section = {
+                                        "text": text,
+                                        "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                    }
+                                    sections.append(section)
+                            except:
+                                section = {
+                                    "text": ' ',
+                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
+                                }
+                                sections.append(section)
             except Exception as e:
 
                 # this block belongs to insert fail data in database
