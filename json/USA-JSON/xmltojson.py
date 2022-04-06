@@ -80,7 +80,7 @@ class XmlToJsonConverter:
                                 print(f"{file} File Not Converted XML to JSON")
                         else:
                             print(f"{file} File already exists")
-                            os.remove(self.xmlFilePath + '/' + file)
+                            # os.remove(self.xmlFilePath + '/' + file)
             else:
                 print("No XML file found")
                 break
@@ -97,46 +97,59 @@ class XmlToJsonConverter:
         data = data.replace("\\n", "")
         data = data.replace("#", "")
         data = data.replace("ns0:", "")
+        data = data.replace("ns2:", "")
+        data = data.replace("xsi:", "")
         data = json.loads(data)
-        applicationNumber = \
-            int(data['us-patent-application']['us-bibliographic-data-application'][
+        if 'us-patent-application' in data:
+            applicationNumber = \
+                int(data['us-patent-application']['us-bibliographic-data-application'][
+                        'application-reference'][
+                        'document-id'][
+                        'doc-number'])
+            date = \
+                data['us-patent-application']['us-bibliographic-data-application'][
                     'application-reference'][
                     'document-id'][
-                    'doc-number'])
-        date = \
-            data['us-patent-application']['us-bibliographic-data-application'][
-                'application-reference'][
-                'document-id'][
-                'date']
-        documentType = 'SPEC'
-        sections = []
-        for i in range(len(data['us-patent-application']['description']['p'])):
-            if 'boundary-data' in data['us-patent-application']['description']['p'][i]:
+                    'date']
+            documentType = 'SPEC'
+            sections = []
+            for i in range(len(data['us-patent-application']['description']['p'])):
                 try:
-                    if type(data['us-patent-application']['description']['p'][i][
-                                'boundary-data']) == dict:
-                        text = data['us-patent-application']['description']['p'][i]['text'].strip()
-                        text = " ".join(text.split())
-                        section = {
-                            "text": text,
-                            "type": data['us-patent-application']['description']['p'][i][
-                                'boundary-data'][
-                                'type']
-                        }
-                        sections.append(section)
-                    elif type(
-                            data['us-patent-application']['description']['p'][i][
-                                'boundary-data']) == list:
-                        text = data['us-patent-application']['description']['p'][i]['text'].strip()
-                        text = " ".join(text.split())
-                        section = {
-                            "text": text,
-                            "type":
-                                data['us-patent-application']['description']['p'][i][
-                                    'boundary-data'][0][
-                                    'type']
-                        }
-                        sections.append(section)
+                    if 'boundary-data' in data['us-patent-application']['description']['p'][i]:
+                        if type(data['us-patent-application']['description']['p'][i]['boundary-data']) == dict:
+                            try:
+                                text = data['us-patent-application']['description']['p'][i]['text'].strip()
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": text,
+                                    "type": data['us-patent-application']['description']['p'][i]['boundary-data'][
+                                        'type']
+                                }
+                                sections.append(section)
+                            except:
+                                section = {
+                                    "text": " ",
+                                    "type": data['us-patent-application']['description']['p'][i]['boundary-data'][
+                                        'type']
+                                }
+                                sections.append(section)
+                        elif type(data['us-patent-application']['description']['p'][i]['boundary-data']) == list:
+                            try:
+                                text = data['us-patent-application']['description']['p'][i]['text'].strip()
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": text,
+                                    "type": data['us-patent-application']['description']['p'][i]['boundary-data'][0][
+                                        'type']
+                                }
+                                sections.append(section)
+                            except:
+                                section = {
+                                    "text": " ",
+                                    "type": data['us-patent-application']['description']['p'][i]['boundary-data'][0][
+                                        'type']
+                                }
+                                sections.append(section)
                 except Exception as e:
 
                     # this block belongs to insert fail data in database
@@ -153,35 +166,106 @@ class XmlToJsonConverter:
                     except:
                         print("Data Can not insert")
 
-        getjson = {
-            'applicationNumber': applicationNumber,
-            'date': date,
-            'documentType': documentType,
-            'sections': sections
-        }
+            getjson = {
+                'applicationNumber': applicationNumber,
+                'date': date,
+                'documentType': documentType,
+                'sections': sections
+            }
 
-        with open(self.cleanJsonPath + "/" + file, 'w') as f:
-            json.dump(getjson, f, indent=4)
+            with open(self.cleanJsonPath + "/" + file, 'w') as f:
+                json.dump(getjson, f, indent=4)
 
-        # this block belongs to insert success data in database
-        try:
-            connection = self.con
-            cursor = connection.cursor()
-            conn = """
-                            insert into success (file_name, time_stamp, status) values (%s, %s, %s)
-                        """
-            cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
-            connection.commit()
-            print("Record inserted successfully into the success table")
-            cursor.close()
-        except:
-            print("Data Can not insert")
+            # this block belongs to insert success data in database
+            try:
+                connection = self.con
+                cursor = connection.cursor()
+                conn = """
+                                        insert into success (file_name, time_stamp, status) values (%s, %s, %s)
+                                    """
+                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
+                connection.commit()
+                print("Record inserted successfully into the success table")
+                cursor.close()
+            except:
+                print("Data Can not insert")
 
-        shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
-                    self.CopyXmlPath + "/" + fileName + ".xml")
-        os.remove(self.jsonFilePath + "/" + file)
+            shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+                        self.CopyXmlPath + "/" + fileName + ".xml")
+            os.remove(self.jsonFilePath + "/" + file)
 
-        print(colored(f"\n{file} Successfully cleaned", 'green'))
+            print(colored(f"\n{file} Successfully cleaned", 'green'))
+
+        elif 'SpecificationDocument' in data:
+            applicationNumber = \
+                int(data['SpecificationDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
+                        'ApplicationNumber'])
+            date = \
+                data['SpecificationDocument']['MailRoomDate']
+            documentType = 'SPEC'
+            sections = []
+            try:
+                for i in range(len(data['SpecificationDocument']['Specification']['P'])):
+                    try:
+                        text = data['SpecificationDocument']['Specification']['P'][i]['text']
+                        text = ' '.join(text.split())
+                        section = {
+                            "text": text,
+                            "type": data['SpecificationDocument']['Specification']['P'][i]['id']
+                        }
+                        sections.append(section)
+                    except:
+                        section = {
+                            "text": " ",
+                            "type": data['SpecificationDocument']['Specification']['P'][i]['id']
+                        }
+                        sections.append(section)
+
+            except Exception as e:
+
+                # this block belongs to insert fail data in database
+                try:
+                    connection = self.con
+                    cursor = connection.cursor()
+                    conn = """
+                                    insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
+                                """
+                    cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
+                    connection.commit()
+                    print("Record inserted successfully into the fail table")
+                    cursor.close()
+                except:
+                    print("Data Can not insert")
+
+            getjson = {
+                'applicationNumber': applicationNumber,
+                'date': date,
+                'documentType': documentType,
+                'sections': sections
+            }
+
+            with open(self.cleanJsonPath + "/" + file, 'w') as f:
+                json.dump(getjson, f, indent=4)
+
+            # this block belongs to insert success data in database
+            try:
+                connection = self.con
+                cursor = connection.cursor()
+                conn = """
+                                insert into success (file_name, time_stamp, status) values (%s, %s, %s)
+                            """
+                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
+                connection.commit()
+                print("Record inserted successfully into the success table")
+                cursor.close()
+            except:
+                print("Data Can not insert")
+
+            shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+                        self.CopyXmlPath + "/" + fileName + ".xml")
+            os.remove(self.jsonFilePath + "/" + file)
+
+            print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     # this method will be cleaned ABST type of xml file into json file
     def clean_abst_file(self, file):
@@ -295,8 +379,9 @@ class XmlToJsonConverter:
                                             'ClaimText']) == list:
                                     try:
                                         text = \
-                                        data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][-1][
-                                            'text']
+                                            data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
+                                                -1][
+                                                'text']
                                         text = " ".join(text.split())
                                         section = {
                                             "text": text,

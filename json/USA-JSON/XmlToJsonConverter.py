@@ -58,6 +58,8 @@ class XmlToJson:
         data = data.replace("\\n", "")
         data = data.replace("#", "")
         data = data.replace("ns0:", "")
+        data = data.replace("ns2:", "")
+        data = data.replace("xsi:", "")
         data = json.loads(data)
         with open(self.jsonFilePath + "/" + file, 'w') as f:
             json.dump(data, f, indent=4)
