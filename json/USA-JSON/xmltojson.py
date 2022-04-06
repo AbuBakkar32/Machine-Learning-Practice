@@ -209,13 +209,19 @@ class XmlToJsonConverter:
         try:
             if type(data['us-patent-application']['abstract']['p']) == list:
                 for i in range(len(data['us-patent-application']['abstract']['p'])):
-                    if 'boundary-data' in data['us-patent-application']['abstract']['p'][i]:
-                        sections.append(data['us-patent-application']['abstract']['p'][i]['text'])
-                    else:
-                        sections.append(
-                            data['us-patent-application']['abstract']['p'][i]['confidence']['text'])
-            else:
-                sections.append(data['us-patent-application']['abstract']['p']['text'])
+                    try:
+                        text = data['us-patent-application']['abstract']['p'][i]['text']
+                        text = " ".join(text.split())
+                        sections.append(text)
+                    except:
+                        sections.append(" ")
+            elif type(data['us-patent-application']['abstract']['p']) != list:
+                try:
+                    text = data['us-patent-application']['abstract']['p']['text']
+                    text = " ".join(text.split())
+                    sections.append(text)
+                except:
+                    sections.append(" ")
         except Exception as e:
 
             # this block belongs to insert fail data in database
