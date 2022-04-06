@@ -41,6 +41,7 @@ class XmlToJson:
                     baseFileName = filename.split('.xml')[0]
                     with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
                         json.dump(xml, f, indent=4)
+                    self.clean_clm_file(baseFileName + '.json')
             print(colored(f"Total {len(self.xmlFile)} files Successfully converted XML to JSON", 'green'))
         except FileNotFoundError:  # This is skipped if file exists
             print("FileNotFoundError")
@@ -48,6 +49,18 @@ class XmlToJson:
             print("An exception occurred: ", e)
         finally:  # This is always processed no matter what
             pass
+
+    def clean_clm_file(self, file):
+        with open(self.jsonFilePath + "/" + file, 'r') as f:
+            data = json.load(f)
+        data = json.dumps(data, indent=4)
+        data = data.replace("\\t", "")
+        data = data.replace("\\n", "")
+        data = data.replace("#", "")
+        data = data.replace("ns0:", "")
+        data = json.loads(data)
+        with open(self.jsonFilePath + "/" + file, 'w') as f:
+            json.dump(data, f, indent=4)
 
 
 if __name__ == '__main__':

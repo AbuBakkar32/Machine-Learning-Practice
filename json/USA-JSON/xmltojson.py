@@ -96,6 +96,7 @@ class XmlToJsonConverter:
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
         data = data.replace("#", "")
+        data = data.replace("ns0:", "")
         data = json.loads(data)
         applicationNumber = \
             int(data['us-patent-application']['us-bibliographic-data-application'][
@@ -191,6 +192,7 @@ class XmlToJsonConverter:
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
         data = data.replace("#", "")
+        data = data.replace("ns0:", "")
         data = json.loads(data)
         applicationNumber = \
             int(data['us-patent-application']['us-bibliographic-data-application'][
@@ -268,91 +270,184 @@ class XmlToJsonConverter:
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
         data = data.replace("#", "")
+        data = data.replace("ns0:", "")
         data = json.loads(data)
-        applicationNumber = \
-            int(data['us-patent-application']['us-bibliographic-data-application'][
+        if 'ClaimsDocument' in data:
+            applicationNumber = \
+                int(data['ClaimsDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
+                        'ApplicationNumber'])
+            date = data['ClaimsDocument']['MailRoomDate']
+            documentType = 'CLM'
+            sections = []
+            if 'ClaimsDocument' in data:
+                try:
+                    for i in range(len(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'])):
+                        if 'ClaimText' in data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]:
+                            if data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id'].split('-')[
+                                0] != 'UNKNOWN':
+                                if type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                            'ClaimText']) == list:
+                                    try:
+                                        text = \
+                                        data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][-1][
+                                            'text']
+                                        text = " ".join(text.split())
+                                        section = {
+                                            "text": text,
+                                            "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
+                                        }
+                                        sections.append(section)
+                                    except:
+                                        section = {
+                                            "text": ' ',
+                                            "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
+                                        }
+                                        sections.append(section)
+                                elif type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                              'ClaimText']) != list:
+                                    try:
+                                        text = data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
+                                            'text']
+                                        text = " ".join(text.split())
+                                        section = {
+                                            "text": text,
+                                            "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
+                                        }
+                                        sections.append(section)
+                                    except:
+                                        section = {
+                                            "text": ' ',
+                                            "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
+                                        }
+                                        sections.append(section)
+                except Exception as e:
+
+                    # this block belongs to insert fail data in database
+                    try:
+                        connection = self.con
+                        cursor = connection.cursor()
+                        conn = """
+                                        insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
+                                    """
+                        cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
+                        connection.commit()
+                        print("Record inserted successfully into the fail table")
+                        cursor.close()
+                    except:
+                        print("Data Can not insert")
+                getjson = {
+                    'applicationNumber': applicationNumber,
+                    'date': date,
+                    'documentType': documentType,
+                    'sections': sections
+                }
+                with open(self.cleanJsonPath + "/" + file, 'w') as f:
+                    json.dump(getjson, f, indent=4)
+
+                # this block belongs to insert success data in database
+                try:
+                    connection = self.con
+                    cursor = connection.cursor()
+                    conn = """
+                                    insert into success (file_name, time_stamp, status) values (%s, %s, %s)
+                                """
+                    cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
+                    connection.commit()
+                    print("Record inserted successfully into the success table")
+                    cursor.close()
+                except:
+                    print("Data Can not insert")
+
+                shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+                            self.CopyXmlPath + "/" + fileName + ".xml")
+                os.remove(self.jsonFilePath + "/" + file)
+                print(colored(f"\n{file} Successfully cleaned", 'green'))
+
+        else:
+            applicationNumber = \
+                int(data['us-patent-application']['us-bibliographic-data-application'][
+                        'application-reference'][
+                        'document-id'][
+                        'doc-number'])
+            date = \
+                data['us-patent-application']['us-bibliographic-data-application'][
                     'application-reference'][
                     'document-id'][
-                    'doc-number'])
-        date = \
-            data['us-patent-application']['us-bibliographic-data-application'][
-                'application-reference'][
-                'document-id'][
-                'date']
-        documentType = 'CLM'
-        sections = []
-        try:
-            for i in range(len(data['us-patent-application']['claims']['claim'])):
-                if data['us-patent-application']['claims']['claim'][i]['id'].split('-')[0] != 'UNKNOWN':
-                    if type(data['us-patent-application']['claims']['claim'][i]['claim-text']) != list:
-                        text = data['us-patent-application']['claims']['claim'][i]['claim-text'][
-                            'text'].strip()
-                        text = " ".join(text.split())
-                        section = {
-                            "text": text,
-                            "id": data['us-patent-application']['claims']['claim'][i]['id']
-                        }
-                        sections.append(section)
-                    elif type(
-                            data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
-                        text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0][
-                            'text']
-                        text = " ".join(text.split())
-                        section = {
-                            "text": text,
-                            "id": data['us-patent-application']['claims']['claim'][i]['id']
-                        }
-                        sections.append(section)
-                    else:
-                        section = {
-                            "text": '',
-                            "id": data['us-patent-application']['claims']['claim'][i]['id']
-                        }
-                        sections.append(section)
-        except Exception as e:
+                    'date']
+            documentType = 'CLM'
+            sections = []
+            try:
+                for i in range(len(data['us-patent-application']['claims']['claim'])):
+                    if data['us-patent-application']['claims']['claim'][i]['id'].split('-')[0] != 'UNKNOWN':
+                        if type(data['us-patent-application']['claims']['claim'][i]['claim-text']) != list:
+                            text = data['us-patent-application']['claims']['claim'][i]['claim-text'][
+                                'text'].strip()
+                            text = " ".join(text.split())
+                            section = {
+                                "text": text,
+                                "id": data['us-patent-application']['claims']['claim'][i]['id']
+                            }
+                            sections.append(section)
+                        elif type(
+                                data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
+                            text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0][
+                                'text']
+                            text = " ".join(text.split())
+                            section = {
+                                "text": text,
+                                "id": data['us-patent-application']['claims']['claim'][i]['id']
+                            }
+                            sections.append(section)
+                        else:
+                            section = {
+                                "text": '',
+                                "id": data['us-patent-application']['claims']['claim'][i]['id']
+                            }
+                            sections.append(section)
+            except Exception as e:
 
-            # this block belongs to insert fail data in database
+                # this block belongs to insert fail data in database
+                try:
+                    connection = self.con
+                    cursor = connection.cursor()
+                    conn = """
+                                    insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
+                                """
+                    cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
+                    connection.commit()
+                    print("Record inserted successfully into the fail table")
+                    cursor.close()
+                except:
+                    print("Data Can not insert")
+
+            getjson = {
+                'applicationNumber': applicationNumber,
+                'date': date,
+                'documentType': documentType,
+                'sections': sections
+            }
+
+            with open(self.cleanJsonPath + "/" + file, 'w') as f:
+                json.dump(getjson, f, indent=4)
+
+            # this block belongs to insert success data in database
             try:
                 connection = self.con
                 cursor = connection.cursor()
                 conn = """
-                                insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
+                                insert into success (file_name, time_stamp, status) values (%s, %s, %s)
                             """
-                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
+                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
                 connection.commit()
-                print("Record inserted successfully into the fail table")
+                print("Record inserted successfully into the success table")
                 cursor.close()
             except:
                 print("Data Can not insert")
 
-        getjson = {
-            'applicationNumber': applicationNumber,
-            'date': date,
-            'documentType': documentType,
-            'sections': sections
-        }
-
-        with open(self.cleanJsonPath + "/" + file, 'w') as f:
-            json.dump(getjson, f, indent=4)
-
-        # this block belongs to insert success data in database
-        try:
-            connection = self.con
-            cursor = connection.cursor()
-            conn = """
-                            insert into success (file_name, time_stamp, status) values (%s, %s, %s)
-                        """
-            cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
-            connection.commit()
-            print("Record inserted successfully into the success table")
-            cursor.close()
-        except:
-            print("Data Can not insert")
-
-        shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
-                    self.CopyXmlPath + "/" + fileName + ".xml")
-        os.remove(self.jsonFilePath + "/" + file)
-        print(colored(f"\n{file} Successfully cleaned", 'green'))
+            shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+                        self.CopyXmlPath + "/" + fileName + ".xml")
+            os.remove(self.jsonFilePath + "/" + file)
+            print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     # this is the end of class where we are calling the function to convert json to clean json format
     def cleanjson(self, file):
