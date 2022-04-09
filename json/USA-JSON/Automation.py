@@ -1,12 +1,9 @@
 import json
 import os
 import shutil
-import time
-from datetime import datetime
 from xml.dom import minidom
 from xml.parsers import expat
 
-import psycopg2
 import xmltodict
 from termcolor import colored
 
@@ -18,7 +15,7 @@ class XmlToJsonConverter:
         self.jsonFilePath = 'c:/jsonfile'  # path of json where json file will be created
         self.cleanJsonPath = 'c:/cleanjson'  # path of json where clean json file will be created
         self.CopyXmlPath = 'c:/copyxml'  # path of xml file where xml file will be stored after cleaning
-        self.con = self.db_con()  # Established connection to database (postgres database)
+        # self.con = self.db_con()  # Established connection to database (postgres database)
 
         path = ['c:/jsonfile', 'c:/cleanjson', 'c:/copyxml']
         for p in path:
@@ -31,15 +28,47 @@ class XmlToJsonConverter:
         # call convert_xml_file_to_json function for processing xml file to json file
         self.convert_xml_file_to_json()
 
-    def db_con(self):
-        try:
-            connection = psycopg2.connect(user="postgres", password="asl123", host="localhost", port="5433",
-                                          database="automation")
-            self.con = connection
-            return self.con
+    # def db_con(self):
+    #     try:
+    #         connection = psycopg2.connect(user="postgres", password="asl123", host="localhost", port="5433",
+    #                                       database="automation")
+    #         self.con = connection
+    #         return self.con
+    #
+    #     except (Exception, psycopg2.Error) as error:
+    #         print("Database Can't Connected Successfully", error)
 
-        except (Exception, psycopg2.Error) as error:
-            print("Database Can't Connected Successfully", error)
+    ### This Content Belong Database fail and success Properties where data will be insert
+
+    # def success_db_message(self, file):
+    #     try:
+    #         connection = self.con
+    #         cursor = connection.cursor()
+    #         conn = """
+    #                   insert into success (file_name, time_stamp, status) values (%s, %s, %s)
+    #             """
+    #         cursor.execute(conn, (file + ".xml", datetime.now().date(), 'success'))
+    #         connection.commit()
+    #         print("Record inserted successfully into the success table")
+    #         cursor.close()
+    #     except:
+    #         print("Data Can not insert")
+
+    # def fail_db_message(self, file):
+    #     # this block belongs to insert fail data in database
+    #     try:
+    #         connection = self.con
+    #         cursor = connection.cursor()
+    #         conn = """
+    #                                             insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
+    #                                         """
+    #         cursor.execute(conn, (
+    #             file + ".xml", datetime.now().date(), 'File Not Converted XML to JSON'))
+    #         connection.commit()
+    #         print("Record inserted successfully into the fail table")
+    #         cursor.close()
+    #     except:
+    #         print("Data Can not insert")
 
     def convert_xml_file_to_json(self):
         # for handle the exception using try and case
@@ -59,26 +88,11 @@ class XmlToJsonConverter:
                                         json.dump(xml, f, indent=4)
                                 json_file = baseFileName + '.json'
                                 self.clean_json(json_file)
-                            except:  # This is skipped if file exists
-                                # this block belongs to insert fail data in database
-                                try:
-                                    connection = self.con
-                                    cursor = connection.cursor()
-                                    conn = """
-                                        insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-                                    """
-                                    cursor.execute(conn, (
-                                        file + ".xml", datetime.now().date(), 'File Not Converted XML to JSON'))
-                                    connection.commit()
-                                    print("Record inserted successfully into the fail table")
-                                    cursor.close()
-                                except:
-                                    print("Data Can not insert")
-
+                            except:
+                                # self.fail_db_message(file)
                                 print(f"{file} File Not Converted XML to JSON")
                         else:
                             print(f"{file} File already exists")
-                            # os.remove(self.xmlFilePath + '/' + file)
             else:
                 print("No XML file found")
 
@@ -133,20 +147,8 @@ class XmlToJsonConverter:
                             }
                             sections.append(section)
             except Exception as e:
-
-                # this block belongs to insert fail data in database
-                try:
-                    connection = self.con
-                    cursor = connection.cursor()
-                    conn = """
-                                                insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-                                            """
-                    cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
-                    connection.commit()
-                    print("Record inserted successfully into the fail table")
-                    cursor.close()
-                except:
-                    print("Data Can not insert")
+                pass
+                # self.fail_db_message(file)
 
         getjson = {
             'applicationNumber': applicationNumber,
@@ -158,23 +160,11 @@ class XmlToJsonConverter:
         with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
-        # this block belongs to insert success data in database
-        try:
-            connection = self.con
-            cursor = connection.cursor()
-            conn = """
-                                                insert into success (file_name, time_stamp, status) values (%s, %s, %s)
-                                            """
-            cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
-            connection.commit()
-            print("Record inserted successfully into the success table")
-            cursor.close()
-        except:
-            print("Data Can not insert")
+        # self.success_db_message(fileName)
 
-        shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+        shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
                     self.CopyXmlPath + "/" + fileName + ".xml")
-        os.remove(self.jsonFilePath + "/" + file)
+        # os.remove(self.jsonFilePath + "/" + file)
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
@@ -204,21 +194,8 @@ class XmlToJsonConverter:
                     sections.append(section)
 
         except Exception as e:
-
-            # this block belongs to insert fail data in database
-            try:
-                connection = self.con
-                cursor = connection.cursor()
-                conn = """
-                                            insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-                                        """
-                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
-                connection.commit()
-                print("Record inserted successfully into the fail table")
-                cursor.close()
-            except:
-                print("Data Can not insert")
-
+            pass
+            # self.fail_db_message(fileName)
         getjson = {
             'applicationNumber': applicationNumber,
             'date': date,
@@ -229,23 +206,11 @@ class XmlToJsonConverter:
         with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
-        # this block belongs to insert success data in database
-        try:
-            connection = self.con
-            cursor = connection.cursor()
-            conn = """
-                                        insert into success (file_name, time_stamp, status) values (%s, %s, %s)
-                                    """
-            cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
-            connection.commit()
-            print("Record inserted successfully into the success table")
-            cursor.close()
-        except:
-            print("Data Can not insert")
+        # self.success_db_message(fileName)
 
-        shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+        shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
                     self.CopyXmlPath + "/" + fileName + ".xml")
-        os.remove(self.jsonFilePath + "/" + file)
+        # os.remove(self.jsonFilePath + "/" + file)
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
@@ -309,20 +274,8 @@ class XmlToJsonConverter:
                 except:
                     sections.append(" ")
         except Exception as e:
-
-            # this block belongs to insert fail data in database
-            try:
-                connection = self.con
-                cursor = connection.cursor()
-                conn = """
-                                insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-                            """
-                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
-                connection.commit()
-                print("Record inserted successfully into the fail table")
-                cursor.close()
-            except:
-                print("Data Can not insert")
+            pass
+            # self.fail_db_message(fileName)
 
         getjson = {
             'applicationNumber': applicationNumber,
@@ -334,23 +287,11 @@ class XmlToJsonConverter:
         with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
-        # this block belongs to insert success data in database
-        try:
-            connection = self.con
-            cursor = connection.cursor()
-            conn = """
-                            insert into success (file_name, time_stamp, status) values (%s, %s, %s)
-                        """
-            cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
-            connection.commit()
-            print("Record inserted successfully into the success table")
-            cursor.close()
-        except:
-            print("Data Can not insert")
+        # self.success_db_message(fileName)
 
-        shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+        shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
                     self.CopyXmlPath + "/" + fileName + ".xml")
-        os.remove(self.jsonFilePath + "/" + file)
+        # os.remove(self.jsonFilePath + "/" + file)
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     def new_clm_xml_format_clean_to_json(self, data, fileName, file):
@@ -424,21 +365,8 @@ class XmlToJsonConverter:
                             }
                             sections.append(section)
         except Exception as e:
-
-            # this block belongs to insert fail data in database
-            try:
-                connection = self.con
-                cursor = connection.cursor()
-                conn = """
-                                            insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-                                        """
-                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
-                connection.commit()
-                print("Record inserted successfully into the fail table")
-                cursor.close()
-            except:
-                print("Data Can not insert")
-
+            pass
+            # self.fail_db_message(fileName)
         getjson = {
             'applicationNumber': applicationNumber,
             'date': date,
@@ -448,24 +376,10 @@ class XmlToJsonConverter:
 
         with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
-
-        # this block belongs to insert success data in database
-        try:
-            connection = self.con
-            cursor = connection.cursor()
-            conn = """
-                                        insert into success (file_name, time_stamp, status) values (%s, %s, %s)
-                                    """
-            cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
-            connection.commit()
-            print("Record inserted successfully into the success table")
-            cursor.close()
-        except:
-            print("Data Can not insert")
-
-        shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+        # self.success_db_message(fileName)
+        shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
                     self.CopyXmlPath + "/" + fileName + ".xml")
-        os.remove(self.jsonFilePath + "/" + file)
+        # os.remove(self.jsonFilePath + "/" + file)
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     def old_clm_xml_format_clean_to_json(self, data, fileName, file):
@@ -518,20 +432,8 @@ class XmlToJsonConverter:
                                     }
                                     sections.append(section)
             except Exception as e:
-
-                # this block belongs to insert fail data in database
-                try:
-                    connection = self.con
-                    cursor = connection.cursor()
-                    conn = """
-                                                insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-                                            """
-                    cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'Failed to process'))
-                    connection.commit()
-                    print("Record inserted successfully into the fail table")
-                    cursor.close()
-                except:
-                    print("Data Can not insert")
+                pass
+                # self.fail_db_message(fileName)
             getjson = {
                 'applicationNumber': applicationNumber,
                 'date': date,
@@ -540,24 +442,10 @@ class XmlToJsonConverter:
             }
             with open(self.cleanJsonPath + "/" + file, 'w') as f:
                 json.dump(getjson, f, indent=4)
-
-            # this block belongs to insert success data in database
-            try:
-                connection = self.con
-                cursor = connection.cursor()
-                conn = """
-                                            insert into success (file_name, time_stamp, status) values (%s, %s, %s)
-                                        """
-                cursor.execute(conn, (fileName + ".xml", datetime.now().date(), 'success'))
-                connection.commit()
-                print("Record inserted successfully into the success table")
-                cursor.close()
-            except:
-                print("Data Can not insert")
-
-            shutil.move(self.xmlFilePath + "/" + fileName + ".xml",
+            # self.success_db_message(fileName)
+            shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
                         self.CopyXmlPath + "/" + fileName + ".xml")
-            os.remove(self.jsonFilePath + "/" + file)
+            # os.remove(self.jsonFilePath + "/" + file)
             print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     def clean_clm_file(self, file):
@@ -588,25 +476,13 @@ class XmlToJsonConverter:
                 self.clean_spec_file(file)
             # if file type is ABST then it will be converting it to ABST.json
             elif sfile == 'ABST':
-                self.clean_abst_file(file)
+                self.clean_new_old_abst_file_to_json(file)
             # if file type is CLM then it will be converting it to CLM.json
             elif sfile == 'CLM':
                 self.clean_clm_file(file)
             else:
-                # this block belongs to insert fail data in database
-                try:
-                    connection = self.con
-                    cursor = connection.cursor()
-                    conn = """
-                                                insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-                                            """
-                    cursor.execute(conn,
-                                   (fileName + ".xml", datetime.now().date(), 'File type should be SPEC, ABST or CLM'))
-                    connection.commit()
-                    print("Record inserted successfully into the fail table")
-                    cursor.close()
-                except:
-                    print("Data Can not insert")
+                print("File Name Suffix should be CLM, ABST & SPEC")
+                # self.fail_db_message(fileName)
 
 
 def main():
