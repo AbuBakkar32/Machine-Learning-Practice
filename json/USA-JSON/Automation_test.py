@@ -1,6 +1,6 @@
 import json
 import os
-import shutil
+from pathlib import Path
 from xml.dom import minidom
 from xml.parsers import expat
 
@@ -17,10 +17,18 @@ class XmlToJsonConverter:
 
         self.jsonFilePath = 'c:/jsonfile'  # path of json where json file will be created
         self.cleanJsonPath = 'c:/cleanjson'  # path of json where clean json file will be created
-        self.CopyXmlPath = 'c:/copyxml'  # path of xml file where xml file will be stored after cleaning
         # self.con = self.db_con()  # Established connection to database (postgres database)
 
-        path = ['c:/jsonfile', 'c:/cleanjson', 'c:/copyxml']
+        xmlFile = Path(self.xmlFilePath)
+
+        # check txt file exist or not. if not it will create new txt file automatically
+        if 'xml_file.txt' in os.listdir(xmlFile):
+            pass
+        else:
+            with open(xmlFile.joinpath('xml_file.txt'), 'w') as f:
+                f.write("")
+
+        path = ['c:/jsonfile', 'c:/cleanjson']
         for p in path:
             if not os.path.exists(p):
                 os.mkdir(p)
@@ -79,25 +87,27 @@ class XmlToJsonConverter:
             if len(files) > 0:
                 for file in files:
                     if file.endswith('.xml'):
-                        if not os.path.exists(self.CopyXmlPath + '/' + file):  # check this file already clean or not
-                            try:
-                                with open(self.xmlFilePath + '/' + file, 'r') as f:  # read XML file one by one
-                                    xml = f.read()
-                                    xml = minidom.parseString(xml)
-                                    xml = xml.toprettyxml()
-                                    xml = xmltodict.parse(xml, attr_prefix='', encoding='utf-8', expat=expat)
-                                    baseFileName = file.split('.xml')[0]
-                                    with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
-                                        json.dump(xml, f, indent=4)
-                                json_file = baseFileName + '.json'
-                                self.clean_json(json_file)
-                            except:
-                                # self.fail_db_message(file)
-                                print(f"{file} File Not Converted XML to JSON")
-                        else:
-                            print(f"{file} File already exists")
+                        with open(self.xmlFilePath + '/' + "xml_file.txt", 'r') as f:
+                            if file not in f.read():
+                                try:
+                                    with open(self.xmlFilePath + '/' + file, 'r') as f:  # read XML file one by one
+                                        xml = f.read()
+                                        xml = minidom.parseString(xml)
+                                        xml = xml.toprettyxml()
+                                        xml = xmltodict.parse(xml, attr_prefix='', encoding='utf-8', expat=expat)
+                                        baseFileName = file.split('.xml')[0]
+                                        with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
+                                            json.dump(xml, f, indent=4)
+                                    json_file = baseFileName + '.json'
+                                    self.clean_json(json_file)
+                                except:
+                                    # self.fail_db_message(file)
+                                    print(f"{file} File Not Converted XML to JSON")
+
+                            else:
+                                print(f"{file} File already exists")
             else:
-                print("No XML file found")
+                print(f"No XML file found in this {self.xmlFilePath} folder")
 
     def new_spec_xml_format_clean_to_json(self, data, fileName, file):
         applicationNumber = \
@@ -165,9 +175,9 @@ class XmlToJsonConverter:
 
         # self.success_db_message(fileName)
 
-        shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
-                    self.CopyXmlPath + "/" + fileName + ".xml")
-        # os.remove(self.jsonFilePath + "/" + file)
+        with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+            f.seek(0)
+            f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
@@ -211,9 +221,9 @@ class XmlToJsonConverter:
 
         # self.success_db_message(fileName)
 
-        shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
-                    self.CopyXmlPath + "/" + fileName + ".xml")
-        # os.remove(self.jsonFilePath + "/" + file)
+        with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+            f.seek(0)
+            f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
@@ -292,9 +302,10 @@ class XmlToJsonConverter:
 
         # self.success_db_message(fileName)
 
-        shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
-                    self.CopyXmlPath + "/" + fileName + ".xml")
-        # os.remove(self.jsonFilePath + "/" + file)
+        with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+            f.seek(0)
+            f.write("\n" + fileName + ".xml")
+
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     def new_clm_xml_format_clean_to_json(self, data, fileName, file):
@@ -379,10 +390,13 @@ class XmlToJsonConverter:
 
         with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
+
         # self.success_db_message(fileName)
-        shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
-                    self.CopyXmlPath + "/" + fileName + ".xml")
-        # os.remove(self.jsonFilePath + "/" + file)
+
+        with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+            f.seek(0)
+            f.write("\n" + fileName + ".xml")
+
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     def old_clm_xml_format_clean_to_json(self, data, fileName, file):
@@ -445,10 +459,12 @@ class XmlToJsonConverter:
             }
             with open(self.cleanJsonPath + "/" + file, 'w') as f:
                 json.dump(getjson, f, indent=4)
+
             # self.success_db_message(fileName)
-            shutil.copy(self.xmlFilePath + "/" + fileName + ".xml",
-                        self.CopyXmlPath + "/" + fileName + ".xml")
-            # os.remove(self.jsonFilePath + "/" + file)
+            with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+                f.seek(0)
+                f.write("\n" + fileName + ".xml")
+
             print(colored(f"\n{file} Successfully cleaned", 'green'))
 
     def clean_clm_file(self, file):

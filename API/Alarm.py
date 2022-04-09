@@ -21,5 +21,4 @@ while True:
                 print(f"Wake Up! Its {alarm_time.upper()}")
                 playsound('audio.mp3')
         except:
-            print("Error in playing audio")
-            break
+            pass
