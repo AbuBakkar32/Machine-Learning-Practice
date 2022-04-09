@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from pathlib import Path
 from xml.dom import minidom
 from xml.parsers import expat
@@ -83,6 +84,7 @@ class XmlToJsonConverter:
 
     def convert_xml_file_to_json(self):
         # for handle the exception using try and case
+        t1 = time.time()
         for root, dirs, files in os.walk(self.xmlFilePath):
             if len(files) > 0:
                 for file in files:
@@ -108,6 +110,8 @@ class XmlToJsonConverter:
                                 print(f"{file} File already exists")
             else:
                 print(f"No XML file found in this {self.xmlFilePath} folder")
+        t2 = time.time()
+        print(f"Total time taken to convert xml to json file is {t2 - t1}")
 
     def new_spec_xml_format_clean_to_json(self, data, fileName, file):
         applicationNumber = \
@@ -176,7 +180,6 @@ class XmlToJsonConverter:
         # self.success_db_message(fileName)
 
         with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
-            f.seek(0)
             f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -222,7 +225,6 @@ class XmlToJsonConverter:
         # self.success_db_message(fileName)
 
         with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
-            f.seek(0)
             f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -303,7 +305,6 @@ class XmlToJsonConverter:
         # self.success_db_message(fileName)
 
         with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
-            f.seek(0)
             f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -394,7 +395,6 @@ class XmlToJsonConverter:
         # self.success_db_message(fileName)
 
         with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
-            f.seek(0)
             f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -462,7 +462,6 @@ class XmlToJsonConverter:
 
             # self.success_db_message(fileName)
             with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
-                f.seek(0)
                 f.write("\n" + fileName + ".xml")
 
             print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -500,7 +499,7 @@ class XmlToJsonConverter:
             elif sfile == 'CLM':
                 self.clean_clm_file(file)
             else:
-                print("File Name Suffix should be CLM, ABST & SPEC")
+                print(f"This {fileName}.xml file Suffix should be CLM, ABST & SPEC format")
                 # self.fail_db_message(fileName)
 
 
