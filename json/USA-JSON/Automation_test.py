@@ -76,8 +76,6 @@ class XmlToJsonConverter:
                                         xml = xml.toprettyxml()
                                         xml = xmltodict.parse(xml, attr_prefix='', encoding='utf-8', expat=expat)
                                         baseFileName = file.split('.xml')[0]
-                                        # with open(self.json_folder + '/' + baseFileName + '.json', 'w') as f:
-                                        #     json.dump(xml, f, indent=4)
                                         data = json.dumps(xml, indent=4)
                                         json_file = baseFileName + '.json'
                                         self.clean_json(json_file, data)
