@@ -1,4 +1,3 @@
-import os
 # check if file not exists then create a new one
 # Github Access Token: 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
 
@@ -36,12 +35,20 @@ import os
 #     f.write("\n12001267-FAAZ01Z3PPOPPY5-ABST.xml")
 
 # for create a text file
-from pathlib import Path
-
-xmlFilePath = Path("c:/xmlfile/")
+# from pathlib import Path
+#
+# xmlFilePath = Path("c:/xmlfile/")
 # with open(xmlFilePath.joinpath('xml_file.txt'), 'w') as f:
 #     f.write("")
 
+# if 'xml_file.txt' in os.listdir(xmlFilePath):
+#     print("file exists")
+import datetime
 
-if 'xml_file.txt' in os.listdir(xmlFilePath):
-    print("file exists")
+date_time = datetime.datetime.now()
+
+date_today = date_time.strftime("%Y-%m-%d")
+xml_file = f"c:/search-ai-lab-bdr-landing-zone/{date_today}"
+date_pre = datetime.datetime.today() - datetime.timedelta(days=1)
+date_pre = date_pre.strftime("%Y-%m-%d")
+print(date_pre)

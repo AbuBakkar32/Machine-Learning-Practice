@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import time
@@ -9,107 +10,84 @@ import xmltodict
 from termcolor import colored
 
 
-# def initialize(xml_file="c:/xmlfile"):
-#     return XmlToJsonConverter(xmlFilePath=xml_file)
+# source file Name should like this below
+# gs://search-ai-lab-bdr-landing-zone/2022-03-15/12000008-FA48RMU5PPOPPY5-SPEC.xml
 
 class XmlToJsonConverter:
     def __init__(self, xmlFilePath: any = None):
         self.xmlFilePath = xmlFilePath  # path of xml file
+        self.jsonFilePath = 'c:/jsonfile/'  # path of json where json file will be created
+        self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
 
-        self.jsonFilePath = 'c:/jsonfile'  # path of json where json file will be created
-        self.cleanJsonPath = 'c:/cleanjson'  # path of json where clean json file will be created
-        # self.con = self.db_con()  # Established connection to database (postgres database)
+        # current date format
+        self.dt = datetime.datetime.now()
+        self.today = self.dt.strftime("%Y-%m-%d")
+        self.ctf = self.xmlFilePath + self.today
+        self.file_path = Path(self.ctf)
 
-        xmlFile = Path(self.xmlFilePath)
+        # previous date format
+        self.pre_date = datetime.datetime.today() - datetime.timedelta(days=1)
+        self.pre_date = self.pre_date.strftime("%Y-%m-%d")
+        self.ptf = self.xmlFilePath + self.pre_date
+        self.clean_folder = self.cleanJsonPath + self.pre_date
+        self.json_folder = self.jsonFilePath + self.pre_date
 
-        # check txt file exist or not. if not it will create new txt file automatically
-        if 'xml_file.txt' in os.listdir(xmlFile):
-            pass
+        if not os.path.exists(self.cleanJsonPath):
+            os.mkdir(self.cleanJsonPath)
+            os.mkdir(self.cleanJsonPath + self.today)
+            print(colored("Directory " + self.cleanJsonPath + " Created", 'green'))
         else:
-            with open(xmlFile.joinpath('xml_file.txt'), 'w') as f:
-                f.write("")
+            pass
 
-        path = ['c:/jsonfile', 'c:/cleanjson']
-        for p in path:
-            if not os.path.exists(p):
-                os.mkdir(p)
-                print(colored("Directory " + p + " Created", 'green'))
-            else:
-                pass
-
+        self._create_folder()
         # call convert_xml_file_to_json function for processing xml file to json file
         self.convert_xml_file_to_json()
 
-    # def db_con(self):
-    #     try:
-    #         connection = psycopg2.connect(user="postgres", password="asl123", host="localhost", port="5433",
-    #                                       database="automation")
-    #         self.con = connection
-    #         return self.con
-    #
-    #     except (Exception, psycopg2.Error) as error:
-    #         print("Database Can't Connected Successfully", error)
-
-    ### This Content Belong Database fail and success Properties where data will be insert
-
-    # def success_db_message(self, file):
-    #     try:
-    #         connection = self.con
-    #         cursor = connection.cursor()
-    #         conn = """
-    #                   insert into success (file_name, time_stamp, status) values (%s, %s, %s)
-    #             """
-    #         cursor.execute(conn, (file + ".xml", datetime.now().date(), 'success'))
-    #         connection.commit()
-    #         print("Record inserted successfully into the success table")
-    #         cursor.close()
-    #     except:
-    #         print("Data Can not insert")
-
-    # def fail_db_message(self, file):
-    #     # this block belongs to insert fail data in database
-    #     try:
-    #         connection = self.con
-    #         cursor = connection.cursor()
-    #         conn = """
-    #                                             insert into fail (file_name, time_stamp, status) values (%s, %s, %s)
-    #                                         """
-    #         cursor.execute(conn, (
-    #             file + ".xml", datetime.now().date(), 'File Not Converted XML to JSON'))
-    #         connection.commit()
-    #         print("Record inserted successfully into the fail table")
-    #         cursor.close()
-    #     except:
-    #         print("Data Can not insert")
+    def _create_folder(self):
+        if not os.path.exists(self.ctf):
+            os.mkdir(self.ctf)
+            print(colored("Directory " + self.ctf + " Created", 'green'))
+            if 'xml_file.txt' in os.listdir(self.file_path):
+                pass
+            else:
+                with open(self.file_path.joinpath('xml_file.txt'), 'w') as f:
+                    f.write("")
+        else:
+            if 'xml_file.txt' in os.listdir(self.file_path):
+                pass
+            else:
+                with open(self.file_path.joinpath('xml_file.txt'), 'w') as f:
+                    f.write("")
+            print(colored("Directory " + self.ctf + " Already Exists", 'red'))
 
     def convert_xml_file_to_json(self):
         # for handle the exception using try and case
         t1 = time.time()
-        for root, dirs, files in os.walk(self.xmlFilePath):
-            if len(files) > 0:
+        for root, dirs, files in os.walk(self.ptf):
+            if len(files) > 1:
                 for file in files:
                     if file.endswith('.xml'):
-                        with open(self.xmlFilePath + '/' + "xml_file.txt", 'r') as f:
+                        with open(self.ptf + '/' + "xml_file.txt", 'r') as f:
                             if file not in f.read():
                                 try:
-                                    with open(self.xmlFilePath + '/' + file, 'r') as f:  # read XML file one by one
+                                    with open(self.ptf + '/' + file, 'r') as f:  # read XML file one by one
                                         xml = f.read()
                                         xml = minidom.parseString(xml)
                                         xml = xml.toprettyxml()
                                         xml = xmltodict.parse(xml, attr_prefix='', encoding='utf-8', expat=expat)
                                         baseFileName = file.split('.xml')[0]
-                                        with open(self.jsonFilePath + '/' + baseFileName + '.json', 'w') as f:
-                                            json.dump(xml, f, indent=4)
-                                    json_file = baseFileName + '.json'
-                                    self.clean_json(json_file)
+                                        # with open(self.json_folder + '/' + baseFileName + '.json', 'w') as f:
+                                        #     json.dump(xml, f, indent=4)
+                                        data = json.dumps(xml, indent=4)
+                                        json_file = baseFileName + '.json'
+                                        self.clean_json(json_file, data)
                                 except:
                                     # self.fail_db_message(file)
                                     print(f"{file} File Not Converted XML to JSON")
-
                             else:
                                 print(f"{file} File already exists")
             else:
-                print(f"No XML file found in this {self.xmlFilePath} folder")
+                print(f"No XML file found in this {self.ptf} folder")
         t2 = time.time()
         print(f"Total time taken to convert xml to json file is {t2 - t1}")
 
@@ -174,12 +152,12 @@ class XmlToJsonConverter:
             'sections': sections
         }
 
-        with open(self.cleanJsonPath + "/" + file, 'w') as f:
+        with open(self.clean_folder + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
         # self.success_db_message(fileName)
 
-        with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+        with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -219,21 +197,18 @@ class XmlToJsonConverter:
             'sections': sections
         }
 
-        with open(self.cleanJsonPath + "/" + file, 'w') as f:
+        with open(self.clean_folder + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
         # self.success_db_message(fileName)
 
-        with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+        with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-    def clean_spec_file(self, file):
+    def clean_spec_file(self, file, data):
         fileName = file.split('.json')[0]
-        with open(self.jsonFilePath + "/" + file, 'r') as f:
-            data = json.load(f)
-        data = json.dumps(data, indent=4)
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
         data = data.replace("#", "")
@@ -250,11 +225,8 @@ class XmlToJsonConverter:
             self.old_spec_xml_format_clean_to_json(data, fileName,
                                                    file)
 
-    def clean_new_old_abst_file_to_json(self, file):
+    def clean_new_old_abst_file_to_json(self, file, data):
         fileName = file.split('.json')[0]
-        with open(self.jsonFilePath + "/" + file, 'r') as f:
-            data = json.load(f)
-        data = json.dumps(data, indent=4)
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
         data = data.replace("#", "")
@@ -299,12 +271,12 @@ class XmlToJsonConverter:
             'sections': sections
         }
 
-        with open(self.cleanJsonPath + "/" + file, 'w') as f:
+        with open(self.clean_folder + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
         # self.success_db_message(fileName)
 
-        with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+        with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -389,12 +361,12 @@ class XmlToJsonConverter:
             'sections': sections
         }
 
-        with open(self.cleanJsonPath + "/" + file, 'w') as f:
+        with open(self.clean_folder + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
         # self.success_db_message(fileName)
 
-        with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+        with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write("\n" + fileName + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
@@ -457,20 +429,17 @@ class XmlToJsonConverter:
                 'documentType': documentType,
                 'sections': sections
             }
-            with open(self.cleanJsonPath + "/" + file, 'w') as f:
+            with open(self.clean_folder + "/" + file, 'w') as f:
                 json.dump(getjson, f, indent=4)
 
             # self.success_db_message(fileName)
-            with open(self.xmlFilePath + '/' + "xml_file.txt", 'a') as f:
+            with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
                 f.write("\n" + fileName + ".xml")
 
             print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-    def clean_clm_file(self, file):
+    def clean_clm_file(self, file, data):
         fileName = file.split('.json')[0]
-        with open(self.jsonFilePath + "/" + file, 'r') as f:
-            data = json.load(f)
-        data = json.dumps(data, indent=4)
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
         data = data.replace("#", "")
@@ -483,7 +452,7 @@ class XmlToJsonConverter:
             # this method will be cleaned new CLM type of xml file into json file
             self.new_clm_xml_format_clean_to_json(data, fileName, file)
 
-    def clean_json(self, file):
+    def clean_json(self, file, data):
         fileName = file.split('.json')[0]
         if file.endswith('.json'):
             sfile = file.split('-')[-1]
@@ -491,13 +460,13 @@ class XmlToJsonConverter:
 
             # if file type is SPEC then it will be converting it to SPEC.json
             if sfile == 'SPEC':
-                self.clean_spec_file(file)
+                self.clean_spec_file(file, data)
             # if file type is ABST then it will be converting it to ABST.json
             elif sfile == 'ABST':
-                self.clean_new_old_abst_file_to_json(file)
+                self.clean_new_old_abst_file_to_json(file, data)
             # if file type is CLM then it will be converting it to CLM.json
             elif sfile == 'CLM':
-                self.clean_clm_file(file)
+                self.clean_clm_file(file, data)
             else:
                 print(f"This {fileName}.xml file Suffix should be CLM, ABST & SPEC format")
                 # self.fail_db_message(fileName)
@@ -505,7 +474,7 @@ class XmlToJsonConverter:
 
 def main():
     # this is the main function where we are calling the class to convert json to clean json format
-    xml_file = "c:/xmlfile"
+    xml_file = "c:/search-ai-lab-bdr-landing-zone/"
     XmlToJsonConverter(xml_file)
 
 
