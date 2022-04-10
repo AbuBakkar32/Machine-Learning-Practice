@@ -86,6 +86,8 @@ class XmlToJsonConverter:
                                     print(f"{file} File Not Converted XML to JSON")
                             else:
                                 print(f"{file} File already exists")
+                    else:
+                        print(f"{file} File Not ends with .xml")
             else:
                 print(f"No XML file found in this {self.ptf} folder")
         t2 = time.time()
