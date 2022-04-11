@@ -34,8 +34,9 @@ for root, dirs, files in os.walk(jsonFilePath):
                                             'ClaimText']) == list:
                                     try:
                                         text = \
-                                        data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][-1][
-                                            'text']
+                                            data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
+                                                -1][
+                                                'text']
                                         text = " ".join(text.split())
                                         section = {
                                             "text": text,

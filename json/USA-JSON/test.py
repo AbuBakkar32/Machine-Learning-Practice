@@ -35,8 +35,6 @@
 #     f.write("\n12001267-FAAZ01Z3PPOPPY5-ABST.xml")
 
 # for create a text file
-# from pathlib import Path
-#
 # xmlFilePath = Path("c:/xmlfile/")
 # with open(xmlFilePath.joinpath('xml_file.txt'), 'w') as f:
 #     f.write("")

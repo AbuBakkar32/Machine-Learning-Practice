@@ -156,9 +156,9 @@ class XmlToJsonConverter:
             json.dump(getjson, f, indent=4)
 
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-            f.write("\n" + file_name + ".xml")
+            f.write(file_name + ".xml\n")
 
-        print(colored(f"\n{file} Successfully cleaned", 'green'))
+        print(colored(f"{file} Successfully cleaned", 'green'))
 
     def old_spec_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
@@ -198,9 +198,9 @@ class XmlToJsonConverter:
             json.dump(getjson, f, indent=4)
 
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-            f.write("\n" + file_name + ".xml")
+            f.write(file_name + ".xml\n")
 
-        print(colored(f"\n{file} Successfully cleaned", 'green'))
+        print(colored(f"{file} Successfully cleaned", 'green'))
 
     def clean_spec_file(self, file, data, file_name):
         if 'us-patent-application' in data:
@@ -212,7 +212,7 @@ class XmlToJsonConverter:
             self.old_spec_xml_format_clean_to_json(data, file_name,
                                                    file)
         else:
-            print(colored(f"\n{file} is not a valid file", 'red'))
+            print(colored(f"{file} is not a valid file", 'red'))
 
     def clean_new_old_abst_file_to_json(self, file, data, file_name):
         applicationNumber = \
@@ -257,9 +257,16 @@ class XmlToJsonConverter:
             json.dump(getjson, f, indent=4)
 
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-            f.write("\n" + file_name + ".xml")
+            f.write(file_name + ".xml\n")
 
-        print(colored(f"\n{file} Successfully cleaned", 'green'))
+        print(colored(f"{file} Successfully cleaned", 'green'))
+
+    def clean_abst_file(self, file, data, file_name):
+        if 'us-patent-application' in data:
+            # this method will be cleaned new ABST type of xml file into json file
+            self.clean_new_old_abst_file_to_json(file, data, file_name)
+        else:
+            print(colored(f"{file} is not a valid file", 'red'))
 
     def new_clm_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
@@ -344,9 +351,9 @@ class XmlToJsonConverter:
             json.dump(getjson, f, indent=4)
 
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-            f.write("\n" + file_name + ".xml")
+            f.write(file_name + ".xml\n")
 
-        print(colored(f"\n{file} Successfully cleaned", 'green'))
+        print(colored(f"{file} Successfully cleaned", 'green'))
 
     def old_clm_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
@@ -405,9 +412,9 @@ class XmlToJsonConverter:
                 json.dump(getjson, f, indent=4)
 
             with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-                f.write("\n" + file_name + ".xml")
+                f.write(file_name + ".xml\n")
 
-            print(colored(f"\n{file} Successfully cleaned", 'green'))
+            print(colored(f"{file} Successfully cleaned", 'green'))
 
     def clean_clm_file(self, file, data, file_name):
         if 'ClaimsDocument' in data:
@@ -417,7 +424,7 @@ class XmlToJsonConverter:
             # this method will be cleaned new CLM type of xml file into json file
             self.new_clm_xml_format_clean_to_json(data, file_name, file)
         else:
-            print(colored(f"\n{file} is not a valid type", 'red'))
+            print(colored(f"{file} is not a valid type", 'red'))
 
     def clean_json(self, file, data):
         file_name = file.split('.json')[0]
@@ -437,7 +444,7 @@ class XmlToJsonConverter:
                 self.clean_spec_file(file, data, file_name)
             # if file type is ABST then it will be converting it to ABST.json
             elif sfile == 'ABST':
-                self.clean_new_old_abst_file_to_json(file, data, file_name)
+                self.clean_abst_file(file, data, file_name)
             # if file type is CLM then it will be converting it to CLM.json
             elif sfile == 'CLM':
                 self.clean_clm_file(file, data, file_name)
