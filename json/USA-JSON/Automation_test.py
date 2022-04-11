@@ -211,6 +211,8 @@ class XmlToJsonConverter:
             # this method will be cleaned old SPEC type of xml file into json file
             self.old_spec_xml_format_clean_to_json(data, file_name,
                                                    file)
+        else:
+            print(colored(f"\n{file} is not a valid file", 'red'))
 
     def clean_new_old_abst_file_to_json(self, file, data, file_name):
         applicationNumber = \
@@ -411,9 +413,11 @@ class XmlToJsonConverter:
         if 'ClaimsDocument' in data:
             # this method will be cleaned old CLM type of xml file into json file
             self.old_clm_xml_format_clean_to_json(data, file_name, file)
-        else:
+        elif 'us-patent-application' in data:
             # this method will be cleaned new CLM type of xml file into json file
             self.new_clm_xml_format_clean_to_json(data, file_name, file)
+        else:
+            print(colored(f"\n{file} is not a valid type", 'red'))
 
     def clean_json(self, file, data):
         file_name = file.split('.json')[0]
