@@ -16,7 +16,6 @@ from termcolor import colored
 class XmlToJsonConverter:
     def __init__(self, xmlFilePath: any = None):
         self.xmlFilePath = xmlFilePath  # path of xml file
-        self.jsonFilePath = 'c:/jsonfile/'  # path of json where json file will be created
         self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
 
         # current date format
@@ -30,7 +29,6 @@ class XmlToJsonConverter:
         self.pre_date = self.pre_date.strftime("%Y-%m-%d")
         self.ptf = self.xmlFilePath + self.pre_date
         self.clean_folder = self.cleanJsonPath + self.pre_date
-        self.json_folder = self.jsonFilePath + self.pre_date
 
         if not os.path.exists(self.cleanJsonPath):
             os.mkdir(self.cleanJsonPath)
