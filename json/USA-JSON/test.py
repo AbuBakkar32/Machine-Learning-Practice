@@ -43,12 +43,15 @@
 
 # if 'xml_file.txt' in os.listdir(xmlFilePath):
 #     print("file exists")
-import datetime
 
-date_time = datetime.datetime.now()
+##### Date time format #####
 
-date_today = date_time.strftime("%Y-%m-%d")
-xml_file = f"c:/search-ai-lab-bdr-landing-zone/{date_today}"
-date_pre = datetime.datetime.today() - datetime.timedelta(days=1)
-date_pre = date_pre.strftime("%Y-%m-%d")
-print(date_pre)
+# import datetime
+#
+# date_time = datetime.datetime.now()
+#
+# date_today = date_time.strftime("%Y-%m-%d")
+# xml_file = f"c:/search-ai-lab-bdr-landing-zone/{date_today}"
+# date_pre = datetime.datetime.today() - datetime.timedelta(days=1)
+# date_pre = date_pre.strftime("%Y-%m-%d")
+# print(date_pre)

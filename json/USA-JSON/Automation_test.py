@@ -79,11 +79,12 @@ class XmlToJsonConverter:
                                         data = json.dumps(xml, indent=4)
                                         json_file = baseFileName + '.json'
                                         self.clean_json(json_file, data)
-                                except:
-                                    # self.fail_db_message(file)
+                                except Exception as e:
                                     print(f"{file} File Not Converted XML to JSON")
                             else:
                                 print(f"{file} File already exists")
+                    elif file.endswith('.txt'):
+                        pass
                     else:
                         print(f"{file} File Not ends with .xml")
             else:
@@ -91,7 +92,7 @@ class XmlToJsonConverter:
         t2 = time.time()
         print(f"Total time taken to convert xml to json file is {t2 - t1}")
 
-    def new_spec_xml_format_clean_to_json(self, data, fileName, file):
+    def new_spec_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
             int(data['us-patent-application']['us-bibliographic-data-application'][
                     'application-reference'][
@@ -143,7 +144,6 @@ class XmlToJsonConverter:
                             sections.append(section)
             except Exception as e:
                 pass
-                # self.fail_db_message(file)
 
         getjson = {
             'applicationNumber': applicationNumber,
@@ -155,14 +155,12 @@ class XmlToJsonConverter:
         with open(self.clean_folder + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
-        # self.success_db_message(fileName)
-
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-            f.write("\n" + fileName + ".xml")
+            f.write("\n" + file_name + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-    def old_spec_xml_format_clean_to_json(self, data, fileName, file):
+    def old_spec_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
             int(data['SpecificationDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
                     'ApplicationNumber'])
@@ -189,7 +187,6 @@ class XmlToJsonConverter:
 
         except Exception as e:
             pass
-            # self.fail_db_message(fileName)
         getjson = {
             'applicationNumber': applicationNumber,
             'date': date,
@@ -200,38 +197,22 @@ class XmlToJsonConverter:
         with open(self.clean_folder + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
-        # self.success_db_message(fileName)
-
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-            f.write("\n" + fileName + ".xml")
+            f.write("\n" + file_name + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-    def clean_spec_file(self, file, data):
-        fileName = file.split('.json')[0]
-        data = data.replace("\\t", "")
-        data = data.replace("\\n", "")
-        data = data.replace("#", "")
-        data = data.replace("ns0:", "")
-        data = data.replace("ns2:", "")
-        data = data.replace("xsi:", "")
-        data = json.loads(data)
+    def clean_spec_file(self, file, data, file_name):
         if 'us-patent-application' in data:
             # this method will be cleaned new SPEC type of xml file into json file
-            self.new_spec_xml_format_clean_to_json(data, fileName,
+            self.new_spec_xml_format_clean_to_json(data, file_name,
                                                    file)
         elif 'SpecificationDocument' in data:
             # this method will be cleaned old SPEC type of xml file into json file
-            self.old_spec_xml_format_clean_to_json(data, fileName,
+            self.old_spec_xml_format_clean_to_json(data, file_name,
                                                    file)
 
-    def clean_new_old_abst_file_to_json(self, file, data):
-        fileName = file.split('.json')[0]
-        data = data.replace("\\t", "")
-        data = data.replace("\\n", "")
-        data = data.replace("#", "")
-        data = data.replace("ns0:", "")
-        data = json.loads(data)
+    def clean_new_old_abst_file_to_json(self, file, data, file_name):
         applicationNumber = \
             int(data['us-patent-application']['us-bibliographic-data-application'][
                     'application-reference'][
@@ -262,7 +243,6 @@ class XmlToJsonConverter:
                     sections.append(" ")
         except Exception as e:
             pass
-            # self.fail_db_message(fileName)
 
         getjson = {
             'applicationNumber': applicationNumber,
@@ -274,14 +254,12 @@ class XmlToJsonConverter:
         with open(self.clean_folder + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
-        # self.success_db_message(fileName)
-
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-            f.write("\n" + fileName + ".xml")
+            f.write("\n" + file_name + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-    def new_clm_xml_format_clean_to_json(self, data, fileName, file):
+    def new_clm_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
             int(data['us-patent-application']['us-bibliographic-data-application'][
                     'application-reference'][
@@ -353,7 +331,6 @@ class XmlToJsonConverter:
                             sections.append(section)
         except Exception as e:
             pass
-            # self.fail_db_message(fileName)
         getjson = {
             'applicationNumber': applicationNumber,
             'date': date,
@@ -364,14 +341,12 @@ class XmlToJsonConverter:
         with open(self.clean_folder + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
 
-        # self.success_db_message(fileName)
-
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-            f.write("\n" + fileName + ".xml")
+            f.write("\n" + file_name + ".xml")
 
         print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-    def old_clm_xml_format_clean_to_json(self, data, fileName, file):
+    def old_clm_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
             int(data['ClaimsDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
                     'ApplicationNumber'])
@@ -382,15 +357,11 @@ class XmlToJsonConverter:
             try:
                 for i in range(len(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'])):
                     if 'ClaimText' in data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]:
-                        if data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id'].split('-')[
-                            0] != 'UNKNOWN':
-                            if type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
-                                        'ClaimText']) == list:
+                        if data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id'].split('-')[0] != 'UNKNOWN':
+                            if type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText']) == list:
                                 try:
-                                    text = \
-                                        data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
-                                            -1][
-                                            'text']
+                                    text = data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][-1][
+                                        'text']
                                     text = " ".join(text.split())
                                     section = {
                                         "text": text,
@@ -422,7 +393,6 @@ class XmlToJsonConverter:
                                     sections.append(section)
             except Exception as e:
                 pass
-                # self.fail_db_message(fileName)
             getjson = {
                 'applicationNumber': applicationNumber,
                 'date': date,
@@ -432,44 +402,43 @@ class XmlToJsonConverter:
             with open(self.clean_folder + "/" + file, 'w') as f:
                 json.dump(getjson, f, indent=4)
 
-            # self.success_db_message(fileName)
             with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-                f.write("\n" + fileName + ".xml")
+                f.write("\n" + file_name + ".xml")
 
             print(colored(f"\n{file} Successfully cleaned", 'green'))
 
-    def clean_clm_file(self, file, data):
-        fileName = file.split('.json')[0]
+    def clean_clm_file(self, file, data, file_name):
+        if 'ClaimsDocument' in data:
+            # this method will be cleaned old CLM type of xml file into json file
+            self.old_clm_xml_format_clean_to_json(data, file_name, file)
+        else:
+            # this method will be cleaned new CLM type of xml file into json file
+            self.new_clm_xml_format_clean_to_json(data, file_name, file)
+
+    def clean_json(self, file, data):
+        file_name = file.split('.json')[0]
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
         data = data.replace("#", "")
         data = data.replace("ns0:", "")
+        data = data.replace("ns2:", "")
+        data = data.replace("xsi:", "")
         data = json.loads(data)
-        if 'ClaimsDocument' in data:
-            # this method will be cleaned old CLM type of xml file into json file
-            self.old_clm_xml_format_clean_to_json(data, fileName, file)
-        else:
-            # this method will be cleaned new CLM type of xml file into json file
-            self.new_clm_xml_format_clean_to_json(data, fileName, file)
-
-    def clean_json(self, file, data):
-        fileName = file.split('.json')[0]
         if file.endswith('.json'):
             sfile = file.split('-')[-1]
             sfile = sfile.split('.')[0]
 
             # if file type is SPEC then it will be converting it to SPEC.json
             if sfile == 'SPEC':
-                self.clean_spec_file(file, data)
+                self.clean_spec_file(file, data, file_name)
             # if file type is ABST then it will be converting it to ABST.json
             elif sfile == 'ABST':
-                self.clean_new_old_abst_file_to_json(file, data)
+                self.clean_new_old_abst_file_to_json(file, data, file_name)
             # if file type is CLM then it will be converting it to CLM.json
             elif sfile == 'CLM':
-                self.clean_clm_file(file, data)
+                self.clean_clm_file(file, data, file_name)
             else:
-                print(f"This {fileName}.xml file Suffix should be CLM, ABST & SPEC format")
-                # self.fail_db_message(fileName)
+                print(f"This {file_name}.xml file Suffix should be CLM, ABST & SPEC format")
 
 
 def main():
