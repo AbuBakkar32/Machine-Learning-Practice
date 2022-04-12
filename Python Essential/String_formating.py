@@ -10,6 +10,9 @@
 # https://www.geeksforgeeks.org/python-zip-function/
 # https://www.jcchouinard.com/pandas-excel/
 # https://www.jcchouinard.com/30-days-of-pandas/
+# https://towardsdatascience.com/3-methods-for-aggregating-data-with-python-pandas-14ceb75b6f6e
+# https://towardsdatascience.com/create-a-butterfly-chart-easily-using-plotly-aa3d43ba410d
+# https://medium.com/@avinashchandrana/comparison-of-matplotlib-vs-seaborn-and-plotly-on-a-dataset-for-beginners-92a7e8197dc6
 
 # text = "hello world"
 # print(f"{text:^20}")
