@@ -16,7 +16,6 @@ from termcolor import colored
 class XmlToJsonConverter:
     def __init__(self, xmlFilePath: any = None):
         self.xmlFilePath = xmlFilePath  # path of xml file
-        self.jsonFilePath = 'c:/jsonfile/'  # path of json where json file will be created
         self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
 
         # current date format
@@ -24,13 +23,13 @@ class XmlToJsonConverter:
         self.today = self.dt.strftime("%Y-%m-%d")
         self.ctf = self.xmlFilePath + self.today
         self.file_path = Path(self.ctf)
+        self.cjf = self.cleanJsonPath + self.today
 
         # previous date format
         self.pre_date = datetime.datetime.today() - datetime.timedelta(days=1)
         self.pre_date = self.pre_date.strftime("%Y-%m-%d")
         self.ptf = self.xmlFilePath + self.pre_date
         self.clean_folder = self.cleanJsonPath + self.pre_date
-        self.json_folder = self.jsonFilePath + self.pre_date
 
         if not os.path.exists(self.cleanJsonPath):
             os.mkdir(self.cleanJsonPath)
@@ -44,8 +43,9 @@ class XmlToJsonConverter:
         self.convert_xml_file_to_json()
 
     def _create_folder(self):
-        if not os.path.exists(self.ctf):
+        if not os.path.exists(self.ctf) and not os.path.exists(self.cjf):
             os.mkdir(self.ctf)
+            os.mkdir(self.cjf)
             print(colored("Directory " + self.ctf + " Created", 'green'))
             if 'xml_file.txt' in os.listdir(self.file_path):
                 pass
