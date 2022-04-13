@@ -1,39 +1,51 @@
-import datetime
-import json
-import os
-import time
-from pathlib import Path
-from xml.dom import minidom
-from xml.parsers import expat
-
-import xmltodict
-from termcolor import colored
+try:
+    import datetime
+    import json
+    import os
+    import time
+    from pathlib import Path
+    from xml.dom import minidom
+    from xml.parsers import expat
+    from google.cloud import storage
+    import google.cloud.storage
+    import xmltodict
+    from termcolor import colored
+except Exception as e:
+    print("Error : {} ".format(e))
 
 
 # source file Name should like this below
 # gs://search-ai-lab-bdr-landing-zone/2022-03-15/12000008-FA48RMU5PPOPPY5-SPEC.xml
 
+def google_bucket_conn():
+    # Google Cloud Storage Credentials for accessing the bucket
+    PATH = os.path.join(os.getcwd(), 'patents-search-ai-347106-575782eaf768.json')
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
+    storage_client = storage.Client(PATH)
+    return storage_client
+
+
 class XmlToJsonConverter:
     def __init__(self, xmlFilePath: any = None):
         self.xmlFilePath = xmlFilePath  # path of xml file
         self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
+        self.storage_client = google_bucket_conn()  # Google Cloud Storage Credentials for accessing the bucket
+        self.destination_bucket_name = 'search-ai-data-landing-clean-josn'  # bucket name where clean json file will be uploaded
+        self.source_bucket_name = 'search-ai-data-landing-asl'  # bucket name where xml file will be uploaded
 
         # current date format
         self.dt = datetime.datetime.now()
         self.today = self.dt.strftime("%Y-%m-%d")
         self.ctf = self.xmlFilePath + self.today
         self.file_path = Path(self.ctf)
-        self.cjf = self.cleanJsonPath + self.today
 
         # previous date format
         self.pre_date = datetime.datetime.today() - datetime.timedelta(days=1)
         self.pre_date = self.pre_date.strftime("%Y-%m-%d")
         self.ptf = self.xmlFilePath + self.pre_date
-        self.clean_folder = self.cleanJsonPath + self.pre_date
 
         if not os.path.exists(self.cleanJsonPath):
             os.mkdir(self.cleanJsonPath)
-            os.mkdir(self.cleanJsonPath + self.today)
             print(colored("Directory " + self.cleanJsonPath + " Created", 'green'))
         else:
             pass
@@ -42,10 +54,14 @@ class XmlToJsonConverter:
         # call convert_xml_file_to_json function for processing xml file to json file
         self.convert_xml_file_to_json()
 
+    def upload_destination_bucket(self, blob_name, file_path, bucket_name):
+        bucket = self.storage_client.get_bucket(bucket_name)
+        blob = bucket.blob(blob_name)
+        blob.upload_from_filename(file_path)
+
     def _create_folder(self):
-        if not os.path.exists(self.ctf) and not os.path.exists(self.cjf):
+        if not os.path.exists(self.ctf):
             os.mkdir(self.ctf)
-            os.mkdir(self.cjf)
             print(colored("Directory " + self.ctf + " Created", 'green'))
             if 'xml_file.txt' in os.listdir(self.file_path):
                 pass
@@ -152,13 +168,18 @@ class XmlToJsonConverter:
             'sections': sections
         }
 
-        with open(self.clean_folder + "/" + file, 'w') as f:
+        with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
+
+        # upload clean json file into the GCP bucket
+        try:
+            self.upload_destination_bucket(file, self.cleanJsonPath + "/" + file, self.destination_bucket_name)
+            print(f"{file} is successfully uploaded to bucket")
+        except Exception as e:
+            print(f"{file} is not uploaded to bucket")
 
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write(file_name + ".xml\n")
-
-        print(colored(f"{file} Successfully cleaned", 'green'))
 
     def old_spec_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
@@ -194,13 +215,18 @@ class XmlToJsonConverter:
             'sections': sections
         }
 
-        with open(self.clean_folder + "/" + file, 'w') as f:
+        with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
+
+        # upload clean json file into the GCP bucket
+        try:
+            self.upload_destination_bucket(file, self.cleanJsonPath + "/" + file, self.destination_bucket_name)
+            print(f"{file} is successfully uploaded to bucket")
+        except Exception as e:
+            print(f"{file} is not uploaded to bucket")
 
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write(file_name + ".xml\n")
-
-        print(colored(f"{file} Successfully cleaned", 'green'))
 
     def clean_spec_file(self, file, data, file_name):
         if 'us-patent-application' in data:
@@ -214,7 +240,7 @@ class XmlToJsonConverter:
         else:
             print(colored(f"{file} is not a valid file", 'red'))
 
-    def clean_new_old_abst_file_to_json(self, file, data, file_name):
+    def clean_new_abst_file_to_json(self, file, data, file_name):
         applicationNumber = \
             int(data['us-patent-application']['us-bibliographic-data-application'][
                     'application-reference'][
@@ -253,18 +279,23 @@ class XmlToJsonConverter:
             'sections': sections
         }
 
-        with open(self.clean_folder + "/" + file, 'w') as f:
+        with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
+
+        # upload clean json file into the GCP bucket
+        try:
+            self.upload_destination_bucket(file, self.cleanJsonPath + "/" + file, self.destination_bucket_name)
+            print(f"{file} is successfully uploaded to bucket")
+        except Exception as e:
+            print(f"{file} is not uploaded to bucket")
 
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write(file_name + ".xml\n")
 
-        print(colored(f"{file} Successfully cleaned", 'green'))
-
     def clean_abst_file(self, file, data, file_name):
         if 'us-patent-application' in data:
             # this method will be cleaned new ABST type of xml file into json file
-            self.clean_new_old_abst_file_to_json(file, data, file_name)
+            self.clean_new_abst_file_to_json(file, data, file_name)
         else:
             print(colored(f"{file} is not a valid file", 'red'))
 
@@ -347,13 +378,18 @@ class XmlToJsonConverter:
             'sections': sections
         }
 
-        with open(self.clean_folder + "/" + file, 'w') as f:
+        with open(self.cleanJsonPath + "/" + file, 'w') as f:
             json.dump(getjson, f, indent=4)
+
+        # upload clean json file into the GCP bucket
+        try:
+            self.upload_destination_bucket(file, self.cleanJsonPath + "/" + file, self.destination_bucket_name)
+            print(f"{file} is successfully uploaded to bucket")
+        except Exception as e:
+            print(f"{file} is not uploaded to bucket")
 
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write(file_name + ".xml\n")
-
-        print(colored(f"{file} Successfully cleaned", 'green'))
 
     def old_clm_xml_format_clean_to_json(self, data, file_name, file):
         applicationNumber = \
@@ -408,13 +444,18 @@ class XmlToJsonConverter:
                 'documentType': documentType,
                 'sections': sections
             }
-            with open(self.clean_folder + "/" + file, 'w') as f:
+            with open(self.cleanJsonPath + "/" + file, 'w') as f:
                 json.dump(getjson, f, indent=4)
+
+            # upload clean json file into the GCP bucket
+            try:
+                self.upload_destination_bucket(file, self.cleanJsonPath + "/" + file, self.destination_bucket_name)
+                print(f"{file} is successfully uploaded to bucket")
+            except Exception as e:
+                print(f"{file} is not uploaded to bucket")
 
             with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
                 f.write(file_name + ".xml\n")
-
-            print(colored(f"{file} Successfully cleaned", 'green'))
 
     def clean_clm_file(self, file, data, file_name):
         if 'ClaimsDocument' in data:
@@ -454,7 +495,7 @@ class XmlToJsonConverter:
 
 def main():
     # this is the main function where we are calling the class to convert json to clean json format
-    xml_file = "c:/search-ai-lab-bdr-landing-zone/"
+    xml_file = "c:/search-ai-data-landing/"
     XmlToJsonConverter(xml_file)
 
 
