@@ -47,7 +47,8 @@
             <ns0:Claim ns0:id="CLM-00002">
                 <ns0:ClaimNumber>2</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00007"><ns0:ClaimLabelText>2.</ns0:ClaimLabelText>(Currently Amended) A system
-                    according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]</ns0:OCRConfidenceData>
+                    according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]</ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00002">
                         <ns0:OCRConfidenceData ns0:levelNumber="2">2</ns0:OCRConfidenceData>
                     </ns0:ClaimReference>
@@ -73,15 +74,19 @@
             <ns0:Claim ns0:id="CLM-00003">
                 <ns0:ClaimNumber>4</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00008"><ns0:ClaimLabelText>4.</ns0:ClaimLabelText>(Currently Amended) A system
-                    according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]</ns0:OCRConfidenceData>
+                    according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]</ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00023">
                         <ns0:OCRConfidenceData ns0:levelNumber="66">25</ns0:OCRConfidenceData>
                     </ns0:ClaimReference>
-                    , wherein<ns0:OCRConfidenceData ns0:levelNumber="5">:</ns0:OCRConfidenceData>
+                    , wherein
+                    <ns0:OCRConfidenceData ns0:levelNumber="5">:</ns0:OCRConfidenceData>
                 </ns0:ClaimText>
-                <ns0:ClaimText ns0:id="ID-00009">the plurality of applications <ns0:DeletedText>arc in a
-                </ns0:DeletedText>
-                    <ns0:InsertedText>comprise a servlet composition using a</ns0:InsertedText> converged
+                <ns0:ClaimText ns0:id="ID-00009">the plurality of applications
+                    <ns0:DeletedText>arc in a
+                    </ns0:DeletedText>
+                    <ns0:InsertedText>comprise a servlet composition using a</ns0:InsertedText>
+                    converged
                     container <ns0:InsertedText>whereby the system can rely on other information present in the
                         converged container</ns0:InsertedText>.
                 </ns0:ClaimText>
@@ -96,15 +101,21 @@
                         <ns2:ColourModeCategory>Black and white</ns2:ColourModeCategory>
                     </ns0:PatentImage>
                     <ns0:Br/>
-                    the signaling message, event, or associated media is received from <ns0:OCRConfidenceData
-                        ns0:levelNumber="66866">[[a]]
-                </ns0:OCRConfidenceData>
-                    <ns0:InsertedText>the</ns0:InsertedText> network level and is able to be processed using any of the
-                    plurality of applications, at least one <ns0:DeletedText>nctwork spccific cnablcr</ns0:DeletedText>
+                    the signaling message, event, or associated media is received from
+                    <ns0:OCRConfidenceData
+                            ns0:levelNumber="66866">[[a]]
+                    </ns0:OCRConfidenceData>
+                    <ns0:InsertedText>the</ns0:InsertedText>
+                    network level and is able to be processed using any of the
+                    plurality of applications, at least one
+                    <ns0:DeletedText>nctwork spccific cnablcr</ns0:DeletedText>
                     <ns0:InsertedText>of the one or more call control enabler interfaces</ns0:InsertedText>, and at
-                    least one <ns0:DeletedText>abstract cnablcr by the application dispatcher</ns0:DeletedText>
-                    <ns0:InsertedText>of the one or more call control enabler instrances</ns0:InsertedText> as
-                    determined by <ns0:DeletedText>at least one policy</ns0:DeletedText>
+                    least one
+                    <ns0:DeletedText>abstract cnablcr by the application dispatcher</ns0:DeletedText>
+                    <ns0:InsertedText>of the one or more call control enabler instrances</ns0:InsertedText>
+                    as
+                    determined by
+                    <ns0:DeletedText>at least one policy</ns0:DeletedText>
                     <ns0:InsertedText>one or more policies</ns0:InsertedText>.
                 </ns0:ClaimText>
                 <ns0:ClaimStatusCategory>currently amended</ns0:ClaimStatusCategory>
@@ -113,7 +124,8 @@
             <ns0:Claim ns0:id="CLM-00004">
                 <ns0:ClaimNumber>6</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00010"><ns0:ClaimLabelText>6.</ns0:ClaimLabelText>(Currently Amended) A system
-                    according to claim <ns0:ClaimReference ns0:idrefs="CLM-00000">5</ns0:ClaimReference>, wherein the <ns0:DeletedText>
+                    according to claim <ns0:ClaimReference ns0:idrefs="CLM-00000">5</ns0:ClaimReference>, wherein the
+                    <ns0:DeletedText>
                         memory further includes instructions which cause the processors to execute
                     </ns0:DeletedText>
                     <ns0:InsertedText>system is further configured to perform operations comprising:</ns0:InsertedText>
@@ -121,8 +133,10 @@
                 <ns0:ClaimText ns0:id="ID-00011">
                     <ns0:InsertedText>executing</ns0:InsertedText>
                     a Service Capability Interaction Manager(SC<ns0:OCRConfidenceData ns0:levelNumber="5">
-                    I</ns0:OCRConfidenceData>M) component at the network <ns0:DeletedText>level</ns0:DeletedText>
-                    <ns0:InsertedText>layer</ns0:InsertedText> operable to perform network level composition or
+                    I</ns0:OCRConfidenceData>M) component at the network
+                    <ns0:DeletedText>level</ns0:DeletedText>
+                    <ns0:InsertedText>layer</ns0:InsertedText>
+                    operable to perform network level composition or
                     orchestration before passing processing of the signaling message, event, or media to the application
                     dispatcher.
                 </ns0:ClaimText>
@@ -152,13 +166,16 @@
             <ns0:Claim ns0:id="CLM-00005">
                 <ns0:ClaimNumber>7</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00013"><ns0:ClaimLabelText>7.</ns0:ClaimLabelText>(Currently Amended) A system
-                    according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]</ns0:OCRConfidenceData>
+                    according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]</ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00023">
                         <ns0:OCRConfidenceData ns0:levelNumber="66">25</ns0:OCRConfidenceData>
                     </ns0:ClaimReference>
-                    , wherein <ns0:DeletedText>applying the at least one policy includcs at least one of
+                    , wherein
+                    <ns0:DeletedText>applying the at least one policy includcs at least one of
                     </ns0:DeletedText>
-                    <ns0:InsertedText>the one or more policies dictate</ns0:InsertedText> performing queries to
+                    <ns0:InsertedText>the one or more policies dictate</ns0:InsertedText>
+                    performing queries to
                     environmental and contextual information of the plurality of applications and composing service
                     level code.
                 </ns0:ClaimText>
@@ -168,11 +185,13 @@
             <ns0:Claim ns0:id="CLM-00006">
                 <ns0:ClaimNumber>8</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00014"><ns0:ClaimLabelText>8.</ns0:ClaimLabelText>(Currently Amended) A system
-                    according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]</ns0:OCRConfidenceData>
+                    according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]</ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00023">
                         <ns0:OCRConfidenceData ns0:levelNumber="66">25</ns0:OCRConfidenceData>
                     </ns0:ClaimReference>
-                    , wherein the <ns0:DeletedText>memory further includes instructions which cause the processors to
+                    , wherein the
+                    <ns0:DeletedText>memory further includes instructions which cause the processors to
                         execute
                     </ns0:DeletedText>
                     <ns0:InsertedText>system is further configured to perform operations comprising:</ns0:InsertedText>
@@ -194,7 +213,8 @@
             <ns0:Claim ns0:id="CLM-00008">
                 <ns0:ClaimNumber>10</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00017"><ns0:ClaimLabelText>10.</ns0:ClaimLabelText>(Currently Amended) A
-                    system according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
+                    system according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
                     </ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00023">
                         <ns0:OCRConfidenceData ns0:levelNumber="66">25</ns0:OCRConfidenceData>
@@ -219,7 +239,8 @@
             <ns0:Claim ns0:id="CLM-00010">
                 <ns0:ClaimNumber>12</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00019"><ns0:ClaimLabelText>12.</ns0:ClaimLabelText>(Currently Amended) A
-                    system according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
+                    system according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
                     </ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00023">
                         <ns0:OCRConfidenceData ns0:levelNumber="22">25</ns0:OCRConfidenceData>
@@ -227,9 +248,11 @@
                     , wherein
                     <ns0:DeletedText>the processing of the signaling message</ns0:DeletedText>
                     <ns0:OCRConfidenceData ns0:levelNumber="8">,</ns0:OCRConfidenceData>
-                    <ns0:DeletedText>event</ns0:DeletedText>,<ns0:DeletedText>or media</ns0:DeletedText>
+                    <ns0:DeletedText>event</ns0:DeletedText>,
+                    <ns0:DeletedText>or media</ns0:DeletedText>
                     <ns0:InsertedText>routing the request to the first application to process the request
-                    </ns0:InsertedText> includes launching a Service Oriented Architecture (SOA) process.
+                    </ns0:InsertedText>
+                    includes launching a Service Oriented Architecture (SOA) process.
                 </ns0:ClaimText>
                 <ns0:ClaimStatusCategory>currently amended</ns0:ClaimStatusCategory>
                 <ns0:ClaimTypeCategory>Dependent</ns0:ClaimTypeCategory>
@@ -237,13 +260,16 @@
             <ns0:Claim ns0:id="CLM-00011">
                 <ns0:ClaimNumber>13</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00020"><ns0:ClaimLabelText>13.</ns0:ClaimLabelText>(Currently Amended) A
-                    system according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
+                    system according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
                     </ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00023">
                         <ns0:OCRConfidenceData ns0:levelNumber="66">25</ns0:OCRConfidenceData>
                     </ns0:ClaimReference>
-                    , wherein the <ns0:DeletedText>signaling message or event</ns0:DeletedText>
-                    <ns0:InsertedText>request</ns0:InsertedText> includes a Session Initiation Protocol (SIP) request.
+                    , wherein the
+                    <ns0:DeletedText>signaling message or event</ns0:DeletedText>
+                    <ns0:InsertedText>request</ns0:InsertedText>
+                    includes a Session Initiation Protocol (SIP) request.
                 </ns0:ClaimText>
                 <ns0:ClaimStatusCategory>currently amended</ns0:ClaimStatusCategory>
                 <ns0:ClaimTypeCategory>Dependent</ns0:ClaimTypeCategory>
@@ -251,13 +277,15 @@
             <ns0:Claim ns0:id="CLM-00012">
                 <ns0:ClaimNumber>14</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00021"><ns0:ClaimLabelText>14.</ns0:ClaimLabelText>(Currently Amended) A
-                    system according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
+                    system according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
                     </ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00002">
                         <ns0:OCRConfidenceData ns0:levelNumber="2">2</ns0:OCRConfidenceData>
                     </ns0:ClaimReference>
                     , wherein the application dispatcher comprises a Service Capability Interaction Manager (SCIM)-based
-                    component operable to dictate a sequence of services used to process the <ns0:DeletedText>signaling
+                    component operable to dictate a sequence of services used to process the
+                    <ns0:DeletedText>signaling
                         message or event
                     </ns0:DeletedText>
                     <ns0:InsertedText>request</ns0:InsertedText>.
@@ -288,15 +316,18 @@
             <ns0:Claim ns0:id="CLM-00013">
                 <ns0:ClaimNumber>15</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00023"><ns0:ClaimLabelText>15.</ns0:ClaimLabelText>(Currently Amended) A
-                    system according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
+                    system according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
                     </ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00002">
                         <ns0:OCRConfidenceData ns0:levelNumber="2">2</ns0:OCRConfidenceData>
                     </ns0:ClaimReference>
                     <ns0:OCRConfidenceData ns0:levelNumber="5">,</ns0:OCRConfidenceData>
-                    wherein the application dispatcher further directs the <ns0:DeletedText>signaling message or event
+                    wherein the application dispatcher further directs the
+                    <ns0:DeletedText>signaling message or event
                     </ns0:DeletedText>
-                    <ns0:InsertedText>request</ns0:InsertedText> to at least one other application instance based at
+                    <ns0:InsertedText>request</ns0:InsertedText>
+                    to at least one other application instance based at
                     least in part on load balancing.
                 </ns0:ClaimText>
                 <ns0:ClaimStatusCategory>currently amended</ns0:ClaimStatusCategory>
@@ -305,21 +336,25 @@
             <ns0:Claim ns0:id="CLM-00014">
                 <ns0:ClaimNumber>16</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00024"><ns0:ClaimLabelText>16.</ns0:ClaimLabelText>(Currently Amended) A
-                    system according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
+                    system according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
                     </ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00023">
                         <ns0:OCRConfidenceData ns0:levelNumber="22">25</ns0:OCRConfidenceData>
                     </ns0:ClaimReference>
-                    , wherein the <ns0:DeletedText>memory further includes instructions which cause the processors to
+                    , wherein the
+                    <ns0:DeletedText>memory further includes instructions which cause the processors to
                         execute
                     </ns0:DeletedText>
                     <ns0:InsertedText>system is further configured to perform operations comprising:</ns0:InsertedText>
                 </ns0:ClaimText>
                 <ns0:ClaimText ns0:id="ID-00025">
                     <ns0:InsertedText>executing</ns0:InsertedText>
-                    a Web services component programmed to direct the <ns0:DeletedText>signaling message
-                </ns0:DeletedText>
-                    <ns0:InsertedText>request</ns0:InsertedText> to the application dispatcher.
+                    a Web services component programmed to direct the
+                    <ns0:DeletedText>signaling message
+                    </ns0:DeletedText>
+                    <ns0:InsertedText>request</ns0:InsertedText>
+                    to the application dispatcher.
                 </ns0:ClaimText>
                 <ns0:ClaimStatusCategory>currently amended</ns0:ClaimStatusCategory>
                 <ns0:ClaimTypeCategory>Dependent</ns0:ClaimTypeCategory>
@@ -327,7 +362,8 @@
             <ns0:Claim ns0:id="CLM-00015">
                 <ns0:ClaimNumber>17</ns0:ClaimNumber>
                 <ns0:ClaimText ns0:id="ID-00026"><ns0:ClaimLabelText>17.</ns0:ClaimLabelText>(Currently Amended) A
-                    system according to claim <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
+                    system according to claim
+                    <ns0:OCRConfidenceData ns0:levelNumber="66866">[[1]]
                     </ns0:OCRConfidenceData>
                     <ns0:ClaimReference ns0:idrefs="CLM-00023">
                         <ns0:OCRConfidenceData ns0:levelNumber="22">25</ns0:OCRConfidenceData>
@@ -348,7 +384,8 @@
                     wherein:
                 </ns0:ClaimText>
                 <ns0:ClaimText ns0:id="ID-00029">the application dispatcher is programmed to directly compose processing
-                    of the <ns0:DeletedText>signaling message or event</ns0:DeletedText>
+                    of the
+                    <ns0:DeletedText>signaling message or event</ns0:DeletedText>
                     <ns0:InsertedText>request</ns0:InsertedText>.
                 </ns0:ClaimText>
                 <ns0:ClaimStatusCategory>currently amended</ns0:ClaimStatusCategory>
@@ -428,9 +465,10 @@
                 <ns0:ClaimText ns0:id="ID-00038">a fourth layer comprising a network layer a plurality of network
                     resources that are each coupled to corresponding ones of the call control enabler instances;
                 </ns0:ClaimText>
-                <ns0:ClaimText ns0:id="ID-00039">wherein the system is configured to perform operations comprising<ns0:OCRConfidenceData
-                        ns0:levelNumber="5">:
-                </ns0:OCRConfidenceData>
+                <ns0:ClaimText ns0:id="ID-00039">wherein the system is configured to perform operations comprising
+                    <ns0:OCRConfidenceData
+                            ns0:levelNumber="5">:
+                    </ns0:OCRConfidenceData>
                 </ns0:ClaimText>
                 <ns0:ClaimText ns0:id="ID-00040">receiving, by the application dispatcher, a request;</ns0:ClaimText>
                 <ns0:ClaimText ns0:id="ID-00041">analyzing, by the application dispatcher, the request to extract a
