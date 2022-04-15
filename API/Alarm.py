@@ -27,7 +27,7 @@ class Alarm:
                         print("Alarm ringing..")
                         print(f"Wake Up! Its {alarm.upper()}")
                         webbrowser.open("audio.mp3")
-                        time.sleep(28)
+                        time.sleep(25)
                 except:
                     pass
 
