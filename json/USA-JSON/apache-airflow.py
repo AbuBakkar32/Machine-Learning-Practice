@@ -5,8 +5,8 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
+from dependencies.applications import parse_xml_claims_v1
 
-# from dependencies.applications import parse_xml_claims_v1
 warnings.warn(
     "This module is deprecated. Please use `airflow.providers.google.cloud.hooks.gcs`.",
     DeprecationWarning,

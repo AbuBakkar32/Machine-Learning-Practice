@@ -11,7 +11,6 @@ try:
     import google.cloud.storage
     import xmltodict
     from termcolor import colored
-    import cloudstorage as gcs
     import xml.etree.ElementTree as ET
 except Exception as e:
     print("Error : {} ".format(e))
@@ -23,7 +22,7 @@ except Exception as e:
 
 def google_bucket_conn():
     # Google Cloud Storage Credentials for accessing the bucket
-    PATH = os.path.join(os.getcwd(), 'patents-search-ai-347106-575782eaf768.json')
+    PATH = os.path.join(os.getcwd(), 'asl-project-demo-013a807f0641.json')
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
     storage_client = storage.Client(PATH)
     return storage_client
@@ -34,8 +33,8 @@ class XmlToJsonConverter:
         self.xmlFilePath = xmlFilePath  # path of xml file
         self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
         self.storage_client = google_bucket_conn()  # Google Cloud Storage Credentials for accessing the bucket
-        self.destination_bucket_name = 'search-ai-data-landing-clean-josn'  # bucket name where clean json file will be uploaded
-        self.source_bucket_name = 'search-ai-data-landing-asl'  # bucket name where xml file will be uploaded
+        self.source_bucket_name = 'search-ai-data-landings'  # bucket name where xml file will be uploaded
+        self.destination_bucket_name = 'search-ai-data-landing-clean-file'  # bucket name where clean json file will be uploaded
         self.bucket = self.storage_client.get_bucket(self.source_bucket_name)
 
         # current date format
@@ -95,7 +94,7 @@ class XmlToJsonConverter:
                 file = file.split('/')[1]
                 if file.endswith('.xml'):
                     blob = self.bucket.blob(blob_name=file_path).download_as_string()
-                    with open(self.ptf+'/'+file, 'wb') as f:
+                    with open(self.ptf + '/' + file, 'wb') as f:
                         f.write(blob)
                     with open(self.ptf + '/' + "xml_file.txt", 'r') as f:
                         if file not in f.read():
@@ -321,6 +320,7 @@ class XmlToJsonConverter:
                 'document-id'][
                 'date']
         documentType = 'CLM'
+        claim_id_format = "CLM-00000"
         sections = []
         try:
             for i in range(len(data['us-patent-application']['claims']['claim'])):
@@ -330,7 +330,7 @@ class XmlToJsonConverter:
                             text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text']
                             text = " ".join(text.split())
                             section = {
-                                "text": text,
+                                "text": [text],
                                 "id": data['us-patent-application']['claims']['claim'][i]['id']
                             }
                             sections.append(section)
@@ -338,13 +338,13 @@ class XmlToJsonConverter:
                             text = data['us-patent-application']['claims']['claim'][i]['claim-text']
                             text = " ".join(text.split())
                             section = {
-                                "text": text,
+                                "text": [text],
                                 "id": data['us-patent-application']['claims']['claim'][i]['id']
                             }
                             sections.append(section)
                         except:
                             section = {
-                                "text": ' ',
+                                "text": [],
                                 "id": data['us-patent-application']['claims']['claim'][i]['id']
                             }
                             sections.append(section)
@@ -353,7 +353,7 @@ class XmlToJsonConverter:
                             text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text']
                             text = " ".join(text.split())
                             section = {
-                                "text": text,
+                                "text": [text],
                                 "id": data['us-patent-application']['claims']['claim'][i]['id']
                             }
                             sections.append(section)
@@ -362,23 +362,79 @@ class XmlToJsonConverter:
                                 text = data['us-patent-application']['claims']['claim'][i]['claim-text'][-1]['text']
                                 text = " ".join(text.split())
                                 section = {
-                                    "text": text,
+                                    "text": [text],
                                     "id": data['us-patent-application']['claims']['claim'][i]['id']
                                 }
                                 sections.append(section)
                             except TypeError:
                                 text = data['us-patent-application']['claims']['claim'][i]['claim-text']
                                 section = {
-                                    "text": text,
+                                    "text": [text],
                                     "id": data['us-patent-application']['claims']['claim'][i]['id']
                                 }
                                 sections.append(section)
                         except:
                             section = {
-                                "text": ' ',
+                                "text": [],
                                 "id": data['us-patent-application']['claims']['claim'][i]['id']
                             }
                             sections.append(section)
+                else:
+                    if type(data['us-patent-application']['claims']['claim'][i]['claim-text']) != list:
+                        try:
+                            text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text']
+                            text = " ".join(text.split())
+                            section = {
+                                "text": [text],
+                                "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][-2:]
+                            }
+                            sections.append(section)
+                        except TypeError:
+                            text = data['us-patent-application']['claims']['claim'][i]['claim-text']
+                            text = " ".join(text.split())
+                            section = {
+                                "text": [text],
+                                "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][-2:]
+                            }
+                            sections.append(section)
+                        except:
+                            section = {
+                                "text": [],
+                                "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][-2:]
+                            }
+                            sections.append(section)
+                    elif type(data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
+                        try:
+                            text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text']
+                            text = " ".join(text.split())
+                            section = {
+                                "text": [text],
+                                "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][-2:]
+                            }
+                            sections.append(section)
+                        except TypeError:
+                            try:
+                                text = data['us-patent-application']['claims']['claim'][i]['claim-text'][-1]['text']
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": [text],
+                                    "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][
+                                                            -2:]
+                                }
+                                sections.append(section)
+                            except TypeError:
+                                text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]
+                                section = {
+                                    "text": [text],
+                                    "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][
+                                                            -2:]
+                                }
+                                sections.append(section)
+                        except:
+                            section = {
+                                "text": [],
+                                "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][-2:]
+                            }
         except Exception as e:
             pass
         getjson = {
@@ -407,65 +463,98 @@ class XmlToJsonConverter:
                     'ApplicationNumber'])
         date = data['ClaimsDocument']['MailRoomDate']
         documentType = 'CLM'
+        claim_id_format = "CLM-00000"
         sections = []
-        if 'ClaimsDocument' in data:
-            try:
-                for i in range(len(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'])):
-                    if 'ClaimText' in data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]:
-                        if data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id'].split('-')[0] != 'UNKNOWN':
-                            if type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText']) == list:
-                                try:
-                                    text = data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][-1][
+        try:
+            for i in range(len(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'])):
+                if 'ClaimText' in data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]:
+                    if data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id'].split('-')[
+                        0] != 'UNKNOWN':
+                        if type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                    'ClaimText']) == list:
+                            try:
+                                text = \
+                                    data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
+                                        -1][
                                         'text']
-                                    text = " ".join(text.split())
-                                    section = {
-                                        "text": text,
-                                        "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
-                                    }
-                                    sections.append(section)
-                                except:
-                                    section = {
-                                        "text": ' ',
-                                        "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
-                                    }
-                                    sections.append(section)
-                            elif type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
-                                          'ClaimText']) != list:
-                                try:
-                                    text = data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": [text],
+                                    "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
+                                }
+                                sections.append(section)
+                            except:
+                                section = {
+                                    "text": [],
+                                    "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
+                                }
+                                sections.append(section)
+                        elif type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                      'ClaimText']) != list:
+                            try:
+                                text = data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
+                                    'text']
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": [text],
+                                    "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
+                                }
+                                sections.append(section)
+                            except:
+                                section = {
+                                    "text": [],
+                                    "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
+                                }
+                                sections.append(section)
+                    else:
+                        if type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                    'ClaimText']) == list:
+                            try:
+                                text = \
+                                    data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
+                                        -1][
                                         'text']
-                                    text = " ".join(text.split())
-                                    section = {
-                                        "text": text,
-                                        "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
-                                    }
-                                    sections.append(section)
-                                except:
-                                    section = {
-                                        "text": ' ',
-                                        "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
-                                    }
-                                    sections.append(section)
-            except Exception as e:
-                pass
-            getjson = {
-                'applicationNumber': applicationNumber,
-                'date': date,
-                'documentType': documentType,
-                'sections': sections
-            }
-            with open(self.cleanJsonPath + "/" + file, 'w') as f:
-                json.dump(getjson, f, indent=4)
+                                text = " ".join(text.split())
+                                section = {
+                                    "text": [text],
+                                    "id": claim_id_format + data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                                                'id'][-2:]
+                                }
+                                sections.append(section)
+                            except KeyError:
+                                section = {
+                                    "text": [],
+                                    "id": claim_id_format + data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                                                'id'][-2:]
+                                }
+                                sections.append(section)
+                            except TypeError:
+                                section = {
+                                    "text": [],
+                                    "id": claim_id_format + data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                                                'id'][-2:]
+                                }
+                                sections.append(section)
+        except Exception as e:
+            pass
+        getjson = {
+            'applicationNumber': applicationNumber,
+            'date': date,
+            'documentType': documentType,
+            'sections': sections
+        }
+        with open(self.cleanJsonPath + "/" + file, 'w') as f:
+            json.dump(getjson, f, indent=4)
 
-            # upload clean json file into the GCP bucket
-            try:
-                self.upload_destination_bucket(file, self.cleanJsonPath + "/" + file, self.destination_bucket_name)
-                print(f"{file} is successfully uploaded to bucket")
-            except Exception as e:
-                print(f"{file} is not uploaded to bucket")
+        # upload clean json file into the GCP bucket
+        try:
+            self.upload_destination_bucket(file, self.cleanJsonPath + "/" + file, self.destination_bucket_name)
+            print(f"{file} is successfully uploaded to bucket")
+        except Exception as e:
+            print(f"{file} is not uploaded to bucket")
 
-            with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
-                f.write(file_name + ".xml\n")
+        with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
+            f.write(file_name + ".xml\n")
 
     def clean_clm_file(self, file, data, file_name):
         if 'ClaimsDocument' in data:

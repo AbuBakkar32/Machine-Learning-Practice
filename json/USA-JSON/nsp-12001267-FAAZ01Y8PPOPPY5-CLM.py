@@ -1,8 +1,6 @@
 import json
 import os
 
-from termcolor import colored
-
 jsonFilePath = "D:/jsonfile"
 jsonfile = []
 for root, dirs, files in os.walk(jsonFilePath):
@@ -19,6 +17,7 @@ for root, dirs, files in os.walk(jsonFilePath):
                 data = data.replace("#", "")
                 data = data.replace("ns0:", "")
                 data = json.loads(data)
+                claim_id_format = "CLM-00000"
                 applicationNumber = \
                     int(data['ClaimsDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
                             'ApplicationNumber'])
@@ -39,13 +38,13 @@ for root, dirs, files in os.walk(jsonFilePath):
                                                 'text']
                                         text = " ".join(text.split())
                                         section = {
-                                            "text": text,
+                                            "text": [text],
                                             "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
                                         }
                                         sections.append(section)
                                     except:
                                         section = {
-                                            "text": ' ',
+                                            "text": [],
                                             "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
                                         }
                                         sections.append(section)
@@ -56,22 +55,52 @@ for root, dirs, files in os.walk(jsonFilePath):
                                             'text']
                                         text = " ".join(text.split())
                                         section = {
-                                            "text": text,
+                                            "text": [text],
                                             "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
                                         }
                                         sections.append(section)
                                     except:
                                         section = {
-                                            "text": ' ',
+                                            "text": [],
                                             "id": data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id']
                                         }
                                         sections.append(section)
+                            else:
+                                if type(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i][
+                                            'ClaimText']) == list:
+                                    try:
+                                        text = \
+                                            data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['ClaimText'][
+                                                -1][
+                                                'text']
+                                        text = " ".join(text.split())
+                                        section = {
+                                            "text": [text],
+                                            "id": claim_id_format +
+                                                  data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id'][-2:]
+                                        }
+                                        sections.append(section)
+                                    except KeyError:
+                                        section = {
+                                            "text": [],
+                                            "id": claim_id_format +
+                                                  data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id'][-2:]
+                                        }
+                                        sections.append(section)
+                                    except TypeError:
+                                        section = {
+                                            "text": [],
+                                            "id": claim_id_format +
+                                                  data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i]['id'][-2:]
+                                        }
+                                        sections.append(section)
+                print(sections)
                 getjson = {
                     'applicationNumber': applicationNumber,
                     'date': date,
                     'documentType': documentType,
                     'sections': sections
                 }
-            with open("D:/cleanjson" + "/" + file, 'w') as f:
-                json.dump(getjson, f, indent=4)
-            print(colored(f"{file} Successfully cleaned", 'green'))
+                # with open("D:/cleanjson" + "/" + file, 'w') as f:
+                #     json.dump(getjson, f, indent=4)
+                # print(colored(f"{file} Successfully cleaned", 'green'))
