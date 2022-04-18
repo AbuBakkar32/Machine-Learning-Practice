@@ -54,14 +54,6 @@
 # date_pre = date_pre.strftime("%Y-%m-%d")
 # print(date_pre)
 
-
-import os
-
-from google.cloud import storage
-
-PATH = os.path.join(os.getcwd(), 'patents-search-ai-347106-575782eaf768.json')
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
-storage_client = storage.Client(PATH)
-bucket = storage_client.get_bucket('search-ai-data-landing-asl')
-
-# https://console.cloud.google.com/storage/browser/search-ai-data-landing-asl
+data = {"name": 1, "age": 0, "city": 2}
+data = sorted(data.items(), key=lambda x: x[0])
+print(data)

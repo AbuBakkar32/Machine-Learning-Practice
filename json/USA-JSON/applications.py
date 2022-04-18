@@ -55,7 +55,7 @@ def parse_xml_claims_v2(xml: bytes):
     parser = etree.XMLParser(ns_clean=True)
     root = etree.parse(BytesIO(xml), parser)
 
-    with open("src/lib/resources/claims-transform.xsl") as f:
+    with open("D:/xmlfile/claims-transform.xsl") as f:
         transform = etree.XSLT(etree.parse(f))
 
     result = transform(root)
@@ -165,7 +165,7 @@ def parse_xml_claims_v1(xml: bytes):
     parser = etree.XMLParser(ns_clean=True)
     root = etree.parse(BytesIO(xml), parser)
 
-    with open("src/lib/resources/claims-transform.xsl") as f:
+    with open("D:/xmlfile/claims-transform.xsl") as f:
         transform = etree.XSLT(etree.parse(f))
 
     result = transform(root)
@@ -258,7 +258,7 @@ def parse_xml_abst(xml: bytes):
 
     root = etree.parse(BytesIO(xml))
 
-    with open("src/lib/resources/abstract-transform.xsl") as f:
+    with open("D:/xmlfile/claims-transform.xsl") as f:
         transform = etree.XSLT(etree.parse(f))
 
     result = transform(root)
@@ -318,7 +318,7 @@ def parse_xml_specification(xml: bytes):
 
     root = etree.parse(BytesIO(xml))
 
-    with open("src/lib/resources/specification-transform.xsl") as f:
+    with open("D:/xmlfile/claims-transform.xsl") as f:
         transform = etree.XSLT(etree.parse(f))
 
     result = transform(root)
@@ -414,4 +414,5 @@ def embed_application(host: str, abstract: str, claims: str, description: str):
     }
 
     response = requests.post(host, json=payload)
+    print(response.json())
     return response.json()
