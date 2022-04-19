@@ -6,6 +6,7 @@ from utestfile.file.rname import Rname
 
 # pytest -v --cov=rmath --cov-report=html
 # pytest -v --cov=../ --cov-report=html
+# pytest -v --cov=./file --cov-report=html
 
 
 class RmathTestCase(unittest.TestCase):
