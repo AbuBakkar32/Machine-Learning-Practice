@@ -55,5 +55,5 @@
 # print(date_pre)
 
 data = {"name": 1, "age": 0, "city": 2}
-data = sorted(data.items(), key=lambda x: x[0])
+data = sorted(data.items(), key=lambda x: x[1])
 print(data)

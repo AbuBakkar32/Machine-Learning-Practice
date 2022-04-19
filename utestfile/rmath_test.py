@@ -4,6 +4,8 @@ import rmath
 from rname import Rname
 
 
+# pytest -v --cov=rmath --cov-report=html for run the html test case file
+
 class RmathTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -23,8 +25,8 @@ class RmathTestCase(unittest.TestCase):
 
     def test_addition(self):
         print('test_addition')
-        sum = rmath.substract(20, 12)
-        self.assertEqual(sum, 8)
+        sum = rmath.addition(20, 12)
+        self.assertEqual(sum, 32)
 
     def test_substraction(self):
         print('test_substraction')

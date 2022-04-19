@@ -407,7 +407,6 @@ def embed_application(host: str, abstract: str, claims: str, description: str):
         "cpc_first": "",
         "cpcs": [],
         "title_xml": "",
-        ##########
         "abstract_xml": abstract,
         "claims_xml": claims,
         "description_xml": description,
