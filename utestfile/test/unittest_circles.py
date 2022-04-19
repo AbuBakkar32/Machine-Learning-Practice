@@ -1,7 +1,7 @@
 import unittest
 from math import pi
 
-from utestfile.circles import circle_area
+from utestfile.file.circles import circle_area
 
 
 class TestCircleArea(unittest.TestCase):

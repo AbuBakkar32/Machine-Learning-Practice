@@ -1,10 +1,12 @@
 import unittest
 
-import rmath
-from rname import Rname
+from utestfile.file import rmath
+from utestfile.file.rname import Rname
 
 
-# pytest -v --cov=rmath --cov-report=html for run the html test case file
+# pytest -v --cov=rmath --cov-report=html
+# pytest -v --cov=../ --cov-report=html
+
 
 class RmathTestCase(unittest.TestCase):
     @classmethod
