@@ -3,156 +3,86 @@ import os
 
 from termcolor import colored
 
-jsonFilePath = "D:/jsonfile"
-jsonfile = []
-for root, dirs, files in os.walk(jsonFilePath):
-    for file in files:
-        if file.endswith('.json'):
-            sfile = file.split('-')[-1]
-            sfile = sfile.split('.')[0]
-            if sfile == 'CLM':
-                with open(jsonFilePath + "/" + file, 'r') as f:
-                    data = json.load(f)
-                data = json.dumps(data, indent=4)
-                data = data.replace("\\t", "")
-                data = data.replace("\\n", "")
-                data = data.replace("#", "")
-                data = json.loads(data)
-                claim_id_format = "CLM-00000"
-                applicationNumber = \
-                    int(data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
+
+def append_all_text(obj):
+    text_data = []
+
+    def get_text(obj):
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                if key == 'text':
+                    txt = " ".join(value.split())
+                    if len(txt) > 3:
+                        if txt.endswith(':'):
+                            txt = txt[:-1]
+                            text_data.append(txt)
+                        else:
+                            text_data.append(txt)
+                else:
+                    get_text(value)
+        elif isinstance(obj, list):
+            for item in obj:
+                get_text(item)
+
+    get_text(obj)
+    return text_data
+
+
+def cmlDataClean():
+    jsonFilePath = "D:/jsonfile"
+    for root, dirs, files in os.walk(jsonFilePath):
+        for file in files:
+            if file.endswith('.json'):
+                sfile = file.split('-')[-1]
+                sfile = sfile.split('.')[0]
+                if sfile == 'CLM':
+                    with open(jsonFilePath + "/" + file, 'r') as f:
+                        data = json.load(f)
+                    data = json.dumps(data, indent=4)
+                    data = data.replace("\\t", "")
+                    data = data.replace("\\n", "")
+                    data = data.replace("#", "")
+                    data = json.loads(data)
+                    claim_id_format = "CLM-00000"
+                    applicationNumber = \
+                        int(data['us-patent-application']['us-bibliographic-data-application'][
+                                'application-reference'][
+                                'document-id'][
+                                'doc-number'])
+                    date = \
+                        data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
                             'document-id'][
-                            'doc-number'])
-                date = \
-                    data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
-                        'document-id'][
-                        'date']
-                documentType = 'CLM'
-                sections = []
-                # print(data['us-patent-application']['claims']['claim'][7]['claim-text'][0])
-                for i in range(len(data['us-patent-application']['claims']['claim'])):
-                    if data['us-patent-application']['claims']['claim'][i]['id'].split('-')[0] != 'UNKNOWN':
-                        if type(data['us-patent-application']['claims']['claim'][i]['claim-text']) != list:
-                            try:
-                                text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text']
-                                text = " ".join(text.split())
-                                section = {
-                                    "text": [text],
-                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                }
-                                sections.append(section)
-                            except TypeError:
-                                text = data['us-patent-application']['claims']['claim'][i]['claim-text']
-                                text = " ".join(text.split())
-                                section = {
-                                    "text": [text],
-                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                }
-                                sections.append(section)
-                            except:
-                                section = {
-                                    "text": [],
-                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                }
-                                sections.append(section)
-                        elif type(data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
-                            try:
-                                text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text']
-                                text = " ".join(text.split())
-                                section = {
-                                    "text": [text],
-                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                }
-                                sections.append(section)
-                            except TypeError:
-                                try:
-                                    text = data['us-patent-application']['claims']['claim'][i]['claim-text'][-1]['text']
-                                    text = " ".join(text.split())
-                                    section = {
-                                        "text": [text],
-                                        "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                    }
-                                    sections.append(section)
-                                except TypeError:
-                                    text = data['us-patent-application']['claims']['claim'][i]['claim-text']
-                                    section = {
-                                        "text": [text],
-                                        "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                    }
-                                    sections.append(section)
-                            except:
-                                section = {
-                                    "text": [],
-                                    "id": data['us-patent-application']['claims']['claim'][i]['id']
-                                }
-                                sections.append(section)
-                    else:
-                        if type(data['us-patent-application']['claims']['claim'][i]['claim-text']) != list:
-                            try:
-                                text = data['us-patent-application']['claims']['claim'][i]['claim-text']['text']
-                                text = " ".join(text.split())
-                                section = {
-                                    "text": [text],
-                                    "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][
-                                                            -2:]
-                                }
-                                sections.append(section)
-                            except TypeError:
-                                text = data['us-patent-application']['claims']['claim'][i]['claim-text']
-                                text = " ".join(text.split())
-                                section = {
-                                    "text": [text],
-                                    "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][
-                                                            -2:]
-                                }
-                                sections.append(section)
-                            except:
-                                section = {
-                                    "text": [],
-                                    "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][
-                                                            -2:]
-                                }
-                                sections.append(section)
-                        elif type(data['us-patent-application']['claims']['claim'][i]['claim-text']) == list:
-                            try:
-                                text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]['text']
-                                text = " ".join(text.split())
-                                section = {
-                                    "text": [text],
-                                    "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][
-                                                            -2:]
-                                }
-                                sections.append(section)
-                            except TypeError:
-                                try:
-                                    text = data['us-patent-application']['claims']['claim'][i]['claim-text'][-1]['text']
-                                    text = " ".join(text.split())
-                                    section = {
-                                        "text": [text],
-                                        "id": claim_id_format + data['us-patent-application']['claims']['claim'][i][
-                                                                    'id'][-2:]
-                                    }
-                                    sections.append(section)
-                                except TypeError:
-                                    text = data['us-patent-application']['claims']['claim'][i]['claim-text'][0]
-                                    section = {
-                                        "text": [text],
-                                        "id": claim_id_format + data['us-patent-application']['claims']['claim'][i][
-                                                                    'id'][-2:]
-                                    }
-                                    sections.append(section)
-                            except:
-                                section = {
-                                    "text": [],
-                                    "id": claim_id_format + data['us-patent-application']['claims']['claim'][i]['id'][
-                                                            -2:]
-                                }
-                getjson = {
-                    'applicationNumber': applicationNumber,
-                    'date': date,
-                    'documentType': documentType,
-                    'sections': sections
-                }
-                with open("D:/cleanjson" + "/" + file, 'w') as f:
-                    json.dump(getjson, f, indent=4)
-                print(colored(f"{file} Successfully cleaned", 'green'))
+                            'date']
+                    documentType = 'CLM'
+                    sections = []
+
+                    for i in range(len(data['us-patent-application']['claims']['claim'])):
+                        if data['us-patent-application']['claims']['claim'][i]['id'].split('-')[0] != 'UNKNOWN':
+                            txt = append_all_text(data['us-patent-application']['claims']['claim'][i])
+                            section = {
+                                "text": txt,
+                                "id": data['us-patent-application']['claims']['claim'][i]['id']
+                            }
+                            sections.append(section)
+                        else:
+                            txt = append_all_text(data['us-patent-application']['claims']['claim'][i])
+                            section = {
+                                "text": txt,
+                                "id": claim_id_format + data['us-patent-application']['claims']['claim'][i][
+                                                            'id'][
+                                                        -2:]
+                            }
+                            sections.append(section)
+                    getjson = {
+                        'applicationNumber': applicationNumber,
+                        'date': date,
+                        'documentType': documentType,
+                        'sections': sections
+                    }
+
+                    with open("D:/cleanjson" + "/" + file, 'w') as f:
+                        json.dump(getjson, f, indent=4)
+                    print(colored(f"{file} Successfully cleaned", 'green'))
+
+
+cmlDataClean()

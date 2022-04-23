@@ -131,7 +131,7 @@ def parse_xml_claims_v2(xml: bytes):
         "documentType": "CLM",
         "sections": elements,
     }
-
+    print(document)
     return document
 
 
@@ -236,7 +236,7 @@ def parse_xml_claims_v1(xml: bytes):
         "documentType": "CLM",
         "sections": elements,
     }
-
+    print(document)
     return document
 
 
@@ -283,7 +283,7 @@ def parse_xml_abst(xml: bytes):
         "documentType": "ABST",
         "sections": elements,
     }
-
+    print(document)
     return document
 
 
@@ -349,7 +349,7 @@ def parse_xml_specification(xml: bytes):
         "documentType": "SPEC",
         "sections": elements,
     }
-
+    print(document)
     return document
 
 
@@ -415,3 +415,6 @@ def embed_application(host: str, abstract: str, claims: str, description: str):
     response = requests.post(host, json=payload)
     print(response.json())
     return response.json()
+
+
+print(parse_xml_claims_v2("D:/xmlfile/claims-transform.xsl"))
