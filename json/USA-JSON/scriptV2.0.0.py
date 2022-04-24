@@ -119,6 +119,7 @@ class XmlToJsonConverter:
     def append_all_text(self, obj):
         text_data = []
 
+        # this function is used to append all text data from xml file
         def get_text(obj):
             if isinstance(obj, dict):
                 for key, value in obj.items():
