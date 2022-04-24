@@ -12,7 +12,7 @@ def append_all_text(obj):
             for key, value in obj.items():
                 if key == 'text':
                     txt = " ".join(value.split())
-                    if len(txt) > 3:
+                    if len(txt) > 5:
                         if txt.endswith(':'):
                             txt = txt[:-1]
                             text_data.append(txt)
@@ -58,14 +58,25 @@ def specDataClean():
                         try:
                             for i in range(len(data['us-patent-application']['description']['p'])):
                                 if 'boundary-data' in data['us-patent-application']['description']['p'][i]:
-                                    text = append_all_text(data['us-patent-application']['description']['p'][i])
-                                    section = {
-                                        "type":
-                                            data['us-patent-application']['description']['p'][i]['boundary-data'][
-                                                'type'],
-                                        "text": text
-                                    }
-                                    sections.append(section)
+                                    try:
+                                        text = append_all_text(data['us-patent-application']['description']['p'][i])
+                                        section = {
+                                            "type":
+                                                data['us-patent-application']['description']['p'][i]['boundary-data'][
+                                                    'type'],
+                                            "text": text
+                                        }
+                                        sections.append(section)
+                                    except:
+                                        text = append_all_text(data['us-patent-application']['description']['p'][i])
+                                        section = {
+                                            "type":
+                                                data['us-patent-application']['description']['p'][i]['boundary-data'][
+                                                    0][
+                                                    'type'],
+                                            "text": text
+                                        }
+                                        sections.append(section)
                         except KeyError:
                             text = append_all_text(data['us-patent-application']['description']['p'][i])
                             section = {
@@ -76,29 +87,29 @@ def specDataClean():
                             }
                             sections.append(section)
 
-                    # elif 'SpecificationDocument' in data:
-                    #     applicationNumber = \
-                    #         int(data['SpecificationDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
-                    #                 'ApplicationNumber'])
-                    #     date = \
-                    #         data['SpecificationDocument']['MailRoomDate']
-                    #     documentType = 'SPEC'
-                    #     sections = []
-                    #     for i in range(len(data['SpecificationDocument']['Specification']['P'])):
-                    #         try:
-                    #             text = data['SpecificationDocument']['Specification']['P'][i]['text']
-                    #             text = ' '.join(text.split())
-                    #             section = {
-                    #                 "text": text,
-                    #                 "type": data['SpecificationDocument']['Specification']['P'][i]['id']
-                    #             }
-                    #             sections.append(section)
-                    #         except:
-                    #             section = {
-                    #                 "text": " ",
-                    #                 "type": data['SpecificationDocument']['Specification']['P'][i]['id']
-                    #             }
-                    #             sections.append(section)
+                    elif 'SpecificationDocument' in data:
+                        applicationNumber = \
+                            int(data['SpecificationDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
+                                    'ApplicationNumber'])
+                        date = \
+                            data['SpecificationDocument']['MailRoomDate']
+                        documentType = 'SPEC'
+                        sections = []
+                        try:
+                            for i in range(len(data['SpecificationDocument']['Specification']['P'])):
+                                text = append_all_text(data['SpecificationDocument']['Specification']['P'][i])
+                                section = {
+                                    "type": data['SpecificationDocument']['Specification']['P'][i]['id'],
+                                    "text": text
+                                }
+                                sections.append(section)
+                        except KeyError:
+                            text = append_all_text(data['SpecificationDocument']['Specification']['P'])
+                            section = {
+                                "type": data['SpecificationDocument']['Specification']['P'][i]['id'],
+                                "text": text
+                            }
+                            sections.append(section)
 
                     getjson = {
                         'applicationNumber': applicationNumber,

@@ -152,45 +152,34 @@ class XmlToJsonConverter:
                 'date']
         documentType = 'SPEC'
         sections = []
-        for i in range(len(data['us-patent-application']['description']['p'])):
-            try:
+        try:
+            for i in range(len(data['us-patent-application']['description']['p'])):
                 if 'boundary-data' in data['us-patent-application']['description']['p'][i]:
-                    if type(data['us-patent-application']['description']['p'][i]['boundary-data']) == dict:
-                        try:
-                            text = data['us-patent-application']['description']['p'][i]['text'].strip()
-                            text = " ".join(text.split())
-                            section = {
-                                "text": text,
-                                "type": data['us-patent-application']['description']['p'][i]['boundary-data'][
-                                    'type']
-                            }
-                            sections.append(section)
-                        except:
-                            section = {
-                                "text": " ",
-                                "type": data['us-patent-application']['description']['p'][i]['boundary-data'][
-                                    'type']
-                            }
-                            sections.append(section)
-                    elif type(data['us-patent-application']['description']['p'][i]['boundary-data']) == list:
-                        try:
-                            text = data['us-patent-application']['description']['p'][i]['text'].strip()
-                            text = " ".join(text.split())
-                            section = {
-                                "text": text,
-                                "type": data['us-patent-application']['description']['p'][i]['boundary-data'][0][
-                                    'type']
-                            }
-                            sections.append(section)
-                        except:
-                            section = {
-                                "text": " ",
-                                "type": data['us-patent-application']['description']['p'][i]['boundary-data'][0][
-                                    'type']
-                            }
-                            sections.append(section)
-            except Exception as e:
-                pass
+                    try:
+                        text = self.append_all_text(data['us-patent-application']['description']['p'][i])
+                        section = {
+                            "type": data['us-patent-application']['description']['p'][i]['boundary-data']['type'],
+                            "text": text
+                        }
+                        sections.append(section)
+                    except:
+                        text = self.append_all_text(data['us-patent-application']['description']['p'][i])
+                        section = {
+                            "type":
+                                data['us-patent-application']['description']['p'][i]['boundary-data'][0][
+                                    'type'],
+                            "text": text
+                        }
+                        sections.append(section)
+        except KeyError:
+            text = self.append_all_text(data['us-patent-application']['description']['p'][i])
+            section = {
+                "type":
+                    data['us-patent-application']['description']['p'][i]['boundary-data'][
+                        'type'],
+                "text": text
+            }
+            sections.append(section)
 
         getjson = {
             'applicationNumber': applicationNumber,
@@ -222,23 +211,19 @@ class XmlToJsonConverter:
         sections = []
         try:
             for i in range(len(data['SpecificationDocument']['Specification']['P'])):
-                try:
-                    text = data['SpecificationDocument']['Specification']['P'][i]['text']
-                    text = ' '.join(text.split())
-                    section = {
-                        "text": text,
-                        "type": data['SpecificationDocument']['Specification']['P'][i]['id']
-                    }
-                    sections.append(section)
-                except:
-                    section = {
-                        "text": " ",
-                        "type": data['SpecificationDocument']['Specification']['P'][i]['id']
-                    }
-                    sections.append(section)
-
-        except Exception as e:
-            pass
+                text = self.append_all_text(data['SpecificationDocument']['Specification']['P'][i])
+                section = {
+                    "type": data['SpecificationDocument']['Specification']['P'][i]['id'],
+                    "text": text
+                }
+                sections.append(section)
+        except KeyError:
+            text = self.append_all_text(data['SpecificationDocument']['Specification']['P'])
+            section = {
+                "type": data['SpecificationDocument']['Specification']['P'][i]['id'],
+                "text": text
+            }
+            sections.append(section)
         getjson = {
             'applicationNumber': applicationNumber,
             'date': date,
