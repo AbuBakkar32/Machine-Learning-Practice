@@ -295,10 +295,49 @@ class XmlToJsonConverter:
         with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
             f.write(file_name + ".xml\n")
 
+    def clean_old_abst_file_to_json(self, file, data, file_name):
+        applicationNumber = \
+            int(data['SpecificationDocument']['DocumentHeaderDetails'][
+                    'ApplicationHeaderDetails'][
+                    'ApplicationNumber'])
+        date = \
+            data['SpecificationDocument']['DocumentCreateDateText']
+        documentType = 'ABST'
+        sections = []
+        try:
+            for i in range(len(data['SpecificationDocument']['Specification']['P'])):
+                txt = self.append_all_text(data['SpecificationDocument']['Specification']['P'][i])
+                sections.append(txt)
+        except KeyError:
+            txt = self.append_all_text(data['SpecificationDocument']['Specification']['P'])
+            sections.append(txt)
+
+        getjson = {
+            'applicationNumber': applicationNumber,
+            'date': date,
+            'documentType': documentType,
+            'sections': sections
+        }
+        with open(self.cleanJsonPath + "/" + file, 'w') as f:
+            json.dump(getjson, f, indent=4)
+
+        # upload clean json file into the GCP bucket
+        # try:
+        #     self.upload_destination_bucket(file, self.cleanJsonPath + "/" + file, self.destination_bucket_name)
+        #     print(f"{file} is successfully uploaded to bucket")
+        # except Exception as e:
+        #     print(f"{file} is not uploaded to bucket")
+
+        with open(self.ptf + '/' + "xml_file.txt", 'a') as f:
+            f.write(file_name + ".xml\n")
+
     def clean_abst_file(self, file, data, file_name):
         if 'us-patent-application' in data:
             # this method will be cleaned new ABST type of xml file into json file
             self.clean_new_abst_file_to_json(file, data, file_name)
+        elif 'SpecificationDocument' in data:
+            # this method will be cleaned old ABST type of xml file into json file
+            self.clean_old_abst_file_to_json(file, data, file_name)
         else:
             print(colored(f"{file} is not a valid file", 'red'))
 
@@ -422,6 +461,8 @@ class XmlToJsonConverter:
         data = data.replace("ns0:", "")
         data = data.replace("ns2:", "")
         data = data.replace("xsi:", "")
+        data = data.replace("pat:", "")
+        data = data.replace("com:", "")
         data = json.loads(data)
         if file.endswith('.json'):
             sfile = file.split('-')[-1]

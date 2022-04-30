@@ -1,8 +1,6 @@
 import json
 import os
 
-from termcolor import colored
-
 
 def append_all_text(obj):
     text_data = []
@@ -12,7 +10,7 @@ def append_all_text(obj):
             for key, value in obj.items():
                 if key == 'text':
                     txt = " ".join(value.split())
-                    if len(txt) > 3:
+                    if len(txt) > 5:
                         if txt.endswith(':'):
                             txt = txt[:-1]
                             text_data.append(txt)
@@ -43,23 +41,42 @@ def abstDataClean():
                     data = data.replace("\\n", "")
                     data = data.replace("#", "")
                     data = json.loads(data)
-                    applicationNumber = \
-                        int(data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
+                    if 'us-patent-application' in data:
+                        applicationNumber = \
+                            int(data['us-patent-application']['us-bibliographic-data-application'][
+                                    'application-reference'][
+                                    'document-id'][
+                                    'doc-number'])
+                        date = \
+                            data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
                                 'document-id'][
-                                'doc-number'])
-                    date = \
-                        data['us-patent-application']['us-bibliographic-data-application']['application-reference'][
-                            'document-id'][
-                            'date']
-                    documentType = 'ABST'
-                    sections = []
+                                'date']
+                        documentType = 'ABST'
+                        sections = []
 
-                    for i in range(len(data['us-patent-application']['abstract']['p'])):
                         try:
-                            txt = append_all_text(data['us-patent-application']['abstract']['p'][i])
-                            sections.append(txt)
+                            for i in range(len(data['us-patent-application']['abstract']['p'])):
+                                txt = append_all_text(data['us-patent-application']['abstract']['p'][i])
+                                sections.append(txt)
                         except KeyError:
                             txt = append_all_text(data['us-patent-application']['abstract']['p'])
+                            sections.append(txt)
+
+                    elif 'SpecificationDocument' in data:
+                        applicationNumber = \
+                            int(data['SpecificationDocument']['DocumentHeaderDetails'][
+                                    'ApplicationHeaderDetails'][
+                                    'ApplicationNumber'])
+                        date = \
+                            data['SpecificationDocument']['DocumentCreateDateText']
+                        documentType = 'ABST'
+                        sections = []
+                        try:
+                            for i in range(len(data['SpecificationDocument']['Specification']['P'])):
+                                txt = append_all_text(data['SpecificationDocument']['Specification']['P'][i])
+                                sections.append(txt)
+                        except KeyError:
+                            txt = append_all_text(data['SpecificationDocument']['Specification']['P'])
                             sections.append(txt)
 
                     getjson = {
@@ -68,9 +85,10 @@ def abstDataClean():
                         'documentType': documentType,
                         'sections': sections
                     }
-                    with open("D:/cleanjson" + "/" + file, 'w') as f:
-                        json.dump(getjson, f, indent=4)
-                    print(colored(f"{file} Successfully cleaned", 'green'))
+                    print(getjson)
+                    # with open("D:/cleanjson" + "/" + file, 'w') as f:
+                    #     json.dump(getjson, f, indent=4)
+                    # print(colored(f"{file} Successfully cleaned", 'green'))
 
 
 abstDataClean()
