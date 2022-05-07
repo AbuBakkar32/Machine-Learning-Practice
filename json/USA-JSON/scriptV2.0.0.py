@@ -203,6 +203,7 @@ class XmlToJsonConverter:
             f.write(file_name + ".xml\n")
 
     def old_spec_xml_format_clean_to_json(self, data, file_name, file):
+        id = data['SpecificationDocument']['DocumentHeaderDetails']['id']
         applicationNumber = \
             int(data['SpecificationDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
                     'ApplicationNumber'])
@@ -226,6 +227,7 @@ class XmlToJsonConverter:
             }
             sections.append(section)
         getjson = {
+            'id': id,
             'applicationNumber': applicationNumber,
             'date': date,
             'documentType': documentType,
@@ -299,6 +301,7 @@ class XmlToJsonConverter:
             f.write(file_name + ".xml\n")
 
     def clean_old_abst_file_to_json(self, file, data, file_name):
+        id = data['SpecificationDocument']['DocumentHeaderDetails']['id']
         applicationNumber = \
             int(data['SpecificationDocument']['DocumentHeaderDetails'][
                     'ApplicationHeaderDetails'][
@@ -316,6 +319,7 @@ class XmlToJsonConverter:
             sections.append(txt)
 
         getjson = {
+            'id': id,
             'applicationNumber': applicationNumber,
             'date': date,
             'documentType': documentType,
@@ -398,6 +402,7 @@ class XmlToJsonConverter:
             f.write(file_name + ".xml\n")
 
     def old_clm_xml_format_clean_to_json(self, data, file_name, file):
+        id = data['ClaimsDocument']['DocumentHeaderDetails']['id']
         applicationNumber = \
             int(data['ClaimsDocument']['DocumentHeaderDetails']['ApplicationHeaderDetails'][
                     'ApplicationNumber'])
@@ -428,6 +433,7 @@ class XmlToJsonConverter:
                     sections.append(section)
 
         getjson = {
+            'id': id,
             'applicationNumber': applicationNumber,
             'date': date,
             'documentType': documentType,
