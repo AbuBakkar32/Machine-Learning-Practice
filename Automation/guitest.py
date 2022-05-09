@@ -1,5 +1,3 @@
-import time
-
 import pyautogui
 
 # screenWidth, screenHeight = pyautogui.size()  # Returns two integers, the width and height of the screen. (The primary monitor, in multi-monitor setups.)
@@ -24,7 +22,7 @@ import pyautogui
 
 """
     For more information on pyautogui, see:
-    """
+"""
 
 # pyautogui.alert('This is an alert box.')
 # pyautogui.confirm('Shall I proceed?')
@@ -33,7 +31,7 @@ import pyautogui
 # pyautogui.password('Enter password (text will be hidden)')
 
 """
-find out image location
+    find out image location
 """
 # im1 = pyautogui.screenshot()
 # im1.save('button.png')
@@ -44,5 +42,6 @@ find out image location
 pyautogui.moveTo(400, 800)
 x, y = pyautogui.position()
 pyautogui.click(x, y)
-pyautogui.typewrite('Hello world!', interval=0.10)
-time.sleep(2)
+pyautogui.typewrite("Hello Friends! I'm here to let you know about france visa!", interval=0.10)
+pyautogui.countdown(5)
+# pyautogui.press('enter')
