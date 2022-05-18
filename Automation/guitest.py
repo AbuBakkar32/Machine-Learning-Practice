@@ -1,3 +1,5 @@
+import time
+
 import pyautogui
 
 # screenWidth, screenHeight = pyautogui.size()  # Returns two integers, the width and height of the screen. (The primary monitor, in multi-monitor setups.)
@@ -39,9 +41,22 @@ import pyautogui
 # buttonx, buttony = pyautogui.center(button7location)
 # pyautogui.click(buttonx, buttony)
 
-pyautogui.moveTo(400, 800)
+# click on Chrom Browser
+pyautogui.moveTo(620, 750)
 x, y = pyautogui.position()
 pyautogui.click(x, y)
-pyautogui.typewrite("Hello Friends! I'm here to let you know about france visa!", interval=0.10)
-pyautogui.countdown(5)
+time.sleep(2)
+
+# click on cricbuzz
+pyautogui.moveTo(420, 80)
+x, y = pyautogui.position()
+pyautogui.click(x, y)
+time.sleep(2)
+
+pyautogui.moveTo(320, 380)
+x, y = pyautogui.position()
+pyautogui.click(x, y)
+
+# pyautogui.typewrite("Hello Friends! I'm here to let you know about france visa!", interval=0.10)
+# pyautogui.countdown(5)
 # pyautogui.press('enter')
