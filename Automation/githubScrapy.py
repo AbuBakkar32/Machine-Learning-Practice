@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import pandas as pd
 
-browser = webdriver.Chrome('G:/Machine Learning Practice/Automation/driver/chromedriver.exe')
+browser = webdriver.Chrome('E:/ABS-RAKIB/python/Machine-Learning-Practice/Automation/driver/chromedriver.exe')
 browser.maximize_window()
 
 # browser.get("https://github.com/TheDancerCodes")
@@ -48,11 +48,12 @@ browser.maximize_window()
 browser.get("https://forums.edmunds.com/discussion/43315/mercedes-benz/amg-gt/amg-gt-leasing-questions")
 # elems = browser.find_elements_by_xpath("//a[@href]")
 
-elems = browser.find_elements_by_tag_name('a')
+link = []
+elems = browser.find_elements(by=By.TAG_NAME, value="a")
 for elem in elems:
     href = elem.get_attribute('href')
     if href is not None:
         print(href)
 
-# browser.close()
-# browser.quit()
+browser.close()
+browser.quit()
