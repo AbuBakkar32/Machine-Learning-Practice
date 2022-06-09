@@ -33,7 +33,8 @@ class XmlToJsonConverter:
         self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
         self.storage_client = google_bucket_conn()  # Google Cloud Storage Credentials for accessing the bucket
         self.source_bucket_name = 'search-ai-data-landings'  # bucket name where xml file will be uploaded
-        self.destination_bucket_name = 'search-ai-data-landing-clean-file'  # bucket name where clean json file will be uploaded
+        self.destination_bucket_name = 'search-ai-data-landing-clean-file'  # bucket name where clean json file will
+        # be uploaded
         self.bucket = self.storage_client.get_bucket(self.source_bucket_name)
 
         # current date format
