@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup, Tag
 from json import dump
 from sys import getsizeof
 
+# Django rest Frameworka URL
+# https://github.com/lakshit77/django-rest-framework
 urls = {
     'all': 'https://free-proxy-list.net/',
     'ssl': 'https://www.sslproxies.org/',
