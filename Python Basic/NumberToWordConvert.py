@@ -74,5 +74,11 @@ def numToWord(num):
         return numToWord(num // 1000) + " thousand " + numToWord(num % 1000)
     elif num == 1000000:
         return "one million"
+    elif num < 2000000:
+        return "one million " + numToWord(num % 1000000)
+    elif num < 1000000000:
+        return numToWord(num // 1000000) + " million " + numToWord(num % 1000000)
+    elif num == 1000000000:
+        return "one billion"
 
 print(numToWord(14450))
