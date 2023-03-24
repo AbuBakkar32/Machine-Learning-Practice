@@ -2,7 +2,7 @@ import time
 from datetime import datetime
 import webbrowser
 
-
+# Set alarm for a specific time
 class Alarm:
     def __init__(self, hour, minute, second, period):
         self.hour = hour
