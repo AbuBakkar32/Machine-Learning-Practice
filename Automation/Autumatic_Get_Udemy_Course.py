@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from ruamel.yaml import YAML
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -75,7 +74,8 @@ def redeemUdemyCourse(url):
     udemyEnroll.click()
 
     # Enroll Now 2
-    element_present = EC.presence_of_element_located((By.XPATH, '//*[@class="udemy pageloaded"]/div[1]/div[2]/div/div/div/div[2]/form/div[2]/div/div[4]/button'))
+    element_present = EC.presence_of_element_located(
+        (By.XPATH, '//*[@class="udemy pageloaded"]/div[1]/div[2]/div/div/div/div[2]/form/div[2]/div/div[4]/button'))
     WebDriverWait(driver, 10).until(element_present)
 
     # Check if zipcode exists before doing this
@@ -93,7 +93,7 @@ def redeemUdemyCourse(url):
 
     udemyEnroll = driver.find_element_by_xpath(
         '//*[@class="udemy pageloaded"]/div[1]/div[2]/div/div/div/div[2]/form/div[2]/div/div[4]/button'
-    )  # Udemy
+    )
     udemyEnroll.click()
 
 
