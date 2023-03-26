@@ -31,7 +31,6 @@ for _ in range(1, 4):
 
 
 time.sleep(5)
-# browser.close()
-# browser.quit()
+browser.close()
+browser.quit()
 print('Thank for logged-in our website')
-# hello abu rakib
