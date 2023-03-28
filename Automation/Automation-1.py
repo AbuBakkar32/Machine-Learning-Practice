@@ -34,3 +34,13 @@ time.sleep(5)
 browser.close()
 browser.quit()
 print('Thank for logged-in our website')
+
+# write a function to check if the element is present or not
+# def is_element_present(locator):
+#     try:
+#         browser.find_element_by_xpath(locator)
+#         return True
+#     except:
+#         return False
+#
+# print(is_element_present('//*[@id="menu_admin_viewAdminModule"]/b'))
