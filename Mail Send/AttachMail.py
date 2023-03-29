@@ -5,6 +5,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 import os.path
 
+# Email password is not included in this code
 email = 'myaddress@gmail.com'
 password = 'password'
 send_to_email = 'sentoaddreess@gmail.com'
