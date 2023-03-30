@@ -6,7 +6,7 @@ from xml.parsers import expat
 import xmltodict
 from termcolor import colored
 
-
+# xml to json coverter class
 class XmlToJson:
     def __init__(self, xmlFilePath: any = "D:/xmlfile", jsonFilePath: any = "D:/jsonfile"):
         self.xmlFile = []
