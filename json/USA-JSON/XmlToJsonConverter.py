@@ -1,3 +1,4 @@
+# Import all necessary module
 import json
 import os
 from xml.dom import minidom
@@ -5,6 +6,7 @@ from xml.parsers import expat
 
 import xmltodict
 from termcolor import colored
+
 
 # xml to json coverter class
 class XmlToJson:
@@ -14,6 +16,7 @@ class XmlToJson:
         self.jsonFilePath = jsonFilePath  # path of json file where json file will be created
         self.getjson()  # call getjson function
 
+    # convert XML file to list
     def convertXMLFileToList(self):
         # for handle the exception using try and case
         try:
@@ -29,6 +32,7 @@ class XmlToJson:
         finally:  # This is always processed no matter what
             pass
 
+    # convert xml file to json file
     def getjson(self):
         # this function is to convert xml file to json file
         try:
@@ -50,6 +54,7 @@ class XmlToJson:
         finally:  # This is always processed no matter what
             pass
 
+    # clean json file
     def clean_clm_file(self, file):
         with open(self.jsonFilePath + "/" + file, 'r') as f:
             data = json.load(f)
