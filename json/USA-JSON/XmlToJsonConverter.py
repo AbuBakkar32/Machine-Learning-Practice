@@ -73,5 +73,4 @@ class XmlToJson:
 
 
 if __name__ == '__main__':
-    # XmlToJson("D:/xmlfile", "D:/jsonfile")
-    XmlToJson()
+    XmlToJson() # XmlToJson("D:/xmlfile", "D:/jsonfile")
