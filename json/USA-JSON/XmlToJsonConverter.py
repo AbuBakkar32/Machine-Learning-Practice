@@ -58,6 +58,7 @@ class XmlToJson:
     def clean_clm_file(self, file):
         with open(self.jsonFilePath + "/" + file, 'r') as f:
             data = json.load(f)
+        # clean data to remove unwanted data from json file
         data = json.dumps(data, indent=4)
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
@@ -73,4 +74,4 @@ class XmlToJson:
 
 
 if __name__ == '__main__':
-    XmlToJson() # XmlToJson("D:/xmlfile", "D:/jsonfile")
+    XmlToJson()  # XmlToJson("D:/xmlfile", "D:/jsonfile")
