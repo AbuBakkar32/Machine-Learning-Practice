@@ -36,8 +36,10 @@ class XmlToJson:
     def getjson(self):
         # this function is to convert xml file to json file
         try:
-            for filename in self.convertXMLFileToList():  # call function to read xml file
-                with open(self.xmlFilePath + '/' + filename, 'r') as f:  # read XML file one by one
+            # call function to read xml file
+            for filename in self.convertXMLFileToList():
+                # read XML file one by one
+                with open(self.xmlFilePath + '/' + filename, 'r') as f:
                     xml = f.read()
                     xml = minidom.parseString(xml)
                     xml = xml.toprettyxml()
@@ -47,11 +49,14 @@ class XmlToJson:
                         json.dump(xml, f, indent=4)
                     self.clean_clm_file(baseFileName + '.json')
             print(colored(f"Total {len(self.xmlFile)} files Successfully converted XML to JSON", 'green'))
-        except FileNotFoundError:  # This is skipped if file exists
+            # This is skipped if file exists
+        except FileNotFoundError:
             print("FileNotFoundError")
-        except Exception as e:  # This is processed instead
+            # This is processed instead
+        except Exception as e:
             print("An exception occurred: ", e)
-        finally:  # This is always processed no matter what
+            # This is always processed no matter what
+        finally:
             pass
 
     # clean json file
