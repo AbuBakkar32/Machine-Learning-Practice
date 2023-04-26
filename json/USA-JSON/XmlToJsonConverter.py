@@ -12,9 +12,12 @@ from termcolor import colored
 class XmlToJson:
     def __init__(self, xmlFilePath: any = "D:/xmlfile", jsonFilePath: any = "D:/jsonfile"):
         self.xmlFile = []
-        self.xmlFilePath = xmlFilePath  # path of xml file
-        self.jsonFilePath = jsonFilePath  # path of json file where json file will be created
-        self.getjson()  # call getjson function
+        # path of xml file
+        self.xmlFilePath = xmlFilePath
+        # path of json file where json file will be created
+        self.jsonFilePath = jsonFilePath
+        # call getjson function
+        self.getjson()
 
     # convert XML file to list
     def convertXMLFileToList(self):
@@ -25,11 +28,14 @@ class XmlToJson:
                     if file.endswith('.xml'):
                         self.xmlFile.append(file)
             return self.xmlFile
-        except FileNotFoundError:  # This is skipped if file exists
+        # This is skipped if file exists
+        except FileNotFoundError:
             print("FileNotFoundError")
-        except Exception as e:  # This is processed instead
+            # This is processed instead
+        except Exception as e:
             print("An exception occurred: ", e)
-        finally:  # This is always processed no matter what
+            # This is always processed no matter what
+        finally:
             pass
 
     # convert xml file to json file
