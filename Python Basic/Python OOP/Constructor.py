@@ -20,10 +20,18 @@ def print_animal(o):
     print(f'The {o.type()} is named "{o.name()}" and says "{o.sound()}"')
 
 
+def print_animal_if_is_instance(i):
+    if isinstance(i, Animal):
+        print(f'The {i.type()} is named "{i.name()}" and says "{i.sound()}"')
+    else:
+        raise TypeError('print_animal(): requires an animal')
+
+
 def main():
     print_animal(Animal('kitten', 'fluffy', 'meow'))
-    print_animal(Animal('duck', 'doland', 'quack'))
+    print_animal(Animal('duck', 'Roland', 'quack'))
     print_animal(Animal('dino', 'jack', 'hello'))
+    print_animal_if_is_instance(Animal('kitten', 'fluffy', 'meow'))
 
 
 if __name__ == '__main__':
