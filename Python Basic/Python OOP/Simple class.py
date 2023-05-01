@@ -7,11 +7,13 @@ class Mobile:
 
     def new_iphone(self):
         print(self.new_phone)
-        
+
+
 def main():
     myMobile = Mobile()
     myMobile.new_iphone()
     myMobile.old_nokia()
+
 
 if __name__ == '__main__':
     main()
