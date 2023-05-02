@@ -32,6 +32,8 @@ def main():
     print_animal(Animal('duck', 'Roland', 'quack'))
     print_animal(Animal('dino', 'jack', 'hello'))
     print_animal_if_is_instance(Animal('kitten', 'fluffy', 'meow'))
+    print_animal_if_is_instance(Animal('dino', 'jack', 'hello'))
+    print_animal_if_is_instance(Animal('duck', 'Roland', 'quack'))
 
 
 if __name__ == '__main__':
