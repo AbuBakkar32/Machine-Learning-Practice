@@ -227,6 +227,7 @@ class XmlToJsonConverter:
                 "text": text
             }
             sections.append(section)
+            # Json object making
         getjson = {
             'id': id,
             'applicationNumber': applicationNumber,
