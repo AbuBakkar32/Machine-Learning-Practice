@@ -64,6 +64,7 @@ class XmlToJsonConverter:
         # call convert_xml_file_to_json function for processing xml file to json file
         self.convert_xml_file_to_json()
 
+    # Upload file to google bucket
     def upload_destination_bucket(self, blob_name, file_path, bucket_name):
         bucket = self.storage_client.get_bucket(bucket_name)
         blob = bucket.blob(blob_name)
@@ -86,6 +87,7 @@ class XmlToJsonConverter:
                     f.write("")
             print(colored("Directory " + self.ctf + " Already Exists", 'red'))
 
+    # Convert xml file to json file
     def convert_xml_file_to_json(self):
         filename = [filename.name for filename in list(self.bucket.list_blobs(prefix=self.pre_date))]
         if len(filename) > 1:
