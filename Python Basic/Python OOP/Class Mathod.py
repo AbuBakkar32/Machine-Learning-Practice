@@ -43,6 +43,7 @@ d = [0] * (max(m + b) + 1)
 a1 = 0
 a2 = 0
 
+# # Create a subclass of Animal
 for i in range(n):
     if m[i] > k:
         continue
@@ -62,6 +63,7 @@ elif a1 == a2:
 else:
     print("Bashar".capitalize())
 
+# Answer should be:
 # 7 3
 # 1 1 2 3 4 1 2
 # 2 2 2 1 1 1 2
