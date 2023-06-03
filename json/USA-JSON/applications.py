@@ -4,6 +4,7 @@ import requests
 from lxml import etree
 
 
+# parsing document metadata
 def parse_document_metadata(xml_root):
     application_number = ""
     date = ""
