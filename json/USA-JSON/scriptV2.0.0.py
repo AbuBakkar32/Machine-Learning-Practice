@@ -27,6 +27,7 @@ def google_bucket_conn():
     return storage_client
 
 
+# XML to JSON Converter class file
 class XmlToJsonConverter:
     def __init__(self, xmlFilePath: any = None):
         self.xmlFilePath = xmlFilePath  # path of xml file
