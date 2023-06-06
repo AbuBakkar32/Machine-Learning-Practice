@@ -1,13 +1,16 @@
-from reactpy import component, html, run
+from reactpy import component, html
+from reactpy.backend.sanic import configure
+from sanic import Sanic
 
 
 @component
-def App():
-    return html.div(
-        html.h1("Hello, world!"),
-        html.p("This is a paragraph."),
-        html.button("Click me!")
-    )
+def HelloWorld():
+    return html.h1("Hello, world!")
 
 
-run(App)
+app = Sanic("MyApp")
+configure(app, HelloWorld)
+
+
+if __name__ == "__main__":
+    app.run(port=8000)
