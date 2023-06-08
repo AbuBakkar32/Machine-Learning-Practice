@@ -14,5 +14,6 @@ def HelloWorld():
 app = Sanic("MyApp")
 configure(app, HelloWorld)
 
+# this is the main program to run the app
 if __name__ == "__main__":
     app.run(port=8000)
