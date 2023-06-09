@@ -1,45 +1,132 @@
+# import json
+#
+# import requests
+# from bs4 import BeautifulSoup
+#
+# # Send a GET request to the website
+# url = 'https://www.luluhypermarket.com/en-ae/electronics'
+# main_url = 'https://www.luluhypermarket.com'
+# response = requests.get(url)
+#
+# # Create a BeautifulSoup object to parse the HTML content
+# soup = BeautifulSoup(response.content, 'html.parser')
+#
+# # Scrape subcategories
+# subcategories = soup.select('.recommended-content > div > div > a')
+# subcategory_names = [subcategory.get_text(strip=True) for subcategory in subcategories]
+#
+# # Scrape product URLs
+# product_urls = [f'{main_url}{product["href"]}' for product in soup.select('.recommended-content > div > div > a')]
+#
+# # Scrape product details
+# product_details = {}
+# for product_url in product_urls[:1]:
+#     product_response = requests.get(product_url)
+#     product_soup = BeautifulSoup(product_response.content, 'html.parser')
+#     product_info = product_soup.find('div', class_='product-listing-sectionfashion-products').find_all('div',
+#                                                                                                        class_='product-img')
+#     subcategory_name = product_soup.select_one('.product-sorting > div > h1').get_text(strip=True)
+#
+#     sub_product_urls = [f'{main_url}' + product.find('a')['href'] for product in product_info]
+#     product_list = []
+#     for sub_product_url in sub_product_urls:
+#         sub_product_response = requests.get(sub_product_url)
+#         sub_product_soup = BeautifulSoup(sub_product_response.content, 'html.parser')
+#         sub_product_info = sub_product_soup.find('div', class_="product-description")
+#
+#         product_name = sub_product_info.find('h1').get_text(strip=True)
+#         product_price = sub_product_info.find('span', class_='item price').get_text(strip=True).split('AED')[-1]
+#
+#         ul = sub_product_info.find('div', class_='description-block').find_all('li')
+#         product_summary = [li.get_text(strip=True) for li in ul]
+#
+#         data = {
+#             "Title": product_name,
+#             "Price": "AED " + product_price,
+#             "Product Summary": product_summary
+#         }
+#         product_list.append(data)
+#     product_details[subcategory_name] = product_list
+#
+# with open('product_data.json', 'a') as f:
+#     json.dump(product_details, f, indent=4)
+
+# Import Necessary Libraries
+import json
 import requests
 from bs4 import BeautifulSoup
-import csv
-
-# Send a GET request to the website
-url = 'https://www.luluhypermarket.com/en-ae/electronics'
-mainUrl = 'https://www.luluhypermarket.com'
-response = requests.get(url)
-
-# Create a BeautifulSoup object to parse the HTML content
-soup = BeautifulSoup(response.content, 'html.parser')
-
-# Scrape subcategories
-subcategories = soup.find('div', class_='recommended-content').find('div')
-subcategory_names = [subcategory.get_text(strip=True) for subcategory in subcategories.find_all('a')]
-
-product_url = []
-for product in subcategories.find_all('div'):
-    try:
-        product_url.append(f'{mainUrl}'+product.find('a')['href'])
-    except TypeError:
-        pass
-
-print(subcategory_names)
-print(product_url)
 
 
+class LuluHypermarketScraper:
+    def __init__(self, url):
+        """
+        Initialize the scraper with the URL and set up instance variables.
+        """
+        self.url = url
+        self.main_url = 'https://www.luluhypermarket.com'
+        self.product_details = {}
 
-# Scrape product details
-product_details = []
-for product_url in product_urls:
-    product_response = requests.get(product_url)
-    product_soup = BeautifulSoup(product_response.content, 'html.parser')
-    product_info = product_soup.select_one('.product-info')
-    if product_info:
-        product_details.append(product_info.get_text(strip=True))
-    else:
-        product_details.append('')
+    def scrape_product_urls(self):
+        """
+        Scrape the product URLs from the website.
+        """
+        response = requests.get(self.url)
+        soup = BeautifulSoup(response.content, 'html.parser')
+        product_urls = [f'{self.main_url}{product["href"]}' for product in
+                        soup.select('.recommended-content > div > div > a')]
+        return product_urls
 
-# Write data to CSV file
-with open('data.csv', 'w', newline='', encoding='utf-8') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(['Category', 'Product', 'Details'])
-    for category, product, details in zip(subcategory_names, product_names, product_details):
-        writer.writerow([category, product, details])
+    def scrape_product_details(self, product_urls):
+        """
+        Scrape the product details for each URL.
+        """
+        for product_url in product_urls:
+            product_response = requests.get(product_url)
+            product_soup = BeautifulSoup(product_response.content, 'html.parser')
+            product_info = product_soup.find('div', class_='product-listing-sectionfashion-products').find_all('div',
+                                                                                                               class_='product-img')
+            subcategory_name = product_soup.select_one('.product-sorting > div > h1').get_text(strip=True)
+
+            sub_product_urls = [f'{self.main_url}' + product.find('a')['href'] for product in product_info]
+            product_list = []
+            for sub_product_url in sub_product_urls:
+                sub_product_response = requests.get(sub_product_url)
+                sub_product_soup = BeautifulSoup(sub_product_response.content, 'html.parser')
+                sub_product_info = sub_product_soup.find('div', class_="product-description")
+
+                product_name = sub_product_info.find('h1').get_text(strip=True)
+                product_price = sub_product_info.find('span', class_='item price').get_text(strip=True).split('AED')[-1]
+
+                ul = sub_product_info.find('div', class_='description-block').find_all('li')
+                product_summary = [li.get_text(strip=True) for li in ul]
+
+                data = {
+                    "Title": product_name,
+                    "Price": "AED " + product_price,
+                    "Product Summary": product_summary
+                }
+                product_list.append(data)
+            self.product_details[subcategory_name] = product_list
+
+    def save_to_json(self, filename):
+        """
+        Save the product details to a JSON file.
+        """
+        with open(filename, 'a') as f:
+            json.dump(self.product_details, f, indent=4)
+
+
+def main():
+    """
+    Call the Class to perform the scraping process from the main function.
+    """
+    url = 'https://www.luluhypermarket.com/en-ae/electronics'
+    scraper = LuluHypermarketScraper(url)
+    product_urls = scraper.scrape_product_urls()
+    scraper.scrape_product_details(product_urls)
+    scraper.save_to_json('product_data.json')
+
+
+if __name__ == '__main__':
+    # Call the main function
+    main()
