@@ -4,20 +4,27 @@ import csv
 
 # Send a GET request to the website
 url = 'https://www.luluhypermarket.com/en-ae/electronics'
+mainUrl = 'https://www.luluhypermarket.com'
 response = requests.get(url)
 
 # Create a BeautifulSoup object to parse the HTML content
 soup = BeautifulSoup(response.content, 'html.parser')
 
 # Scrape subcategories
-subcategories = soup.find('div', class_='recommended-content').find_all('a')
-print(subcategories)
-subcategory_names = [subcategory.get_text(strip=True) for subcategory in subcategories]
+subcategories = soup.find('div', class_='recommended-content').find('div')
+subcategory_names = [subcategory.get_text(strip=True) for subcategory in subcategories.find_all('a')]
 
-# Scrape product listings and URLs
-products = soup.select('.plp-product-name')
-product_names = [product.get_text(strip=True) for product in products]
-product_urls = [product.find('a')['href'] for product in products]
+product_url = []
+for product in subcategories.find_all('div'):
+    try:
+        product_url.append(f'{mainUrl}'+product.find('a')['href'])
+    except TypeError:
+        pass
+
+print(subcategory_names)
+print(product_url)
+
+
 
 # Scrape product details
 product_details = []
