@@ -13,6 +13,7 @@ class LuluHypermarketSpider(scrapy.Spider):
     name = 'lulu_hypermarket'
     start_urls = ['https://www.luluhypermarket.com/en-ae/electronics']
     main_url = 'https://www.luluhypermarket.com'
+    product_details = {}
 
     def parse(self, response):
         """
@@ -30,14 +31,12 @@ class LuluHypermarketSpider(scrapy.Spider):
         Parses the product page and extracts the product details.
         """
         subcategory_name = response.css('.product-sorting > div > h1::text').get().strip()
-        print(subcategory_name)
 
         sub_product_urls = response.css('.product-listing-sectionfashion-products .product-img a::attr(href)').getall()
 
-        product_list = []
         for url in sub_product_urls:
             yield scrapy.Request(self.main_url + url, callback=self.parse_sub_product,
-                                 meta={'subcategory_name': subcategory_name, 'product_list': product_list})
+                                 meta={'subcategory_name': subcategory_name})
 
     def parse_sub_product(self, response):
         """
@@ -57,17 +56,17 @@ class LuluHypermarketSpider(scrapy.Spider):
             "Product Summary": product_summary
         }
 
-        product_list = response.meta['product_list']
-        product_list.append(data)
-        self.save_product_details(subcategory_name, product_list)
+        if subcategory_name in self.product_details:
+            self.product_details[subcategory_name].append(data)
+        else:
+            self.product_details[subcategory_name] = [data]
 
-    def save_product_details(self, subcategory_name, product_list):
+    def closed(self, reason):
         """
-        Saves the product details to a JSON file.
+        Triggered when the spider is closed. Saves the product details to a JSON file.
         """
-        product_details = {subcategory_name: product_list}
-        with open('product_data1.json', 'a') as f:
-            json.dump(product_details, f, indent=4)
+        with open('product_data.json', 'w') as f:
+            json.dump(self.product_details, f, indent=4)
 
 
 # Run the spider
