@@ -1,55 +1,8 @@
-# import json
-#
-# import requests
-# from bs4 import BeautifulSoup
-#
-# # Send a GET request to the website
-# url = 'https://www.luluhypermarket.com/en-ae/electronics'
-# main_url = 'https://www.luluhypermarket.com'
-# response = requests.get(url)
-#
-# # Create a BeautifulSoup object to parse the HTML content
-# soup = BeautifulSoup(response.content, 'html.parser')
-#
-# # Scrape subcategories
-# subcategories = soup.select('.recommended-content > div > div > a')
-# subcategory_names = [subcategory.get_text(strip=True) for subcategory in subcategories]
-#
-# # Scrape product URLs
-# product_urls = [f'{main_url}{product["href"]}' for product in soup.select('.recommended-content > div > div > a')]
-#
-# # Scrape product details
-# product_details = {}
-# for product_url in product_urls[:1]:
-#     product_response = requests.get(product_url)
-#     product_soup = BeautifulSoup(product_response.content, 'html.parser')
-#     product_info = product_soup.find('div', class_='product-listing-sectionfashion-products').find_all('div',
-#                                                                                                        class_='product-img')
-#     subcategory_name = product_soup.select_one('.product-sorting > div > h1').get_text(strip=True)
-#
-#     sub_product_urls = [f'{main_url}' + product.find('a')['href'] for product in product_info]
-#     product_list = []
-#     for sub_product_url in sub_product_urls:
-#         sub_product_response = requests.get(sub_product_url)
-#         sub_product_soup = BeautifulSoup(sub_product_response.content, 'html.parser')
-#         sub_product_info = sub_product_soup.find('div', class_="product-description")
-#
-#         product_name = sub_product_info.find('h1').get_text(strip=True)
-#         product_price = sub_product_info.find('span', class_='item price').get_text(strip=True).split('AED')[-1]
-#
-#         ul = sub_product_info.find('div', class_='description-block').find_all('li')
-#         product_summary = [li.get_text(strip=True) for li in ul]
-#
-#         data = {
-#             "Title": product_name,
-#             "Price": "AED " + product_price,
-#             "Product Summary": product_summary
-#         }
-#         product_list.append(data)
-#     product_details[subcategory_name] = product_list
-#
-# with open('product_data.json', 'a') as f:
-#     json.dump(product_details, f, indent=4)
+""""
+Author: Abu Bakkar Siddikk
+Email:abubakkar.swe@gmail.com
+Date: 2023-06-09
+"""
 
 # Import Necessary Libraries
 import json

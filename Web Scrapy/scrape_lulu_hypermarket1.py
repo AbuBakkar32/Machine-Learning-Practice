@@ -1,3 +1,10 @@
+""""
+Author: Abu Bakkar Siddikk
+Email:abubakkar.swe@gmail.com
+Date: 2023-06-09
+"""
+
+# Import necessary libraries
 import scrapy
 import json
 
@@ -12,7 +19,6 @@ class LuluHypermarketSpider(scrapy.Spider):
         Entry point of the spider. It parses the start URL and triggers the scraping process.
         """
         subcategories = response.css('.recommended-content > div > div > a')
-        subcategory_names = subcategories.css('::text').getall()
 
         product_urls = [self.main_url + product.css('::attr(href)').get() for product in subcategories]
 
@@ -24,6 +30,7 @@ class LuluHypermarketSpider(scrapy.Spider):
         Parses the product page and extracts the product details.
         """
         subcategory_name = response.css('.product-sorting > div > h1::text').get().strip()
+        print(subcategory_name)
 
         sub_product_urls = response.css('.product-listing-sectionfashion-products .product-img a::attr(href)').getall()
 
@@ -39,7 +46,7 @@ class LuluHypermarketSpider(scrapy.Spider):
         subcategory_name = response.meta['subcategory_name']
 
         product_name = response.css('.product-description h1::text').get().strip()
-        product_price = response.css('.product-description span.item.price::text').get().strip().split('AED')[-1]
+        product_price = response.css('.product-description span.item.price span::text').get().strip()
 
         product_summary = response.css('.product-description .description-block li::text').getall()
         product_summary = [summary.strip() for summary in product_summary]
@@ -59,7 +66,7 @@ class LuluHypermarketSpider(scrapy.Spider):
         Saves the product details to a JSON file.
         """
         product_details = {subcategory_name: product_list}
-        with open('product_data.json', 'a') as f:
+        with open('product_data1.json', 'a') as f:
             json.dump(product_details, f, indent=4)
 
 
