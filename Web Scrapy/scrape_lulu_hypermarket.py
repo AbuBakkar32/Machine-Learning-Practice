@@ -16,6 +16,7 @@ class LuluHypermarketScraper:
         Initialize the scraper with the URL and set up instance variables.
         """
         self.url = url
+        #Main URLs
         self.main_url = 'https://www.luluhypermarket.com'
         self.product_details = {}
 
@@ -73,6 +74,7 @@ def main():
     """
     Call the Class to perform the scraping process from the main function.
     """
+    # Category URLs
     url = 'https://www.luluhypermarket.com/en-ae/electronics'
     scraper = LuluHypermarketScraper(url)
     product_urls = scraper.scrape_product_urls()
