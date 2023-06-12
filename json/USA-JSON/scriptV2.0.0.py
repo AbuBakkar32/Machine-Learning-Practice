@@ -20,15 +20,19 @@ except Exception as e:
 # https://cloud.google.com/appengine/docs/standard/python/googlecloudstorageclient/read-write-to-cloud-storage
 
 def google_bucket_conn():
-    # Google Cloud Storage Credentials for accessing the bucket
+    """
+    Google Cloud Storage Credentials for accessing the bucket
+    """
     PATH = os.path.join(os.getcwd(), 'asl-project-demo-013a807f0641.json')
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = PATH
     storage_client = storage.Client(PATH)
     return storage_client
 
 
-# XML to JSON Converter class file
 class XmlToJsonConverter:
+    """
+    This class is used to convert xml file to json file
+    """
     def __init__(self, xmlFilePath: any = None):
         self.xmlFilePath = xmlFilePath  # path of xml file
         self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
