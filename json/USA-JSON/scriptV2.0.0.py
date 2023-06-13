@@ -349,10 +349,14 @@ class XmlToJsonConverter:
 
     def clean_abst_file(self, file, data, file_name):
         if 'us-patent-application' in data:
-            # this method will be cleaned new ABST type of xml file into json file
+            """
+            this method will be cleaned new ABST type of xml file into json file
+            """
             self.clean_new_abst_file_to_json(file, data, file_name)
         elif 'SpecificationDocument' in data:
-            # this method will be cleaned old ABST type of xml file into json file
+            """
+            this method will be cleaned old ABST type of xml file into json file
+            """
             self.clean_old_abst_file_to_json(file, data, file_name)
         else:
             print(colored(f"{file} is not a valid file", 'red'))
