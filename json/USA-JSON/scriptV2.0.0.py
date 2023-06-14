@@ -475,32 +475,7 @@ class XmlToJsonConverter:
         else:
             print(colored(f"{file} is not a valid type", 'red'))
 
-    def clean_json(self, file, data):
-        file_name = file.split('.json')[0]
-        data = data.replace("\\t", "")
-        data = data.replace("\\n", "")
-        data = data.replace("#", "")
-        data = data.replace("ns0:", "")
-        data = data.replace("ns2:", "")
-        data = data.replace("xsi:", "")
-        data = data.replace("pat:", "")
-        data = data.replace("com:", "")
-        data = json.loads(data)
-        if file.endswith('.json'):
-            sfile = file.split('-')[-1]
-            sfile = sfile.split('.')[0]
 
-            # if file type is SPEC then it will be converting it to SPEC.json
-            if sfile == 'SPEC':
-                self.clean_spec_file(file, data, file_name)
-            # if file type is ABST then it will be converting it to ABST.json
-            elif sfile == 'ABST':
-                self.clean_abst_file(file, data, file_name)
-            # if file type is CLM then it will be converting it to CLM.json
-            elif sfile == 'CLM':
-                self.clean_clm_file(file, data, file_name)
-            else:
-                print(f"This {file_name}.xml file Suffix should be CLM, ABST & SPEC format")
 
 
 def main():
