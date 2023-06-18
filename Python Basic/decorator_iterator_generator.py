@@ -89,28 +89,28 @@ sqr(54)
 
 
 # multiple decorators
-def lowercase_decorator(function):
-    def wrapper():
-        func = function()
-        make_lowercase = func.lower()
-        return make_lowercase
-
-    return wrapper
-
-
-def split_string(function):
-    def wrapper():
-        func = function()
-        split_string = func.split()
-        return split_string
-
-    return wrapper
-
-
-@split_string
-@lowercase_decorator
-def test_func():
-    return 'MOTHER OF DRAGONS'
-
-
-test_func()
+# def lowercase_decorator(function):
+#     def wrapper():
+#         func = function()
+#         make_lowercase = func.lower()
+#         return make_lowercase
+#
+#     return wrapper
+#
+#
+# def split_string(function):
+#     def wrapper():
+#         func = function()
+#         split_string = func.split()
+#         return split_string
+#
+#     return wrapper
+#
+#
+# @split_string
+# @lowercase_decorator
+# def test_func():
+#     return 'MOTHER OF DRAGONS'
+#
+#
+# test_func()
