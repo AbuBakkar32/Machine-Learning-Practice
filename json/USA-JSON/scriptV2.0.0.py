@@ -33,6 +33,7 @@ class XmlToJsonConverter:
     """
     This class is used to convert xml file to json file
     """
+
     def __init__(self, xmlFilePath: any = None):
         self.xmlFilePath = xmlFilePath  # path of xml file
         self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
@@ -436,6 +437,7 @@ class XmlToJsonConverter:
                     sections.append(section)
 
                 # if claim id start with UNKNOWN, then it will be modified to Claim id like CLM-0000001
+
                 else:
                     txt = self.append_all_text(data['ClaimsDocument']['ClaimSet']['ClaimList']['Claim'][i])
                     section = {
@@ -466,6 +468,13 @@ class XmlToJsonConverter:
             f.write(file_name + ".xml\n")
 
     def clean_clm_file(self, file, data, file_name):
+        """
+        this method will be cleaned CLM type of xml file into json file and upload into the GCP bucket
+        :param file:
+        :param data:
+        :param file_name:
+        :return:
+        """
         if 'ClaimsDocument' in data:
             # this method will be cleaned old CLM type of xml file into json file
             self.old_clm_xml_format_clean_to_json(data, file_name, file)
