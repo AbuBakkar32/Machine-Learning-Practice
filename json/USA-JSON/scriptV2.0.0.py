@@ -485,6 +485,12 @@ class XmlToJsonConverter:
             print(colored(f"{file} is not a valid type", 'red'))
 
     def clean_json(self, file, data):
+        """
+        this method will be cleaned SPEC and ABST type of json file into json file and upload into the GCP bucket
+        :param file:
+        :param data:
+        :return:
+        """
         file_name = file.split('.json')[0]
         data = data.replace("\\t", "")
         data = data.replace("\\n", "")
