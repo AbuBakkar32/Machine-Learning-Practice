@@ -505,7 +505,9 @@ class XmlToJsonConverter:
             sfile = file.split('-')[-1]
             sfile = sfile.split('.')[0]
 
-            # if file type is SPEC then it will be converting it to SPEC.json
+            """
+            if file type is SPEC then it will be converting it to SPEC.json
+            """
             if sfile == 'SPEC':
                 self.clean_spec_file(file, data, file_name)
             # if file type is ABST then it will be converting it to ABST.json
@@ -519,7 +521,10 @@ class XmlToJsonConverter:
 
 
 def main():
-    # this is the main function where we are calling the class to convert json to clean json format
+    """
+    this is the main function where we are calling the class to convert json to clean json format
+    :return:
+    """
     xml_file = "c:/search-ai-data-landing/"
     XmlToJsonConverter(xml_file)
 
