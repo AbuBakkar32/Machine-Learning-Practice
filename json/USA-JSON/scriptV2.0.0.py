@@ -35,11 +35,16 @@ class XmlToJsonConverter:
     """
 
     def __init__(self, xmlFilePath: any = None):
-        self.xmlFilePath = xmlFilePath  # path of xml file
-        self.cleanJsonPath = 'c:/cleanjson/'  # path of json where clean json file will be created
-        self.storage_client = google_bucket_conn()  # Google Cloud Storage Credentials for accessing the bucket
-        self.source_bucket_name = 'search-ai-data-landings'  # bucket name where xml file will be uploaded
-        self.destination_bucket_name = 'search-ai-data-landing-clean-file'  # bucket name where clean json file will
+        # path of xml file
+        self.xmlFilePath = xmlFilePath
+        # path of json where clean json file will be created
+        self.cleanJsonPath = 'c:/cleanjson/'
+        # Google Cloud Storage Credentials for accessing the bucket
+        self.storage_client = google_bucket_conn()
+        # bucket name where xml file will be uploaded
+        self.source_bucket_name = 'search-ai-data-landings'
+        # bucket name where clean json file will
+        self.destination_bucket_name = 'search-ai-data-landing-clean-file'
         # be uploaded
         self.bucket = self.storage_client.get_bucket(self.source_bucket_name)
 
