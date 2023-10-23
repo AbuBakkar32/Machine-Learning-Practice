@@ -51,4 +51,4 @@ plt.legend()
 plt.xlabel('Area measure')
 plt.ylabel('Price of Area')
 plt.title('Home Price and Area')
-plt.show()
+plt.show()m
