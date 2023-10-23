@@ -28,6 +28,17 @@ array2 = array.astype(np.float)
 value = ([[array2]])
 result = reg.predict(value)
 
+
+# Write a function to predict home price based on area
+def home_price(area):
+    array = np.array(n)
+    array2 = array.astype(np.float)
+    value = ([[array2]])
+    return reg.predict([[value]])
+
+
+home_price(3300)
+
 home_price = np.array(result)
 home_price = home_price.item()
 
@@ -37,7 +48,7 @@ plt.scatter(df['area'], df['price'], marker=r'$\clubsuit$', edgecolors='black', 
 plt.plot(df.area, reg.predict(df[['area']]), color='red')
 
 plt.legend()
-# plt.xlabel('Area measure')
-# plt.ylabel('Price of Area')
-# plt.title('Home Price and Area')
+plt.xlabel('Area measure')
+plt.ylabel('Price of Area')
+plt.title('Home Price and Area')
 plt.show()
