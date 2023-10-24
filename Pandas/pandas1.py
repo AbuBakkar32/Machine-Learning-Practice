@@ -25,38 +25,38 @@ print(sr+sr2)
 
 # ...............Pandas DataFrame Tutorial..............
 
-# arr = randint(0, 100, 16).reshape(4, 4)
-#
-# row = 'A B C D'.split()
-# col = 'E F G H'.split()
-#
-# df = pd.DataFrame(data=arr, index=row, columns=col)
-# print(df)
+arr = randint(0, 100, 16).reshape(4, 4)
+
+row = 'A B C D'.split()
+col = 'E F G H'.split()
+
+df = pd.DataFrame(data=arr, index=row, columns=col)
+print(df)
 
 
 # ...............Pandas DataFrame Selection Index and Missing data ..............
 
-# arr = randint(-100, 100, 16).reshape(4, 4)
-#
-# row = 'A B C D'.split()
-# col = 'E F G H'.split()
-#
-# df = pd.DataFrame(data=arr, index=row, columns=col)
+arr = randint(-100, 100, 16).reshape(4, 4)
 
-# print(df.iloc[1]) # Integer Location index wish will be print
-# print(df.T) # travers index to columns, columns to index
-# df['SUM(G & H)'] = df['G']+df['H'] # Create new Column doing sum G and H Column
-# df.loc['SUM(C & D)'] = df.loc['C']+df.loc['D'] # Create new Row doing sum C and D Row
-# df.drop('SUM(G & H)', axis=1, inplace=True) # Delete single Column
-# df.drop('D', axis=1, inplace=True)  # Delete single Row  {Notes: axis '1' means Column axis '0' means Row}
+row = 'A B C D'.split()
+col = 'E F G H'.split()
+
+df = pd.DataFrame(data=arr, index=row, columns=col)
+
+print(df.iloc[1]) # Integer Location index wish will be print
+print(df.T) # travers index to columns, columns to index
+df['SUM(G & H)'] = df['G']+df['H'] # Create new Column doing sum G and H Column
+df.loc['SUM(C & D)'] = df.loc['C']+df.loc['D'] # Create new Row doing sum C and D Row
+df.drop('SUM(G & H)', axis=1, inplace=True) # Delete single Column
+df.drop('D', axis=1, inplace=True)  # Delete single Row  {Notes: axis '1' means Column axis '0' means Row}
 
 
-# df = df[df > 0]  # check the value which number is positive
-# df = df.dropna() #row wise dekbe kun row te kono null nai
-# df = df.dropna(axis=1) #Column wise dekbe kun Column te kono null nai
-# df = df.dropna(thresh= 2, axis=1) #at list column e 2 ta value thakte hobe
-# df = df.fillna(10)  # jei khane null thakbe, sei khane 10 diye fill up kore dibe
-# print(df['E'].fillna(df['E'].mean()))
+df = df[df > 0]  # check the value which number is positive
+df = df.dropna() #row wise dekbe kun row te kono null nai
+df = df.dropna(axis=1) #Column wise dekbe kun Column te kono null nai
+df = df.dropna(thresh= 2, axis=1) #at list column e 2 ta value thakte hobe
+df = df.fillna(10)  # jei khane null thakbe, sei khane 10 diye fill up kore dibe
+print(df['E'].fillna(df['E'].mean()))
 
 
 # ...............Pandas DataFrame GroupBy ..............
