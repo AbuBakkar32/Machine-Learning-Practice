@@ -4,23 +4,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# from google.colab import files
-# upload = files.upload()
-#
-# for fn in upload.keys():
-#     print('User uploaded file "{name}" with length "{length}" bytes'. format(name=fn, length=len(upload[fn])))
+from google.colab import files
+upload = files.upload()
+
+for fn in upload.keys():
+    print('User uploaded file "{name}" with length "{length}" bytes'. format(name=fn, length=len(upload[fn])))
 
 # ................Pandas Series...................
 
-# labels = 'A B C D'.split()
-# my_data = [1, 2, 3, 4]
-# arr = np.array(my_data)
-# dic = {'A': 1, 'B': 2, 'C': 3, 'D': 4}
-# dic2 = {'A': 1, 'B': 2, 'C': 3, 'E': 4}
-#
-# sr = pd.Series(dic)
-# sr2 = pd.Series(dic2)
-# print(sr+sr2)
+labels = 'A B C D'.split()
+my_data = [1, 2, 3, 4]
+arr = np.array(my_data)
+dic = {'A': 1, 'B': 2, 'C': 3, 'D': 4}
+dic2 = {'A': 1, 'B': 2, 'C': 3, 'E': 4}
+
+sr = pd.Series(dic)
+sr2 = pd.Series(dic2)
+print(sr+sr2)
 
 
 # ...............Pandas DataFrame Tutorial..............
