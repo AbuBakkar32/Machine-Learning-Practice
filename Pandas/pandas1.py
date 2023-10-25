@@ -57,35 +57,34 @@ print(df['E'].fillna(df['E'].mean()))
 
 # ...............Pandas DataFrame GroupBy ..............
 
-# data = {
-#     'Dept': ['CSE', 'SWE', 'CSE', 'EEE', 'SWE', 'ETE'],
-#     'Student_Name': ['Rakib', 'Abu', 'Bakkar', 'Siddik', 'Prious', 'Sarkar'],
-#     'Totall_marks': [100, 200, 120, 230, 88, 180]
-# }
-# index = 'A B C D E F'.split()
-# df = pd.DataFrame(data, index=index)
-# df = df.groupby('Dept').describe().T
-# print(df)
-
+data = {
+    'Dept': ['CSE', 'SWE', 'CSE', 'EEE', 'SWE', 'ETE'],
+    'Student_Name': ['Rakib', 'Abu', 'Bakkar', 'Siddik', 'Prious', 'Sarkar'],
+    'Totall_marks': [100, 200, 120, 230, 88, 180]
+}
+index = 'A B C D E F'.split()
+df = pd.DataFrame(data, index=index)
+df = df.groupby('Dept').describe().T
+print(df)
 
 # ...............Pandas Marge concat ..............
 
-# arr = randint(0, 100, 16).reshape(4, 4)
-# arr1 = randint(0, 100, 16).reshape(4, 4)
-# arr2 = randint(0, 100, 16).reshape(4, 4)
-#
-# row = 'A B C H'.split()
-# col = 'E F G H'.split()
-#
-# df = pd.DataFrame(data=arr, index=row, columns=col)
-# df1 = pd.DataFrame(data=arr1, index=row, columns=col)
-# df2 = pd.DataFrame(data=arr2, index=row, columns=col)
-# #print(pd.concat([df, df1, df2]))
-# #print(pd.merge(df, df1, how='inner', on='H'))
-# df.join(df1, how='right')
-# df.join(df1, how='left')
-# df.join(df1, how='inner')
-# df.join(df1, how='outer')
+arr = randint(0, 100, 16).reshape(4, 4)
+arr1 = randint(0, 100, 16).reshape(4, 4)
+arr2 = randint(0, 100, 16).reshape(4, 4)
+
+row = 'A B C H'.split()
+col = 'E F G H'.split()
+
+df = pd.DataFrame(data=arr, index=row, columns=col)
+df1 = pd.DataFrame(data=arr1, index=row, columns=col)
+df2 = pd.DataFrame(data=arr2, index=row, columns=col)
+print(pd.concat([df, df1, df2]))
+print(pd.merge(df, df1, how='inner', on='H'))
+df.join(df1, how='right')
+df.join(df1, how='left')
+df.join(df1, how='inner')
+df.join(df1, how='outer')
 
 # ...............Pandas Operations..............
 
