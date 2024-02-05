@@ -62,3 +62,61 @@ if __name__ == '__main__':
 
     node = bst.search(3)
     print(node.data)  # Output: 3
+
+
+#  Data Structure Tree Implementation in Python
+
+# class Node:
+#     def __init__(self, data):
+#         self.data = data
+#         self.left = None
+#         self.right = None
+#
+#
+# class Tree:
+#     def __init__(self):
+#         self.root = None
+#
+#     def insert(self, data):
+#         if self.root is None:
+#             self.root = Node(data)
+#         else:
+#             self._insert(data, self.root)
+#
+#     def _insert(self, data, node):
+#         if data < node.data:
+#             if node.left is None:
+#                 node.left = Node(data)
+#             else:
+#                 self._insert(data, node.left)
+#         else:
+#             if node.right is None:
+#                 node.right = Node(data)
+#             else:
+#                 self._insert(data, node.right)
+#
+#     def inorder_traversal(self):
+#         if self.root is not None:
+#             self._inorder_traversal(self.root)
+#
+#     def _inorder_traversal(self, node):
+#         if node:
+#             self._inorder_traversal(node.left)
+#             print(node.data, end=" ")
+#             self._inorder_traversal(node.right)
+#
+#
+# # Create a tree
+# tree = Tree()
+# tree.insert(5)
+# tree.insert(3)
+# tree.insert(7)
+# tree.insert(2)
+# tree.insert(4)
+# tree.insert(6)
+# tree.insert(8)
+#
+# # Print the inorder traversal
+# print("Inorder traversal:")
+# tree.inorder_traversal() # Output: 2 3 4 5 6 7 8
+

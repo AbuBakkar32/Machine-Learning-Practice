@@ -16,7 +16,6 @@ def swapPositions(list, pos1, pos2):
     first_ele = list.pop(pos1)
     second_ele = list.pop(pos2 - 1)
 
-
     list.insert(pos1, second_ele)
     list.insert(pos2, first_ele)
 
