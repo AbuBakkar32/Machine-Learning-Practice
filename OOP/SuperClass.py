@@ -1,3 +1,6 @@
+from poetry.console.commands import self
+
+
 class Course:
     def __init__(self, title, instructor, lectures, price):
         self.title = title
@@ -20,7 +23,7 @@ class Course:
 
     def show_details(self):
         print('Course Title : ', self.title)
-        print('Intructor : ', self.instructor)
+        print('Instructor : ', self.instructor)
         print('Price : ', self.price)
         print('Number of Lectures : ', self.lectures)
         print('Users : ', self.users)
@@ -30,8 +33,7 @@ class Course:
 class VideoCourse(Course):
     def __init__(self, title, instructor, lectures, price, length_video):
         super().__init__(title, instructor, lectures, price)
-
-    self.length_video = length_video
+        self.length_video = length_video
 
 
 def show_details(self):
