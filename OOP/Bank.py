@@ -23,13 +23,33 @@
 # a2.display()
 
 
-def IsPrimeNumber(num):
-    if num < 2:
+def is_prime(num):
+    """
+    This function checks if a number is prime.
+
+    Args:
+        num: The number to check.
+
+    Returns:
+        True if the number is prime, False otherwise.
+    """
+    if num <= 1:
         return False
-    for i in range(2, num):
-        if num % i == 0:
-            return print(f'{num} is not a prime number')
-    return print(f'{num} is a prime number')
+    if num <= 3:
+        return True
+    if num % 2 == 0 or num % 3 == 0:
+        return False
+    i = 5
+    while i * i <= num:
+        if num % i == 0 or num % (i + 2) == 0:
+            return False
+        i += 6
+    return True
 
 
-IsPrimeNumber(2)
+# Example usage
+number = 11
+if is_prime(number):
+    print(number, "is a prime number")
+else:
+    print(number, "is not a prime number")
