@@ -22,18 +22,157 @@
 # a1.display()
 # a2.display()
 
+# ---------------------------------------------------------------------------------------------------
+# A - Chess Move
+# def rook_moves(pos):
+#     row, col = pos[1], pos[0]
+#     moves = []
+#
+#     for i in range(1, 9):
+#         if i != int(row):
+#             moves.append(col + str(i))
+#         if col != chr(ord('a') + i - 1):
+#             moves.append(chr(ord('a') + i - 1) + row)
+#
+#     return moves
+#
+#
+# t = int(input())
+# for _ in range(t):
+#     pos = input().strip()
+#     moves = rook_moves(pos)
+#     for move in moves:
+#         print(move)
 
+# ---------------------------------------------------------------------------------------------------
+# B - Guess The Array
+# def solve():
+#     t = int(input())
+#     for _ in range(t):
+#         n = int(input())
+#         a = list(map(int, input().split()))
+#         b = [0] * n
+#         sum_a = sum(a)
+#         b[0] = a[0]
+#         for i in range(1, n):
+#             if a[i] * b[i - 1] == 0:
+#                 b[i] = a[i]
+#             else:
+#                 if abs(a[i] - a[i] // b[i - 1] * b[i - 1]) < abs(a[i] - 1):
+#                     b[i] = a[i] // b[i - 1] * b[i - 1]
+#                 else:
+#                     b[i] = 1
+#         print(' '.join(map(str, b)))
+#
+#
+# def main():
+#     solve()
+#
+#
+# if __name__ == "__main__":
+#     main()
+
+# ---------------------------------------------------------------------------------------------------
+# C - Break An Arm
+# import math
+#
+# def calculate_AD(AB, CA, BC, ratio):
+#     # Calculate the ratio of ADE to ABC
+#     ratio = ratio / (ratio + 1)
+#     # Calculate the length of AD
+#     AD = AB * math.sqrt(ratio)
+#     return AD
+#
+# # Read input
+# test_cases = int(input())
+#
+# # Process each test case
+# for case in range(1, test_cases + 1):
+#     AB, CA, BC, ratio = map(float, input().strip().split())
+#     AD = calculate_AD(AB, CA, BC, ratio)
+#     print("Case {}: {:.10f}".format(case, AD))
+
+# ---------------------------------------------------------------------------------------------------
+# D - Determination
+# def is_teacher_suspicious(n, tasks):
+#     task_set = set()
+#     for i in range(n - 1):
+#         if tasks[i] == tasks[i + 1]:
+#             return "NO"
+#         task_set.add(tasks[i])
+#     return "YES" if tasks[-1] not in task_set else "NO"
+#
+#
 # t = int(input())
 #
 # for _ in range(t):
-#     pos = input()
-#
-#     for j in range(8):
-#         if pos[0] != chr(ord('a') + j):
-#             print(chr(ord('a') + j) + pos[1])
-#         if pos[1] != chr(ord('1') + j):
-#             print(pos[0] + chr(ord('1') + j))
+#     n = int(input())
+#     tasks = input().strip()
+#     print(is_teacher_suspicious(n, tasks))
 
+
+# ---------------------------------------------------------------------------------------------------
+# E - Treat Treat Treat
+# def serve_ice_cream(n, x, queue):
+#     ice_cream_left = x
+#     distressed_kids = 0
+#
+#     for operation, d in queue:
+#         if operation == '+':
+#             ice_cream_left += d
+#         else:
+#             if ice_cream_left >= d:
+#                 ice_cream_left -= d
+#             else:
+#                 distressed_kids += 1
+#
+#     return ice_cream_left, distressed_kids
+#
+#
+# # Read input
+# n, x = map(int, input().split())
+# queue = [input().split() for _ in range(n)]
+#
+# # Convert ice cream packs to integers
+# for i in range(n):
+#     queue[i][1] = int(queue[i][1])
+#
+# ice_cream_left, distressed_kids = serve_ice_cream(n, x, queue)
+# print(ice_cream_left, distressed_kids)
+
+# ---------------------------------------------------------------------------------------------------
+# F - Mad Creatures!
+def count_cows(stalls, distance):
+    count = 1
+    last_position = stalls[0]
+    for stall in stalls:
+        if stall - last_position >= distance:
+            count += 1
+            last_position = stall
+    return count
+
+
+def largest_minimum_distance(stalls, cows):
+    stalls.sort()
+    left, right = 0, stalls[-1] - stalls[0]
+
+    while left <= right:
+        mid = (left + right) // 2
+        if count_cows(stalls, mid) >= cows:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return right
+
+
+t = int(input())
+for _ in range(t):
+    n, c = map(int, input().split())
+    stall_locations = [int(input()) for _ in range(n)]
+    result = largest_minimum_distance(stall_locations, c)
+    print(result)
+
+# ---------------------------------------------------------------------------------------------------
 # G - Black Ops?
 # import sys
 #
@@ -63,6 +202,7 @@
 #
 # sys.exit(0)
 
+# ---------------------------------------------------------------------------------------------------
 # H - The Guilty One
 # def count_cows(stalls, distance):
 #     count = 1
@@ -93,85 +233,3 @@
 #     stall_locations = [int(input()) for _ in range(n)]
 #     result = largest_minimum_distance(stall_locations, c)
 #     print(result)
-
-
-# E - Treat Treat Treat
-# def serve_ice_cream(n, x, queue):
-#     ice_cream_left = x
-#     distressed_kids = 0
-#
-#     for operation, d in queue:
-#         if operation == '+':
-#             ice_cream_left += d
-#         else:
-#             if ice_cream_left >= d:
-#                 ice_cream_left -= d
-#             else:
-#                 distressed_kids += 1
-#
-#     return ice_cream_left, distressed_kids
-#
-#
-# # Read input
-# n, x = map(int, input().split())
-# queue = [input().split() for _ in range(n)]
-#
-# # Convert ice cream packs to integers
-# for i in range(n):
-#     queue[i][1] = int(queue[i][1])
-#
-# ice_cream_left, distressed_kids = serve_ice_cream(n, x, queue)
-# print(ice_cream_left, distressed_kids)
-
-# D - Determination
-# def is_teacher_suspicious(n, tasks):
-#     task_set = set()
-#     for i in range(n - 1):
-#         if tasks[i] == tasks[i + 1]:
-#             return "NO"
-#         task_set.add(tasks[i])
-#     return "YES" if tasks[-1] not in task_set else "NO"
-#
-#
-# t = int(input())
-#
-# for _ in range(t):
-#     n = int(input())
-#     tasks = input().strip()
-#     print(is_teacher_suspicious(n, tasks))
-
-
-# C - Break An Arm
-import math
-
-
-def find_ad(ab, ac, bc, area_ratio):
-    """
-    Finds the length of AD given the side lengths of triangle ABC,
-    DE parallel to BC, and the area ratio between triangles ADE and BDEC.
-    """
-
-    # Calculate the altitude of triangle ABC from A to BC
-    s = (ab + ac + bc) / 2  # Semi-perimeter
-    area_abc = math.sqrt(s * (s - ab) * (s - ac) * (s - bc))  # Heron's formula
-    altitude = 2 * area_abc / bc
-
-    # Calculate the height of triangle ADE from A to DE
-    height_ade = altitude * area_ratio / (1 + area_ratio)
-
-    # Calculate AD using the formula for right triangles (ADE)
-    return math.sqrt(ac ** 2 - height_ade ** 2)
-
-
-# Read the number of test cases
-t = int(input())
-
-for case_num in range(1, t + 1):
-    # Read the side lengths and area ratio
-    ab, ac, bc, area_ratio = map(float, input().split())
-
-    # Calculate AD
-    ad = find_ad(ab, ac, bc, area_ratio)
-
-    # Print the result
-    print(f"Case {case_num}: {ad:.6f}")  # Output with 6 decimal places
