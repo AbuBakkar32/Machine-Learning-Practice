@@ -205,32 +205,32 @@
 
 # ---------------------------------------------------------------------------------------------------
 # H - The Guilty One
-def count_cows(stalls, distance):
-    count = 1
-    last_position = stalls[0]
-    for stall in stalls:
-        if stall - last_position >= distance:
-            count += 1
-            last_position = stall
-    return count
-
-
-def largest_minimum_distance(stalls, cows):
-    stalls.sort()
-    left, right = 0, stalls[-1] - stalls[0]
-
-    while left <= right:
-        mid = (left + right) // 2
-        if count_cows(stalls, mid) >= cows:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return right
-
-
-t = int(input())
-for _ in range(t):
-    n, c = map(int, input().split())
-    stall_locations = [int(input()) for _ in range(n)]
-    result = largest_minimum_distance(stall_locations, c)
-    print(result)
+# def count_cows(stalls, distance):
+#     count = 1
+#     last_position = stalls[0]
+#     for stall in stalls:
+#         if stall - last_position >= distance:
+#             count += 1
+#             last_position = stall
+#     return count
+#
+#
+# def largest_minimum_distance(stalls, cows):
+#     stalls.sort()
+#     left, right = 0, stalls[-1] - stalls[0]
+#
+#     while left <= right:
+#         mid = (left + right) // 2
+#         if count_cows(stalls, mid) >= cows:
+#             left = mid + 1
+#         else:
+#             right = mid - 1
+#     return right
+#
+#
+# t = int(input())
+# for _ in range(t):
+#     n, c = map(int, input().split())
+#     stall_locations = [int(input()) for _ in range(n)]
+#     result = largest_minimum_distance(stall_locations, c)
+#     print(result)
