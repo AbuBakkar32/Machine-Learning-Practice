@@ -51,6 +51,7 @@ class PdfCourse(Course):
         print('Number of pages : ', self.pages)
 
 
+# video course object create
 vc = VideoCourse('Learn C++', 'Jack', 30, 50, 10)
 vc.new_user_enrolled('Allen')
 vc.new_user_enrolled('Max')
@@ -60,8 +61,7 @@ vc.received_a_rating(5)
 vc.received_a_rating(4)
 vc.show_details()
 
-print()
-
+# pdf course object create
 pc = PdfCourse('Learn Java', 'Jim', 35, 50, 1000)
 pc.new_user_enrolled('Allen')
 pc.new_user_enrolled('Mary')
