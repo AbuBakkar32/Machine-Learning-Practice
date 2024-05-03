@@ -8,10 +8,10 @@ driver = webdriver.Chrome()
 driver.get("https://jqueryui.com/resources/demos/droppable/default.html")
 
 # Find the draggable element
-draggable_element = driver.find_element_by_id("draggable")
+draggable_element = driver.find_element(by="id", value="draggable")
 
 # Find the droppable element
-droppable_element = driver.find_element_by_id("droppable")
+droppable_element = driver.find_element(by="id", value="droppable")
 
 # Create an ActionChains object
 actions = ActionChains(driver)
