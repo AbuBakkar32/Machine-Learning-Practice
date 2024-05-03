@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 
 # Initialize a Selenium webdriver (you may need to specify the path to your webdriver)
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(executable_path)
 driver.maximize_window()
 driver.implicitly_wait(3)
 
