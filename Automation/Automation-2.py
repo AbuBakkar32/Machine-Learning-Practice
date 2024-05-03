@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.service import Service
 import time
 from selenium.webdriver.common.by import By
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome('G:/Machine Learning Practice/Automation/driver/chromedriver.exe')
 driver.maximize_window()
 email = 'abubakkarsiddik32@hotmail.com'
 password = 'AbuBakkar'
