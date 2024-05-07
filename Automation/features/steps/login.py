@@ -47,3 +47,5 @@ def verifyDashboard(context):
     if dashboard == 'Dashboard':
         context.driver.close()
         assert True, 'Test Passed'
+
+# behave -f allure_behave.formatter:AllureFormatter -o reports/ features
