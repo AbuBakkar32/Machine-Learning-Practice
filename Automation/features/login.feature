@@ -1,11 +1,11 @@
 Feature: OrangeHRM Login
 
-  Background: common steps
-    """
-    This block only for common steps purpose
-    common file will be listed here.
-    so, we should keeps all the common file here
-    """
+#  Background: common steps
+#    """
+#    This block only for common steps purpose
+#    common file will be listed here.
+#    so, we should keeps all the common file here
+#    """
 
 
   Scenario: Login with valid credentials
