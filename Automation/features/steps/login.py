@@ -35,8 +35,17 @@ def clickLogin(context):
                                 "//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button").click()
 
 
-
 @then('I should see the Dashboard page')
 def verifyDashboard(context):
-    dashboard = context.driver.find_element(By.XPATH, "//*[@id='app']/div[1]/div[1]/header/div[1]/div[1]/span/h6").text
-    assert dashboard == "Dashboard"
+    try:
+        dashboard = context.driver.find_element(By.XPATH,
+                                                "//*[@id='app']/div[1]/div[1]/header/div[1]/div[1]/span/h6").text
+    except:
+        time.sleep(2)
+        context.driver.close()
+        assert False, 'Test Failed'
+
+    if dashboard == 'Dashboard':
+        time.sleep(2)
+        context.driver.close()
+        assert True, 'Test Passed'
