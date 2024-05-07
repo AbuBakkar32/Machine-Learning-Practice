@@ -1,0 +1,61 @@
+{
+  "name": "Logo presence on OrangeHRM home Page",
+  "status": "failed",
+  "statusDetails": {
+    "message": "AssertionError\n",
+    "trace": "  File \"C:\\Users\\ABS RAKIB\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\behave\\model.py\", line 1329, in run\n    match.run(runner.context)\n  File \"C:\\Users\\ABS RAKIB\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\behave\\matchers.py\", line 98, in run\n    self.func(context, *args, **kwargs)\n  File \"features\\steps\\test1.py\", line 21, in verify_logo\n    assert logo.is_displayed() is False\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
+  },
+  "steps": [
+    {
+      "name": "Given launch the chrome browser",
+      "status": "passed",
+      "start": 1715099350723,
+      "stop": 1715099353453
+    },
+    {
+      "name": "When open the OrangeHRM Home Page",
+      "status": "passed",
+      "start": 1715099353459,
+      "stop": 1715099363641
+    },
+    {
+      "name": "Then verify the logo on the page",
+      "status": "failed",
+      "statusDetails": {
+        "message": "AssertionError\n",
+        "trace": "  File \"C:\\Users\\ABS RAKIB\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\behave\\model.py\", line 1329, in run\n    match.run(runner.context)\n  File \"C:\\Users\\ABS RAKIB\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\behave\\matchers.py\", line 98, in run\n    self.func(context, *args, **kwargs)\n  File \"features\\steps\\test1.py\", line 21, in verify_logo\n    assert logo.is_displayed() is False\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
+      },
+      "start": 1715099363642,
+      "stop": 1715099366363
+    },
+    {
+      "name": "And close browser",
+      "status": "skipped",
+      "start": 1715099366364,
+      "stop": 1715099366364
+    }
+  ],
+  "start": 1715099350722,
+  "stop": 1715099366364,
+  "uuid": "2d9ebbb0-f7f6-44cd-9d1b-6cd61f3433d4",
+  "historyId": "313d29db02c14b318be8ceedd65c2a2c",
+  "fullName": "OrangeHRM Logo: Logo presence on OrangeHRM home Page",
+  "labels": [
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "feature",
+      "value": "OrangeHRM Logo"
+    },
+    {
+      "name": "framework",
+      "value": "behave"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    }
+  ]
+}

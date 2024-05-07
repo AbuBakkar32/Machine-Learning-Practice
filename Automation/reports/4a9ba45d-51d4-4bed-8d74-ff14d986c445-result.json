@@ -1,0 +1,69 @@
+{
+  "name": "Login with multiple credentials -- @1.1 ",
+  "status": "passed",
+  "steps": [
+    {
+      "name": "Given I am on the OrangeHRM login page",
+      "status": "passed",
+      "start": 1715099282799,
+      "stop": 1715099293096
+    },
+    {
+      "name": "When I enter username \"admin\" in the user field",
+      "status": "passed",
+      "start": 1715099293096,
+      "stop": 1715099295081
+    },
+    {
+      "name": "And I enter password \"admin123\" in the password field",
+      "status": "passed",
+      "start": 1715099295081,
+      "stop": 1715099296607
+    },
+    {
+      "name": "And I click the on Login button",
+      "status": "passed",
+      "start": 1715099296607,
+      "stop": 1715099298430
+    },
+    {
+      "name": "Then I should see the Dashboard page",
+      "status": "passed",
+      "start": 1715099298430,
+      "stop": 1715099303818
+    }
+  ],
+  "parameters": [
+    {
+      "name": "username",
+      "value": "admin"
+    },
+    {
+      "name": "password",
+      "value": "admin123"
+    }
+  ],
+  "start": 1715099282796,
+  "stop": 1715099305972,
+  "uuid": "5c80039e-a916-46a2-9c68-e1c73a882097",
+  "historyId": "39a7a679b3d79a0f26e329106cb217e3",
+  "fullName": "OrangeHRM Login: Login with multiple credentials",
+  "labels": [
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "feature",
+      "value": "OrangeHRM Login"
+    },
+    {
+      "name": "framework",
+      "value": "behave"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    }
+  ]
+}
