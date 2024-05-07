@@ -21,3 +21,11 @@ def step_impl(context, phrase):
     assert len(links_div.find_elements_by_xpath('//div')) > 0
     search_input = context.browser.find_element_by_name('q')
     assert search_input.get_attribute('value') == phrase
+
+
+@step("close browser")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    raise NotImplementedError(u'STEP: And close browser')
