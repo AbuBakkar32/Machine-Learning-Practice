@@ -1,0 +1,59 @@
+{
+  "name": "Login with valid credentials",
+  "status": "passed",
+  "steps": [
+    {
+      "name": "Given I am on the OrangeHRM login page",
+      "status": "passed",
+      "start": 1715101147430,
+      "stop": 1715101187145
+    },
+    {
+      "name": "When I enter username \"admin\" in the user field",
+      "status": "passed",
+      "start": 1715101187147,
+      "stop": 1715101188865
+    },
+    {
+      "name": "And I enter password \"admin123\" in the password field",
+      "status": "passed",
+      "start": 1715101188865,
+      "stop": 1715101192824
+    },
+    {
+      "name": "And I click the on Login button",
+      "status": "passed",
+      "start": 1715101192824,
+      "stop": 1715101198423
+    },
+    {
+      "name": "Then I should see the Dashboard page",
+      "status": "passed",
+      "start": 1715101198423,
+      "stop": 1715101222688
+    }
+  ],
+  "start": 1715101147428,
+  "stop": 1715101225568,
+  "uuid": "78cea8d1-66b2-458d-990b-401485e1e8a5",
+  "historyId": "0f0abda2b7e3871ded3d3bc3b88658de",
+  "fullName": "OrangeHRM Login: Login with valid credentials",
+  "labels": [
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "feature",
+      "value": "OrangeHRM Login"
+    },
+    {
+      "name": "framework",
+      "value": "behave"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    }
+  ]
+}
