@@ -11,8 +11,8 @@ def f(a, b):
     print(a, b)
 
 
-args = {"a": 1, "b": 2}
-print(**args)
+args = {'a': 1, 'b': 2}
+print(*args)
 
 
 def f(a, b, c):

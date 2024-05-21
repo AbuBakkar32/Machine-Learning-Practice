@@ -49,7 +49,7 @@ Pass = "01639474727"  # senders Gmail's Password over here
 msg = EmailMessage()
 msg['Subject'] = 'Subject of the Email'  # Subject of Email
 msg['From'] = EmailAdd
-msg['To'] = 'a.sanjida2020@gmail.com' # Reciver of the Mail
+msg['To'] = 'a.sanjida2020@gmail.com'  # Reciver of the Mail
 msg.set_content('Mail Body')  # Email body or Content
 
 #### >> Code from here will send the message << ####
