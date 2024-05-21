@@ -36,5 +36,5 @@ for package in packages_json[0:]:
         print(f'Got {package_name} in {r.elapsed.total_seconds()} seconds')
     except:
         pass
-# with open('test.json', 'a') as f:
-#     json.dump(results, f, indent=2)
+with open('test.json', 'a') as f:
+    json.dump(results, f, indent=2)
