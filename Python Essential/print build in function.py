@@ -14,4 +14,4 @@ name = "Abubakkar"
 print(name[1::3])
 print(name[2::3])
 print(name[::3])
-print(name[1::-1])
+print(name[2::-1])
