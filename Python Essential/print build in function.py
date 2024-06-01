@@ -18,9 +18,24 @@ import time
 
 # 1 to 10 Namata
 
-for i in range(1, 11):
-    print(f'\n{"* " * 10}Namata of {i}{" *" * 10}')
+def print_namata_table(number: int):
+    """
+    Prints the multiplication table of the given number.
+    """
+    print(f'\n{"* " * 10}Namata of {number}{" *" * 10}')
     for j in range(1, 11):
-        print(end='\t')
-        print(f'{i} x {j} = {i * j}')
+        print(f'\t{number} x {j} = {number * j}')
     print(end='\t')
+
+
+def print_all_namata_tables():
+    """
+    Prints the multiplication tables from 1 to 10.
+    """
+    for i in range(1, 11):
+        print_namata_table(i)
+
+
+if __name__ == "__main__":
+    print_all_namata_tables()
+
