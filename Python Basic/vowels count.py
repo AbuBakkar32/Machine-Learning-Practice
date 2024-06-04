@@ -1,7 +1,3 @@
-import time
-from datetime import datetime
-import string
-
 # Constants
 VOWELS = 'aeiou'
 TEXT = (
