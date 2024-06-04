@@ -1,35 +1,26 @@
 import time
 from datetime import datetime
-from string import punctuation
+import string
 
-vowels = 'aeiou' # This is Vowels character
-text = 'Hello every one my name is abu bakkar siddik. i am from bangladesh. i am studing as a software engineer under daffodil international university. my dreame so long and may Allah full fill my dreams'
-text = text.casefold()
-count = {}.fromkeys(vowels, 0)
+# Constants
+VOWELS = 'aeiou'
+TEXT = (
+    'Hello every one my name is abu bakkar siddik. i am from bangladesh. '
+    'i am studying as a software engineer under daffodil international university. '
+    'my dream is so long and may Allah fulfill my dreams'
+).casefold()
 
-cons = {}
+# Initialize counts
+counts = {char: 0 for char in VOWELS}
+consonants = {}
 
-for char in text:
-    if char in count:
-        count[char] += 1
-    else:
-        cons[char] = cons.get(char, 0)+1
+# Count vowels and consonants
+for char in TEXT:
+    if char in VOWELS:
+        counts[char] += 1
+    elif char.isalpha():  # Count only alphabetic characters as consonants
+        consonants[char] = consonants.get(char, 0) + 1
 
-print(f'The Vowels is : {count}', end=" ")
-print("")
-print(f'The consonants is : {cons}', end=" ")
-
-# simple code for remove punctuation character
-data = {}
-for i, j in cons.items():
-    if i in punctuation:
-        continue
-    if i == ' ':
-        continue
-    else:
-        data[i] = j
-
-print('\n<<<<<<<<<<This the clear item count after processing data>>>>>>>>>>')
-print(data)
-
-
+# Output the results
+print(f'The Vowels are: {counts}')
+print(f'The consonants are: {consonants}')

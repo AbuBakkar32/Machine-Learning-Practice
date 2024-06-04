@@ -40,5 +40,4 @@ def print_all_namata_tables():
 
 
 if __name__ == "__main__":
-    pass
-    # print_all_namata_tables()
+    print_all_namata_tables()
