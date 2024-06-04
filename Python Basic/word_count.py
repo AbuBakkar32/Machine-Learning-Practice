@@ -3,7 +3,10 @@ import re
 from collections import Counter
 
 # Define the sentence
-sentence = ("my name is rakib. are your know me? hey rakib your are so smart and sexy!. i love you rakib.").casefold()
+sentence = ("my name is Rakib. "
+            "are your know me? hey Rakib your are so smart and sexy!. "
+            "i love you Rakib."
+            ).casefold()
 
 # Remove punctuation and numbers
 cleaned_sentence = re.sub(r'[^\w\s]', '', sentence)
