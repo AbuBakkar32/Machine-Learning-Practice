@@ -6,8 +6,8 @@ import string
 VOWELS = 'aeiou'
 TEXT = (
     'Hello every one my name is abu bakkar siddik. i am from bangladesh. '
-    'i am studying as a software engineer under daffodil international university. '
-    'my dream is so long and may Allah fulfill my dreams'
+    'I am studying as a software engineer under daffodil international university. '
+    'My dream is so long and may Allah fulfill my dreams'
 ).casefold()
 
 # Initialize counts
