@@ -6,7 +6,7 @@ from collections import Counter
 sentence = ("my name is Rakib. "
             "are your know me? hey Rakib your are so smart and sexy!. "
             "i love you Rakib."
-            ).casefold()
+).casefold()
 
 # Remove punctuation and numbers
 cleaned_sentence = re.sub(r'[^\w\s]', '', sentence)
