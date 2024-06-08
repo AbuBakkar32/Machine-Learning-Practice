@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "integer",
+          "string"
+        ]
+      },
+      "make": {
+        "type": [
+          "number",
+          "string"
+        ]
+      },
+      "model": {
+        "type": "string"
+      },
+      "year": {
+        "type": [
+          "integer",
+          "string"
+        ]
+      },
+      "type": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "seats": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bags": {
+        "type": [
+          "integer",
+          "string"
+        ]
+      },
+      "features": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "rates": {
+        "type": "object",
+        "properties": {
+          "hourly": {
+            "type": "integer"
+          },
+          "daily": {
+            "type": [
+              "integer",
+              "null",
+              "string"
+            ]
+          },
+          "weekly": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "daily",
+          "hourly",
+          "weekly"
+        ]
+      },
+      "imageURL": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "bags",
+      "features",
+      "id",
+      "model",
+      "seats"
+    ]
+  }
+}
