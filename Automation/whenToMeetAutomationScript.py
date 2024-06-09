@@ -4,6 +4,7 @@ Date: 2024-06-08
 Description: This script automates the process of creating a When2Meet event, signing in with a specified name, and marking availability from 10 AM to 11 AM for each day.
 """
 
+# Import necessary libraries
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
