@@ -4,6 +4,7 @@ Date: 2024-06-08
 Description: This script automates the process of creating a When2Meet event, signing in with a specified name, and marking availability from 10 AM to 11 AM for each day.
 """
 
+# Import necessary libraries
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -15,12 +16,12 @@ import time
 
 def create_event(driver):
     # Set the date range (15-20 June)
-    for week in range(1, 6):
-        for day in range(1, 6):
-            if week == 2:
+    for week in range(1, 7):
+        for day in range(1, 5):
+            if week == 1:
                 driver.find_element(By.ID, f"Day-{week}-7").click()
-            if week == 3:
-                driver.find_element(By.ID, f"Day-3-{day}").click()
+            if week == 2:
+                driver.find_element(By.ID, f"Day-2-{day}").click()
 
     # Enter event name
     event_name_field = driver.find_element(By.ID, "NewEventName")
