@@ -16,12 +16,12 @@ import time
 
 def create_event(driver):
     # Set the date range (15-20 June)
-    for week in range(1, 6):
+    for week in range(1, 3):
         for day in range(1, 6):
-            if week == 2:
+            if week == 1:
                 driver.find_element(By.ID, f"Day-{week}-7").click()
-            if week == 3:
-                driver.find_element(By.ID, f"Day-3-{day}").click()
+            if week == 2:
+                driver.find_element(By.ID, f"Day-2-{day}").click()
 
     # Enter event name
     event_name_field = driver.find_element(By.ID, "NewEventName")
