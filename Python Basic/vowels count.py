@@ -1,3 +1,9 @@
+"""
+Author: Abu Bakkar Siddikk
+Date: 2024-06-03
+Description: Count vowel and consonants character
+"""
+
 # Constants
 VOWELS = 'aeiou'
 TEXT = (
