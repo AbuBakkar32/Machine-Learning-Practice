@@ -1,3 +1,9 @@
+"""
+Author: Abu Bakkar Siddikk
+Date: 2024-06-03
+Description: word Count and consonants character
+"""
+
 import string
 import re
 from collections import Counter
