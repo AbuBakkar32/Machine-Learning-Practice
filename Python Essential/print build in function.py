@@ -1,3 +1,9 @@
+"""
+Author: Abu Bakkar Siddikk
+Date: 2024-06-03
+Description: Build in function and Namata 1 to 10
+"""
+
 # How to print all Built-In functions in Python?
 # import re
 # import time
