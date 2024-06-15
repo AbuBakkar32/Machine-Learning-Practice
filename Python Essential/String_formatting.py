@@ -1,3 +1,9 @@
+"""
+Author: Abu Bakkar Siddikk
+Date: 2024-06-14
+Description: String Formatting
+"""
+
 # https://docs.python.org/3/library/string.html#formatspec
 # https://towardsdatascience.com/apply-functions-to-pandas-dataframe-using-map-apply-applymap-and-pipe-9571b1f1cb18
 # https://www.geeksforgeeks.org/python-map-function/
