@@ -1,3 +1,9 @@
+"""
+Author: Abu Bakkar Siddikk
+Date: 2024-06-06
+Description: Compare Json file with Json Schema
+"""
+
 import json
 from jsonschema import validate, ValidationError
 
