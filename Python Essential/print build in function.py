@@ -47,3 +47,5 @@ def print_all_namata_tables():
 
 if __name__ == "__main__":
     print_all_namata_tables()
+
+print("hello world")
