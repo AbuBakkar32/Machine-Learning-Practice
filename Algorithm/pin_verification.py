@@ -4,9 +4,6 @@ from cryptography.fernet import Fernet
 key = Fernet.generate_key()
 cipher_suite = Fernet(key)
 
-print(key)
-print(cipher_suite)
-
 
 def encrypt_pin(pin):
     """Encrypt the PIN using the symmetric key."""
@@ -31,16 +28,16 @@ def verify_pin(stored_encrypted_pin, input_pin):
 
 
 # Example usage
-# if __name__ == "__main__":
-#     # Simulate setting up an account with a PIN
-#     original_pin = "1234"  # Example PIN (ideally chosen by the user)
-#     encrypted_pin = encrypt_pin(original_pin)
-#     print("Encrypted PIN stored:", encrypted_pin)
-#
-#     # Simulate user attempting to log in
-#     user_input = input("Enter your PIN: ")
-#
-#     if verify_pin(encrypted_pin, user_input):
-#         print("PIN verified successfully!")
-#     else:
-#         print("Invalid PIN.")
+if __name__ == "__main__":
+    # Simulate setting up an account with a PIN
+    original_pin = "1234"  # Example PIN (ideally chosen by the user)
+    encrypted_pin = encrypt_pin(original_pin)
+    print("Encrypted PIN stored:", encrypted_pin)
+
+    # Simulate user attempting to log in
+    user_input = input("Enter your PIN: ")
+
+    if verify_pin(encrypted_pin, user_input):
+        print("PIN verified successfully!")
+    else:
+        print("Invalid PIN.")
