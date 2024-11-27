@@ -1,5 +1,7 @@
 from cryptography.fernet import Fernet
 
+from Automation.Autumatic_Get_Udemy_Course import main_function
+
 # Generate a key for encryption and decryption (usually saved securely in a real system)
 key = Fernet.generate_key()
 cipher_suite = Fernet(key)
@@ -30,7 +32,7 @@ def verify_pin(stored_encrypted_pin, input_pin):
 # Example usage
 if __name__ == "__main__":
     # Simulate setting up an account with a PIN
-    original_pin = "1234"  # Example PIN (ideally chosen by the user)
+    original_pin = "12345"  # Example PIN (ideally chosen by the user)
     encrypted_pin = encrypt_pin(original_pin)
     print("Encrypted PIN stored:", encrypted_pin)
 
