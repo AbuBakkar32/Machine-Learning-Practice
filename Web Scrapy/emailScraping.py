@@ -40,7 +40,7 @@ while len(unscraped):
     new_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.com", response.text, re.I))
     emails.update(new_emails)
 
-    soup = BeautifulSoup(response.text, 'lxml')
+    soup = BeautifulSoup(response.text, 'html.parser')
 
     for anchor in soup.find_all("a"):
         if "href" in anchor.attrs:
@@ -55,8 +55,5 @@ while len(unscraped):
                 link = path + link
 print(emails)
 
-# df = pd.DataFrame(emails, columns=["Email"]) # replace with column name you prefer
-# df.to_csv('email.csv', index=False)
-
-# from google.colab import files
-# files.download("email.csv")
+df = pd.DataFrame(emails, columns=["Email"]) # replace with column name you prefer
+df.to_csv('email.csv', index=False)
