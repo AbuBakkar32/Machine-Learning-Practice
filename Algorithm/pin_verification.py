@@ -1,6 +1,5 @@
 from cryptography.fernet import Fernet
 
-from Automation.Autumatic_Get_Udemy_Course import main_function
 
 # Generate a key for encryption and decryption (usually saved securely in a real system)
 key = Fernet.generate_key()
