@@ -1,67 +1,107 @@
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.fernet import Fernet
 from colorama import Back, Fore
 
-# Generate a key for encryption and decryption (usually saved securely in a real system)
-key = Fernet.generate_key()
-cipher_suite = Fernet(key)
+
+#
+# # Generate a key for encryption and decryption (usually saved securely in a real system)
+# key = Fernet.generate_key()
+# cipher_suite = Fernet(key)
+#
+#
+# def encrypt_pin(pin):
+#     return cipher_suite.encrypt(pin.encode())
+#
+#
+# def decrypt_pin(encrypted_pin_number):
+#     return cipher_suite.decrypt(encrypted_pin_number).decode()
+#
+#
+# def verify_pin(stored_encrypted_pin, input_pin):
+#     decrypted_pin = decrypt_pin(stored_encrypted_pin)
+#     return decrypted_pin == input_pin
+#
+#
+# def main():
+#     # Simulate setting up an account with a PIN
+#     original_pin = "12345"  # Example PIN (ideally chosen by the user)
+#     encrypted_pin = encrypt_pin(original_pin)
+#
+#     # Simulate user attempting to log in
+#     user_input = input(Fore.CYAN+ "Enter your PIN: ")
+#
+#     if verify_pin(encrypted_pin, user_input):
+#         print(Fore.GREEN+ "PIN verified successfully!")
+#     else:
+#         print(Fore.RED+ "Invalid PIN.")
+#         main()
+#
+#
+# # Example usage
+# if __name__ == "__main__":
+#     main()
 
 
-def encrypt_pin(pin):
-    return cipher_suite.encrypt(pin.encode())
+def decrypt(key, data):
+    # Placeholder function for decryption
+    return data  # Replace with actual decryption logic
 
 
-def decrypt_pin(encrypted_pin_number):
-    return cipher_suite.decrypt(encrypted_pin_number).decode()
+def encrypt(data):
+    # Placeholder function for encryption
+    return data  # Replace with actual encryption logic
 
 
-def verify_pin(stored_encrypted_pin, input_pin):
-    decrypted_pin = decrypt_pin(stored_encrypted_pin)
-    return decrypted_pin == input_pin
+def format_check(data):
+    # Placeholder function for format checking
+    # Return None if format is invalid, else return processed data
+    return data if data else None
 
 
-def main():
-    # Simulate setting up an account with a PIN
-    original_pin = "12345"  # Example PIN (ideally chosen by the user)
-    encrypted_pin = encrypt_pin(original_pin)
+def decimalize(dectab, hex_str):
+    # Convert hexadecimal string to decimal using dectab
+    return int(''.join(dectab[int(c, 16)] for c in hex_str), 10)
 
-    # Simulate user attempting to log in
-    user_input = input(Fore.CYAN+ "Enter your PIN: ")
 
-    if verify_pin(encrypted_pin, user_input):
-        print(Fore.GREEN+ "PIN verified successfully!")
+def sum_mod10(value, offset):
+    # Calculate the sum modulo 10
+    return (value + offset) % 10
+
+
+def PIN(EPB, vdata, length, dectab, offset, key):
+    # Decrypt the typed PIN
+    x1 = decrypt(key, EPB)
+
+    # Check format and remove random data
+    t_pin = format_check(x1)
+    if t_pin is None:
+        return "Format wrong"
+
+    # Encrypt vdata
+    x2 = encrypt(vdata)
+
+    # Take the leftmost 'length' hex digits
+    x3 = x2[:length]
+
+    # Decimalize the digits
+    x4 = decimalize(dectab, x3)
+
+    # Compute the user PIN with offset
+    u_pin = sum_mod10(x4, offset)
+
+    # Compare t_pin and u_pin
+    if t_pin == u_pin:
+        return "PIN is correct"
     else:
-        print(Fore.RED+ "Invalid PIN.")
-        main()
+        return "PIN is incorrect"
 
 
-# Example usage
-if __name__ == "__main__":
-    main()
+# Example usage (placeholders)
+EPB = "encrypted_pin_blob"
+vdata = "verification_data"
+length = 5
+dectab = {i: str(i) for i in range(16)}  # Placeholder decimalization table
+offset = 3
+key = "encryption_key"
 
-
-# def recover_plaintext_pin(decrypted_pin_block, offset, decimalization_table):
-#     """
-#     Recover plaintext PIN from decrypted PIN block, offset, and decimalization table.
-#
-#     :param decrypted_pin_block: The decrypted PIN block (hexadecimal string).
-#     :param offset: The offset (string of digits).
-#     :param decimalization_table: The decimalization table (string of 16 digits).
-#     :return: The plaintext PIN.
-#     """
-#     # Convert the decrypted PIN block to digits using the decimalization table
-#     pin_digits = [decimalization_table[int(char, 16)] for char in decrypted_pin_block]
-#
-#     # Apply the offset to recover the plaintext PIN
-#     plaintext_pin = ''.join(str((int(pin_digits[i]) - int(offset[i])) % 10) for i in range(len(offset)))
-#
-#     return plaintext_pin
-#
-#
-# # Example inputs
-# decrypted_pin_block = "12345678"  # Example decrypted block (replace with actual)
-# offset = "5493"
-# decimalization_table = "0123456789012345"
-#
-# # Recover the PIN
-# plaintext_pin = recover_plaintext_pin(decrypted_pin_block, offset, decimalization_table)
-# print(f"Recovered Plaintext PIN: {plaintext_pin}")
+print(PIN(EPB, vdata, length, dectab, offset, key))
