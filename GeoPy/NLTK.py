@@ -1,28 +1,27 @@
 import nltk
 from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import wordpunct_tokenize
 from string import punctuation
+from colorama import Fore
 
+# Example sentence
+count = 0
 example_sent = "This is a sample sentence, showing off the stop words filtration."
 
+# Load English stopwords
 stop_words = set(stopwords.words('english'))
-print(stop_words)
-word_tokens = word_tokenize(example_sent)
-print(word_tokens)
+for word in stop_words:
+    count +=1
+    print(word, end=", ")
+print(f"\nTotal Stop Words Found {count}")
 
-# filtered_sentence = [w for w in word_tokens if not w in stop_words]
 
-filtered_sentence = []
-
-for w in word_tokens:
-    if w not in stop_words:
-        filtered_sentence.append(w)
+# Tokenize and filter in one step
+filtered_sentence = [
+    word for word in wordpunct_tokenize(example_sent)
+    if word.lower() not in stop_words and word not in punctuation
+]
 
 print(filtered_sentence)
 
-filter = []
-for a in filtered_sentence:
-    if a not in punctuation:
-        filter.append(a)
-print(filter)
 
