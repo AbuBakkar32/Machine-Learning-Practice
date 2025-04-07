@@ -47,7 +47,7 @@ def decrypt(key, data):
     return data  # Replace with actual decryption logic
 
 
-def encrypt(data):
+def encrypt(key, data):
     # Placeholder function for encryption
     return data  # Replace with actual encryption logic
 
