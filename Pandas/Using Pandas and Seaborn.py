@@ -14,9 +14,9 @@ def Age_groups(age):
         return 'Old'
 
 
-people['Age Groupe'] = people['Age'].apply(Age_groups)
+people['Age Group'] = people['Age'].apply(Age_groups)
 people['Activity Level'] = people['Miles'].apply(lambda x: 'active' if x > 1 else 'inactive')
 print(people)
 
-sns.countplot(x='Age Groupe', hue='Activity Level', data=people)
+sns.countplot(x='Age Group', hue='Activity Level', data=people)
 plt.show()

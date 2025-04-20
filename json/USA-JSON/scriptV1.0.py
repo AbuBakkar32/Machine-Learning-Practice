@@ -1,3 +1,5 @@
+from nltk.book import texts
+
 try:
     import shutil
     import datetime
@@ -165,7 +167,7 @@ class XmlToJsonConverter:
                             "type":
                                 data['us-patent-application']['description']['p'][i]['boundary-data'][0][
                                     'type'],
-                            "text": text
+                            "text": text,
                         }
                         sections.append(section)
         except KeyError:
