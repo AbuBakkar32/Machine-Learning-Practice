@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Udemy Certification Course\Data Analytic in Python using Pandas\sample.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Web Scrapy\Country suicide rate.csv">
           <value>
             <Attribute>
