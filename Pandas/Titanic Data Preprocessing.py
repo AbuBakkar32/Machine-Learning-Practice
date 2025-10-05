@@ -4,6 +4,13 @@ import matplotlib.pyplot as plt
 
 pd.set_option('display.max_columns', None)
 
+data = [i*2 for i in range(6)]
+print(data)
+
+s = "Hello Abu Bakkar Siddikk"
+cons = "".join([c for c in s.lower() if c not in 'aeiou'])
+print(cons)
+
 training_set = pd.read_csv('train.csv')
 # print(training_set.head(n=5))
 # print(training_set.shape)
@@ -30,6 +37,17 @@ def assignDeckValue(CabinCode):
 Deck = np.array([assignDeckValue(cabin) for cabin in training_set['Cabin'].values])
 training_set = training_set.assign(Deck=Deck)
 # print(training_set.head(5))
+
+#i want to make a function which function return a value male or female given the value hight, weigh, shoe size, body size
+
+def decideMaleOrFemale(height, weight, shoe_size, body_size):
+    if height > 5.5 and weight > 70 and shoe_size > 9 and body_size > 36:
+        value = "Male"
+    else:
+        value = "Female"
+    return value
+
+print (decideMaleOrFemale(5.7, 75, 10, 41))
 
 #################################################################################
 
