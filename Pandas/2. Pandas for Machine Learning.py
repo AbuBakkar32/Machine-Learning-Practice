@@ -585,4 +585,3 @@ json_normalize(data)
 
 json_normalize(data, 'counties', ['state', ['info', 'governor']])
 
-# In[ ]:

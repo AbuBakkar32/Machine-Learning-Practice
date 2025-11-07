@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Pandas\token_placement.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Pandas\train.csv">
           <value>
             <Attribute>
@@ -74,6 +81,13 @@
           </value>
         </entry>
         <entry key="\Web Scrapy\email.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\WebScraping\Result.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
