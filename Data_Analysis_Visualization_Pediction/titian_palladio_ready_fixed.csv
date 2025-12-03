@@ -1,0 +1,208 @@
+Painting ID,Title,Year Created,Place Created,Patron Origin place,Patron,Patron Type,Artwork Genre,"Coordinates (lat, lon)",City,County/Province,Region/State,Country
+1,Fondaco Frescoes,1508,Venice,Venice,Fondaco dei Tedeschi,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+2,Portrait of a Man,1508,Venice,Venice,unknown,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+3,Christ Carrying the Cross,1510,Venice,Venice,Scuola di San Rocco,Church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+4,Man of Sorrows,1510,Venice,Venice,Scuola di San Rocco,Church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+5,St. Mark Enthroned,1511,Venice,Isola,Santo Spirito,Church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+6,Three Miracles of St. Anthony of Padua,1511,Venice,Padua,unknown,unknown,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+7,Baptism of Christ,1511,Venice,Spain,Giovanni Ram,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+8,"St. Peter Enthroned, Adored by Alexander VI and Jacopo Pesaro",1512,Venice,Venice,Pesaro,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+9,Sacred and Profane Love,1514,Venice,Venice,Niccolo Aurelio,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+10,Portrait of Jacopo Sannazzaro (so-called),1514,Venice,Venice,unknown,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+11,Noli me Tangere,1514,Venice,Venice,unknown,unknown,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+12,Sacred and Profane Love,1514,Venice,Venice,Niccolo Aurelio,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+13,Tarquin and Lucretia,1514,Venice,Mantua,Gonzaga,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+14,Feast of the Gods,1514,Venice,Ferrara,Alfonso I d'Este,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+15,Woman with a Mirror,1515,Venice,Mantua,Gonzaga,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+16,Salome,1515,Venice,Urbino,unknown,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+17,Portrait of the Physician Gian Giacomo Bartolotti da Parma,1515,Venice,Venice,Gian Giacomo Bartolotti da Parma,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+18,"Madonna and Child with SS. Catherine, Dominic and a Donor",1515,Venice,Venice,Balbi?,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+19,Tribute Money,1516,Venice,Ferrara,Alfonso I d'Este,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+20,Assumption of the Virgin,1516,Venice,Venice,Santa Maria dei Frari,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+21,"St. George (cut down; originally SS. Michael, George, and Theodore)",1516,Venice,Venice,Venetian Senate,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+22,Flora,1516,Venice,Ferrara,d'Este,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+23,Humiliation of Frederick Barbarossa by Pope Alexander III,1516,Venice,Venice,Venetian State,government,history,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+24,Worship of Venus,1518,Venice,Ferrara,Alfonso I d'Este,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+25,Malchiostro Annunciation,1519,Venice,Treviso,Broccardi Chapel,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+26,Madonna of the Pesaro Family,1519,Venice,Venice,Jacopo Pesaro,Church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+27,Madonna of the Pesaro Family,1519,Venice,Venice,Santa Maria dei Frari,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+28,Gozzi Altarpiece,1520,Venice,Ancona,San Francesco ad Alto,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+29,"Madonna and Child with SS. Stephen, Jerome, and Maurice",1520,Venice,Ferrara,Alfonso I d'Este,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+30,"Madonna and Child with SS. Stephen, Jerome, and Maurice",1520,Venice,Venice,unknown,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+31,Madonna and Child with St. Anthony Abbot and the Infant Baptist,1520,Venice,Venice,unknown,unknown,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+32,Gentleman,1520,Venice,Mantua,Gonzaga,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+33,Man with a Glove,1520,Venice,Mantua,Gonzaga,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+34,Resurrection Altarpiece,1520,Venice,Venice?,SS. Nasaro e Celso,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+35,Bacchus and Ariadne,1520,Venice,Ferrara,Alfonso I d'Este,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+36,"Madonna and Child with SS. Catherine, Nicholas, Peter, Sebastian, Francis, and Anthony of Padua",1520,Venice,Venice,San Niccolò dei Frari,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+37,Bust of Christ,1520,Venice,Venice,unknown,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+38,Laura dei Dianti,1523,Venice,Ferrara,Alfonso I d'Este,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+39,Portrait of Federico II Gonzaga,1523,Venice,Mantua,Gonzaga,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+40,Madonna and Child with Angels,1523,Venice,Venice,Ducal Palace,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+41,St. Christopher,1523,Venice,Venice,Ducal Palace,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+42,St. Christopher,1523,Venice,Venice,Ducal Palace,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+43,Alfonso d'Este,1523,Venice,Ferrara,Alfonso I d'Este,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+44,The Bacchanal of the Andrians,1523,Venice,Ferrara,Alfonso I d'Este,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+45,Venus Anadyomene,1525,Venice,Ferrara,unknown,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+46,Death of St. Peter Martyr,1526,Venice,Venice,SS. Giovanni e Paolo,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+47,Entombment,1526,Venice,Mantua,Gonzaga,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+48,Charles V with Drawn Sword (lost),1530,Venice,Augsburg/Spain,Charles V,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+49,The Aldobrandini Madonna,1530,Venice,Ferrara,Alfonso I d'Este,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+50,Madonna and Child with St. Catherine and a Rabbit,1530,Venice,Mantua,Gonzaga,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+51,Annunciation,1530,Venice,Venice,Scuola di San Rocco,Church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+52,"Gregorio Vecellio, Titian's Father (presumed)",1530,Venice,Venice,unknown,unknown,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+53,St. Jerome in Penitence,1531,Venice,Mantua,Gonzaga,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+54,Supper at Emmaus,1531,Venice,Venice,Ducal Palace,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+55,Madonna and Child with Four Saints and Andrea Gritti and Donor (destroyed),1531,Venice,Venice,Ducal Palace,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+56,Andrea dei Franceschi (Detroit version),1532,Venice,Venice,Andrea dei Franceschi,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+57,Nativity (ruined),1532,Venice,Urbino/Pesaro,"Francesco Maria I Della Rovere, Duke of Urbino",government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+58,Hannibal,1532,Venice,Urbino/Pesaro,"Francesco Maria I Della Rovere, Duke of Urbino",government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+59,Charles V with a Hound,1533,Bologna,Augsburg/Spain,Charles V,government,portrait,"44.493820, 11.342633",Bologna,Bologna,Emilia-Romagna,Italy
+60,"Alfonso d'Avalos, Marchese del Vasto, with Page",1533,Bologna,Milan,Alfonso d'Avalos,private,portrait,"44.493820, 11.342633",Bologna,Bologna,Emilia-Romagna,Italy
+61,Ippolito dei Medici,1533,Bologna,Rome,Medici,private,portrait,"44.493820, 11.342633",Bologna,Bologna,Emilia-Romagna,Italy
+62,St. Mary Magdalene in Penitence,1533,Venice,Urbino/Pesaro,"Francesco Maria I Della Rovere, Duke of Urbino",government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+63,Portrait of Isabella d'Este,1534,Venice,Ferrara,d'Este,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+64,Presentation of the Virgin,1534,Venice,Venice,Accademia,museum,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+65,Presentation of the Virgin,1534,Venice,Venice,Ducal Palace,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+66,Jupiter and Antiope (Pardo Venus),1534,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+67,Supper at Emmaus,1535,Venice,Mantua,Nicola Maffei,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+68,Rest on the flight into Egypt,1535,Venice,Padua,Assonica,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+69,Assumption of the Virgin,1535,Venice,Verona,Duomo di Verona,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+70,Portrait of Giulio Romano,1536,Venice,Mantua,Giulio Romano,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+71,La Bella,1536,Venice,Urbino/Pesaro,"Francesco Maria I Della Rovere, Duke of Urbino",government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+72,"Franceso Maria I della Rovere, Duke of Urbino",1536,Venice,Pesaro,"Francesco Maria I della Rovere, Duke of Urbino",government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+73,"Eleanora Gonzaga della Rovere, Duchess of Urbino",1536,Venice,Pesaro,"Francesco Maria I della Rovere, Duke of Urbino",government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+74,Cardinal Georges d'Armagnac and His Secretary Guillaume Philandrier,1536,Venice,Venice,Georges d'Armagnac,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+75,"Roman Emperors (12 works, lost)",1536,Venice,Mantua,Gonzaga,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+76,Pietro Aretino,1537,Venice,Venice,Francesco Marcolini,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+77,The Battle of Cadore (Lost),1537,Venice,Venice,Ducal Palace,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+78,Portrait of Francis I (sketch),1538,Venice,Paris,Francis I,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+79,Venus of Urbino,1538,Venice,Urbino/Pesaro,Duke of Urbino,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+80,Portrait of Francesco Filetto and Son,1538,Venice,Venice,Francesco Filetto,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+81,Francesco Filetto and His Son (presumed; single canvas cut in two),1538,Venice,Venice,Giustiniani,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+82,Francis I,1539,Venice,France,Pietro Aretino,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+83,Allocution of Alfonso d'Avalos,1539,Milan,Milan,Alfonso d'Avalos,private,portrait,"45.464194, 9.189635",Milan,Milan,Lombardy,Italy
+84,Allegory of Marriage (or Allegory of the Marchese del Vasto),1540,Venice,Milan,Alfonso d'Avalos,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+85,Portrait of Vincenzo Capello,1540,Venice,Venice,Vincenzo Capello,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+86,Portrait of Cardinal Pietro Bembo,1540,Venice,Venice,,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+87,"Portrait of Ranuccio Farnese, as King of Malta",1542,Venice,Rome,Farnese,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+88,Portrait of Clarissa Strozzi,1542,Venice,Rome,Strozzi,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+89,"Portrait of Niccolo Marcello, Doge of Venice",1542,Venice,Venice,Niccolo Marcello,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+90,St. John the Baptist,1542,Venice,Venice,Santa Maria Maggiore,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+91,Madonna and Child Appearing to SS. Peter and Andrew,1542,Venice,Serravalle,Santa Maria Nuova,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+92,"Portrait of Paul III, Without a Cap",1543,Bologna,Rome,Farnese,private,portrait,"44.493820, 11.342633",Bologna,Bologna,Emilia-Romagna,Italy
+93,Ecce Homo,1543,Venice,Venice,Giovanni d'Anna,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+94,"Ceiling paintings for Cain slaying Abel, Sacrifice of Abraham, and David Slaying Goliath, along with the roundels of the Evangelists and the Fathers of the Church",1543,Venice,Venice,Santo Spirito,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+95,Vendramin family,1543,Venice,Venice,Gabriel Vendramin,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+96,Madonna and Child with SS. Peter and Paul,1543,Venice,Treviso,"San Fior, Castello di Roganzuolo",church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+97,Portrait of Sperone Speroni,1544,Venice,Venice,Speroni,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+98,Empress Isabella (lost),1544,Venice,Augsburg,Charles V,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+99,Vision of St. John the Evangelist on Patmos,1544,Venice,Venice,Scuola di San Giovanni Evangelista,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+100,Portrait of Pietro Aretino,1545,Venice,Florence,Medici,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+101,Descent of the Holy Ghost,1545,Venice,Venice,Santo Spirito,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+102,Portrait of Cardinal Alessandro Farnese,1545,Rome,Rome,Alessandro Farnese,private,portrait,"41.893320, 12.482932",Rome,Roma Capitale,Lazio,Italy
+103,Portrait of Sixtus IV,1545,Rome,Rome,Sixtus IV,pope,portrait,"41.893320, 12.482932",Rome,Roma Capitale,Lazio,Italy
+104,Portrait of Francesco Savorgnan della Torre,1545,Venice,Venice,Francesco Savorgnan della Torre,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+105,Portrait of Paul III with Cap (Camauro),1545,Rome,Rome,Farnese,private,portrait,"41.893320, 12.482932",Rome,Roma Capitale,Lazio,Italy
+106,Portrait of Cardinal Pietro Bembo,1545,Rome,Rome,Farnese,private,portrait,"41.893320, 12.482932",Rome,Roma Capitale,Lazio,Italy
+107,Portrait of Paul III with Cap,1545,Rome?,Rome,Farnese,private,portrait,"41.893320, 12.482932",Rome,Roma Capitale,Lazio,Italy
+108,Danae with Cupid,1545,Venice,Rome,Cardinal Alessandro Farnese,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+109,Portrait of a Girl,1545,Rome,Rome,Farnese,private,portrait,"41.893320, 12.482932",Rome,Roma Capitale,Lazio,Italy
+110,Portrait of Julius II (after Raphael),1545,Rome,Urbino/Pesaro,Duke of Urbino,government,portrait,"41.893320, 12.482932",Rome,Roma Capitale,Lazio,Italy
+111,Portrait of Martino Pasqualigo,1545,Venice,Venice?,Martino Pasqualigo,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+112,"Portrait of Giulia Varano della Rovere, Duchess of Urbino",1545,Venice,Urbino/Pesaro,Duke of Urbino,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+113,Portrait of Paul III and his Grandsons,1546,Rome,Rome,Farnese,private,portrait,"41.893320, 12.482932",Rome,Roma Capitale,Lazio,Italy
+114,Pierluigi Farnese and Standard Bearer,1546,Piacenza/Venice,Rome/Parma,Farnese,private,portrait,"45.045211, 9.704932",Piacenza,Piacenza,Emilia-Romagna,Italy
+115,Doge Andrea Gritti,1546,Venice,Venice,Ducal Palace,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+116,Ecce Homo,1547,Venice,Augsburg,Charles V,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+117,Charles V in Armour with Baton,1548,Augsburg,Augsburg,Charles V,government,portrait,"48.371540, 10.898510",Augsburg,,Bavaria,Germany
+118,Charles V at Muhlberg,1548,Augsburg,Augsburg,Charles V,government,portrait,"48.371540, 10.898510",Augsburg,,Bavaria,Germany
+119,Charles V and Empress Isabella,1548,Augsburg,Augsburg,Charles V,government,portrait,"48.371540, 10.898510",Augsburg,,Bavaria,Germany
+120,Empress Isabella,1548,Augsburg,Augsburg,Charles V,government,portrait,"48.371540, 10.898510",Augsburg,,Bavaria,Germany
+121,Venus and Cupid with an Organist,1548,Venice,Augsburg,gift to Charles V,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+122,Antoine Perrenot de Granvelle,1548,Augsburg,Besançon,Antoine Perrenot de Granvelle,private,portrait,"48.371540, 10.898510",Augsburg,,Bavaria,Germany
+123,Philip II (lost),1548,Milan,Spain,Philip II,government,portrait,"45.464194, 9.189635",Milan,Milan,Lombardy,Italy
+124,The Four Condemned,1548,Venice,Belgium,Mary of Hungary,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+125,Venus and Cupid with an Organist,1548,Milan,Spain,Philip II,government,myth,"45.464194, 9.189635",Milan,Milan,Lombardy,Italy
+126,Martyrdom of St. Lawrence,1548,Venice,Venice,Santa Maria dei Crociferi,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+127,St. Mary Magdalene in Penitence,1550,Venice,Rome/Parma,Farnese,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+128,Temptation of Adam and Eve,1550,Venice,Spain,Antonio Perez,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+129,Putti at Games,1550,Venice,Venice,Titian,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+130,St. James Major,1550,Venice,Venice,San Lio,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+131,Tobias and the Angel,1550,Venice,Venice,San Marziale,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+132,St. John the Almsgiver,1550,Venice,Venice,San Giovanni Elemosinario,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+133,Tobias and the Angel,1550,Venice,Venice,San Marziale,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+134,Venus and Dog with an organist,1550,Venice,Venice,unknown,unknown,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+135,Self-Portrait,1550,Venice,Venice,Titian,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+136,Venus and Cupid with a Partridge,1550,Venice,Venice,Orsini,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+137,Madonna and Child with SS. Catherine and Luke,1550,Venice,Padua,Cavaliere Orologio,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+138,"Johann Friedrich, Elector of Saxony, Seated",1550,Augsburg,Belgium,Mary of Hungary,government,portrait,"48.371540, 10.898510",Augsburg,,Bavaria,Germany
+139,Philip II in Armour (full length),1550,Augsburg,Belgium,Mary of Hungary,government,portrait,"48.371540, 10.898510",Augsburg,,Bavaria,Germany
+140,Portrait of Philip II Seated Wearing a Crown,1551,Augsburg,Augsburg,Charles V,government,portrait,"48.371540, 10.898510",Augsburg,,Bavaria,Germany
+141,Trinity (Gloria),1551,Venice,Brussels,Charles V,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+142,St. Margaret,1552,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+143,Landscape,1552,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+144,Ludovico Beccadelli,1552,Venice,Venice,Ludovico Beccadelli,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+145,"Guidobaldo II della Rovere, Duke of Urbino, and His Son Francesco Maria II",1552,Venice,Urbino/Pesaro,Duke of Urbino,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+146,Noli me Tangere,1553,Venice,Belgium,Mary of Hungary,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+147,Philip II (half length),1553,Venice,Spain,Philip II,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+148,Danae with a Nursemaid,1553,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+149,Venus and Adonis,1553,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+150,Mater Dolorosa with raised hands,1554,Venice,Brussels,Charles V,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+151,Apparition of Christ to the Madonna,1554,Medole,Medole,Santa Maria Medole,church,religious,"45.324254, 10.514405",Medole,Mantua,Lombardy,Italy
+152,Entombment,1554,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+153,Philip II (full length),1554,Venice,Spain,Philip II,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+154,Philip II (full length),1554,Venice,Spain,Philip II,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+155,Perseus and Andromeda,1554,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+156,Mater Dolorosa with clasped hands,1555,Venice,Brussels/Augsburg,Charles V,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+157,Lavinia as Bride with a Fan,1555,Venice,Ferrara,d'Este,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+158,Lavinia with a Tray of Fruit,1555,Venice,Mantua,Jacopo Strada,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+159,St. Jerome in Penitence,1555,Venice,Rome,Accademia di San Luca,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+160,St. Jerome in Penitence,1555,Venice,Venice,Santa Maria Nuova,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+161,Madonna and Child with the Magdalene,1555,Venice,Venice,unknown,unknown,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+162,Venus at her Toilet with Two Cupids,1555,Venice,Venice,Bartolomeo della Nave,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+163,Doge Antonio Grimani Kneeling before Faith,1555,Venice,Venice,Ducal Palace,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+164,Diana and Actaeon,1556,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+165,Diana and Callisto,1556,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+166,Adoration of the Kings,1557,Venice,Ferrara,d'Este,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+167,Last Supper,1557,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+168,Crucifixion,1558,Venice,Ancona,San Domenico,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+169,Agony in the Garden,1558,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+170,Adoration of the Kings (Type II),1559,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+171,Lavinia as Matron,1560,Venice,Ferrara,d'Este,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+172,"Madonna and Nursing Child with SS. Andrew and Tiziano, and Titian as Donor",1560,Venice,Pieve de Cadore,Parish Church,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+173,Christ Carrying the Cross,1560,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+174,Adoration of the Kings (Type II),1560,Venice,Spain,Antonio Perez,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+175,St. John the Baptist,1560,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+176,Ecce Homo,1560,Venice,Venice,unknown,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+177,Filippo Strozzi,1560,Venice,Venice,Filippo Strozzi,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+178,Europa,1560,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+179,Wisdom,1560,Venice,Venice,Library of St. Mark's,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+180,Transfiguration,1560,Venice,Venice,San Salvador,Church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+181,St. Mary Magdalene in Penitence,1561,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+182,Antonio Palma,1561,Venice,Venice,Antonio Palma,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+183,Annunciation,1562,Venice,Venice,San Salvador,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+184,Madonna and Child in an Evening Landscape,1562,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+185,Agony in the Garden,1563,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+186,St. Nicholas of Bari,1563,Venice,Venice,San Sebastiano,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+187,Martyrdom of St. Lawrence,1564,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+188,St. Dominic (or St. Vincent Ferrer),1565,Venice,Rome,Cardinal Sfondrato,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+189,Christ Carrying the Cross,1565,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+190,St. Margaret,1565,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+191,Venus Clothed at her Toilet with One Cupid,1565,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+192,Self Portrait,1565,Venice,Venice,Titian,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+193,Diana and Callisto,1566,Venice,Vienna,Maximilian II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+194,St. Catherine of Alexandria at Prayer,1567,Venice,Rome,Cardinal Alessandro Farnese,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+195,Jacopo Strada,1567,Venice,Mantua,Jacopo Strada,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+196,Tribute Money (Escorial type),1568,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+197,Tarquin and Lucretia,1568,Venice,Spain,Philip II,government,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+198,Boy with Dogs,1570,Venice,Milan,Agabrio Serbelloni,private,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+199,Nymph and Shepherd,1570,Venice,Venice,unknown,private,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+200,Entombment,1572,Venice,Spain,Antonio Perez,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+201,Religion Succoured by Spain,1572,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+202,Madonna of Mercy,1573,Venice,Pesaro,Duke of Urbino,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+203,Philip II Allegory of Lepanto,1574,Venice,Spain,Philip II,government,portrait,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+204,St. Jerome in Penitence (type III),1575,Venice,Spain,Philip II,government,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+205,St. Sebastian,1575,Venice,Venice,Titian,private,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+206,Pietà,1576,Venice,Venice,Santa Maria dei Frari,church,religious,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
+207,Venus at her Toilet with Two Cupids,1576,Venice,Venice,unknown,unknown,myth,"45.437191, 12.334590",Venice,Venezia,Veneto,Italy
