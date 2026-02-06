@@ -3,8 +3,14 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
-from datetime import datetime
 import warnings
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import xgboost as xgb
+import lightgbm as lgb
 warnings.filterwarnings('ignore')
 
 # Set high-resolution defaults
@@ -439,13 +445,6 @@ print("\nVisualization Part 2 Complete!")
 
 # STEP 11: BUILD PREDICTIVE MODELS
 
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-import xgboost as xgb
-import lightgbm as lgb
 
 print("="*80)
 print("STEP 11: BUILDING PREDICTIVE MODELS FOR BENZENE")
@@ -813,3 +812,45 @@ print("\n✓ Saved: 07_Month_Day_Prediction_Analysis.png")
 plt.close()
 
 print("\n✓ Analysis Complete!")
+
+# STEP 13: COMPREHENSIVE MODEL PREDICTIONS VISUALIZATION
+
+print("="*80)
+print("STEP 13: DETAILED MODEL PREDICTIONS COMPARISON")
+print("="*80)
+
+# Create a large comparison figure with predictions from all models
+fig, axes = plt.subplots(3, 2, figsize=(18, 14), dpi=200)
+axes = axes.flatten()
+
+model_list = ['Linear Regression', 'Ridge', 'Random Forest', 'Gradient Boosting', 'XGBoost', 'LightGBM']
+colors_model = ['#FF6B6B', '#4ECDC4', '#95E1D3', '#F7DC6F', '#BB86FC', '#FF6B9D']
+
+for idx, (model_name, color) in enumerate(zip(model_list, colors_model)):
+    ax = axes[idx]
+    y_pred = results[model_name]['Pred']
+
+    # Scatter plot: Actual vs Predicted
+    scatter = ax.scatter(y_test.values, y_pred, alpha=0.5, s=50, c=y_test.values,
+                        cmap='viridis', edgecolors='black', linewidth=0.5)
+
+    # Perfect prediction line
+    min_val = min(y_test.min(), y_pred.min())
+    max_val = max(y_test.max(), y_pred.max())
+    ax.plot([min_val, max_val], [min_val, max_val], 'r--', linewidth=2.5, label='Perfect Prediction', alpha=0.8)
+
+    # Calculate metrics
+    r2 = results[model_name]['R2']
+    rmse = results[model_name]['RMSE']
+    mae = results[model_name]['MAE']
+    ax.set_xlabel('Actual Benzene (µg/m³)', fontsize=11, fontweight='bold')
+    ax.set_ylabel('Predicted Benzene (µg/m³)', fontsize=11, fontweight='bold')
+    ax.set_title(f'{model_name}\nR²={r2:.3f}, RMSE={rmse:.3f}, MAE={mae:.3f}', fontsize=12, fontweight='bold')
+    ax.legend(fontsize=10)
+    ax.grid(True, alpha=0.3, linestyle='--')
+    cbar = plt.colorbar(scatter, ax=ax)
+    cbar.set_label('Actual Value', fontsize=10)
+plt.tight_layout()
+plt.savefig('08_Detailed_Model_Predictions_Comparison.png', dpi=200, bbox_inches='tight')
+print("✓ Saved: 08_Detailed_Model_Predictions_Comparison.png")
+plt.close()
