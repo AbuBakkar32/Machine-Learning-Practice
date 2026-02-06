@@ -855,6 +855,233 @@ plt.savefig('08_Detailed_Model_Predictions_Comparison.png', dpi=200, bbox_inches
 print("✓ Saved: 08_Detailed_Model_Predictions_Comparison.png")
 plt.close()
 
+# ======================================================================
+# NEW ADDITIONS (Recommendations Analysis + Evidence + Alert System)
+# ======================================================================
+
+print("\n" + "="*80)
+print("STEP 14: POLICY-FOCUSED ANALYSIS FOR RECOMMENDATIONS")
+print("="*80)
+
+# 14.1 Define Peak Hours and High Benzene threshold (events)
+peak_hours_morning = [8, 9, 10]
+peak_hours_evening = [18, 19, 20, 21]
+peak_hours = peak_hours_morning + peak_hours_evening
+
+df_analysis['IsPeakHour'] = df_analysis['Hour'].isin(peak_hours)
+df_analysis['IsFriday'] = (df_analysis['DayOfWeek'] == 'Friday')
+df_analysis['IsOctNov'] = df_analysis['Month'].isin([10, 11])
+
+# High benzene "event" threshold: 90th percentile (you can change to 85 or 95)
+high_thr = df_analysis['C6H6(GT)'].quantile(0.90)
+df_analysis['HighBenzeneEvent'] = (df_analysis['C6H6(GT)'] >= high_thr).astype(int)
+
+print(f"High-benzene event threshold (90th percentile): {high_thr:.3f} µg/m³")
+event_rate = df_analysis['HighBenzeneEvent'].mean() * 100
+print(f"Overall high-event rate: {event_rate:.2f}%")
+
+# 14.2 Friday & peak-hour evidence
+policy_tbl = df_analysis.groupby(['DayOfWeek', 'IsPeakHour']).agg(
+    Mean_Benzene=('C6H6(GT)', 'mean'),
+    Event_Rate=('HighBenzeneEvent', 'mean'),
+    Count=('C6H6(GT)', 'size')
+).reset_index()
+
+# Extract Friday rows summary
+fri_summary = policy_tbl[policy_tbl['DayOfWeek'] == 'Friday'].copy()
+print("\nFriday summary (Peak vs Off-peak):")
+print(fri_summary.to_string(index=False))
+
+# 14.3 Oct-Nov evidence
+octnov_tbl = df_analysis.groupby('IsOctNov').agg(
+    Mean_Benzene=('C6H6(GT)', 'mean'),
+    Event_Rate=('HighBenzeneEvent', 'mean'),
+    Count=('C6H6(GT)', 'size')
+).rename(index={False: 'Other Months', True: 'October-November'})
+
+print("\nOctober–November vs Other months:")
+print(octnov_tbl)
+
+# 14.4 Weekday-Hour heatmap (policy targeting)
+heat = df_analysis.pivot_table(index='DayOfWeek', columns='Hour', values='C6H6(GT)', aggfunc='mean') \
+                 .reindex(day_order)
+
+plt.figure(figsize=(18, 6), dpi=200)
+sns.heatmap(heat, cmap='YlOrRd', linewidths=0.5)
+plt.title("Mean Benzene by Day-of-Week and Hour (Targeting: Fri + Peak Hours)", fontweight='bold')
+plt.xlabel("Hour of Day")
+plt.ylabel("Day of Week")
+plt.tight_layout()
+plt.savefig("09_Policy_Heatmap_DayHour.png", dpi=200, bbox_inches='tight')
+print("✓ Saved: 09_Policy_Heatmap_DayHour.png")
+plt.close()
+
+# ======================================================================
+# STEP 15: Ozone Early Warning (Lead/Lag + Event Prediction)
+# ======================================================================
+print("\n" + "="*80)
+print("STEP 15: OZONE EARLY WARNING ANALYSIS")
+print("="*80)
+
+# We use PT08.S5(O3) as "ozone sensor channel" available in this dataset.
+# Create short-term lags for early warning (1–6 hours)
+o3_col = 'PT08.S5(O3)'
+for h in range(1, 7):
+    df_analysis[f'{o3_col}_lag{h}'] = df_analysis[o3_col].shift(h)
+
+# After creating lag, fill small NA holes with ffill/bfill
+lag_cols = [f'{o3_col}_lag{h}' for h in range(1, 7)]
+df_analysis[lag_cols] = df_analysis[lag_cols].fillna(method='ffill').fillna(method='bfill')
+
+# Correlation of benzene with ozone at different lead times (lag1..lag6)
+o3_lag_corr = {f'lag{h}': df_analysis['C6H6(GT)'].corr(df_analysis[f'{o3_col}_lag{h}']) for h in range(1, 7)}
+o3_lag_corr_series = pd.Series(o3_lag_corr).sort_index()
+print("\nCorrelation of Benzene with Ozone-lag (1–6 hours):")
+print(o3_lag_corr_series)
+
+plt.figure(figsize=(8, 4), dpi=200)
+plt.plot(range(1, 7), [o3_lag_corr[f'lag{h}'] for h in range(1, 7)], marker='o', linewidth=2.5)
+plt.title("Ozone Early Warning: Corr(Benzene_t, Ozone_{t-h})", fontweight='bold')
+plt.xlabel("Lag hours (h)")
+plt.ylabel("Correlation")
+plt.grid(True, alpha=0.3, linestyle='--')
+plt.tight_layout()
+plt.savefig("10_Ozone_EarlyWarning_Correlation.png", dpi=200, bbox_inches='tight')
+print("✓ Saved: 10_Ozone_EarlyWarning_Correlation.png")
+plt.close()
+
+# Simple early-warning classifier: predict HighBenzeneEvent using ozone lags + traffic + weather
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score, confusion_matrix, classification_report
+
+event_features = [
+    'CO(GT)', 'NOx(GT)', 'NO2(GT)', 'T', 'RH', 'Hour', 'Month', 'WeekDay_Num',
+    'Benzene_lag24', 'CO(GT)_lag24', 'NOx(GT)_lag24', 'NO2(GT)_lag24',
+    f'{o3_col}_lag1', f'{o3_col}_lag2', f'{o3_col}_lag3', f'{o3_col}_lag4', f'{o3_col}_lag5', f'{o3_col}_lag6'
+]
+
+df_event = df_analysis[event_features + ['HighBenzeneEvent']].dropna().copy()
+X_evt = df_event[event_features]
+y_evt = df_event['HighBenzeneEvent']
+
+sc_evt = StandardScaler()
+X_evt_scaled = sc_evt.fit_transform(X_evt)
+
+X_evt_train, X_evt_test, y_evt_train, y_evt_test = train_test_split(
+    X_evt_scaled, y_evt, test_size=0.2, random_state=42, stratify=y_evt
+)
+
+clf = LogisticRegression(max_iter=500)
+clf.fit(X_evt_train, y_evt_train)
+proba = clf.predict_proba(X_evt_test)[:, 1]
+pred_evt = (proba >= 0.5).astype(int)
+
+auc = roc_auc_score(y_evt_test, proba)
+print(f"\nEarly-warning event classifier AUC: {auc:.3f}")
+print("\nConfusion matrix:")
+print(confusion_matrix(y_evt_test, pred_evt))
+print("\nClassification report:")
+print(classification_report(y_evt_test, pred_evt, digits=3))
+
+# ======================================================================
+# STEP 16: "High-benzene forecast days" (Traffic reduction policy)
+# ======================================================================
+print("\n" + "="*80)
+print("STEP 16: HIGH-BENZENE FORECAST DAYS (POLICY ALERT LIST)")
+print("="*80)
+
+# Build a prediction dataframe aligned with df_model rows
+# IMPORTANT: df_model is already cleaned for features + target, same order.
+df_model_pred = df_model.copy()
+
+# predict using best model (XGBoost used in your code)
+# Need to scale features like training
+X_all_scaled = scaler.transform(df_model_pred[model_features])
+df_model_pred['Predicted_Benzene'] = xgb_model.predict(X_all_scaled)
+
+# Convert df_model_pred back to original timestamps:
+# We map by index using df_model index in df_analysis (works because df_model came from df_analysis slice)
+# We'll take DateTime from df_analysis using same row positions (df_model index refers to df_analysis index)
+df_model_pred['DateTime'] = df_analysis.loc[df_model.index, 'DateTime'].values
+df_model_pred['Date'] = pd.to_datetime(df_model_pred['DateTime']).dt.date
+df_model_pred['DayOfWeek'] = pd.to_datetime(df_model_pred['DateTime']).dt.day_name()
+df_model_pred['Month'] = pd.to_datetime(df_model_pred['DateTime']).dt.month
+
+# Daily max prediction = "forecast day risk"
+daily_forecast = df_model_pred.groupby('Date').agg(
+    Pred_Max=('Predicted_Benzene', 'max'),
+    Pred_Mean=('Predicted_Benzene', 'mean'),
+    Obs_Mean=('C6H6(GT)', 'mean'),
+    DayOfWeek=('DayOfWeek', lambda x: x.iloc[0]),
+    Month=('Month', lambda x: x.iloc[0])
+).reset_index()
+
+# Forecast high day if Pred_Max >= high_thr (same 90% threshold)
+daily_forecast['HighForecastDay'] = (daily_forecast['Pred_Max'] >= high_thr).astype(int)
+
+print("\nTop 15 highest-forecast days (by Pred_Max):")
+top15 = daily_forecast.sort_values('Pred_Max', ascending=False).head(15)
+print(top15[['Date', 'DayOfWeek', 'Month', 'Pred_Max', 'Pred_Mean', 'Obs_Mean', 'HighForecastDay']].to_string(index=False))
+
+# Save the alert list
+daily_forecast.to_csv("High_Benzene_Forecast_Days.csv", index=False)
+print("\n✓ Saved: High_Benzene_Forecast_Days.csv (use for traffic-reduction policy days)")
+
+# Visual: distribution of daily max predictions + threshold
+plt.figure(figsize=(10, 4), dpi=200)
+plt.hist(daily_forecast['Pred_Max'], bins=40, edgecolor='black', alpha=0.75)
+plt.axvline(high_thr, color='red', linestyle='--', linewidth=2.5, label=f'High-event threshold: {high_thr:.2f}')
+plt.title("Daily Max Predicted Benzene Distribution (Forecast-based alerts)", fontweight='bold')
+plt.xlabel("Daily Max Predicted Benzene (µg/m³)")
+plt.ylabel("Days count")
+plt.legend()
+plt.grid(True, alpha=0.3, linestyle='--')
+plt.tight_layout()
+plt.savefig("11_DailyForecast_Distribution.png", dpi=200, bbox_inches='tight')
+print("✓ Saved: 11_DailyForecast_Distribution.png")
+plt.close()
+
+# ======================================================================
+# STEP 17: Direct evidence for your recommendations (summary outputs)
+# ======================================================================
+print("\n" + "="*80)
+print("STEP 17: FINAL RECOMMENDATION EVIDENCE SUMMARY")
+print("="*80)
+
+# Evidence 1: Friday + peak hours
+friday_peak = df_analysis[(df_analysis['IsFriday']) & (df_analysis['IsPeakHour'])]['C6H6(GT)'].mean()
+friday_off  = df_analysis[(df_analysis['IsFriday']) & (~df_analysis['IsPeakHour'])]['C6H6(GT)'].mean()
+all_peak    = df_analysis[df_analysis['IsPeakHour']]['C6H6(GT)'].mean()
+all_off     = df_analysis[~df_analysis['IsPeakHour']]['C6H6(GT)'].mean()
+
+print(f"Mean benzene on Friday peak-hours: {friday_peak:.3f}")
+print(f"Mean benzene on Friday off-peak:  {friday_off:.3f}")
+print(f"Mean benzene on all peak-hours:   {all_peak:.3f}")
+print(f"Mean benzene on all off-peak:     {all_off:.3f}")
+
+# Evidence 2: Oct–Nov
+octnov_mean = df_analysis[df_analysis['IsOctNov']]['C6H6(GT)'].mean()
+other_mean  = df_analysis[~df_analysis['IsOctNov']]['C6H6(GT)'].mean()
+print(f"Mean benzene in Oct–Nov: {octnov_mean:.3f}")
+print(f"Mean benzene other months: {other_mean:.3f}")
+
+# Evidence 3: Ozone early warning (lag with highest correlation)
+best_lag = max(o3_lag_corr, key=o3_lag_corr.get)
+print(f"Best ozone early-warning lag (highest corr): {best_lag} with corr={o3_lag_corr[best_lag]:.3f}")
+
+# Evidence 4: Traffic reduction on high forecast days
+high_days = daily_forecast[daily_forecast['HighForecastDay'] == 1]
+print(f"Number of high-forecast days: {len(high_days)} / {len(daily_forecast)} ({len(high_days)/len(daily_forecast)*100:.2f}%)")
+print("Policy action: apply traffic reduction / emission restriction for these days (see CSV).")
+
+# Save recommendation summary tables
+policy_tbl.to_csv("Policy_Targeting_Friday_PeakHours.csv", index=False)
+octnov_tbl.reset_index().to_csv("OctNov_Comparison.csv", index=False)
+print("\n✓ Saved: Policy_Targeting_Friday_PeakHours.csv")
+print("✓ Saved: OctNov_Comparison.csv")
+
+print("\n✓ FINAL PROJECT COMPLETE! All charts + policy CSV files generated.")
+
 print("\n" + "="*80)
 print("STEP 14: KEY RECOMMENDATIONS AND CONCLUSIONS")
 print("="*80)
