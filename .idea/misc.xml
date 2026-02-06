@@ -3,7 +3,7 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.11" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (.venv)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11" project-jdk-type="Python SDK" />
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />
   </component>
@@ -13,10 +13,10 @@
   <component name="RMarkdownSettings">
     <option name="renderProfiles">
       <map>
-        <entry key="file://$PROJECT_DIR$/../../caunive/2025-2026/6. Statistical Inference and Learning/Labs Unit 3 Classification-20251014/SIL-lab9.Rmd">
+        <entry key="file://$USER_HOME$/caunive/2025-2026/6. Statistical Inference and Learning/Labs Unit 3 Classification-20251014/SIL-lab9.Rmd">
           <value>
             <RMarkdownRenderProfile>
-              <option name="outputDirectoryUrl" value="file://$PROJECT_DIR$/../../caunive/2025-2026/6. Statistical Inference and Learning/Labs Unit 3 Classification-20251014" />
+              <option name="outputDirectoryUrl" value="file://$USER_HOME$/caunive/2025-2026/6. Statistical Inference and Learning/Labs Unit 3 Classification-20251014" />
             </RMarkdownRenderProfile>
           </value>
         </entry>
